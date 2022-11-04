@@ -1,0 +1,119 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+main {
+    /* background-color: #ddd; */
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 10;
+    width: 90%;
+    margin-top: 80px;
+}
+form[name='findId-frm'] {
+    border-right: 1px solid #ddd;
+}
+form[name='findId-frm'], form[name='findPw-frm'] {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    padding: 0px 50px;
+    height: auto;
+}
+main button {
+    cursor: pointer;
+}
+.find-area-title {
+    font-size: 30px;
+    font-weight: bold;
+    letter-spacing: -2px;
+    margin-bottom: 15px;
+    /* color: #1c835d; */
+}
+.find-area-title + span {
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+.input-area {
+    margin-bottom: 30px;
+}
+.input-area label{
+    font-size: 20px;
+    font-weight: bold;
+    display: block;
+    margin: 20px 0;
+    /* color: #2fbe8a; */
+}
+.input-area input{
+    display: flex;
+    width: 100%;
+    padding: 20px 15px 15px 15px;
+    font-size: 19px;
+    border: 1px solid #ccc;
+    
+    outline-color: #34E0A1;
+    /* margin-bottom: 20px; */
+}
+
+.input-area > input:not(:first-of-type) {
+    margin-top: 20px;
+}
+/* .input-area > .rrn-input-area {
+    margin-top: 20px;
+} */
+.input-area > .input-row > span{
+    margin: 0px 10px;
+}
+
+.login-btn {
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: #2DC48D;
+    border: none;
+    letter-spacing: -1px;
+}
+
+.find-area {
+    font-size: 1.2em;
+}
+
+.find-area span {
+    margin: 0px 10px;
+}
+
+.find-area a, .find-area span {
+    color: #2DC48D;
+    font-weight: bold;
+}
+.find-area a:hover {
+    text-decoration: underline;
+}
+
+.input-row {
+    display: flex;
+}
+.rrn-input {
+    align-items: center;
+}
+.input-row > button {
+    flex-basis: 30%;
+    background-color: #2DC48D;
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+    border: none;
+    margin-left: 13px;
+}
+.confirm-message {
+    letter-spacing: -1px;
+}
+
+.confirm { color: green; }
+.error {color : red;}

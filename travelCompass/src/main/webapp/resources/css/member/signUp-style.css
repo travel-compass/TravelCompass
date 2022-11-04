@@ -1,0 +1,131 @@
+div, span, main, header, footer, nav, aside, section, article {
+    /* border: 1px solid black; */
+}
+
+/* main */
+main {
+    /* width: 1200px; */
+    flex-basis: 85%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+    height: auto;
+}
+main > h1 {
+    font-size: 50px;
+    color: black;
+}
+.signUp-content {
+    display: flex;
+    justify-content: center;
+    height: auto;
+}
+#signUp-frm {
+    margin-top: 30px;
+}
+#signUp-frm > label {
+    display: block;
+    margin-top: 40px;
+    font-size: 18px;
+    font-weight: bold;
+}
+.signUp-frm > span {
+    display: block;
+    height: 20px;
+}
+
+/********************* 약관 동의 *********************/
+.agree-area {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 20px;
+}
+.agree-label {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+.agree-label > input {
+    width:18px;
+    height: 18px;
+}
+.agree-area textarea {
+    width: 100%;
+    padding: 20px;
+    margin-top: 20px;
+    height: 150px;
+    color: grey;
+}
+
+
+
+/* 필수 작성 */
+.required {
+    color: red;
+    padding: 0 5px;
+}
+
+/* input 태그를 감싸고 있는 div 태그 */
+.signUp-input-area {
+    width: 650px;
+    min-height: 50px;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #ddd;
+    display: flex;
+    align-items: center;
+}
+
+.signUp-input-area > input {
+    width: 70%;
+    height: 100%;
+    padding: 15px 10px 5px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    outline: none;
+}
+.signUp-input-area > input:focus + button {
+    border-color: #34E0A1;
+}
+.signUp-input-area > button {
+    width: 30%;
+    padding: 15px;
+    background-color: white;
+    border: 2px solid #ccc;
+    cursor: pointer;
+    border-bottom: none;
+}
+
+/* :focus-within : 내부 input 요소에 포커스가 맞춰졌을 때 */
+.signUp-input-area:focus-within {
+    border-bottom-color: #34E0A1;
+}
+
+/* 입력 관련 메세지 */
+.signUp-message {
+    font-size: 14px;
+    letter-spacing: -1px;
+}
+
+.confirm { color: green; }
+.error {color : red;}
+
+/* 회원 가입 버튼 */
+#signUp-btn {
+    width: 100%;
+    padding: 10px;
+    margin: 50px 0;
+    border: none;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    background-color: #34E0A1;
+    cursor: pointer;
+}
+
+#signUp-btn:active {
+    transform: scale(0.95);
+}
