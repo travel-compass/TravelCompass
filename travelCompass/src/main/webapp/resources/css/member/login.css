@@ -1,0 +1,106 @@
+body {
+    height:100vvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+main {
+    /* background-color: #ddd; */
+    display: flex;
+    justify-content: center;
+    margin-top: 10;
+    width: 1200px;
+    height: 100%;
+    margin: 80px 0;
+}
+form[name='login-frm'] {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+.login-title {
+    font-size: 50px;
+    font-weight: bold;
+    letter-spacing: -2px;
+    margin-bottom: 5px;
+}
+.login-title + span {
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+.login-title + span > a {
+    color: #2DC48D;
+    font-weight: bold;
+}
+.login-title + span > a:hover {
+    text-decoration: underline;
+}
+.input-area input{
+    display: flex;
+    width: 100%;
+    padding: 20px 15px 15px 15px;
+    font-size: 19px;
+    border: 1px solid #ccc;
+    
+    outline-color: #34E0A1;
+    margin-bottom: 20px;
+}
+
+/************** saveId  **************/
+.saveId-area {
+    font-size: 20px;
+    margin: 25px 0px;
+    letter-spacing: -1px;
+    display: flex;
+    align-items: center;
+}
+.saveId-area > label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50% ;
+    border: 1px solid #ddd;
+    font-size: 13px;
+    margin-right: 15px;
+}
+.saveId-area > label > i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#saveId:checked + label {
+    color: white;
+    background-color: #2DC48D;
+}
+#saveId {
+    display: none;
+}
+
+
+.login-btn {
+    font-size: 30px;
+    color: white;
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: #2DC48D;
+    border: none;
+    letter-spacing: -1px;
+}
+
+.find-area {
+    font-size: 1.2em;
+}
+
+.find-area span {
+    margin: 0px 10px;
+}
+
+.find-area a, .find-area span {
+    color: #2DC48D;
+    font-weight: bold;
+}
+.find-area a:hover {
+    text-decoration: underline;
+}

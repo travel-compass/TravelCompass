@@ -1,0 +1,83 @@
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    width: 1200px;
+    margin-top: 80px;
+}
+main h1 {
+    /* color: #2DC48D; */
+}
+#changePwForm {
+    width:40%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+}
+#changePwForm label {
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    margin-top: 35px;
+}
+#changePwForm label[for='memberPwConfirm'] {
+    margin-top: 60px;
+}
+
+#changePwForm .input-row {
+    display: flex;
+    width: 100%;
+    margin-bottom: 10px;
+    align-items: center;
+    border: none;
+    border-bottom: 2px solid #ddd;
+}
+
+#changePwForm .input-row:focus-within {
+    border-color: #34E0A1;
+}
+
+#changePwForm .input-row + span {
+    letter-spacing: -1.5px;
+}
+
+#changePwForm .input-row input {
+    width: 90%;
+    height: 60px;
+    padding: 15px;
+    font-size: 30px;
+    outline: none;
+    border: none;
+}
+#changePwForm .input-row button {
+    font-size: 25px;
+    background-color: transparent;
+    border: none;
+    width: auto;
+    flex: 1;
+    text-align: start;
+    padding: 0 15px;
+    color: grey;
+    cursor: pointer;
+}
+#changePwForm .input-row button:hover {
+    color: black;
+}
+
+#changePwBtn {
+    margin-top: 30px;
+    font-size: 20px;
+    color: white;
+    background-color: #2DC48D;
+    padding: 20px 0;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+/*********************************** js-style ************************************/
+.confirm {color:green;}
+.error { color: red;}
