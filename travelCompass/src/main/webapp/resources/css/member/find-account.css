@@ -9,15 +9,14 @@ main {
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    margin-top: 10;
-    width: 90%;
+    width: 1200px;
     margin-top: 80px;
 }
 form[name='findId-frm'] {
     border-right: 1px solid #ddd;
 }
 form[name='findId-frm'], form[name='findPw-frm'] {
-    width: 40%;
+    width: 45%;
     display: flex;
     flex-direction: column;
     padding: 0px 50px;
@@ -38,35 +37,48 @@ main button {
     margin-bottom: 30px;
 }
 
-.input-area {
-    margin-bottom: 30px;
-}
-.input-area label{
-    font-size: 20px;
-    font-weight: bold;
-    display: block;
-    margin: 20px 0;
-    /* color: #2fbe8a; */
-}
-.input-area input{
-    display: flex;
+
+/* input 태그를 감싸고 있는 div 태그 */
+.find-input-area {
     width: 100%;
-    padding: 20px 15px 15px 15px;
-    font-size: 19px;
-    border: 1px solid #ccc;
-    
-    outline-color: #34E0A1;
-    /* margin-bottom: 20px; */
+    min-height: 50px;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #ddd;
+    display: flex;
+    align-items: center;
 }
 
-.input-area > input:not(:first-of-type) {
-    margin-top: 20px;
+main form > label{
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 30px;
+    margin-bottom: 10px;
 }
-/* .input-area > .rrn-input-area {
-    margin-top: 20px;
-} */
-.input-area > .input-row > span{
-    margin: 0px 10px;
+.find-input-area > input {
+    width: 100%;
+    height: 100%;
+    padding: 0 10px;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    outline: none;
+}
+.find-input-area > input:focus + button {
+    border-color: #34E0A1;
+}
+.find-input-area > button {
+    width: 30%;
+    padding: 10px;
+    background-color: white;
+    border: 2px solid #ccc;
+    cursor: pointer;
+    border-bottom: none;
+    letter-spacing: -1px;
+}
+
+/* :focus-within : 내부 input 요소에 포커스가 맞춰졌을 때 */
+.find-input-area:focus-within {
+    border-bottom-color: #34E0A1;
 }
 
 .login-btn {
@@ -74,46 +86,13 @@ main button {
     font-weight: bold;
     color: white;
     padding: 15px;
+    margin-top: 30px;
     margin-bottom: 20px;
     background-color: #2DC48D;
     border: none;
     letter-spacing: -1px;
 }
 
-.find-area {
-    font-size: 1.2em;
-}
-
-.find-area span {
-    margin: 0px 10px;
-}
-
-.find-area a, .find-area span {
-    color: #2DC48D;
-    font-weight: bold;
-}
-.find-area a:hover {
-    text-decoration: underline;
-}
-
-.input-row {
-    display: flex;
-}
-.rrn-input {
-    align-items: center;
-}
-.input-row > button {
-    flex-basis: 30%;
-    background-color: #2DC48D;
-    color: white;
-    font-weight: bold;
-    font-size: 15px;
-    border: none;
-    margin-left: 13px;
-}
-.confirm-message {
-    letter-spacing: -1px;
-}
 
 .confirm { color: green; }
 .error {color : red;}

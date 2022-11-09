@@ -1,0 +1,47 @@
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    width: 90%;
+    margin-top: 80px;
+}
+.result-message {
+    font-size: 25px;
+    color: rgb(70, 68, 68);
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+#memberName {
+    font-size: 30px;
+    font-weight: bold;
+    color: black;
+}
+
+
+.result-box {
+    font-size: 40px;
+    margin-bottom: 30px;
+    padding: 60px;
+    font-weight: bold;
+    background-color: #f2f2f2;
+}
+
+.btn-box {
+    display: flex;
+    justify-content: center;
+}
+.btn-box > a{
+    padding: 15px;
+    font-size: 20px;
+    border: 1px solid grey;
+}
+.btn-box > a:last-child {
+    background-color: #2DC48D;
+    color: white;
+    border: none;
+    margin-left: 10px;
+}

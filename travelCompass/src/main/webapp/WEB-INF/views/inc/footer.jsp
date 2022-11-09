@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <footer>
     <section>
         <div class="footer-logo">
@@ -18,3 +19,9 @@
         <p>KH 정보교육원 교육과정 중 중간프로젝트 트립어드바이저 클론버전 입니다. </p>
     </section>
 </footer>
+
+<c:if test="${not empty message }">
+	<script>
+		alert("${message}");
+	</script>
+</c:if>

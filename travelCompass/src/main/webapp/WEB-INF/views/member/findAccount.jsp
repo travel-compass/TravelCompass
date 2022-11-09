@@ -17,42 +17,52 @@
     <jsp:include page="/WEB-INF/views/inc/header.jsp" />
 
     <main>
+        <%-- 아이디 찾기 --%>
         <form action="아이디 찾기" method="post" name="findId-frm">
             <span class="find-area-title">아이디 찾기</span>
             
-            <div class="input-area">
-                <label for="memberName">이름</label>
-                <input type="text" id="memberName" name="memberName" maxlength="5" autocomplete="off">
-
-                <label for="">주민등록번호</label>
-                <div class="input-row rrn-input">    
-                    <input type="text" name="rrn" maxlength="6" autocomplete="6" placeholder="주민등록번호 앞자리">
-                    <span>&minus;</span>
-                    <input type="password" name="rrn" maxlength="7" placeholder="주민등록번호 뒷자리">
-                </div>
+            <label for="memberName">
+                이름
+            </label>
+            <div class="find-input-area">
+                <input type="text" name="memberEmail" id="memberEmail" maxlength="5" autocomplete="off" required>
             </div>
+
+            <label for="memberName">
+                주민등록번호
+            </label>
+            <div class="find-input-area">
+                <input type="text" name="rrn" maxlength="6" autocomplete="6">
+                    <span>&minus;</span>
+                <input type="password" name="rrn" maxlength="7">
+            </div>
+
 
             <button class="login-btn">아이디 찾기</button>
         </form>
 
+        <%-- 비밀번호 찾기 --%>
         <form action="비밀번호 찾기" method="post" name="findPw-frm">
             <span class="find-area-title">비밀번호 찾기</span>
             
-            <div class="input-area">
-                <label for="memberEmail">이메일</label>
-                <div class="input-row">
-                    <input type="text" id="memberEmail" name="memberEmail" maxlength="20" autocomplete="off" placeholder="이메일 형식으로 입력해주세요">
-                    <button type="button">인증번호 받기</button>
-                </div>
-                <span class="confirm-message error">이메일 형식이 아닙니다.</span>
-
-                <label for="confirm-code">인증번호</label>
-                <div class="input-row">    
-                    <input type="text" id="confirm-code" name="confirm-code" maxlength="5" autocomplete="off" >
-                    <button type="button">인증번호 확인</button>
-                </div>
-                <span class="confirm-message error">인증번호가 일치하지 않습니다.</span>
+            <label for="memberName">
+                이메일
+            </label>
+            <div class="find-input-area">
+                <input type="text" name="memberEmail" id="memberEmail" maxlength="5" autocomplete="off" required>
+                <button>인증번호 받기</button>
             </div>
+            <span class="confirm-message error">이메일 형식이 아닙니다.</span>
+
+            <label for="memberName">
+                인증번호
+            </label>
+            <div class="find-input-area">
+                <input type="text" name="memberEmail" id="memberEmail" maxlength="5" autocomplete="off" required>
+                <button>인증번호 확인</button>
+            </div>
+            <span class="confirm-message error">인증번호가 올바르지 않습니다.</span>
+            
 
             <button class="login-btn">비밀번호 찾기</button>
         </form>

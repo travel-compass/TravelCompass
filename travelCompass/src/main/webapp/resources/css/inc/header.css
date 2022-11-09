@@ -14,9 +14,11 @@ li {
 header, main, footer, div, span, article, a, form {
     /* border: 1px solid black; */
 }
+
 html, body{
     height: 100%;
 }
+
 body {
     display: flex;
     flex-direction: column;
