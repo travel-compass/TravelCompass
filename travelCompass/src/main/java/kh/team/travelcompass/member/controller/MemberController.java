@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -81,9 +82,23 @@ public class MemberController {
 	 */
 	@GetMapping("/signUp")
 	public String signUpPage() {
-		
-		System.out.println("회원가입 페이지 요청");
 		return "member/signUp";
+	}
+	
+	/** 회원가입
+	 * @return / 메인페이지 리다이렉트
+	 */
+	@PostMapping("/signUp")
+	public String signUpPage(Member member) {
+		String path = "";
+		
+		// 회원 가입 실패 시 현재 페이지 리다이렉트
+		
+		// 회원 가입 성공 시 메인페이지 리다이렉트
+		
+		
+		
+		return "redirect:" + path;
 	}
 	
 	/** 계정찾기 페이지 이동
@@ -111,5 +126,11 @@ public class MemberController {
 	public String changePw() {
 		
 		return "member/changePw";
+	}
+	
+	@ResponseBody
+	@GetMapping("/emailDupCheck")
+	public int emailDupCheck(String memberEmail) {
+		return service.emailDupCheck(memberEmail);
 	}
 }

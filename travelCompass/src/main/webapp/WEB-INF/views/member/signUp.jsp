@@ -18,28 +18,28 @@
    	<jsp:include page="/WEB-INF/views/inc/header.jsp"/>
 
     <main>
-        <h1>Join Us</h1>
+        <h1>회원 가입</h1>
         <section class="signUp-content">
-            <form action="#" method="POST" name="signUp-frm" id="signUp-frm">
+            <form action="/member/signUp" method="POST" name="signUp-frm" id="signUp-frm">
                 <label for="memberEmail">
                     <span class="required">*</span> 아이디(이메일)
                 </label>
                 <!-- 이메일 입력 영역 -->
                 <div class="signUp-input-area">
-                    <input type="text" name="memberEmail" id="memberEmail" placeholder="아이디(이메일)" maxlength="20" autocomplete="off" required>
+                    <input type="text" name="memberEmail" id="memberEmail" placeholder="아이디(이메일)" maxlength="30" autocomplete="off">
                     <button type="button">인증번호 받기</button>
                 </div>
-                <span class="signUp-message">메일을 받을 수 있는 이메일을 입력해주세요.</span>
+                <span class="signUp-message" id="memberEmailMessage">메일을 받을 수 있는 이메일을 입력해주세요.</span>
                 
                 <!-- 인증번호 입력 -->
                 <label for="emailCheck">
                     <span class="required">*</span> 인증번호
                 </label>
                 <div class="signUp-input-area">
-                    <input type="text" name="emailCheck" id="emailCheck" placeholder="인증번호 입력" maxlength="6" autocomplete="off" required>
+                    <input type="text" name="emailCheck" id="emailCheck" placeholder="인증번호 입력" maxlength="6" autocomplete="off">
                     <button type="button">인증하기</button>
                 </div>
-                <span class="signUp-message confirm">인증되었습니다.</span><!-- / 인증번호가 일치하지 않습니다. -->
+                <span class="signUp-message" id="signUp-message confirm">인증되었습니다.</span><!-- / 인증번호가 일치하지 않습니다. -->
                 
                 <!-- 비밀번호/비밀번호 확인 입력 -->
                 <label for="memberPw">
@@ -47,20 +47,24 @@
                 </label>
                 
                 <div class="signUp-input-area">
-                    <input type="password" name="memberPw" id="memberPw" placeholder="비밀번호" maxlength="20" required>
+                    <input type="password" name="memberPw" id="memberPw" placeholder="비밀번호" maxlength="20">
                 </div>
+                <span class="signUp-message" id="memberPwMessage">영어, 숫자, 특수문자(!,@,#,-,_) 6 ~ 20 글자 사이로 입력해주세요.</span>
                 <div class="signUp-input-area">
-                    <input type="password" name="memberPwConfirm" id="memberPwConfirm" placeholder="비밀번호 확인" maxlength="20" required>
+                    <input type="password" name="memberPwConfirm" id="memberPwConfirm" placeholder="비밀번호 확인" maxlength="20">
                 </div>
-                <span class="signUp-message error">비밀번호가 일치하지 않습니다.</span>
+                <span class="signUp-message" id="memberPwConfirmMessage"></span>
 
-                <label for="">
+                <label for="memberRRN1">
                     <span class="required">*</span> 주민등록번호
                 </label>
 
                 <div class="signUp-input-area">
-                    <input type="password" name="memberPwConfirm" id="memberPwConfirm" placeholder="(-없이 숫자만 입력)" maxlength="13" required>
+                    <input type="text" name="memberRRN" id="memberRRN" placeholder="" maxlength="6">
+                    <span>&#9866;</span>
+                    <input type="password" name="memberRRN" id="memberRRN2" placeholder="" maxlength="7">
                 </div>
+                <span class="signUp-message" id="memberRRNMessage">숫자만, 뒷자리 맨 첫번째 수는 1 ~ 4</span>
 
 
                 <!-- 닉네임 입력 -->
@@ -69,34 +73,34 @@
                 </label>
                 
                 <div class="signUp-input-area">
-                    <input type="text" name="memberNickname" id="memberNickname" placeholder="닉네임" maxlength="10" required>
+                    <input type="text" name="memberNickname" id="memberNickname" placeholder="닉네임" maxlength="6">
                 </div>
-                <span class="signUp-message confirm">사용가능한 닉네임 입니다.</span>
+                <span class="signUp-message" id="memberNicknameMessage">특수문자를 제외한 2 ~ 6글자</span>
                 
                 <!-- 전화번호 입력 -->
-                <label for="memberTell">
+                <label for="memberTel">
                     <span class="required">*</span> 전화번호
                 </label>
                 
                 <div class="signUp-input-area">
-                    <input type="text" name="memberTell" id="memberTell" placeholder="(-없이 숫자만 입력)" maxlength="11" required>
+                    <input type="text" name="memberTel" id="memberTel" placeholder="(-없이 숫자만 입력)" maxlength="11">
                 </div>
-                <span class="signUp-message error">전화번호 형식이 올바르지 않습니다.</span>
+                <span class="signUp-message" id="memberTelMessage">휴대전화 번호 입력</span>
 
                 <!-- 주소 입력 -->
-                <label for="memberTell">
+                <label for="memberAddress">
                     주소
                 </label>
                 
                 <div class="signUp-input-area">
-                    <input type="text" name="memberAddress" id="memberAddress" placeholder="우편번호" maxlength="6">
-                    <button type="button">검색</button>
+                    <input type="text" name="memberAddress" id="postCode" placeholder="우편번호" maxlength="6" readonly>
+                    <button type="button" id="addressSearch">검색</button>
                 </div>
                 <div class="signUp-input-area">
-                    <input type="text" name="memberAddress" placeholder="도로명/지번 주소">
+                    <input type="text" name="memberAddress" id="address" placeholder="도로명/지번 주소" readonly>
                 </div>
                 <div class="signUp-input-area">
-                    <input type="text" name="memberAddress" placeholder="상세 주소">
+                    <input type="text" name="memberAddress" id="detailAddress" placeholder="상세 주소">
                 </div>
 
                 <label for="">
@@ -472,5 +476,9 @@
     
     <!-- footer:include -->
     <jsp:include page="/WEB-INF/views/inc/footer.jsp"/>
+
+    <script src="/resources/js/common/jQuery-core.js"></script>
+    <script src="/resources/js/member/signUp.js"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </body>
 </html>

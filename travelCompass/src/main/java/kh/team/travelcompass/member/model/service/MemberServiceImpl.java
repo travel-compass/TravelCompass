@@ -37,4 +37,9 @@ public class MemberServiceImpl implements MemberService{
 		
 		return loginMember;
 	}
+
+	@Override
+	public int emailDupCheck(String memberEmail) {
+		return dao.emailDupCheck(memberEmail);
+	}
 }

@@ -1,13 +1,22 @@
+@font-face {
+    font-family: 'LINESeedKR-Rg';
+    src: url("/resources/fonts/LINESeedKR-Rg.woff2") format('woff2');
+    font-weight: 400;
+}
+
+
 * {
     margin: 0; 
     padding: 0;
     box-sizing: border-box;
+    font-family: 'LINESeedKR-Rg';
 }
 
 a {
     text-decoration: none;
     color: black;
 }
+
 li {
     list-style: none;
 }
@@ -129,7 +138,7 @@ label[for='header-menu-toggle'] {
     background: white;
     width: 150px;
     /* padding: 15px; */
-    border-radius: 15px;
+    border-radius: 10%;
     box-shadow: rgba(0, 0, 0, 0.2) 0 1px 10px 1px;
     position: absolute;
     top: 20;
@@ -150,6 +159,7 @@ label[for='header-menu-toggle'] {
 }
 .top-down-menu a:hover {
     background-color: #ddd;
+    border-radius: 15px;
 }
 
 .top-down-menu:after {

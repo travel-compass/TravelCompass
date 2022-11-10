@@ -50,9 +50,11 @@ main > .search-area {
     position: absolute;
     top: calc((350px / 2) - 30px);
     z-index: 800;
+    opacity: 0.8;
 }
 .search-area .search-form:focus-within {
     border-radius: 15px;
+    opacity: 1;
 }
 
 .search-form .search-input-box {
