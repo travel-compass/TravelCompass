@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <header>
     <section class="left-column">
     <a href="/">
-        <img src="https://static.tacdn.com/img2/brand_refresh/Tripadvisor_lockup_horizontal_secondary_registered.svg" alt="" width="200px">
+        <img src="/resources/images/common/logo.png" alt="로고 이미지" width="300px">
     </a>
         <!-- <span>Tripadvisor</span> -->
     </section>

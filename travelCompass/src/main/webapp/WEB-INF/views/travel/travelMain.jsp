@@ -131,7 +131,86 @@
                             </div>
                         </div>
                     </div>
+                </li>
+                <li class="travel-item">
+                    <div>
+                        <a href="해당 여행 상세 페이지">
+                            <!-- position absolute 화면 전체 덮기 -->
+                        </a>
+                        <!-- 썸네일 이미지 -->
+                        <div class="travel-first-image">
+                            <img src="http://tong.visitkorea.or.kr/cms/resource/39/2680839_image2_1.jpg" alt="">
+                        </div>
+    
+                        <!-- 여행 제목, 작성자 -->
+                        <div class="travel-description">
+                            <div>
+                                <span class="travel-title">테스트 여행</span>
+                            </div>
+                            <div>
+                                작성자: <a href="프로필 페이지로" class="travel-writer">Tonic</a>
+                            </div>
+                        </div>
+    
+                        <!-- 여행의 장소 갯수 -->
+                        <div class="travel-place-count">
+                            포함: <span class="">1개의 항목</span>
+                        </div>
+
+                        <%-- 접근 범위 --%>
+                        <div class="access-scope-area">
+                            <div class="access-profile-image">
+                                <a href="작성자 프로필 페이지로">
+                                    <img src="https://cdn.pixabay.com/photo/2022/02/23/17/08/planets-7031048__480.jpg" alt="">
+                                </a>
+                            </div>
+                            <!-- 공개일 경우 -->
+                            <div class="access-scope-public">
+                                <span><i class="fa-solid fa-lock-open"></i></span>
+                            </div>
+                        </div>
+                    </div>
                 </li>      
+                <li class="travel-item">
+                    <div>
+                        <a href="해당 여행 상세 페이지">
+                            <!-- position absolute 화면 전체 덮기 -->
+                        </a>
+                        <!-- 썸네일 이미지 -->
+                        <div class="travel-first-image">
+                            <img src="http://tong.visitkorea.or.kr/cms/resource/39/2680839_image2_1.jpg" alt="">
+                        </div>
+    
+                        <!-- 여행 제목, 작성자 -->
+                        <div class="travel-description">
+                            <div>
+                                <span class="travel-title">테스트 여행</span>
+                            </div>
+                            <div>
+                                작성자: <a href="프로필 페이지로" class="travel-writer">Tonic</a>
+                            </div>
+                        </div>
+    
+                        <!-- 여행의 장소 갯수 -->
+                        <div class="travel-place-count">
+                            포함: <span class="">1개의 항목</span>
+                        </div>
+
+                        <%-- 접근 범위 --%>
+                        <div class="access-scope-area">
+                            <div class="access-profile-image">
+                                <a href="작성자 프로필 페이지로">
+                                    <img src="https://cdn.pixabay.com/photo/2022/02/23/17/08/planets-7031048__480.jpg" alt="">
+                                </a>
+                            </div>
+                            <!-- 공개일 경우 -->
+                            <div class="access-scope-public">
+                                <span><i class="fa-solid fa-lock-open"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </li>      
+                      
             </ul>
         </div>
     </main>

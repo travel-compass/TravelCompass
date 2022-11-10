@@ -21,4 +21,9 @@ public class MemberDAO {
 		return sqlSession.selectOne("memberMapper.login", memberEmail); 
 				
 	}
+
+
+	public int emailDupCheck(String memberEmail) {
+		return sqlSession.selectOne("memberMapper.emailDupCheck", memberEmail);
+	}
 }

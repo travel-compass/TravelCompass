@@ -29,6 +29,13 @@
 		WHERE SECESSION_FL = 'N'
 		AND MEMBER_EMAIL = #{memberEmail}
 	</select>
+	
+	<select id="emailDupCheck" parameterType="string" resultType="_int">
+		SELECT COUNT(*)
+		FROM MEMBER 
+		WHERE MEMBER_EMAIL = #{memberEmail}
+		AND SECESSION_FL = 'N'
+	</select>
 </mapper>
 
 

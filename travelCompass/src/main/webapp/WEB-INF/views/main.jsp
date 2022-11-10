@@ -13,9 +13,8 @@
     <link rel="stylesheet" href="/resources/css/inc/footer.css">
     <link rel="stylesheet" href="/resources/css/swiper.min.css">
 
-    <title>메인 페이지</title>
+    <title>Travelcompass</title>
     <script src="https://kit.fontawesome.com/3fe30a9b47.js" crossorigin="anonymous"></script>
-    
 </head>
 <body>
     <!-- header:include -->
@@ -60,11 +59,11 @@
             
             <div class="swiper-container">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide"><img src="/resources/images/main-img1.jpg" alt=""></div>
-                    <div class="swiper-slide"><img src="/resources/images/main-img2.jpg" alt=""></div>
-                    <div class="swiper-slide"><img src="/resources/images/main-img3.jpg" alt=""></div>
-                    <div class="swiper-slide"><img src="/resources/images/main-img4.jpg" alt=""></div>
-                    <div class="swiper-slide"><img src="/resources/images/main-img5.jpg" alt=""></div>
+                    <div class="swiper-slide"><img src="/resources/images/main-image1.png" alt="메인 이미지"></div>
+                    <div class="swiper-slide"><img src="/resources/images/main-image2.png" alt="메인 이미지"></div>
+                    <div class="swiper-slide"><img src="/resources/images/main-image3.png" alt="메인 이미지"></div>
+                    <div class="swiper-slide"><img src="/resources/images/main-image4.png" alt="메인 이미지"></div>
+                    <div class="swiper-slide"><img src="/resources/images/main-image5.png" alt="메인 이미지"></div>
                 </div>
             </div>
 
@@ -102,7 +101,7 @@
                         </li>
                         <li class="place-item">
                             <a href="해당 장소에 대한 상세페이지(자바스크립트로 queryString 생성)">
-                                <img src="/resources/images/main-img1.jpg">
+                                <img src="/resources/images/main-sample.jpg">
                                 <span class="place-title">최근에 본 장소2</span>
                                 <div class="grade">
                                     <span>평점</span>
