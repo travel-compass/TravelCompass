@@ -66,6 +66,15 @@
                 </div>
                 <span class="signUp-message" id="memberRRNMessage">숫자만, 뒷자리 맨 첫번째 수는 1 ~ 4</span>
 
+                <!-- 이름 입력 -->
+                <label for="memberName">
+                    <span class="required">*</span> 이름(실명)
+                </label>
+                
+                <div class="signUp-input-area">
+                    <input type="text" name="memberName" id="memberName" placeholder="" maxlength="5">
+                </div>
+                <span class="signUp-message" id="memberNameMessage">한글 2 ~ 5글자</span>
 
                 <!-- 닉네임 입력 -->
                 <label for="memberNickname">
@@ -73,7 +82,7 @@
                 </label>
                 
                 <div class="signUp-input-area">
-                    <input type="text" name="memberNickname" id="memberNickname" placeholder="닉네임" maxlength="6">
+                    <input type="text" name="memberNickname" id="memberNickname" maxlength="6">
                 </div>
                 <span class="signUp-message" id="memberNicknameMessage">특수문자를 제외한 2 ~ 6글자</span>
                 

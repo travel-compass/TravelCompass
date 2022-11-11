@@ -89,15 +89,27 @@ public class MemberController {
 	 * @return / 메인페이지 리다이렉트
 	 */
 	@PostMapping("/signUp")
-	public String signUpPage(Member member) {
+	public String signUp(Member member, String[] memberAddress,
+			RedirectAttributes ra, @RequestHeader("referer") String referer) {
+		
+		
 		String path = "";
+		String message = "";
+		String tempStr = String.join(",," ,memberAddress);
+		
+		member.setMemberAddress(tempStr);
+		int result = service.signUp(member);
+		
+		if(result > 0) {				// 회원 가입 성공 시 메인페이지 리다이렉트
+			path = "/";
+			message = "회원가입 성공";
+		} else {
+			path = referer;
+			message = "회원가입 실패";
+		}
 		
 		// 회원 가입 실패 시 현재 페이지 리다이렉트
-		
-		// 회원 가입 성공 시 메인페이지 리다이렉트
-		
-		
-		
+		ra.addFlashAttribute("message", message);
 		return "redirect:" + path;
 	}
 	
