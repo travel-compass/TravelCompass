@@ -5,6 +5,7 @@ const validate = {
     "memberPw" : false,
     "memberPwConfirm" : false,
     "memberRRN" : false,
+    "memberName" : false,
     "memberNickname" : false,
     "memberTel" : false,
     "detailAddress" : false
@@ -200,6 +201,34 @@ function memberRRNValidate(memberRRNInput) {
         validate.memberRRN = false;
     }
 }
+
+
+// 이름 유효성 검사
+const memberName = document.getElementById("memberName");
+const memberNameMessage = document.getElementById("memberNameMessage");
+memberName.addEventListener("change", function(){
+    if(memberName.value.trim().length == 0) {       // 이름이 입력되지 않았다면
+        memberName.value = "";
+        memberNameMessage.classList.remove("error", "confirm");
+        memberNameMessage.innerText = "한글 2 ~ 5글자";
+        validate.memberName = false;
+        return;
+    }
+
+    const regEx = /^[가-힣]{2,5}$/;
+    if(regEx.test(memberName.value)) {          // 이름이 유효한 형식이면
+        memberNameMessage.innerText = "유효한 형식의 이름입니다.";
+        memberNameMessage.classList.add("confirm");
+        memberNameMessage.classList.remove("error");
+        validate.memberName = true;
+    } else {
+        memberNameMessage.innerText = "유효하지 않은 형식의 이름입니다.";
+        memberNameMessage.classList.add("error");
+        memberNameMessage.classList.remove("confirm");
+        validate.memberName = false;
+    }
+});
+
 
 
 // 닉네임 유효성 검사
