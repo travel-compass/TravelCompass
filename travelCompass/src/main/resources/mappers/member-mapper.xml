@@ -30,12 +30,20 @@
 		AND MEMBER_EMAIL = #{memberEmail}
 	</select>
 	
+	<!-- 이메일 중복 체크 -->
 	<select id="emailDupCheck" parameterType="string" resultType="_int">
 		SELECT COUNT(*)
 		FROM MEMBER 
 		WHERE MEMBER_EMAIL = #{memberEmail}
 		AND SECESSION_FL = 'N'
 	</select>
+	
+	<!-- 회원가입 -->
+	<insert id="signUp" parameterType="Member">
+		INSERT INTO "MEMBER" VALUES(SEQ_MEMBER_NO.NEXTVAL, #{memberEmail}, #{memberPw}, #{memberNickname}, #{memberName}, #{memberRRN}, 
+					#{memberTel}, #{memberAddress}, 
+					DEFAULT, DEFAULT, DEFAULT, NULL, DEFAULT, DEFAULT)
+	</insert>
 </mapper>
 
 

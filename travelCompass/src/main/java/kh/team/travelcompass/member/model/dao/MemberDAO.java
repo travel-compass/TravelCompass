@@ -23,7 +23,17 @@ public class MemberDAO {
 	}
 
 
+	/** 이메일 중복 체크 DAO
+	 * @param memberEmail
+	 * @return
+	 */
 	public int emailDupCheck(String memberEmail) {
 		return sqlSession.selectOne("memberMapper.emailDupCheck", memberEmail);
+	}
+
+
+	public int signUp(Member member) {
+
+		return sqlSession.insert("memberMapper.signUp", member);
 	}
 }
