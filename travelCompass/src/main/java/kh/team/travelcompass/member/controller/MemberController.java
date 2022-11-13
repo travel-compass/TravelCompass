@@ -89,15 +89,17 @@ public class MemberController {
 	 * @return / 메인페이지 리다이렉트
 	 */
 	@PostMapping("/signUp")
-	public String signUp(Member member, String[] memberAddress,
-			RedirectAttributes ra, @RequestHeader("referer") String referer) {
-		
-		
+	public String signUp(Member member, String[] memberAddress, String[] memberRRN,
+		RedirectAttributes ra, @RequestHeader("referer") String referer) {
+			
 		String path = "";
 		String message = "";
-		String tempStr = String.join(",," ,memberAddress);
 		
-		member.setMemberAddress(tempStr);
+		String combineMemberAddress = String.join(",," ,memberAddress);
+		String combineMemberRRN = String.join("-", memberRRN);
+		
+		member.setMemberAddress(combineMemberAddress);
+		member.setMemberRRN(combineMemberRRN);
 		int result = service.signUp(member);
 		
 		if(result > 0) {				// 회원 가입 성공 시 메인페이지 리다이렉트
@@ -113,14 +115,32 @@ public class MemberController {
 		return "redirect:" + path;
 	}
 	
-	/** 계정찾기 페이지 이동
-	 * @return member/findAccount 포워드
+	/** 이메일 찾기 페이지 이동
+	 * @return member/findEmail 포워드
 	 */
-	@GetMapping("/findAccount")
-	public String findAccountPage() {
-		return "member/findAccount";
+	@GetMapping("/findEmail")
+	public String findEmail() {
+		return "member/findEmail";
 	}
 	
+	@PostMapping("/findEmail")
+	public String findEmail(Member inputMember, String[] memberRRN, RedirectAttributes ra, @RequestHeader("referer") String referer) {
+		
+		// 주민등록번호 가공
+		String combineMemberRRN = String.join("-", memberRRN);
+		
+		inputMember.setMemberRRN(combineMemberRRN);
+		
+		// service 호출
+		Member findMember = service.findEmail(inputMember);
+
+		if(findMember != null) {							// 일치하는 정보 있으면 결과창
+			ra.addFlashAttribute("result", findMember.getMemberEmail());
+		}
+
+		ra.addFlashAttribute("memberName", inputMember.getMemberName());
+		return "redirect:/member/result";
+	}
 	
 	/** 결과 페이지 이동
 	 * @return member/result 포워드
@@ -131,6 +151,15 @@ public class MemberController {
 	}
 	
 	
+	/** 비밀번호 찾기 페이지 이동
+	 * @return member/findPw
+	 */
+	@GetMapping("/findPw")
+	public String findPwPage() {
+		return "member/findPw";
+	}
+	
+	
 	/** 비밀번호 찾기 -> 비밀번호 변경 
 	 * @return member/changePw 포워드
 	 */
@@ -138,6 +167,18 @@ public class MemberController {
 	public String changePw() {
 		
 		return "member/changePw";
+	}
+	
+	
+	
+	/** 현재 비밀번호 확인
+	 * @return result
+	 */
+	@ResponseBody
+	@PostMapping("/memberPwCheck")
+	public int memberPwCheck(String currentMemberPw) {
+		
+		return 0;
 	}
 	
 	@ResponseBody

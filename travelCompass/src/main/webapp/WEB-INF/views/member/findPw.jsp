@@ -17,34 +17,10 @@
     <jsp:include page="/WEB-INF/views/inc/header.jsp" />
 
     <main>
-        <%-- 아이디 찾기 --%>
-        <form action="아이디 찾기" method="post" name="findId-frm">
-            <span class="find-area-title">아이디 찾기</span>
-            
-            <label for="memberName">
-                이름
-            </label>
-            <div class="find-input-area">
-                <input type="text" name="memberEmail" id="memberEmail" maxlength="5" autocomplete="off" required>
-            </div>
-
-            <label for="memberName">
-                주민등록번호
-            </label>
-            <div class="find-input-area">
-                <input type="text" name="rrn" maxlength="6" autocomplete="6">
-                    <span>&minus;</span>
-                <input type="password" name="rrn" maxlength="7">
-            </div>
-
-
-            <button class="login-btn">아이디 찾기</button>
-        </form>
-
-        <%-- 비밀번호 찾기 --%>
+        
         <form action="비밀번호 찾기" method="post" name="findPw-frm">
             <span class="find-area-title">비밀번호 찾기</span>
-            
+
             <label for="memberName">
                 이메일
             </label>
@@ -63,12 +39,13 @@
             </div>
             <span class="confirm-message error">인증번호가 올바르지 않습니다.</span>
             
-
             <button class="login-btn">비밀번호 찾기</button>
         </form>
     </main>
 
     <!--------------------- footer:include --------------------->
     <jsp:include page="/WEB-INF/views/inc/footer.jsp" />
+
+    <script src="/resources/js/member/findAccount.js"></script>
 </body>
 </html>
