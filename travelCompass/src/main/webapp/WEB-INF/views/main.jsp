@@ -250,7 +250,7 @@
                                 </div>
                             </a>
                         </li>
-                        <li class="place-item">
+                        <%-- <li class="place-item">
                             <a href="해당 장소에 대한 상세페이지(자바스크립트로 queryString 생성)">
                                 <img src="/resources/images/main-sample.jpg">
                                 <span class="place-title">주변 장소6</span>
@@ -299,9 +299,8 @@
                                     <span>리뷰 갯수</span>
                                 </div>
                             </a>
-                        </li>
+                        </li> --%>
                     </ul>
-
                 </div>
             </div>
         </section>
