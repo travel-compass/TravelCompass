@@ -1,4 +1,4 @@
-window.addEventListener("load", function(){
+document.addEventListener("DOMContentLoaded", function(){
     let body = document.querySelector("body");
     let blurBox = document.querySelector(".blur-box");
     let searchForm = document.querySelector(".search-form");
@@ -98,31 +98,42 @@ window.addEventListener("load", function(){
         // console.log(currentNode);
         if (currentNode.className == "prev-arrow") {
             prevMove(currentNode);
-        } else {
+        } else if(currentNode.className == "next-arrow") {
             nextMove(currentNode);
+        } else {
+            return;
         }
     })
 
 
     // 공통 
     let offset = document.querySelector(".slide-container").clientWidth + 20;
-    let placeListWidth = document.querySelector(".place-list").clientWidth;
+    // let placeListWidth = document.querySelector(".place-list").clientWidth;
     let placeItemWidth = 305;
 
     function prevMove(currentNode) {
         let prevBtn = currentNode;
         let nextBtn = prevBtn.nextElementSibling;
         let placeList = nextBtn.nextElementSibling;
-
+        let placeListWidth = placeList.clientWidth;
         // console.log(prevBtn);
         // console.log(nextBtn);
         nextBtn.style.display = "flex";
         let currentLeft = placeList.offsetLeft;
-        let nextOffset = placeListWidth + currentLeft;
+        // let newOffset = currentLeft - offset;
+        // let nextOffset = placeListWidth + currentLeft;
 
-        if (nextOffset <= offset) {
+        // if (nextOffset <= newOffset) {
+        //     placeList.style.left = placeList.offsetLeft + offset + "px";
+        // } else if (-currentLeft < offset) {
+        //     placeList.style.left = 0 + "px";
+        //     prevBtn.style.display = "none";
+        // }
+
+        // 더많이 남았을 때
+        if(offset + currentLeft < 0) {
             placeList.style.left = placeList.offsetLeft + offset + "px";
-        } else if (nextOffset > offset) {
+        } else {
             placeList.style.left = 0 + "px";
             prevBtn.style.display = "none";
         }
@@ -133,6 +144,7 @@ window.addEventListener("load", function(){
 
         let prevBtn = nextBtn.previousElementSibling;
         let placeList = nextBtn.nextElementSibling;
+        let placeListWidth = placeList.clientWidth;
 
         prevBtn.style.display = "flex";
         let currentLeft = placeList.offsetLeft;
