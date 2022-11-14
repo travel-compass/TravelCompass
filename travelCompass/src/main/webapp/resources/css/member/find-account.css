@@ -12,9 +12,6 @@ main {
     width: 1200px;
     margin-top: 80px;
 }
-form[name='findId-frm'] {
-    border-right: 1px solid #ddd;
-}
 form[name='findId-frm'], form[name='findPw-frm'] {
     width: 45%;
     display: flex;
@@ -67,6 +64,7 @@ main form > label{
     border-color: #34E0A1;
 }
 .find-input-area > button {
+    height: 50px;
     width: 30%;
     padding: 10px;
     background-color: white;

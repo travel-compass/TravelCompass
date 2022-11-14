@@ -18,6 +18,7 @@ form.addEventListener("submit", e => {             // form이 제출 되었을 �
     for(let key in validate) {      // 유효성 객체 돌면서
         if(!validate[key]) {        // 한개라도 false면
 
+
             switch(key) {   
             case "memberEmail": message = "이메일 형식이 유효하지 않습니다."; break;
             case "emailDupCheck": message = "중복된 이메일 입니다."; break;
@@ -52,7 +53,7 @@ form.addEventListener("submit", e => {             // form이 제출 되었을 �
 const memberEmail = document.getElementById("memberEmail");
 const memberEmailMessage = document.getElementById("memberEmailMessage");
 
-memberEmail.addEventListener("change", () => {
+memberEmail.addEventListener("input", () => {
     if(memberEmail.value.trim().length == 0) {      // 아무것도 적히지 않았을 때
         memberEmail.value = "";
         memberEmailMessage.classList.remove("error", "confirm");
@@ -104,7 +105,7 @@ const memberPwMessage = document.getElementById("memberPwMessage");
 const memberPwConfirm = document.getElementById("memberPwConfirm");
 const memberPwConfirmMessag = document.getElementById("memberPwConfirmMessage");
 
-memberPw.addEventListener("change", () => {
+memberPw.addEventListener("input", () => {
     if(memberPw.value.trim().length == 0) {             // 비밀번호가 입력되지 않았다면
         memberPw.value = "";
         memberPwMessage.classList.remove("error", "confirm");
@@ -141,7 +142,7 @@ memberPw.addEventListener("change", () => {
 });
 
 // 비밀번호 확인
-memberPwConfirm.addEventListener("change", () => {
+memberPwConfirm.addEventListener("input", () => {
     if(memberPwConfirm.value.trim().length == 0) {             // 비밀번호가 입력되지 않았다면
         memberPwConfirm.value = "";
         memberPwConfirmMessag.classList.remove("error", "confirm");
@@ -170,10 +171,10 @@ const memberRRN2 = document.getElementById("memberRRN2");
 
 const memberRRNMessage = document.getElementById("memberRRNMessage");
 
-memberRRN.addEventListener("change", e => {
+memberRRN.addEventListener("input", e => {
     memberRRNValidate(e.target);
 });
-memberRRN2.addEventListener("change", e => {
+memberRRN2.addEventListener("input", e => {
     memberRRNValidate(e.target);
 });
 
@@ -206,7 +207,7 @@ function memberRRNValidate(memberRRNInput) {
 // 이름 유효성 검사
 const memberName = document.getElementById("memberName");
 const memberNameMessage = document.getElementById("memberNameMessage");
-memberName.addEventListener("change", function(){
+memberName.addEventListener("input", function(){
     if(memberName.value.trim().length == 0) {       // 이름이 입력되지 않았다면
         memberName.value = "";
         memberNameMessage.classList.remove("error", "confirm");
@@ -235,7 +236,7 @@ memberName.addEventListener("change", function(){
 const memberNickname = document.getElementById("memberNickname");
 const memberNicknameMessage = document.getElementById("memberNicknameMessage");
 
-memberNickname.addEventListener("change", () => {
+memberNickname.addEventListener("input", () => {
     if(memberNickname.value.trim().length == 0) {           // 아무것도 입력되지 않았을 때
         memberNickname.value = "";
         memberNicknameMessage.innerText = "특수문자를 제외한 2 ~ 6글자";
@@ -264,7 +265,7 @@ memberNickname.addEventListener("change", () => {
 const memberTel = document.getElementById("memberTel");
 const memberTelMessage = document.getElementById("memberTelMessage");
 
-memberTel.addEventListener("change", () => {
+memberTel.addEventListener("input", () => {
     if(memberTel.value.trim().length == 0) {
         memberTel.value = "";
         memberTelMessage.innerText = "휴대전화 번호 입력";
@@ -273,6 +274,7 @@ memberTel.addEventListener("change", () => {
         return;
     }
     
+
     const regEx = /^010[0-9]{8}$/;
     if(regEx.test(memberTel.value)) {       // 유효한 형식일 때
         memberTelMessage.innerText = "유효한 형식의 전화번호입니다.";

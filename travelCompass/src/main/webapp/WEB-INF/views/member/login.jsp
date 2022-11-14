@@ -37,7 +37,7 @@
 
             <button class="login-btn">Sign in</button>
             <div class="find-area">
-                Forgotten your <a href="/member/findAccount">ID<span>|</span>Password</a>
+                Forgotten your <a href="/member/findEmail">ID</a><span>|</span><a href="/member/findPw">Password</a>
             </div>
         </form>
     </main>

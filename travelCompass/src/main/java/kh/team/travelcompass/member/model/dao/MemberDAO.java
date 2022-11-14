@@ -32,8 +32,20 @@ public class MemberDAO {
 	}
 
 
+	/** 회원가입 DAO
+	 * @param member
+	 * @return result
+	 */
 	public int signUp(Member member) {
-
 		return sqlSession.insert("memberMapper.signUp", member);
+	}
+
+
+	/**	이메일 찾기 DAO
+	 * @param inputMember
+	 * @return findMember
+	 */
+	public Member findEmail(Member inputMember) {
+		return sqlSession.selectOne("memberMapper.findEmail", inputMember);
 	}
 }

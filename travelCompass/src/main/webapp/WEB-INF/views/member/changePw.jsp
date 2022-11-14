@@ -21,6 +21,17 @@
         <h1>비밀번호 변경</h1>
 
         <form action="/member/changePw" id="changePwForm">
+
+            <label for="currentMemberPw">
+                현재 비밀번호 확인
+            </label>
+            <div class="input-row">
+                <input type="password" name="currentMemberPw" id="currentMemberPw">
+                <span id="currentMemberPwCheck">비밀번호 확인</span>
+            </div>
+            <span id="currentMemberPwMessage">영어, 숫자, 특수문자(!,@,#,-,_) 6 ~ 20 글자 사이로 입력해주세요.</span>
+
+
             <label for="memberPw">
                 새 비밀번호
             </label>
@@ -47,6 +58,7 @@
     <%-- footer:include --%>
     <jsp:include page="/WEB-INF/views/inc/footer.jsp" />
 
+    <script src="/resources/js/common/jQuery-core.js"></script>
     <script src="/resources/js/member/changePw.js"></script>
 </body>
 </html>

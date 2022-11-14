@@ -23,4 +23,11 @@ public interface MemberService {
 	 * @return result (result > 0) 성공
 	 */
 	public int signUp(Member member);
+
+
+	/** 아이디 찾기 서비스
+	 * @param inputMember
+	 * @return findMember (이름, 이메일)
+	 */
+	public Member findEmail(Member inputMember);
 }

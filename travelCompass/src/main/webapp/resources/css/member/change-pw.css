@@ -18,6 +18,23 @@ main h1 {
     flex-direction: column;
 
 }
+
+#currentMemberPwCheck {
+    border: 2px solid #ddd;
+    border-bottom: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    height: 100%;
+    padding: 10px;
+    cursor: pointer;
+}
+
+#currentMemberPwMessage {
+    margin-bottom: 80px;
+}
+
 #changePwForm label {
     font-size: 25px;
     font-weight: bold;
@@ -38,6 +55,9 @@ main h1 {
 }
 
 #changePwForm .input-row:focus-within {
+    border-color: #34E0A1;
+}
+#changePwForm .input-row:focus-within > #currentMemberPwCheck{
     border-color: #34E0A1;
 }
 
