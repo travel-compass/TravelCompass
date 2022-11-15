@@ -32,7 +32,7 @@
                 주민등록번호
             </label>
             <div class="find-input-area">
-                <input type="text" name="memberRRN" maxlength="6" autocomplete="6" id="memberRRN1">
+                <input type="text" name="memberRRN" maxlength="6" autocomplete="6" id="memberRRN">
                     <span>&minus;</span>
                 <input type="password" name="memberRRN" maxlength="7" id="memberRRN2">
             </div>
@@ -45,6 +45,6 @@
     <!--------------------- footer:include --------------------->
     <jsp:include page="/WEB-INF/views/inc/footer.jsp" />
 
-    <script src="/resources/js/member/findEmail.js"></script>
+    <script src="/resources/js/member/validate.js"></script>
 </body>
 </html>

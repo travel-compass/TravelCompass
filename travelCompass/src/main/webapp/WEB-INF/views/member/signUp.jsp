@@ -55,6 +55,17 @@
                 </div>
                 <span class="signUp-message" id="memberPwConfirmMessage"></span>
 
+                <!-- 이름 입력 -->
+                <label for="memberName">
+                    <span class="required">*</span> 이름(실명)
+                </label>
+                
+                <div class="signUp-input-area">
+                    <input type="text" name="memberName" id="memberName" placeholder="" maxlength="5">
+                </div>
+                <span class="signUp-message" id="memberNameMessage">한글 2 ~ 5글자</span>
+
+                <!-- 주민등록번호 입력 -->
                 <label for="memberRRN1">
                     <span class="required">*</span> 주민등록번호
                 </label>
@@ -66,15 +77,7 @@
                 </div>
                 <span class="signUp-message" id="memberRRNMessage">숫자만, 뒷자리 맨 첫번째 수는 1 ~ 4</span>
 
-                <!-- 이름 입력 -->
-                <label for="memberName">
-                    <span class="required">*</span> 이름(실명)
-                </label>
                 
-                <div class="signUp-input-area">
-                    <input type="text" name="memberName" id="memberName" placeholder="" maxlength="5">
-                </div>
-                <span class="signUp-message" id="memberNameMessage">한글 2 ~ 5글자</span>
 
                 <!-- 닉네임 입력 -->
                 <label for="memberNickname">
@@ -487,7 +490,7 @@
     <jsp:include page="/WEB-INF/views/inc/footer.jsp"/>
 
     <script src="/resources/js/common/jQuery-core.js"></script>
-    <script src="/resources/js/member/signUp.js"></script>
+    <script src="/resources/js/member/validate.js"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </body>
 </html>
