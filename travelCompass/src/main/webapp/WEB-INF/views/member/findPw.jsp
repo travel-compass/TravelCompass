@@ -18,7 +18,7 @@
 
     <main>
         
-        <form action="비밀번호 찾기" method="post" name="findPw-frm">
+        <form action="/member/findPw" method="post" name="findPw-frm">
             <span class="find-area-title">비밀번호 찾기</span>
 
             <label for="memberEmail">

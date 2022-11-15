@@ -48,4 +48,9 @@ public class MemberDAO {
 	public Member findEmail(Member inputMember) {
 		return sqlSession.selectOne("memberMapper.findEmail", inputMember);
 	}
+	
+	
+	public String findPw(String memberEmail) {
+		return sqlSession.selectOne("memberMapper.findPw", memberEmail);
+	}
 }

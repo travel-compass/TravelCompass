@@ -52,4 +52,9 @@ public class MemberServiceImpl implements MemberService{
 	public Member findEmail(Member inputMember) {
 		return dao.findEmail(inputMember);
 	}
+
+	@Override
+	public String findPw(String memberEmail) {
+		return dao.findPw(memberEmail);
+	}
 }

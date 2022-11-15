@@ -53,6 +53,14 @@
 		AND MEMBER_RRN = #{memberRRN}
 		AND SECESSION_FL = 'N'
 	</select>
+	
+	<!-- 비밀번호 찾기 -->
+	<select id="findPw" parameterType="string" resultType="string">
+		SELECT MEMBER_NO
+		FROM "MEMBER"
+		WHERE MEMBER_EMAIL = #{memberEmail}
+		AND SECESSION_FL = 'N'
+	</select>
 </mapper>
 
 
