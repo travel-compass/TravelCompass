@@ -61,6 +61,14 @@
 		WHERE MEMBER_EMAIL = #{memberEmail}
 		AND SECESSION_FL = 'N'
 	</select>
+	
+	<!-- 비밀번호 변경 -->
+	<update id="changePw">
+		UPDATE "MEMBER" SET
+		MEMBER_PW = #{memberPw}
+		WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
 </mapper>
 
 

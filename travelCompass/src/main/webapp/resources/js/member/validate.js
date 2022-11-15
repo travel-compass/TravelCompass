@@ -15,6 +15,10 @@ const getAuthKeyBtn = document.getElementById("getAuthKeyBtn");                 
 const checkAuthKeyBtn = document.getElementById("checkAuthKeyBtn")                      // 인증번호 확인 버튼
 const authKeyMessage = document.getElementById("authKeyMessage");                       // 인증번호 메세지
 
+// 현재 비밀번호 확인
+const currentMemberPw = document.getElementById("currentMemberPw");
+const currentMemberPwMessage = document.getElementById("currentMemberPwMessage");
+
 // 비밀번호 유효성
 const memberPw = document.getElementById("memberPw");
 const memberPwMessage = document.getElementById("memberPwMessage");
@@ -37,7 +41,6 @@ const memberNicknameMessage = document.getElementById("memberNicknameMessage");
 // 전화번호 유효성 검사
 const memberTel = document.getElementById("memberTel");
 const memberTelMessage = document.getElementById("memberTelMessage");
-
 
 // 주소 Daum API
 const addressBtn = document.getElementById("addressSearch");
@@ -260,6 +263,14 @@ if(memberEmail != null) {
         }, 1000);   // 1초마다 실행
     }
 }
+
+
+// 현재 비밀번호 확인
+if(currentMemberPw != null) {
+    validate.currentMemberPw = false;
+}
+
+
 
 
 // 비밀번호 -------------------------------------------------------------------------------------------------------

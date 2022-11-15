@@ -21,7 +21,7 @@ import kh.team.travelcompass.member.model.service.MemberService;
 import kh.team.travelcompass.member.model.vo.Member;
 
 
-@SessionAttributes({"loginMember"})
+@SessionAttributes("loginMember")
 @RequestMapping("/member")
 @Controller
 public class MemberController {
@@ -75,7 +75,6 @@ public class MemberController {
 	@GetMapping("/logout")
 	public String logout(SessionStatus status) {
 		status.setComplete();
-		
 		return "redirect:/";
 	}
 	
@@ -125,12 +124,12 @@ public class MemberController {
 		return "member/findEmail";
 	}
 	
-	/** 
+	/** 이메일 찾기
 	 * @param inputMember
 	 * @param memberRRN
 	 * @param ra
 	 * @param referer
-	 * @return
+	 * @return 결과창 리다이렉트
 	 */
 	@PostMapping("/findEmail")
 	public String findEmail(Member inputMember, String[] memberRRN, RedirectAttributes ra, @RequestHeader("referer") String referer) {
@@ -170,7 +169,7 @@ public class MemberController {
 	
 	
 	/** 비밀번호 찾기
-	 * @return 
+	 * @return 성공 시 비밀번호 변경페이지 리다이렉트, 실패 시 비밀번호 찾기 페이지 리다이렉트
 	 */
 	@PostMapping("/findPw")
 	public String findPw(String memberEmail, RedirectAttributes ra, HttpSession session) {
@@ -184,6 +183,7 @@ public class MemberController {
 			// 일치하는 회원 정보가 있으면
 			// 회원정보 새션에 올리고
 			session.setAttribute("tempMemberNo", result);
+			session.setAttribute("referer", "findPw");
 			// 비밀번호 변경 페이지로 리다이렉트
 			path = "/member/changePw";
 			
@@ -198,7 +198,6 @@ public class MemberController {
 		return "redirect:" + path;
 	}
 	
-	
 	/** 비밀번호 찾기 -> 비밀번호 변경 
 	 * @return member/changePw 포워드
 	 */
@@ -208,33 +207,47 @@ public class MemberController {
 		return "member/changePw";
 	}
 	
-	
-	@PostMapping("/changePw")
-	public String changePw(@SessionAttribute("tempMemberNo") String tempMemberNo, @SessionAttribute("loginMember") Member loginMember) {
-		System.out.println(tempMemberNo);
-		
-		
-		
-		
-		return null;
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	/** 현재 비밀번호 확인
-	 * @return result
+	/** 비밀번호 변경
+	 * @param tempMemberNo 비로그인 요청 시
+	 * @param loginMember  로그인 요청 시
+	 * @param status       로그아웃을 위한 객체
+	 * @param inputMember  사용자 입력
+	 * @param session      비로그인 요청 시 올려진 세션값 무효화
+	 * @param ra           메세지 응답시 필요
+	 * @return path 경로로 리다이렉트
 	 */
-	@ResponseBody
-	@PostMapping("/memberPwCheck")
-	public int memberPwCheck(String currentMemberPw) {
+	@PostMapping("/changePw")
+	public String changePw(@SessionAttribute(value="tempMemberNo", required = false) int tempMemberNo, @SessionAttribute(value="loginMember", required = false) Member loginMember,
+			SessionStatus status, Member inputMember, HttpSession session, RedirectAttributes ra) {
+		System.out.println(tempMemberNo);
+		System.out.println(loginMember);
 		
-		return 0;
+		// 로그인 멤버의 회원번호로 먼저 검사
+		if(loginMember != null) {									// 로그인 상태에서 요청했을 때 
+			inputMember.setMemberNo(loginMember.getMemberNo());
+			System.out.println("로그인 요청");
+		} else {													// 비로그인 상태에서 요청했을 때 (비밀번호 찾기 후 자동 요청)
+			inputMember.setMemberNo(tempMemberNo);
+			System.out.println("비로그인 요청");
+		}
+		
+		// 비밀번호 변경 요청 후 결과 반환
+		int result = service.changePw(inputMember);
+		
+		String message = "";
+		String path = "";
+		if(result > 0) {			// 비밀번호 변경 성공 시 성공 메세지와 함께 로그아웃 후 메인페이지 리다이렉트 
+			message = "비밀번호가 변경되었습니다.";
+			path = "/";
+//			status.setComplete();
+			session.invalidate();	// 세션 무효화
+			
+		} else {				// 비밀번호 변경 실패 시 실패 메세지와 함께 비밀번호 변경 페이지 리다이렉트
+			message = "비밀번호 변경에 실패하였습니다.";
+			path = "/member/changePw";
+		}
+		ra.addFlashAttribute("message", message);
+		return "redirect:" + path;
 	}
 	
 	/**	이메일 중복 확인

@@ -53,4 +53,9 @@ public class MemberDAO {
 	public String findPw(String memberEmail) {
 		return sqlSession.selectOne("memberMapper.findPw", memberEmail);
 	}
+
+
+	public int changePw(Member inputMember) {
+		return sqlSession.update("memberMapper.changePw", inputMember);
+	}
 }
