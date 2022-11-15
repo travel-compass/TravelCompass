@@ -12,7 +12,7 @@
     <%-- <link rel="stylesheet" href="/resources/css/main-style.css"> --%>
     <link rel="stylesheet" href="/resources/css/inc/footer.css">
     <%-- <link rel="stylesheet" href="/resources/css/swiper.min.css"> --%>
-    <link rel="stylesheet" href="/resources/css/member/MemberPage.css">
+    <link rel="stylesheet" href="/resources/css/profile/MemberPage.css">
 
     
     <script src="https://kit.fontawesome.com/313744e228.js" crossorigin="anonymous"></script>
@@ -25,7 +25,7 @@
     <div class="blur-box"></div>
     
     <main>
-        <div class="user-header-bottom-style">
+        <%-- <div class="user-header-bottom-style">
             <nav class="user-header-bottom-layout">
                 <a href="#">호텔</a>
                 <a href="#">즐길거리</a>
@@ -35,7 +35,7 @@
                 <a href="#">크루즈</a>
                 <a href="#"><i class="fa-solid fa-ellipsis"></i></a>
             </nav>
-        </div>
+        </div> --%>
 
         <!-- 회원 정보 페이지 검색창 하단 메뉴 시작 부분 -->
         <div class="temp-web">
@@ -52,7 +52,7 @@
                         <div class="user-info-left-part">
                             <div class="user-container-image">
                                 <span class="user-info-image">
-                                    <img src="../TeamProject-tripadvisor/image/star.png" alt="프로필 이미지">
+                                    <img src="${loginMember.profileImage}" alt="프로필 이미지">
                                 </span>
                             </div>
                             <div class="user-nickname">
@@ -143,7 +143,7 @@
                             <div class="user-page-review-colums2">
                                 <div class="user-page-review-header-style">
                                     <div class="user-page-review-header-layout">
-                                        <a href="#" class="review-user-image"><img src="../TeamProject-tripadvisor/image/star.png" alt="프로필 이미지"></a>
+                                        <a href="#" class="review-user-image"><img src="${loginMember.profileImage}" alt="프로필 이미지"></a>
                                         <div class="review-user-info-layout">
                                             <span class="review-user-nickname"><a href="#">유저닉네임</a>님이 리뷰를 작성했습니다.</span>
                                             <a href="#" class="review-user-dday">
@@ -181,7 +181,7 @@
                                     <div class="review-navi-layout">
                                         <a href="#" class="review-navi-left">
                                             <div>
-                                                <img src="../TeamProject-tripadvisor/image/venis.webp">
+                                                <img src="/resources/images/profile/venis.webp">
                                             </div>
                                             <div class="review-navi-title">
                                                 <div>배니스</div>
@@ -221,7 +221,7 @@
                             <div class="user-page-review-colums2">
                                 <div class="user-page-review-header-style">
                                     <div class="user-page-review-header-layout">
-                                        <a href="#" class="review-user-image"><img src="../TeamProject-tripadvisor/image/star.png" alt="프로필 이미지"></a>
+                                        <a href="#" class="review-user-image"><img src="${loginMember.profileImage}" alt="프로필 이미지"></a>
                                         <div class="review-user-info-layout">
                                             <span class="review-user-nickname"><a href="#">유저닉네임</a>님이 리뷰를 작성했습니다.</span>
                                             <a href="#" class="review-user-dday">
@@ -241,17 +241,17 @@
                                 <div class="slide-container-style">
                                     <div class="slide fade">
                                         <div class="numbertext">1 / 3</div>
-                                        <img src="../TeamProject-tripadvisor/image/slide/flower.jpg">
+                                        <img src="/resources/images/profile/flower.jpg">
                                     </div>
                                     
                                     <div class="slide fade">
                                         <div class="numbertext">2 / 3</div>
-                                        <img src="../TeamProject-tripadvisor/image/slide/fox.jpg">
+                                        <img src="/resources/images/profile/fox.jpg">
                                     </div>
 
                                     <div class="slide fade">
                                         <div class="numbertext">3 / 3</div>
-                                        <img src="../TeamProject-tripadvisor/image/slide/lightning.jpg">
+                                        <img src="/resources/images/profile/lightning.jpg">
                                     </div>
 
                                     <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
@@ -282,7 +282,7 @@
                                     <div class="review-navi-layout">
                                         <a href="#" class="review-navi-left">
                                             <div>
-                                                <img src="../TeamProject-tripadvisor/image/venis.webp">
+                                                <img src="/resources/images/profile/venis.webp">
                                             </div>
                                             <div class="review-navi-title">
                                                 <div>배니스</div>
@@ -334,7 +334,7 @@
 
     <%-- <script src="/resources/js/main.js"></script>
     <script src="/resources/js/swiper.min.js"></script> --%>
-    <script src="/resources/js/member/MemberPage.js"></script>
+    <script src="/resources/js/profile/MemberPage.js"></script>
 </body>
 </html>
 

@@ -26,7 +26,7 @@
 		            <div class="top-down-menu">
 		                <ul>
 		                    <li><a href="내정보 확인 이동">내 정보</a></li>
-		                    <li><a href="/member/MemberPage">마이 프로필</a></li>
+		                    <li><a href="/profile/MemberPage">마이 프로필</a></li>
 		                    <li><a href="/member/logout">로그아웃</a></li>
 		                </ul>
 		            </div>
