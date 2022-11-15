@@ -27,7 +27,7 @@
                 <!-- 이메일 입력 영역 -->
                 <div class="signUp-input-area">
                     <input type="text" name="memberEmail" id="memberEmail" placeholder="아이디(이메일)" maxlength="30" autocomplete="off">
-                    <button type="button">인증번호 받기</button>
+                    <button type="button" id="getAuthKeyBtn">인증번호 받기</button>
                 </div>
                 <span class="signUp-message" id="memberEmailMessage">메일을 받을 수 있는 이메일을 입력해주세요.</span>
                 
@@ -36,10 +36,10 @@
                     <span class="required">*</span> 인증번호
                 </label>
                 <div class="signUp-input-area">
-                    <input type="text" name="emailCheck" id="emailCheck" placeholder="인증번호 입력" maxlength="6" autocomplete="off">
-                    <button type="button">인증하기</button>
+                    <input type="text" name="authKey" id="authKey" placeholder="인증번호 입력" maxlength="6" autocomplete="off">
+                    <button type="button" id="checkAuthKeyBtn">인증하기</button>
                 </div>
-                <span class="signUp-message" id="signUp-message confirm">인증되었습니다.</span><!-- / 인증번호가 일치하지 않습니다. -->
+                <span class="signUp-message" id="authKeyMessage">인증되었습니다.</span><!-- / 인증번호가 일치하지 않습니다. -->
                 
                 <!-- 비밀번호/비밀번호 확인 입력 -->
                 <label for="memberPw">
@@ -55,6 +55,17 @@
                 </div>
                 <span class="signUp-message" id="memberPwConfirmMessage"></span>
 
+                <!-- 이름 입력 -->
+                <label for="memberName">
+                    <span class="required">*</span> 이름(실명)
+                </label>
+                
+                <div class="signUp-input-area">
+                    <input type="text" name="memberName" id="memberName" placeholder="" maxlength="5">
+                </div>
+                <span class="signUp-message" id="memberNameMessage">한글 2 ~ 5글자</span>
+
+                <!-- 주민등록번호 입력 -->
                 <label for="memberRRN1">
                     <span class="required">*</span> 주민등록번호
                 </label>
@@ -66,15 +77,7 @@
                 </div>
                 <span class="signUp-message" id="memberRRNMessage">숫자만, 뒷자리 맨 첫번째 수는 1 ~ 4</span>
 
-                <!-- 이름 입력 -->
-                <label for="memberName">
-                    <span class="required">*</span> 이름(실명)
-                </label>
                 
-                <div class="signUp-input-area">
-                    <input type="text" name="memberName" id="memberName" placeholder="" maxlength="5">
-                </div>
-                <span class="signUp-message" id="memberNameMessage">한글 2 ~ 5글자</span>
 
                 <!-- 닉네임 입력 -->
                 <label for="memberNickname">
@@ -487,7 +490,7 @@
     <jsp:include page="/WEB-INF/views/inc/footer.jsp"/>
 
     <script src="/resources/js/common/jQuery-core.js"></script>
-    <script src="/resources/js/member/signUp.js"></script>
+    <script src="/resources/js/member/validate.js"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </body>
 </html>

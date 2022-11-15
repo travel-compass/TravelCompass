@@ -47,4 +47,9 @@ public class MemberServiceImpl implements MemberService{
 		member.setMemberPw(bcrypt.encode(member.getMemberPw()));
 		return dao.signUp(member);
 	}
+
+	@Override
+	public Member findEmail(Member inputMember) {
+		return dao.findEmail(inputMember);
+	}
 }

@@ -19,11 +19,37 @@
 		<org.slf4j-version>1.7.25</org.slf4j-version>
 	</properties>
 	<dependencies>
+<<<<<<< HEAD
 
 
 
 		<!-- DBCP (커넥션풀) -->
 		<!-- 커넥션 재활용 커넥션풀 장점 - 한번에 이용할 수 있는 커넥션을 정해 DB에 부하를 줄일 수 있음 -->
+=======
+		
+		
+		  <!-- 이메일 인증 -->
+	    <!-- https://mvnrepository.com/artifact/javax.mail/mail -->
+	    <dependency>
+	       <groupId>javax.mail</groupId>
+	       <artifactId>mail</artifactId>
+	       <version>1.4.7</version>
+	    </dependency>
+	    
+	    <!-- https://mvnrepository.com/artifact/org.springframework/spring-context-support -->
+	    <dependency>
+	       <groupId>org.springframework</groupId>
+	       <artifactId>spring-context-support</artifactId>
+	       <version>${org.springframework-version}</version>
+	    </dependency>
+		<!-- DBCP (커넥션풀)-->
+		<!-- 
+				커넥션 재활용
+				커넥션풀 장점
+					- 한번에 이용할 수 있는 커넥션을 정해
+					  DB에 부하를 줄일 수 있음
+		 -->
+>>>>>>> main
 		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-dbcp2 -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
