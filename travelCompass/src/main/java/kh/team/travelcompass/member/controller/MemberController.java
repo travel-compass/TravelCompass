@@ -123,6 +123,13 @@ public class MemberController {
 		return "member/findEmail";
 	}
 	
+	/** 
+	 * @param inputMember
+	 * @param memberRRN
+	 * @param ra
+	 * @param referer
+	 * @return
+	 */
 	@PostMapping("/findEmail")
 	public String findEmail(Member inputMember, String[] memberRRN, RedirectAttributes ra, @RequestHeader("referer") String referer) {
 		
@@ -181,6 +188,10 @@ public class MemberController {
 		return 0;
 	}
 	
+	/**	이메일 중복 확인
+	 * @param memberEmail
+	 * @return result 
+	 */
 	@ResponseBody
 	@GetMapping("/emailDupCheck")
 	public int emailDupCheck(String memberEmail) {
