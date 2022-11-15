@@ -30,4 +30,18 @@ public interface MemberService {
 	 * @return findMember (이름, 이메일)
 	 */
 	public Member findEmail(Member inputMember);
+
+
+	/** 비밀번호 찾기 서비스
+	 * @param memberEmail
+	 * @return 이메일과 일치하는 회원의 회원번호
+	 */
+	public String findPw(String memberEmail);
+
+
+	/** 비밀번호 변경 서비스(암호화)
+	 * @param inputMember
+	 * @return result
+	 */
+	public int changePw(Member inputMember);
 }

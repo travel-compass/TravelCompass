@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -20,8 +21,9 @@
     <main>
         <h1>비밀번호 변경</h1>
 
-        <form action="/member/changePw" id="changePwForm">
-
+        <form action="/member/changePw" id="changePwForm" method="POST">
+		
+		<c:if test="${empty referer }">
             <label for="currentMemberPw">
                 현재 비밀번호 확인
             </label>
@@ -29,8 +31,8 @@
                 <input type="password" name="currentMemberPw" id="currentMemberPw">
                 <span id="currentMemberPwCheck">비밀번호 확인</span>
             </div>
-            <span id="currentMemberPwMessage">영어, 숫자, 특수문자(!,@,#,-,_) 6 ~ 20 글자 사이로 입력해주세요.</span>
-
+            <span id="currentMemberPwMessage"></span>		
+		</c:if>
 
             <label for="memberPw">
                 새 비밀번호
@@ -59,6 +61,6 @@
     <jsp:include page="/WEB-INF/views/inc/footer.jsp" />
 
     <script src="/resources/js/common/jQuery-core.js"></script>
-    <script src="/resources/js/member/changePw.js"></script>
+    <script src="/resources/js/member/validate.js"></script>
 </body>
 </html>

@@ -52,4 +52,17 @@ public class MemberServiceImpl implements MemberService{
 	public Member findEmail(Member inputMember) {
 		return dao.findEmail(inputMember);
 	}
+
+	@Override
+	public String findPw(String memberEmail) {
+		return dao.findPw(memberEmail);
+	}
+
+	@Override
+	public int changePw(Member inputMember) {
+		
+		// 비밀번호 암호화
+		inputMember.setMemberPw(bcrypt.encode(inputMember.getMemberPw()));
+		return dao.changePw(inputMember);
+	}
 }
