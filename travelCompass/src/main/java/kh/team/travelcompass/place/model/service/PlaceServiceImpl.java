@@ -14,14 +14,14 @@ import kh.team.travelcompass.place.model.vo.Place;
 public class PlaceServiceImpl implements PlaceService {
 
 	@Autowired
-	PlaceAPI api;
+	private PlaceAPI api;
 
 	@Override
 	public List<Place> nearByPlace(String x, String y) throws Exception {
 		Map<String, String> paramMap = new HashMap<>();
 		
-		paramMap.put("mapX", x);
-		paramMap.put("mapY", y);
+		paramMap.put("mapx", x);
+		paramMap.put("mapy", y);
 		paramMap.put("contentTypeId", "12");
 		
 	
