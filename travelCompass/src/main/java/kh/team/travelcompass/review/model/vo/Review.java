@@ -1,5 +1,7 @@
 package kh.team.travelcompass.review.model.vo;
 
+import java.util.List;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,5 +21,9 @@ public class Review {
 	private String contentId; // 리뷰 작성한 장소contentid 번호
 	private String firstImage; // 장소 썸네일 이미지 주소
 	private String reviewflag; // 리뷰 삭제Y / 비공개B
+	
+//	private int reviewLike; // 리뷰 좋아요 갯수(논의필요)
+	
+	private List<ReviewImage> reviewImgList;
 	
 }

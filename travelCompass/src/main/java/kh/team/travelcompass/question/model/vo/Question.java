@@ -1,5 +1,8 @@
 package kh.team.travelcompass.question.model.vo;
 
+import java.util.List;
+
+import kh.team.travelcompass.answer.model.vo.Answer;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,5 +21,7 @@ public class Question {
 	private String questionDelFlag; // QnA 삭제여부(삭제 Y)
 	private String contentId; // QnA가 작성된 장소 번호
 	private String memberNo; // QnA 작성한 회원 번호
+	
+	private List<Answer> answerList; // 질문에 달린 답변리스트
 	
 }

@@ -13,6 +13,8 @@ public interface PlaceService {
 	 * @return placeList
 	 */
 	public List<Place> nearByPlace(String x, String y) throws Exception;
+
+	public Place page(String contentId, String contentTypeId);
 	
 	
 	

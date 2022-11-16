@@ -1,4 +1,4 @@
-package kh.team.travelcompass.answer.model.vo;
+package kh.team.travelcompass.question.model.vo;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
