@@ -78,10 +78,9 @@
                         </div>
 
                         <!-- 본인 회원 프로필 메뉴 -->
-                        <div class="user-info-right-part">
-                            <button class="profile-edit">
-                                프로필 수정
-                            </button>
+                        <div class="my-info-right-part">
+                                <label for="image-input">프로필 사진 변경</label>
+                                <input type="file" id="image-input" accept="image/*">
                         </div>
 
 

@@ -104,13 +104,15 @@ main {
     font-size: 22px;
 }
 
+
+/* 다른 유저 프로필 버튼 */
 .user-info-right-part{
     width: 15%;
     display: flex;
     height: 40px;
 }
 
-.user-info-right-part button:first-child{
+.follow-button{
     width: 60%;
 }
 
@@ -124,6 +126,30 @@ main {
     border: 1px solid #e2e2e2;
     background-color: white;
     border-radius: 5px;
+    cursor: pointer;
+}
+/* 본인 프로필 수정 버튼 */
+
+.my-info-right-part{
+    display: flex;
+    height: 40px;
+    width: 160px;
+}
+
+.my-info-right-part input{
+    display: none;
+}
+
+.my-info-right-part label{
+    width: 80%;
+    height: 40px;
+    font-size: 14px;
+    font-weight: bold;
+    border: 1px solid #e2e2e2;
+    background-color: white;
+    border-radius: 5px;
+    text-align: center;
+    padding: 12px 0;
     cursor: pointer;
 }
 
@@ -418,7 +444,7 @@ main {
 }
 
 /* 사진 슬라이드 CSS */
-.slide > img{
+.slide img{
     width: 100%;
 }
 
@@ -478,16 +504,6 @@ main {
 animation-name: fade;
 animation-duration: 1.5s;
 }
-
-@-webkit-keyframes fade {
-from {opacity: .4} 
-to {opacity: 1}
-}
-
-@keyframes fade {
-from {opacity: .4} 
-to {opacity: 1}
-} 
 
 /* 리뷰 닷 다운 메뉴 */
 
