@@ -76,4 +76,9 @@ public class MemberDAO {
 	public String getMemberPw(int memberNo) {
 		return sqlSession.selectOne("memberMapper.getMemberPw", memberNo);
 	}
+
+
+	public int secession(int memberNo) {
+		return sqlSession.update("memberMapper.secession", memberNo);
+	}
 }

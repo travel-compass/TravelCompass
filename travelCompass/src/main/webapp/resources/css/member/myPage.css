@@ -176,6 +176,17 @@ main, section, div {
     cursor: pointer;
 }
 
+#changePwBtn {
+    background-color: transparent;
+    padding: 6px;
+    font-size: 16px;
+    color: black;
+    font-weight: bold;
+    border: 2px solid #ddd;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
 /* 서브밋 버튼 */
 #submitBtn {
     padding: 15px;

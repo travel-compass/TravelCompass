@@ -80,4 +80,10 @@ public class MemberServiceImpl implements MemberService{
 		String loginMemberPw = dao.getMemberPw(memberNo);
 		return bcrypt.matches(inputMemberPw, loginMemberPw);
 	}
+
+	@Transactional
+	@Override
+	public int secession(int memberNo) {
+		return dao.secession(memberNo);
+	}
 }

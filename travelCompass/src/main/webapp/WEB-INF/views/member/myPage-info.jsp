@@ -25,6 +25,7 @@
                 <h1 class="main-title">내 계정</h1>
                 <p class="main-sub-title">개인 정보를 아래에서 추가 및 편집할 수 있습니다.</p>
                 <button type="button" id="modifyBtn">편집모드</button>
+                <a href="/member/changePw" id="changePwBtn">비밀번호 변경</a>
             </div>
             
             <form action="/member/updateInfo" class="myInfo-form" name="myInfo-form" method="POST">

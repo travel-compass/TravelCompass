@@ -21,6 +21,10 @@ import kh.team.travelcompass.member.model.service.MemberService;
 import kh.team.travelcompass.member.model.vo.Member;
 
 
+/**
+ * @author Tonic
+ *
+ */
 @SessionAttributes("loginMember")
 @RequestMapping("/member")
 @Controller
@@ -313,6 +317,37 @@ public class MemberController {
 	@GetMapping("/secession")
 	public String secession() {
 		return "member/myPage-secession";
+	}
+	
+
+	/** 회원 탈퇴
+	 * @param loginMember
+	 * @param referer
+	 * @param ra
+	 * @param status
+	 * @return 성공시 메인페이지, 실패시 이전페이지 리다이렉트
+	 */
+	@PostMapping("/secession")
+	public String secession(@SessionAttribute Member loginMember, @RequestHeader("referer") String referer,
+			RedirectAttributes ra, SessionStatus status) {
+		
+		String path = "";
+		String message = "";
+		
+		int result = service.secession(loginMember.getMemberNo());
+		
+		if(result > 0) {		// 회원 탈퇴 성공 시
+			// 메인페이지로 리다이렉트
+			path = "/";	
+			message = "성공적으로 탈퇴되었습니다.";
+			status.setComplete();
+			
+		} else {				// 회원 탈퇴 실패 시
+			path = referer;
+			message = "회원 탈퇴에 실패했습니다.";
+		}
+		ra.addFlashAttribute("message", message);
+		return "redirect:" + path;
 	}
 	
 	/**	이메일 중복 확인
