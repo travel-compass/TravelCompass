@@ -6,7 +6,6 @@
 // 유효성 검사 객체
 const validate = {};
 
-
 // 이메일 유효성
 const memberEmail = document.getElementById("memberEmail");                             // 이메일 인풋
 const memberEmailMessage = document.getElementById("memberEmailMessage");               // 이메일 메세지
@@ -49,24 +48,32 @@ const addressBtn = document.getElementById("addressSearch");
 const agree = document.getElementById("agree1");
 
 let findPwPage = false;
+let infoPage = false;
 
 const form = document.getElementsByTagName("form")[0];
 
 if(form.getAttribute("name") == "findPw-frm") {
     findPwPage = true;
 }
-
-
+if(form.getAttribute("name") == "myInfo-form") {
+    infoPage = true;
+}
 
 form.addEventListener("submit", e=>{
+    if(infoPage) {
+        if(!writable) {
+            alert("편집모드로 변경해주세요");
+            e.preventDefault();
+            return;
+        }
+    }
     let message = "";        
     for(let key in validate) {      // 유효성 객체 돌면서
         if(!validate[key]) {        // 한개라도 false면
-
-
             switch(key) {   
                 case "memberEmail": message = "이메일 형식이 유효하지 않습니다."; break;
                 case "emailDupCheck": message = "중복된 이메일 입니다."; break;
+                case "currentMemberPw": message = "현재 비밀번호가 일치하지 않습니다."; break;
                 case "memberPw": message = "비밀번호 형식이 휴효하지 않습니다."; break;
                 case "memberPwConfirm": message = "비밀번호가 일치하지 않습니다."; break;
                 case "memberRRN": message = "주민등록번호 형식이 유효하지 않습니다."; break;
@@ -84,8 +91,14 @@ form.addEventListener("submit", e=>{
                 document.getElementById(key).focus();
             }
             return;
-        }   
+        }
     }
+    if(lastPathName == "secession") {
+        if(!confirm("정말 탈퇴하시겠습니까?")) {
+            e.preventDefault();
+        }
+    }
+
     if(agree != null) {
         if(document.querySelectorAll("input[type='checkbox']:checked").length != 2) {   // 약관 2개가 모두 체크 되어있지 않으면
             alert("약관에 동의해주세요");
@@ -94,10 +107,6 @@ form.addEventListener("submit", e=>{
         }
     }
 });
-
-
-
-
 
 // 이메일 -------------------------------------------------------------------------------------------------------
 if(memberEmail != null) {
@@ -164,55 +173,57 @@ if(memberEmail != null) {
     let authSec = 59;
     // 인증번호 받기
 
-    getAuthKeyBtn.addEventListener("click", e => {
-    if(findPwPage) {       // 비밀번호 찾기 페이지라면
-        if(validate.memberEmail) {      // 이메일이 유효한 형식일 때만 인증 진행
-            startAuth();
-        } else {
-            alert("이메일 형식이 유효하지 않습니다.");
-            validate.authKey = false;
-            memberEmail.focus();
-        }
-    
-    } else {               // 비밀번호 찾기 페이지가 아닐 때
-
-        if(validate.emailDupCheck) {    // 중복된 이메일이 아닐 때만 인증진행
-            startAuth();
-        } else {
-            // 경고창 출력
-            alert("중복되지 않은 이메일을 작성해주세요.");
-            validate.authKey = false;
-        
-            // 이메일입력창 포커스
-            memberEmail.focus();
-        }
-    }
-    });
-    
-    checkAuthKeyBtn.addEventListener("click", ()=>{
-    if(authKey > 0 || authSec > 0) {        // 시간 제한이 지나지 않은 경우에만 인증번호 검사 진행
-        $.ajax({
-            url: "/sendEmail/checkAuthKey",
-            data: {"inputKey": authKey.value},
-            success: result => {
-                if(result > 0) {
-                    clearInterval(authTimer);
-                    authKeyMessage.innerText = "인증되었습니다.";
-                    authKeyMessage.classList.add("confirm");
-                    validate.authKey = true;    // 인증완료
-                } else {
-                    alert("인증번호가 일치하지 않습니다.");
-                    validate.authKey = false;
-                }
-            },
-            error: () => {
-                console.log("인증번호 확인 오류");
+    if(getAuthKeyBtn != null) {
+        getAuthKeyBtn.addEventListener("click", e => {
+        if(findPwPage) {       // 비밀번호 찾기 페이지라면
+            if(validate.memberEmail) {      // 이메일이 유효한 형식일 때만 인증 진행
+                startAuth();
+            } else {
+                alert("이메일 형식이 유효하지 않습니다.");
+                validate.authKey = false;
+                memberEmail.focus();
             }
-        })
-    } else {
-        alert("인증 시간이 만료되었습니다. 다시 시도해주세요.");
+        
+        } else {               // 비밀번호 찾기 페이지가 아닐 때
+    
+            if(validate.emailDupCheck) {    // 중복된 이메일이 아닐 때만 인증진행
+                startAuth();
+            } else {
+                // 경고창 출력
+                alert("중복되지 않은 이메일을 작성해주세요.");
+                validate.authKey = false;
+            
+                // 이메일입력창 포커스
+                memberEmail.focus();
+            }
+        }
+        });
+        
+        checkAuthKeyBtn.addEventListener("click", ()=>{
+        if(authKey > 0 || authSec > 0) {        // 시간 제한이 지나지 않은 경우에만 인증번호 검사 진행
+            $.ajax({
+                url: "/sendEmail/checkAuthKey",
+                data: {"inputKey": authKey.value},
+                success: result => {
+                    if(result > 0) {
+                        clearInterval(authTimer);
+                        authKeyMessage.innerText = "인증되었습니다.";
+                        authKeyMessage.classList.add("confirm");
+                        validate.authKey = true;    // 인증완료
+                    } else {
+                        alert("인증번호가 일치하지 않습니다.");
+                        validate.authKey = false;
+                    }
+                },
+                error: () => {
+                    console.log("인증번호 확인 오류");
+                }
+            })
+        } else {
+            alert("인증 시간이 만료되었습니다. 다시 시도해주세요.");
+        }
+        });
     }
-    });
 
 
     function startAuth() {
@@ -268,10 +279,35 @@ if(memberEmail != null) {
 // 현재 비밀번호 확인
 if(currentMemberPw != null) {
     validate.currentMemberPw = false;
+    currentMemberPw.addEventListener("change", ()=>{
+        if(currentMemberPw.value.trim().length == 0) {      // 비밀번호가 입력되지 않았을 때
+            currentMemberPw.value = "";
+            currentMemberPwMessage.innerText = "";
+            currentMemberPwMessage.classList.remove("error", "confirm");
+            validate.currentMemberPw = false;
+            return;
+        }
+
+        $.ajax({
+            url: "/member/checkMemberPw",
+            data: {"currentMemberPw":currentMemberPw.value},
+            type: "POST",
+            success: result => {
+                if(result) {        // 피밀번호가 일치할 때
+                    currentMemberPwMessage.innerText = "비밀번호가 일치합니다."
+                    currentMemberPwMessage.classList.add("confirm");
+                    currentMemberPwMessage.classList.remove("error");
+                    validate.currentMemberPw = true;
+                } else {            // 비밀번호가 일치하지 않을 때
+                    currentMemberPwMessage.innerText = "비밀번호가 일치하지 않습니다."
+                    currentMemberPwMessage.classList.add("error");
+                    currentMemberPwMessage.classList.remove("confirm");
+                    validate.currentMemberPw = false;
+                }
+            }
+        });
+    });
 }
-
-
-
 
 // 비밀번호 -------------------------------------------------------------------------------------------------------
 if(memberPw != null) {
@@ -425,6 +461,9 @@ if(memberNickname != null) {
         if(memberNickname.value.trim().length == 0) {           // 아무것도 입력되지 않았을 때
             memberNickname.value = "";
             memberNicknameMessage.innerText = "특수문자를 제외한 2 ~ 6글자";
+            if(infoPage) {
+                memberNicknameMessage.innerText = "";
+            }
             memberNicknameMessage.classList.remove("confirm", "error");
             validate.memberNickname = false;
             return;
@@ -454,6 +493,9 @@ if(memberTel != null) {
         if(memberTel.value.trim().length == 0) {
             memberTel.value = "";
             memberTelMessage.innerText = "휴대전화 번호 입력";
+            if(infoPage) {
+                memberTelMessage.innerText = "";
+            }
             memberTelMessage.classList.remove("confirm", "error");
             validate.memberTel = false;
             return;

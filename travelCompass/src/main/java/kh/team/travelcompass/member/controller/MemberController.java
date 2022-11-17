@@ -33,7 +33,7 @@ public class MemberController {
 	 * @return member/login 포워드
 	 */
 	@GetMapping("/login")
-	public String loginPage() {
+	public String login() {
 		
 		return "member/login";
 	}
@@ -82,7 +82,7 @@ public class MemberController {
 	 * @return member/signUp 포워드
 	 */
 	@GetMapping("/signUp")
-	public String signUpPage() {
+	public String signUp() {
 		return "member/signUp";
 	}
 	
@@ -158,12 +158,22 @@ public class MemberController {
 		return "member/result";
 	}
 	
+	/** 현재 비밀번호 확인
+	 * @param currentMemberPw
+	 * @return 일치:true, 불일치:false
+	 */
+	@ResponseBody
+	@PostMapping("/checkMemberPw")
+	public boolean checkMemberPw(String currentMemberPw, @SessionAttribute("loginMember") Member loginMember) {		
+		return service.checkMemberPw(currentMemberPw, loginMember.getMemberNo());
+	}
+	
 	
 	/** 비밀번호 찾기 페이지 이동
 	 * @return member/findPw
 	 */
 	@GetMapping("/findPw")
-	public String findPwPage() {
+	public String findPw() {
 		return "member/findPw";
 	}
 	
@@ -248,6 +258,61 @@ public class MemberController {
 		}
 		ra.addFlashAttribute("message", message);
 		return "redirect:" + path;
+	}
+
+	
+	/** 회원 정보 페이지
+	 * @return member/myPage-info 포워드
+	 */
+	@GetMapping("/info")
+	public String myInfo() {
+		return "member/myPage-info";
+	}
+	
+	
+	/** 회원 정보 수정
+	 * @param ra            메세지 출력을 위한 변수
+	 * @param inputMember   입력받은 데이터
+	 * @param memberAddress 주소 데이터가공을 위한 배열
+	 * @param loginMember   현재 로그인중인 회원번호를 얻기위한 변수
+	 * @param referer       이전 요청 주소를 얻기위한 변수
+	 * @return              성공여부에 따른 메세지와함께 이전요청으로 리다이렉트
+	 */
+	@PostMapping("/updateInfo")
+	public String updateInfo(RedirectAttributes ra, Member inputMember, String[] memberAddress, @SessionAttribute("loginMember") Member loginMember
+			, @RequestHeader("referer") String referer) {
+		
+		String message = "";
+		
+		String combineMemberAddress = String.join(",," ,memberAddress);
+		
+		inputMember.setMemberAddress(combineMemberAddress);
+		inputMember.setMemberNo(loginMember.getMemberNo());
+		
+		int result = service.updateInfo(inputMember);
+		
+		if(result > 0) {			// 정보 수정에 성공했으면
+			message = "회원 정보가 수정되었습니다.";
+			// 현재 로그인멤버에 수정한 회원 정보 동기화
+			loginMember.setMemberNickname(inputMember.getMemberNickname());
+			loginMember.setMemberTel(inputMember.getMemberTel());
+			loginMember.setMemberAddress(inputMember.getMemberAddress());
+			
+		} else {
+			message = "회원 정보 수정에 실패했습니다.";
+		}
+		
+		ra.addFlashAttribute("message", message);
+		return "redirect:" + referer;
+	}
+	
+	
+	/** 회원 탈퇴 페이지
+	 * @return member/myPage-secession 포워드
+	 */
+	@GetMapping("/secession")
+	public String secession() {
+		return "member/myPage-secession";
 	}
 	
 	/**	이메일 중복 확인
