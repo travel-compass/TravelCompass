@@ -21,6 +21,10 @@ import kh.team.travelcompass.member.model.service.MemberService;
 import kh.team.travelcompass.member.model.vo.Member;
 
 
+/**
+ * @author Tonic
+ *
+ */
 @SessionAttributes("loginMember")
 @RequestMapping("/member")
 @Controller
@@ -33,7 +37,7 @@ public class MemberController {
 	 * @return member/login 포워드
 	 */
 	@GetMapping("/login")
-	public String loginPage() {
+	public String login() {
 		
 		return "member/login";
 	}
@@ -82,7 +86,7 @@ public class MemberController {
 	 * @return member/signUp 포워드
 	 */
 	@GetMapping("/signUp")
-	public String signUpPage() {
+	public String signUp() {
 		return "member/signUp";
 	}
 	
@@ -158,12 +162,22 @@ public class MemberController {
 		return "member/result";
 	}
 	
+	/** 현재 비밀번호 확인
+	 * @param currentMemberPw
+	 * @return 일치:true, 불일치:false
+	 */
+	@ResponseBody
+	@PostMapping("/checkMemberPw")
+	public boolean checkMemberPw(String currentMemberPw, @SessionAttribute("loginMember") Member loginMember) {		
+		return service.checkMemberPw(currentMemberPw, loginMember.getMemberNo());
+	}
+	
 	
 	/** 비밀번호 찾기 페이지 이동
 	 * @return member/findPw
 	 */
 	@GetMapping("/findPw")
-	public String findPwPage() {
+	public String findPw() {
 		return "member/findPw";
 	}
 	
@@ -217,17 +231,15 @@ public class MemberController {
 	 * @return path 경로로 리다이렉트
 	 */
 	@PostMapping("/changePw")
-	public String changePw(@SessionAttribute(value="tempMemberNo", required = false) int tempMemberNo, @SessionAttribute(value="loginMember", required = false) Member loginMember,
+	public String changePw(@SessionAttribute(value="tempMemberNo", required=false) String tempMemberNo, @SessionAttribute(value="loginMember", required = false) Member loginMember,
 			SessionStatus status, Member inputMember, HttpSession session, RedirectAttributes ra) {
-		System.out.println(tempMemberNo);
-		System.out.println(loginMember);
 		
 		// 로그인 멤버의 회원번호로 먼저 검사
 		if(loginMember != null) {									// 로그인 상태에서 요청했을 때 
 			inputMember.setMemberNo(loginMember.getMemberNo());
 			System.out.println("로그인 요청");
 		} else {													// 비로그인 상태에서 요청했을 때 (비밀번호 찾기 후 자동 요청)
-			inputMember.setMemberNo(tempMemberNo);
+			inputMember.setMemberNo(Integer.parseInt(tempMemberNo));
 			System.out.println("비로그인 요청");
 		}
 		
@@ -239,12 +251,98 @@ public class MemberController {
 		if(result > 0) {			// 비밀번호 변경 성공 시 성공 메세지와 함께 로그아웃 후 메인페이지 리다이렉트 
 			message = "비밀번호가 변경되었습니다.";
 			path = "/";
-//			status.setComplete();
+			status.setComplete();
 			session.invalidate();	// 세션 무효화
 			
 		} else {				// 비밀번호 변경 실패 시 실패 메세지와 함께 비밀번호 변경 페이지 리다이렉트
 			message = "비밀번호 변경에 실패하였습니다.";
 			path = "/member/changePw";
+		}
+		ra.addFlashAttribute("message", message);
+		return "redirect:" + path;
+	}
+
+	
+	/** 회원 정보 페이지
+	 * @return member/myPage-info 포워드
+	 */
+	@GetMapping("/info")
+	public String myInfo() {
+		return "member/myPage-info";
+	}
+	
+	
+	/** 회원 정보 수정
+	 * @param ra            메세지 출력을 위한 변수
+	 * @param inputMember   입력받은 데이터
+	 * @param memberAddress 주소 데이터가공을 위한 배열
+	 * @param loginMember   현재 로그인중인 회원번호를 얻기위한 변수
+	 * @param referer       이전 요청 주소를 얻기위한 변수
+	 * @return              성공여부에 따른 메세지와함께 이전요청으로 리다이렉트
+	 */
+	@PostMapping("/updateInfo")
+	public String updateInfo(RedirectAttributes ra, Member inputMember, String[] memberAddress, @SessionAttribute("loginMember") Member loginMember
+			, @RequestHeader("referer") String referer) {
+		
+		String message = "";
+		
+		String combineMemberAddress = String.join(",," ,memberAddress);
+		
+		inputMember.setMemberAddress(combineMemberAddress);
+		inputMember.setMemberNo(loginMember.getMemberNo());
+		
+		int result = service.updateInfo(inputMember);
+		
+		if(result > 0) {			// 정보 수정에 성공했으면
+			message = "회원 정보가 수정되었습니다.";
+			// 현재 로그인멤버에 수정한 회원 정보 동기화
+			loginMember.setMemberNickname(inputMember.getMemberNickname());
+			loginMember.setMemberTel(inputMember.getMemberTel());
+			loginMember.setMemberAddress(inputMember.getMemberAddress());
+			
+		} else {
+			message = "회원 정보 수정에 실패했습니다.";
+		}
+		
+		ra.addFlashAttribute("message", message);
+		return "redirect:" + referer;
+	}
+	
+	
+	/** 회원 탈퇴 페이지
+	 * @return member/myPage-secession 포워드
+	 */
+	@GetMapping("/secession")
+	public String secession() {
+		return "member/myPage-secession";
+	}
+	
+
+	/** 회원 탈퇴
+	 * @param loginMember
+	 * @param referer
+	 * @param ra
+	 * @param status
+	 * @return 성공시 메인페이지, 실패시 이전페이지 리다이렉트
+	 */
+	@PostMapping("/secession")
+	public String secession(@SessionAttribute Member loginMember, @RequestHeader("referer") String referer,
+			RedirectAttributes ra, SessionStatus status) {
+		
+		String path = "";
+		String message = "";
+		
+		int result = service.secession(loginMember.getMemberNo());
+		
+		if(result > 0) {		// 회원 탈퇴 성공 시
+			// 메인페이지로 리다이렉트
+			path = "/";	
+			message = "성공적으로 탈퇴되었습니다.";
+			status.setComplete();
+			
+		} else {				// 회원 탈퇴 실패 시
+			path = referer;
+			message = "회원 탈퇴에 실패했습니다.";
 		}
 		ra.addFlashAttribute("message", message);
 		return "redirect:" + path;

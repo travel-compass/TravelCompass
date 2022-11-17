@@ -1,0 +1,229 @@
+main {
+    margin-top: 40px;
+    flex: 1;
+    width: 1200px;
+    display: flex;
+    justify-content: space-between;
+}
+
+main, section, div {
+    /* border: 1px solid black; */
+}
+
+/* 사이드바------------------------------- */
+.myInfo-side {
+    width: 25%;
+    border-right: 2px solid #ddd;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 15px;
+}
+
+/* 프로필--------------------------------- */
+.side-profile {
+    padding: 20px;
+}
+
+/* 프로필-닉네임--------------------------- */
+.side-profile .member-nickname {
+    font-weight: bold;
+    margin-top: 10px;
+    font-size: 22px;
+}
+
+/* 프로필-이미지----------------------------- */
+.profile-image img {
+    width: 100px;
+    border-radius: 50%;
+}
+/* 사이드바 메뉴------------------------------ */
+.side-menu {
+    display: block;
+    width: 100%;
+    margin-top: 50px;
+}
+.side-menu a{
+    display: flex;
+    padding: 12px 20px;
+    font-size: 20px;
+    justify-content: center;
+    transition: background-color 0.1s ease-in;
+}
+.side-menu li:not(.current-menu) a:hover {
+    background-color: #ddd;
+}
+
+
+/* 내 정보 메인-------------------------------- */
+.myInfo-main {
+    width: 70%;
+    padding: 20px;
+}
+
+/* 내 정보 헤더--------------------------------- */
+.myInfo-header {
+    border-bottom: 1px solid #ddd;    
+}
+
+.main-title {
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+.main-sub-title {
+    font-size: 20px;
+    margin-bottom: 40px;
+    color: grey;
+}
+
+/* 내 정보 입력폼--------------------------------- */
+.myInfo-form {
+    display: flex;
+}
+.myInfo-form > div {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+.main-left-column {
+    padding-right: 20px;
+}
+.main-right-column {
+    padding-left: 20px;
+}
+
+/* 내 정보 인풋--------------------------------- */
+.input-row {
+    display: flex;
+    flex-direction: column;
+}
+.input-row label {
+    font-size: 19px;
+    padding: 10px 0;
+}
+.input-row input {
+    padding: 10px 15px;
+    outline: none;
+    font-size: 19px;
+    
+    border: 2px solid #ddd;
+    
+    color: black;
+    margin: 3px 0;
+}
+.input-row input:not(input:read-only):focus {
+    border-color: #2DC48D;
+}
+
+.input-row .input-read-only {
+    border: none;
+    border-bottom: 2px solid #ddd;
+    color: grey;
+}
+
+.input-row span {
+    height: 30px;
+    font-size: 16px;
+    letter-spacing: -1.5px;
+}
+
+/* 주소 입력 창---------------------------------- */
+.address-input input:not(:nth-of-type(1)) {
+    margin-top: 20px;
+}
+
+.address-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#addressSearch {
+    width: 20%;
+    font-size: 18px;
+    background-color: transparent;
+    border: none;
+    background-color: #2DC48D;
+    color: white;
+    font-weight: bold;
+    height: 80%;
+    cursor:pointer;
+}
+
+.confirm {
+    color: green;
+}
+.error {
+    color: red;
+}
+.hide {
+    display: none;
+}
+.black {
+    display: block;
+}
+
+
+/* 편집모드 버튼 */
+#modifyBtn {
+    background-color: #2DC48D;
+    padding: 6px;
+    font-size: 16px;
+    color: white;
+    font-weight: bold;
+    border: none;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+#changePwBtn {
+    background-color: transparent;
+    padding: 6px;
+    font-size: 16px;
+    color: black;
+    font-weight: bold;
+    border: 2px solid #ddd;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+/* 서브밋 버튼 */
+#submitBtn {
+    padding: 15px;
+    background-color: #2DC48D;
+    color: white;
+    font-weight: bold;
+    border: none;
+    margin-top: auto;
+    width: 100%;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.current-menu {
+    background-color: #2DC48D;
+}
+.current-menu a {
+    color: white;
+}
+
+.current-member-pw {
+    width: 50%;
+}
+
+.warning-message {
+    color: red;
+    text-decoration: underline;
+    margin-bottom: 5px;
+}
+
+.secession-btn {
+    width: 50%;
+    padding: 15px;
+    font-size: 20px;
+    margin-top: auto;
+    background-color: #2DC48D;
+    color: white;
+    font-weight: bold;
+    border: none;
+}

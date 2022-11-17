@@ -69,6 +69,27 @@
 		WHERE MEMBER_NO = #{memberNo}
 	</update>
 	
+	<!-- 회원 정보 수정(닉네임, 전화번호, 주소) -->
+	<update id="updateInfo">
+		UPDATE "MEMBER" SET
+		MEMBER_NICKNAME = #{memberNickname},
+		MEMBER_TEL = #{memberTel},
+		MEMBER_ADDRESS = #{memberAddress}
+		WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
+	<!-- 회원비밀번호 조회 -->
+	<select id="getMemberPw" parameterType="_int" resultType="string">
+		SELECT MEMBER_PW FROM "MEMBER"
+		WHERE MEMBER_NO = #{memberNo}
+	</select>
+	
+	<!-- 회원 탈퇴 -->
+	<update id="secession" parameterType="_int">
+		UPDATE "MEMBER" SET
+		SECESSION_FL = 'Y'
+		WHERE MEMBER_NO = #{memberNo}
+	</update>
 </mapper>
 
 

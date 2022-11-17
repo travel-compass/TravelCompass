@@ -58,11 +58,32 @@ public class MemberServiceImpl implements MemberService{
 		return dao.findPw(memberEmail);
 	}
 
+	@Transactional
 	@Override
 	public int changePw(Member inputMember) {
 		
 		// 비밀번호 암호화
 		inputMember.setMemberPw(bcrypt.encode(inputMember.getMemberPw()));
 		return dao.changePw(inputMember);
+	}
+
+	@Transactional
+	@Override
+	public int updateInfo(Member inputMember) {
+		return dao.updateInfo(inputMember);
+	}
+
+	@Override
+	public boolean checkMemberPw(String inputMemberPw, int memberNo) {
+		
+		// 로그인 회원의 암호화된 비밀번호 가져오기
+		String loginMemberPw = dao.getMemberPw(memberNo);
+		return bcrypt.matches(inputMemberPw, loginMemberPw);
+	}
+
+	@Transactional
+	@Override
+	public int secession(int memberNo) {
+		return dao.secession(memberNo);
 	}
 }

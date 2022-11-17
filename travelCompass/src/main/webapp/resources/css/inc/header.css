@@ -151,6 +151,10 @@ label[for='header-menu-toggle'] {
 .top-down-menu > ul {
     list-style: none;
 }
+.top-down-menu li:last-of-type {
+    margin-top: 15px;
+    border-top: 2px solid #ddd;
+}
 .top-down-menu a {
     display: flex;
     padding: 5px;
@@ -159,7 +163,7 @@ label[for='header-menu-toggle'] {
 }
 .top-down-menu a:hover {
     background-color: #ddd;
-    border-radius: 15px;
+    /* border-radius: 15px; */
 }
 
 .top-down-menu:after {
