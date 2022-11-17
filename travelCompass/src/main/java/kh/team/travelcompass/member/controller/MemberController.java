@@ -231,17 +231,15 @@ public class MemberController {
 	 * @return path 경로로 리다이렉트
 	 */
 	@PostMapping("/changePw")
-	public String changePw(@SessionAttribute(value="tempMemberNo", required = false) int tempMemberNo, @SessionAttribute(value="loginMember", required = false) Member loginMember,
+	public String changePw(@SessionAttribute(value="tempMemberNo", required=false) String tempMemberNo, @SessionAttribute(value="loginMember", required = false) Member loginMember,
 			SessionStatus status, Member inputMember, HttpSession session, RedirectAttributes ra) {
-		System.out.println(tempMemberNo);
-		System.out.println(loginMember);
 		
 		// 로그인 멤버의 회원번호로 먼저 검사
 		if(loginMember != null) {									// 로그인 상태에서 요청했을 때 
 			inputMember.setMemberNo(loginMember.getMemberNo());
 			System.out.println("로그인 요청");
 		} else {													// 비로그인 상태에서 요청했을 때 (비밀번호 찾기 후 자동 요청)
-			inputMember.setMemberNo(tempMemberNo);
+			inputMember.setMemberNo(Integer.parseInt(tempMemberNo));
 			System.out.println("비로그인 요청");
 		}
 		
@@ -253,7 +251,7 @@ public class MemberController {
 		if(result > 0) {			// 비밀번호 변경 성공 시 성공 메세지와 함께 로그아웃 후 메인페이지 리다이렉트 
 			message = "비밀번호가 변경되었습니다.";
 			path = "/";
-//			status.setComplete();
+			status.setComplete();
 			session.invalidate();	// 세션 무효화
 			
 		} else {				// 비밀번호 변경 실패 시 실패 메세지와 함께 비밀번호 변경 페이지 리다이렉트

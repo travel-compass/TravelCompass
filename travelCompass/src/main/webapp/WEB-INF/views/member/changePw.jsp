@@ -29,7 +29,6 @@
             </label>
             <div class="input-row">
                 <input type="password" name="currentMemberPw" id="currentMemberPw">
-                <span id="currentMemberPwCheck">비밀번호 확인</span>
             </div>
             <span id="currentMemberPwMessage"></span>		
 		</c:if>

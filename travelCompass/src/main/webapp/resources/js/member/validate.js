@@ -22,7 +22,8 @@ const currentMemberPwMessage = document.getElementById("currentMemberPwMessage")
 const memberPw = document.getElementById("memberPw");
 const memberPwMessage = document.getElementById("memberPwMessage");
 const memberPwConfirm = document.getElementById("memberPwConfirm");
-const memberPwConfirmMessag = document.getElementById("memberPwConfirmMessage");
+const memberPwConfirmMessag = document.getElementById
+const changePwForm = document.getElementById("changePwForm");("memberPwConfirmMessage");
 
 // 주민등록번호 유효성 검사
 const memberRRN = document.getElementById("memberRRN");
@@ -309,6 +310,26 @@ if(currentMemberPw != null) {
     });
 }
 
+
+if(changePwForm != null) {
+    changePwForm.addEventListener("mouseover", function(event){
+        const btn = event.target;
+        if(!btn.classList.contains("visiable-btn")) {
+            return;
+        }
+        btn.previousElementSibling.setAttribute("type", "text");
+    });
+    
+    changePwForm.addEventListener("mouseout", function(event){
+        const btn = event.target;
+        if(!btn.classList.contains("visiable-btn")) {
+            return;
+        }
+        btn.previousElementSibling.setAttribute("type", "password");
+    });
+}
+
+
 // 비밀번호 -------------------------------------------------------------------------------------------------------
 if(memberPw != null) {
     validate.memberPw = false;
@@ -338,14 +359,14 @@ if(memberPw != null) {
         }
     
         if(memberPw.value == memberPwConfirm.value) {       // 비밀번호 == 비밀번호 확인
-            memberPwConfirmMessag.innerText = "비밀번호가 일치합니다."
-            memberPwConfirmMessag.classList.add("confirm");
-            memberPwConfirmMessag.classList.remove("error");
+            memberPwConfirmMessage.innerText = "비밀번호가 일치합니다."
+            memberPwConfirmMessage.classList.add("confirm");
+            memberPwConfirmMessage.classList.remove("error");
             validate.memberPwConfirm = true;
         } else {                                            // 비밀번호 != 비밀번호 확인
-            memberPwConfirmMessag.innerText = "비밀번호가 일치하지 않습니다.."
-            memberPwConfirmMessag.classList.add("error");
-            memberPwConfirmMessag.classList.remove("confirm");
+            memberPwConfirmMessage.innerText = "비밀번호가 일치하지 않습니다.."
+            memberPwConfirmMessage.classList.add("error");
+            memberPwConfirmMessage.classList.remove("confirm");
             validate.memberPwConfirm = false;
         }
     });
@@ -354,22 +375,22 @@ if(memberPw != null) {
     memberPwConfirm.addEventListener("input", () => {
         if(memberPwConfirm.value.trim().length == 0) {             // 비밀번호가 입력되지 않았다면
             memberPwConfirm.value = "";
-            memberPwConfirmMessag.classList.remove("error", "confirm");
-            memberPwConfirmMessag.innerText = "";
+            memberPwConfirmMessage.classList.remove("error", "confirm");
+            memberPwConfirmMessage.innerText = "";
             validate.memberPw = false;
             return;
         }
         
         // 비밀번호 확인과 일치 확인
         if(memberPw.value == memberPwConfirm.value) {       // 비밀번호 == 비밀번호 확인
-            memberPwConfirmMessag.innerText = "비밀번호가 일치합니다."
-            memberPwConfirmMessag.classList.add("confirm");
-            memberPwConfirmMessag.classList.remove("error");
+            memberPwConfirmMessage.innerText = "비밀번호가 일치합니다."
+            memberPwConfirmMessage.classList.add("confirm");
+            memberPwConfirmMessage.classList.remove("error");
             validate.memberPwConfirm = true;
         } else {                                            // 비밀번호 != 비밀번호 확인
-            memberPwConfirmMessag.innerText = "비밀번호가 일치하지 않습니다.."
-            memberPwConfirmMessag.classList.add("error");
-            memberPwConfirmMessag.classList.remove("confirm");
+            memberPwConfirmMessage.innerText = "비밀번호가 일치하지 않습니다.."
+            memberPwConfirmMessage.classList.add("error");
+            memberPwConfirmMessage.classList.remove("confirm");
             validate.memberPwConfirm = false;
         }
     });
