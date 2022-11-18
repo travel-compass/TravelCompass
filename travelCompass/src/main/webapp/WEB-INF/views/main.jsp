@@ -15,6 +15,7 @@
 
     <title>Travelcompass</title>
     <script src="https://kit.fontawesome.com/3fe30a9b47.js" crossorigin="anonymous"></script>
+    <script src="/resources/js/main-place.js"></script>
 </head>
 <body>
     <!-- header:include -->
@@ -193,7 +194,7 @@
 
                 </div>
             </div>
-    
+            <!--
             <div class="place-area">
                 <span class="place-area-title">주변을 둘러보세요</span>
                 <div class="slide-container">
@@ -304,6 +305,7 @@
                 </div>
             </div>
         </section>
+        -->
     </main>
     <!-- footer:include -->
     <jsp:include page="/WEB-INF/views/inc/footer.jsp"></jsp:include>
