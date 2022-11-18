@@ -70,44 +70,95 @@ for(let item of suportbutton){
 }
 
 // 비동기 리뷰 테이블 작성
-const div_P = document.createElement("div");
-div_P.className.add("user-page-review-colums2");
 
-const div_Cdiv1 = document.createElement("div");
-div_Cdiv1.className.add("user-page-review-header-style");
+const review_text_colum = document.createElement("div");
+review_text_colum.classList.add("user-page-review-colums2");
 
-const div_Cdiv1_Cdiv1 = document.createElement("div");
-div_Cdiv1_Cdiv1.className.add("user-page-review-header-layout");
+    const review_text_header_style = document.createElement("div");
+    review_text_header_style.classList.add("user-page-review-header-style");
 
-const div_Cdiv1_Cdiv1_Ca1 = document.createElement("a");
-div_Cdiv1_Cdiv1_Ca1.className.add("review-user-image");
+        const review_text_header_layout = document.createElement("div");
+        review_text_header_layout.classList.add("user-page-review-header-layout");
 
-const div_Cdiv1_Cdiv1_Cdiv1 = document.createElement("div");
+            const review_text_image_fild = document.createElement("a");
+            review_text_image_fild.classList.add("review-user-image");
 
-const div_Cdiv1_Cdiv1_Cdiv1_Cspan1 = document.createElement("span");
-const div_Cdiv1_Cdiv1_Cdiv1_Ca1 = document.createElement("a");
+                const review_text_image_data = document.createElement("img");
 
-const div_Cdiv1_Cdiv2 = document.createElement("div");
-const div_Cdiv1_Cdiv3 = document.createElement("div");
+            const review_info_layout = document.createElement("div");
+            review_info_layout.classList.add("review-user-info-layout");
 
-const div_Cdiv2 = document.createElement("div");
+                const review_info_nickname = document.createElement("span");
+                review_info_nickname.classList.add("review-user-nickname");
 
-const div_Cdiv2_Cdiv1 = document.createElement("div");
-const div_Cdiv2_Cdiv2 = document.createElement("div");
-const div_Cdiv2_Cdiv3 = document.createElement("div");
+                    const review_info_nickname_link = document.createElement("a");
+                    review_info_nickname_link.innerText = "유저닉네임";
 
-const div_Cdiv3 = document.createElement("div");
+                review_info_nickname.innerText = "님이 리뷰를 작성했습니다."
 
-const div_Cdiv3_Cdiv1 = document.createElement("div");
+                    const review_info_date_link = document.createElement("a");
+                    review_info_date_link.classList.add("review-user-dday");
 
-const div_Cdiv4 = document.createElement("div");
+                    review_info_date_link.innerText = "0000년 0월";
+                    
+        const review_text_header_dot_style = document.createElement("div");
+        review_text_header_dot_style.classList.add("user-page-review-dot-style");
 
-const div_Cdiv4_Cdiv1 = document.createElement("div");
-const div_Cdiv4_Cdiv2 = document.createElement("div");
-const div_Cdiv4_Cdiv3 = document.createElement("div");
+        const reivew_text_header_dot_down_menu = document.createElement("div");
+        reivew_text_header_dot_down_menu.classList.add("user-page-review-dot-down-menu");
 
-// 실패 이름 너무 구림
+            const down_menu = document.createElement("ul");
+            down_menu.classList.add("down-menu");
 
-// 재시도 비동기 리뷰 테이블 작성 작명
+                const down_menu_li1 = document.createElement("li");
+                    
+                    const  down_menu_li1_a = document.createElement("a");
 
-const reviewColums2_dt = document.createElement("div");
+                    down_menu_li1_a.innerText = "수정";
+                    
+                const down_menu_li2 = document.createElement("li");
+                    
+                    const  down_menu_li2_a = document.createElement("a");
+
+                    down_menu_li2_a.innerText = "삭제";
+                    
+        const review_text_data_table_style = document.createElement("div");
+        review_text_data_table_style.classList.add("review-date-table-style");
+
+            const review_text_point = document.createElement("div");
+
+                const review_text_span1 = document.createElement("span");
+                review_text_span1.innerHTML = "<i class='fa-solid fa-circle'></i>";
+
+                const review_text_span2 = document.createElement("span");
+                review_text_span2.innerHTML = "<i class='fa-solid fa-circle'></i>";
+                
+                const review_text_span3 = document.createElement("span");
+                review_text_span3.innerHTML = "<i class='fa-solid fa-circle'></i>";
+                
+                const review_text_span4 = document.createElement("span");
+                review_text_span4.innerHTML = "<i class='fa-solid fa-circle'></i>";
+                
+                const review_text_span5 = document.createElement("span");
+                review_text_span5.innerHTML = "<i class='fa-solid fa-circle'></i>";
+            const review_text_title = document.createElement("div");
+            review_text_title.classList.add("review-title");
+
+            review_text_title.innerText = "리뷰 제목";
+
+            const review_text_content = document.createElement("div");
+            review_text_content.classList.add("review-content");
+
+            review_text_content.innerText = "내용";
+
+            const review_text_date = document.createElement("div");
+            review_text_date.classList.add("review-date");
+
+                const review_text_rdt = document.createElement("span");
+                review_text_rdt.classList.add("rdt");
+
+                review_text_rdt.innerText = "방문날짜 :";
+
+            review_text_date.innerText = "0000년 00월";
+
+// ---------------------------------------------------------------------------------------------
