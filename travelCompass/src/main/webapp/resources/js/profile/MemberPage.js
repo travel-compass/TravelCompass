@@ -276,7 +276,17 @@ reviewImageColum.classList.add("user-page-review-colums2");
                     reivewImageDownMenu_li2_a.innerText = "삭제";
 
         /* 사진 슬라이드 비동기 테이블 작성 위치 */
-                    
+        const reviewImageSlideContainer = document.createElement("div");
+        reviewImageSlideContainer.classList.add("slide-container-style");
+
+            const reviewImageSlide = document.createElement("div");
+            reviewImageSlide.classList.add("slide, fade");
+
+                const reviewImageNumber = document.createElement("div");
+                reviewImageNumber.classList.add("numbertext");
+
+                const reviewImageSlideImage = document.createElement("img");
+
         const reviewImageDataTableStyle = document.createElement("div");
         reviewImageDataTableStyle.classList.add("review-date-table-style");
 

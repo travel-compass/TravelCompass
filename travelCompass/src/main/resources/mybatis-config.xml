@@ -23,6 +23,7 @@
 	<mappers>
 		<mapper resource="/mappers/member-mapper.xml"/>
 		<mapper resource="/mappers/myPage-mapper.xml"/> 
+		<mapper resource="/mappers/profile-mapper.xml"/> 
 		<!-- resource : src/main/resources -->
 	</mappers>
 </configuration>

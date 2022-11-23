@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="profileMapper">
+
+	<!-- review resultMap -->
+	<!-- <resultMap type="Review" id="review_rm">
+		<id property="reviewNo" column="REVIEW_NO"/>
+		<result property="rating" column="RATING"/>
+		<result property="reviewTitle" column="REVIEW_TITLE"/>
+		<result property="reviewContent" column="REVIEW_CONTENT"/>
+		<result property="reviewDate" column="REVIEW_DATE"/>
+		<result property="memberNo" column="MEMBER_NO"/>
+		<result property="contentId" column="CONTENT_ID"/>
+		<result property="firstImage" column="FIRST_IMAGE"/>
+	</resultMap>
+	
+	reviewImgae resultMap
+	<resultMap type="ReviewImage" id="reviewImage_rm">
+		<id property="reviewImageNo" column="REVIEW_IMAGE_NO"/>
+		<result property="reivewNo" column="REVIEW_NO"/>
+		<result property="reviewImagePath" column="REVIEW_IMAGE_PATH"/>
+		<result property="reviewImageOrder" column="REVIEW_IMAGE_ORDER"/>
+		<result property="reviewImageReName" column="REVIEW_IMAGE_RENAME"/>
+		<result property="reviewImageOriginal" column="REVIEW_IMAGE_ORIGINAL"/>
+	</resultMap> -->
+	
+	<!-- 프로필 페이지 메뉴 별 게시글 수 조회 -->
+	<select id="getListCount" resultType="_int">
+	SELECT COUNT(*)
+	FROM REVIEW
+	WHERE REVIEW_FL = 'N'
+	</select>
+</mapper>

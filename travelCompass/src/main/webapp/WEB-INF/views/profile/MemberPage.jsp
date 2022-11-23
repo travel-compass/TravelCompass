@@ -103,11 +103,11 @@
                 <!-- 회원 페이지 세부 내용 하단 메뉴 시작 부분 -->
                 <div class="user-page-content-bottom-style">
                     <div class="user-page-content-bottom-layout">
-                        <a href="#">활동 피드</a>
-                        <a href="#">사진</a>
-                        <a href="#">리뷰</a>
-                        <a href="#">배지</a>
-                        <a href="#">여행지도</a>
+                        <a href="/profile/MemberPage/Feed">활동 피드</a>
+                        <a href="/profile/MemberPage/Review">리뷰</a>
+                        <a href="/profile/MemberPage/Image">사진</a>
+                        <a href="/profile/MemberPage/Scrap">스크랩</a>
+                        <a href="/profile/MemberPage/5"></a>
                     </div>
                 </div>
         
