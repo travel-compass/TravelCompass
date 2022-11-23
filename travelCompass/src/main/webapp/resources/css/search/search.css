@@ -1,0 +1,358 @@
+* {
+    box-sizing: border-box;
+    /*HTML요소가 가진 고유 값을 없앰*/
+    padding: 0;
+    margin: 0;
+}
+
+/****************************search-input-area(검색창)**************************************/
+
+main {
+    width: 1200px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.search {
+    height: 135px;
+    padding: 15px 15px 0;
+    padding-left: 50px;
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 100;
+    border-bottom: 5px solid #f2f2f2;
+}
+
+.search-input-area {
+    width: 1200px;
+    height: 60px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    position: relative;
+
+}
+
+
+.search-input-form {
+    width: 700px;
+    height: 47px;
+    border: #ccc solid 1px;
+    background-color: white;
+    border-radius: 25px;
+    padding: 0 12px;
+
+}
+
+
+.search-input-form i {
+    font-size: 25px;
+    z-index: 10;
+    padding: 10px;
+}
+
+/*중앙 정렬*/
+.search-input-area input {
+    width: 400px;
+    height: 100%;
+    border: none;
+    outline: none;
+    font-size: 22px;
+    font-weight: normal;
+}
+
+#search-frm>button {
+    width: 160px;
+    height: 40px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background-color: #0a5a4a;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    align-items: center;
+    
+}
+
+#search-frm>button:hover {
+    background-color: #24c489;
+}
+
+
+/***************************search-filter(모든결과, 명소, 음식점)************************************/
+
+
+.search-filter {
+    height: 60px;
+    padding: 12px 12px 0;
+    background-color: white;
+}
+
+.search-filter>ul {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+}
+
+.search-filter>li {
+    width: 100px;
+    height: 100%;
+    font-size: 14px;
+    font-weight: bold;
+    color: #00AA6C;
+    cursor: pointer;
+}
+
+.search-filter a {
+    color: black;
+    text-decoration: none;
+    padding: 0 30px;
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-filter a:hover {
+    background-color: #ccc;
+    transition-delay: 50ms;
+}
+
+.search-filter a:focus {
+    border-bottom: #00AA6C 5px solid;
+}
+
+/***********************result-title(검색결과 상단 텍스트)******************************/
+
+#title-query {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#title-match {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+
+
+/*************search-result-list(검색 결과)*****************************/
+
+
+.container-main {
+    width: 1200px;
+    padding: 4px 24px 24px;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.container-main-wrap {
+    background-color: white;
+    padding-top: 12px;
+}
+
+.search-result {
+    width: 770px;
+    /*   height: 190px; 
+부모요소에 높이를 주면 자식요소가 아무리 높이가 길어도
+다음 요소가 부모요소 다음에 온다-> 부모요소에 높이x    */
+}
+
+.search-result-list {
+    list-style: none;
+}
+
+.search-result-list>li {
+    border: #ccc solid 1px;
+}
+
+.search-result-title {
+    height: 60px;
+    padding: 16px 24px;
+    font-size: 16px;
+}
+
+.search-result-title a {
+    font-weight: bolder;
+}
+
+.search-result-item {
+    display: inline-flex;
+    width: 770px;
+    height: 190px;
+}
+
+.search-result-item-title a {
+    font-weight: bolder;
+    font-size: 18px;
+
+}
+
+.search-result-item span {
+    display: inline-block;
+}
+
+
+.search-result-item-img {
+    width: 217px;
+    height: 178px;
+    padding: 16px 16px 16px 24px;
+}
+
+.search-result-item-grade a:last-child {
+    font-size: 14px;
+}
+
+.search-result-item-address a {
+    font-size: 14px;
+}
+
+.search-result-item-review {
+    width: 520px;
+    height: 40px;
+    overflow: hidden;
+}
+
+
+.search-result-item-review a {
+    font-size: 13px;
+}
+
+.search-result-item-content {
+    width: 657px;
+    height: 180px;
+    padding: 16px 24px 16px 0;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+/********************show-more-text(더보기)************************************8***/
+
+
+.show-more-text {
+    text-decoration: none;
+    color: #070707;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.show-more-text:hover {
+    text-decoration-line: underline;
+
+}
+
+.fa-solid fa-caret-down {
+    color: #070707;
+}
+
+/*********************page-select(리스트 페이지)******************************/
+
+.page-select {
+    width: 770px;
+    height: 60px;
+    border: #ccc solid 1px;
+    padding: 10px 20px;
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.page-select button {
+    width: 62px;
+    height: 36px;
+    border: none;
+    background-color: black;
+    color: white;
+    font-size: 16px;
+    border-radius: 3px;
+    font-weight: bold;
+    cursor: pointer;
+
+}
+
+.page-select div {
+    padding: 5px 0;
+}
+
+.page-select a {
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+    box-sizing: border-box;
+    font-weight: bolder;
+    padding: 0 10px;
+}
+
+.page-select a:active {
+    background-color: #ccc;
+}
+
+.page-select a:hover {
+    color: #00AA6C;
+}
+
+
+/*******************search-rank(인기 검색어)*********************************/
+.search-rank {
+    margin-top: 60px;
+    margin-left: 30px;
+    display: block;
+    position: sticky;
+    top: 19%;
+    border: #ccc solid 1px;
+    border-radius: 10px;
+}
+
+.search-rank-title {
+    width: 250px;
+    height: 60px;
+    padding: 16px 18px;
+    font-size: 20px;
+    font-weight: bold;
+    border-bottom: #0a5a4a 3px solid;
+}
+
+.search-rank-content {
+    width: 250px;
+    height: 430px;
+    padding: 4px 24px;
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.search-rank-content>ul {
+    list-style: none;
+}
+
+.search-rank-content>li {
+    padding: 8px 0;
+    margin: 20px 0;
+    width: 100%;
+}
+
+.search-rank-content a {
+    display: inline-block;
+    color: black;
+    padding: 10px 5px;
+    font-size: 16px;
+    width: 100%;
+    height: 100%;
+}
+
+.search-rank-content a:hover {
+    transition-delay: 50ms;
+    text-decoration: underline;
+    font-weight: bold;
+}
