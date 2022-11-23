@@ -40,7 +40,7 @@ main {
 
 
 .search-input-form {
-    width: 700px;
+    width: 600px;
     height: 47px;
     border: #ccc solid 1px;
     background-color: white;
@@ -65,11 +65,11 @@ main {
     font-size: 22px;
     font-weight: normal;
 }
-
+/*버튼이 오른쪽에서 5pc떨어지게*/
 #search-frm>button {
     width: 160px;
-    height: 40px;
-    font-size: 16px;
+    height: 45px;
+    font-size: 18px;
     font-weight: bold;
     color: white;
     background-color: #0a5a4a;
@@ -77,12 +77,103 @@ main {
     border-radius: 25px;
     cursor: pointer;
     align-items: center;
+    position: absolute;
+    right: 420px;
     
 }
 
 #search-frm>button:hover {
     background-color: #24c489;
 }
+
+
+
+/************************* search-option-area *************************/
+.search-option-area {
+    padding: 15px 25px;
+    display: flex;
+}
+.search-option-area input[name='contentTypeId'] {
+    display: none;
+}
+.search-option-area label {
+    width: 100px;
+    height: 40px;
+    border: 1px solid #ddd;
+    display: inline-block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition-duration: 0.2s;
+    border-radius: 10px;
+    margin-right: 15px;
+}
+.search-option-area input:checked + label {
+    border : 2px solid #0a5a4a;
+    
+}
+/************************* search-keyword-area *************************/
+.search-keyword-area {
+    width: 100%;
+    /* margin-top: 15px; */
+    /* display: none; */
+    max-height: 0px;
+    overflow: hidden;
+    transition: max-height 0.2s;
+}
+.search-keyword-area a{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    padding: 15px 25px;
+    font-size: 20px;
+    transition: 0.2s;
+}
+.search-keyword-area a:hover {
+    background-color: #ddd;
+}
+/* .search-keyword-area a:hover + hr{
+    background: none;
+} */
+.search-keyword-area a:last-of-type {
+    margin-bottom: 15px;
+}
+.search-keyword-area a > i {
+    border: 2px solid #ccc;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.search-keyword-area a > span {
+    margin-left: 20px;
+}
+/* .popular-keyword-list a:not(:last-of-type) {
+    border-bottom: 2px solid #ddd;
+} */
+.popular-keyword-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.popular-keyword-list hr {
+    width: 95%;
+    background: #ddd;
+    border: 0;
+    height: 1.5px;
+}
+.search-keyword-title {
+    align-self: flex-start;
+    font-size: 14px;
+    font-weight: bold;
+    display: block;
+    padding: 20px 25px 10px;
+}
+
+
+
 
 
 /***************************search-filter(모든결과, 명소, 음식점)************************************/
