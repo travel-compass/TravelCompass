@@ -1,10 +1,10 @@
 document.addEventListener("DOMContentLoaded", function(){
-    let body = document.querySelector("body");
-    let blurBox = document.querySelector(".blur-box");
-    let searchForm = document.querySelector(".search-form");
-    let searchKeywordArea = document.querySelector(".search-keyword-area");
-    let searchInput = searchForm.querySelector("#search-input");
-    let popularKeywordList = searchForm.querySelector(".popular-keyword-list");
+    const body = document.querySelector("body");
+    const blurBox = document.querySelector(".blur-box");
+    const searchForm = document.querySelector(".search-form");
+    const searchKeywordArea = document.querySelector(".search-keyword-area");
+    const searchInput = searchForm.querySelector("#search-input");
+    const popularKeywordList = searchForm.querySelector(".popular-keyword-list");
     popularKeywordList.addEventListener("mouseover", function(e) {
         let targetNode = e.target;
         // console.log(targetNode);
@@ -47,11 +47,28 @@ document.addEventListener("DOMContentLoaded", function(){
         }
         // e.stopPropagation();
     });
-    searchInput.addEventListener("focus", createPopularKeyword); 
-    searchInput.addEventListener("focusout", function(){
+
+
+    const keywordSearchForm = document.querySelector(".search-form");
+    keywordSearchForm.addEventListener("click", e=>{
+        createPopularKeyword();
+        searchKeywordArea.classList.add("js-visiable");
+        keywordSearchForm.classList.add("focus");
+        searchInput.classList.add("input-focus");
+        blurBox.classList.add("js-blur");
+    });
+    // keywordSearchForm.addEventListener("mouseout", ()=> {
+    //     console.log("블러박스 클릭");
+    //     blurBox.classList.remove("js-blur");
+    //     searchKeywordArea.classList.remove("js-visiable");
+    //     keywordSearchForm.classList.remove("focus");
+    // });
+    document.getElementById("blurBox").addEventListener("click", e=>{
         searchKeywordArea.classList.remove("js-visiable");
+        keywordSearchForm.classList.remove("focus");
+        searchInput.classList.remove("input-focus");
         blurBox.classList.remove("js-blur");
-    }); 
+    });
     let exampleData = ['라스베이거스', '서울', '동대문', '부산 해운대'];
     function createPopularKeyword() {
         popularKeywordList.innerHTML = "";
@@ -71,8 +88,7 @@ document.addEventListener("DOMContentLoaded", function(){
                 popularKeywordList.append(hr);
             }
         }
-        searchKeywordArea.classList.add("js-visiable");
-        blurBox.classList.add("js-blur");
+        
     }
 
     // ------------------------------------ 슬라이드 기능 ---------------------------------------------------

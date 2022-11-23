@@ -13,8 +13,6 @@
 		<result property="memberTel" column="MEMBER_TEL"/>
 		<result property="memberAddress" column="MEMBER_ADDRESS"/>
 		<result property="enrollDate" column="ENROLL_DATE"/>
-		<result property="sleepFlag" column="SLEEP_FL"/>
-		<result property="lastLoginDate" column="LAST_LOGIN_DATE"/>
 		<result property="profileImage" column="PROFILE_IMAGE"/>
 		<result property="authority" column="AUTHORITY"/>
 	</resultMap>
@@ -22,8 +20,8 @@
 	
 	<!-- 로그인 -->
 	<select id="login" parameterType="string" resultMap="member_rm">
-		SELECT MEMBER_NO, MEMBER_EMAIL, MEMBER_PW, MEMBER_NICKNAME, MEMBER_NAME, MEMBER_RRN, MEMBER_TEL, MEMBER_ADDRESS, ENROLL_DATE, SLEEP_FL, 
-				LAST_LOGIN_DATE, PROFILE_IMAGE, AUTHORITY,
+		SELECT MEMBER_NO, MEMBER_EMAIL, MEMBER_PW, MEMBER_NICKNAME, MEMBER_NAME, MEMBER_RRN, MEMBER_TEL, MEMBER_ADDRESS, ENROLL_DATE, 
+				PROFILE_IMAGE, AUTHORITY,
 				TO_CHAR(ENROLL_DATE, 'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"') AS ENROLL_DATE
 		FROM "MEMBER"
 		WHERE SECESSION_FL = 'N'
@@ -42,7 +40,7 @@
 	<insert id="signUp" parameterType="Member">
 		INSERT INTO "MEMBER" VALUES(SEQ_MEMBER_NO.NEXTVAL, #{memberEmail}, #{memberPw}, #{memberNickname}, #{memberName}, #{memberRRN}, 
 					#{memberTel}, #{memberAddress}, 
-					DEFAULT, DEFAULT, DEFAULT, NULL, DEFAULT, DEFAULT)
+					DEFAULT, DEFAULT, DEFAULT, DEFAULT)
 	</insert>
 	
 	<!-- 이메일 찾기 -->
