@@ -22,6 +22,6 @@ public class Question {
 	private String contentId; // QnA가 작성된 장소 번호
 	private String memberNo; // QnA 작성한 회원 번호
 	
-	private List<Answer> answerList; // 질문에 달린 답변리스트
+	private int parentNo; // 부모글 식별번호
 	
 }

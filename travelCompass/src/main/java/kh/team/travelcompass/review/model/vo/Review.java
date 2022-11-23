@@ -22,7 +22,7 @@ public class Review {
 	private String firstImage; // 장소 썸네일 이미지 주소
 	private String reviewflag; // 리뷰 삭제Y / 비공개B
 	
-//	private int reviewLike; // 리뷰 좋아요 갯수(논의필요)
+	private int reviewLike; // 리뷰 좋아요 갯수
 	
 	private List<ReviewImage> reviewImgList;
 	
