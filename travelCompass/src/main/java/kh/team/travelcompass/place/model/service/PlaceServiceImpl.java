@@ -7,8 +7,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kh.team.travelcompass.answer.model.dao.AnswerDAO;
-import kh.team.travelcompass.answer.model.vo.Answer;
 import kh.team.travelcompass.place.model.api.PlaceAPI;
 import kh.team.travelcompass.place.model.vo.Place;
 import kh.team.travelcompass.question.model.dao.QuestionDAO;
@@ -45,15 +43,15 @@ public class PlaceServiceImpl implements PlaceService {
 	public Place page(String contentId, String contentTypeId) {
 		
 		// api에서 요청받은 객체 - 리뷰,qna 연결해야함
-		Place place=api.place(contentId,contentTypeId);
+//		Place place=api.place(contentId,contentTypeId);
+//		
+//		List<Review> reviewList=rDao.select(contentId);
+//		List<Question> questionList=qDao.select(contentId);
+//		
+//		place.setReviewList(reviewList);
+//		place.setQuestionList(questionList);
 		
-		List<Review> reviewList=rDao.select(contentId);
-		List<Question> questionList=qDao.select(contentId);
-		
-		place.setReviewList(reviewList);
-		place.setQuestionList(questionList);
-		
-		return place;
+		return null;
 	}
 	
 }
