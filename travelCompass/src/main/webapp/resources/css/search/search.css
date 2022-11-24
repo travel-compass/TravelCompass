@@ -500,7 +500,7 @@ main {
     cursor: pointer;
     position: absolute;
 }
-.search-form input[name='searchKeyword'] {
+.search-form input[name='keyword'] {
     width: 100%;
     height: 45px;
     padding: 0 50px;
