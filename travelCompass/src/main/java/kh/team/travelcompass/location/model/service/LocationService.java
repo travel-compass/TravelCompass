@@ -7,5 +7,5 @@ import kh.team.travelcompass.place.model.vo.Place;
 
 public interface LocationService {
 	
-	public List<Place> searchPlace(String latitude, String longitude) throws Exception;
+	public List<Place> searchPlace(String latitude, String longitude, String contentTypeId) throws Exception;
 }

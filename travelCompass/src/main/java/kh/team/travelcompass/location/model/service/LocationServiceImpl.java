@@ -17,7 +17,7 @@ public class LocationServiceImpl implements LocationService {
 	LocationAPI api;
 	
 	@Override
-	public List<Place> searchPlace(String latitude, String longitude) throws Exception {
+	public List<Place> searchPlace(String latitude, String longitude, String contentTypeId) throws Exception {
 		
 		// 파라미터 맵
 		Map<String, String> paramMap = new HashMap<>();
@@ -26,7 +26,7 @@ public class LocationServiceImpl implements LocationService {
 		paramMap.put("mapY", latitude);
 		paramMap.put("radius", "3000");
 		paramMap.put("numOfRows", "10");
-		paramMap.put("contentTypeId", "12");
+		paramMap.put("contentTypeId", contentTypeId);
 		
 		List<Place> placeList = api.serachPlace(paramMap);
 		

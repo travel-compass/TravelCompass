@@ -12,7 +12,8 @@ console.log("hello");
                 url: "/location/searchPlace",
                 data: {
                     "latitude": latitude,
-                    "longitude": longitude
+                    "longitude": longitude,
+                    "contentTypeId" : "12"
                 },
                 type: "GET",
                 success: result => {
@@ -23,6 +24,22 @@ console.log("hello");
                     console.log("error");
                 }
             });
+            $.ajax({
+                url: "/location/searchPlace",
+                data: {
+                    "latitude": latitude,
+                    "longitude": longitude,
+                    "contentTypeId" : "39"
+                },
+                type: "GET",
+                success: result => {
+                    console.log(result);
+                    createPlaceList(result);
+                },
+                error: () =>{
+                    console.log("error");
+                }
+            })
         }, error => {
             console.log(error);
             return;
@@ -40,7 +57,11 @@ function createPlaceList(resultList) {
 
     const placeAreaTitle = document.createElement("span");
     placeAreaTitle.classList.add("place-area-title");
-    placeAreaTitle.innerText = "주변을 둘러보세요";
+    if(resultList[0].contenttypeid == '12') {
+        placeAreaTitle.innerText = "주변 관광지";
+    } else {
+        placeAreaTitle.innerText = "주변 음식점";
+    }
 
     const slideContainer = document.createElement("div");
     slideContainer.classList.add("slide-container");

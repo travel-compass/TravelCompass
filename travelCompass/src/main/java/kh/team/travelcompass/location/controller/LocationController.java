@@ -19,8 +19,8 @@ public class LocationController {
 	
 	@ResponseBody
 	@GetMapping("/searchPlace")
-	public List<Place> serachPlace(String latitude, String longitude) throws Exception{
-		List<Place> placeList = service.searchPlace(latitude, longitude);
+	public List<Place> serachPlace(String latitude, String longitude, String contentTypeId) throws Exception{
+		List<Place> placeList = service.searchPlace(latitude, longitude, contentTypeId);
 		
 		return placeList;
 	}
