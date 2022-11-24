@@ -30,17 +30,17 @@
 
                             <div class="search-keyword-area">
                                 <div class="search-option-area">
-                                    <input type="radio" name="contentTypeId" value="12" id="12" checked>
-                                    <label for="12">관광지</label>
+                                    <input type="radio" name="contentTypeId" value="12" id="searchType1" checked>
+                                    <label for="searchType1">관광지</label>
                                     
-                                    <input type="radio" name="contentTypeId" value="14" id="14">
-                                    <label for="14">문화시설</label>
+                                    <input type="radio" name="contentTypeId" value="14" id="searchType2">
+                                    <label for="searchType2">문화시설</label>
                                     
-                                    <input type="radio" name="contentTypeId" value="28" id="28">
-                                    <label for="28">레포츠</label>
+                                    <input type="radio" name="contentTypeId" value="28" id="searchType3">
+                                    <label for="searchType3">레포츠</label>
                                     
-                                    <input type="radio" name="contentTypeId" value="39" id="39">
-                                    <label for="39">음식점</label>
+                                    <input type="radio" name="contentTypeId" value="39" id="searchType4">
+                                    <label for="searchType4">음식점</label>
 
                                     <select name="areaCode" id="areaCode">
                                         <option value="-1">지역(전체)</option>
@@ -94,29 +94,20 @@
                         </form>
                     </div>	
                    
-                <!--  
-                <div class="search-input-area">
-                    <div class="search-input-form">
-                        <form action="/place/searchPlaceKeyword" method="get" name="search-frm" id="search-frm">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                            <input type="text" name="keyword" id="input-search" placeholder="검색어를 입력하세요" 
-                            maxlength="20" autocomplete="off" required>
-				                    <button>검색</button>
-                        </form>
+                    <div class="search-filter">
+                        <ul>
+                            <li><input type="radio" name="contentTypeId" value="12" id="12" checked>
+                                <label for="12">관광지</label></li>
+                            <li><input type="radio" name="contentTypeId" value="14" id="14">
+                                <label for="14">문화시설</label></li>
+                            <li><input type="radio" name="contentTypeId" value="28" id="28">
+                                <label for="28">레포츠</label></li>
+                            <li><input type="radio" name="contentTypeId" value="39" id="39">
+                                <label for="39">음식점</label></li>
+                        </ul>
                     </div>
 		        </div>
-            
-                <div class="search-filter">
-                    <ul>
-                        <!--<li><a href="#검색 페이지(모든 결과) (리스트 10개+더보기)">모든 결과</a></li>-->
-                        <li><a href="#<!--검색 페이지(관광지) (리스트30개 +페이지 셀렉트)-->">관광지</a></li>
-                        <li><a href="#<!--검색 페이지(문화시설) (리스트30개 +페이지 셀렉트)-->">문화시설</a></li>
-                        <li><a href="#<!--검색 페이지(레포츠) (리스트30개 +페이지 셀렉트)-->">레포츠</a></li>
-                        <li><a href="#<!--검색 페이지(문화시설) (리스트30개 +페이지 셀렉트)-->">음식점</a></li>
-                    </ul>
-                </div>
             </div>
-            
             <div class="container-main-wrap">
                 <div class="container-main">
                     <section class="search-result">
@@ -910,7 +901,7 @@
                                 </ul>
                             </div>
                     </div>
-                </div>
+                </div> 
             
             </div>
         </div>

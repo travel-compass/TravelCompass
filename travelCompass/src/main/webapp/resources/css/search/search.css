@@ -19,8 +19,8 @@ main {
 }
 
 .search {
-    height: 135px;
-    padding: 15px 15px 0;
+    height: 120px;
+    padding-top: 15px;
     padding-left: 50px;
     display: flex;
     flex-direction: column;
@@ -112,9 +112,10 @@ main {
     border-radius: 10px;
     margin-right: 15px;
 }
-.search-option-area input:checked + label {
-    border : 2px solid #0a5a4a;
-    
+
+.search-option-area label:hover {
+    background-color: #f2f2f2;
+    cursor: pointer;
 }
 /************************* search-keyword-area *************************/
 .search-keyword-area {
@@ -184,10 +185,12 @@ main {
 
 
 .search-filter {
-    height: 60px;
+    height:100%;
     padding: 12px 12px 0;
+    margin-top: 20px;
     background-color: white;
 }
+
 
 .search-filter>ul {
     height: 100%;
@@ -197,6 +200,7 @@ main {
 }
 
 .search-filter>li {
+
     width: 100px;
     height: 100%;
     font-size: 14px;
@@ -205,7 +209,11 @@ main {
     cursor: pointer;
 }
 
-.search-filter a {
+.search-filter input[name='contentTypeId'] {
+    display: none;
+}
+
+.search-filter label {
     color: black;
     text-decoration: none;
     padding: 0 30px;
@@ -213,16 +221,19 @@ main {
     height: 100%;
     align-items: center;
     justify-content: center;
+    
 }
 
-.search-filter a:hover {
+.search-filter label:hover {
     background-color: #ccc;
     transition-delay: 50ms;
 }
 
-.search-filter a:focus {
-    border-bottom: #00AA6C 5px solid;
+.search-filter input:checked + label {
+    border-bottom: #00AA6C solid 4px;
+    transition-delay: 50ms;
 }
+
 
 /***********************result-title(검색결과 상단 텍스트)******************************/
 
