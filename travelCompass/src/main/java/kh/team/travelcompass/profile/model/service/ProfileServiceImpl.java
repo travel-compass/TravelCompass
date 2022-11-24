@@ -1,12 +1,15 @@
 package kh.team.travelcompass.profile.model.service;
 
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kh.team.travelcompass.profile.model.dao.ProfileDAO;
+import kh.team.travelcompass.profile.model.vo.HSHReview;
 @Service
 public class ProfileServiceImpl implements ProfileService {
 
@@ -20,11 +23,33 @@ public class ProfileServiceImpl implements ProfileService {
 		
 		int listCount = dao.getListCount();
 		
-		System.out.println("확인");
+		List<HSHReview> reviewList = dao.selectReviewList();
 		
-		return null;
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("listCount", listCount);
+		map.put("reviewList", reviewList);
+		
+		
+		return map;
 	}
 
-	
+	// 사진 리뷰만 있는 목록 조회하기
+	@Override
+	public Map<String, Object> profileOnlyImageReviewPage(int cp) {
+		
+		int listCount = dao.getListCount();
+		
+		List<HSHReview> reviewList = dao.selectOnlyImageReviewList();
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("listCount", listCount);
+		map.put("reviewList", reviewList);
+		
+		
+		return map;
+		
+	}
 	
 }

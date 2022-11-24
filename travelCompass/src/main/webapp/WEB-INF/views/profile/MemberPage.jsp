@@ -121,12 +121,12 @@
                             <span><i class="fa-regular fa-calendar-days"></i> 가입일</span>
                             <span><i class="fa-regular fa-envelope"></i> 이메일</span>
                         </div>
-                        <ul class="review-list">
 
+                        <ul class="review-list">
                             <%-- 리뷰 목록 조회 --%>
                             <c:choose>
                                 <%-- ${empty list} 목록 조회가 비어있다면  --%>
-                                <c:when test="">
+                                <c:when test="${map.listCount == 0}">
                                     <!-- 리뷰가 아무것도 없을 때 나오는 테이블 -->
                                     <div class="user-page-review-colums2">
                                         <div class="user-page-review-none-content">
@@ -142,10 +142,11 @@
                                             </div>
                                         </div>
                                     </div>
+                                    
                                 </c:when>
 
-                                <%-- 게시글 목록 조회 결과가 있다면 --%>
-                                <c:otherwise>
+                                <%-- 게시글 목록이 있으면서 사진이 없을 경우 --%>
+                                <c:when test="${(listCount > 0) && (empty map.firstImage)}">
                                     <!-- 첫번째 리뷰 테이블 -->
                                     <div class="user-page-review-colums2">
                                         <div class="user-page-review-header-style">
@@ -223,7 +224,11 @@
                                             </div>
                                         </div>
                                     </div>
+                                </c:when>
 
+                                
+                                <%-- 리뷰도 있고 사진도 있을 경우 --%>
+                                <c:otherwise>
                                     <!-- 두번째 리뷰 테이블 (사진 슬라이드 넣어보기) -->
                                     <div class="user-page-review-colums2">
                                         <div class="user-page-review-header-style">
@@ -326,8 +331,8 @@
                                     </div>
                                 </c:otherwise>
                             </c:choose>
-
                         </ul>
+
                         <div class="user-page-review-colums3">
                             빈상자
                         </div>

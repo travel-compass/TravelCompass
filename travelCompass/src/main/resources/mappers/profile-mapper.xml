@@ -2,8 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="profileMapper">
 
+	
 	<!-- review resultMap -->
-	<!-- <resultMap type="Review" id="review_rm">
+	<resultMap type="HSHReview" id="review_rm">
 		<id property="reviewNo" column="REVIEW_NO"/>
 		<result property="rating" column="RATING"/>
 		<result property="reviewTitle" column="REVIEW_TITLE"/>
@@ -14,6 +15,8 @@
 		<result property="firstImage" column="FIRST_IMAGE"/>
 	</resultMap>
 	
+	
+	<!-- 
 	reviewImgae resultMap
 	<resultMap type="ReviewImage" id="reviewImage_rm">
 		<id property="reviewImageNo" column="REVIEW_IMAGE_NO"/>
@@ -25,9 +28,18 @@
 	</resultMap> -->
 	
 	<!-- 프로필 페이지 메뉴 별 게시글 수 조회 -->
-	<select id="getListCount" resultType="_int">
-	SELECT COUNT(*)
-	FROM REVIEW
-	WHERE REVIEW_FL = 'N'
+	<select id="getListCount" parameterType="string" resultType="_int">
+		SELECT COUNT(*)
+		FROM REVIEW
+		WHERE REVIEW_FL = 'N'
 	</select>
+	
+	<select id="selectReviewList" resultMap="review_rm">
+		SELECT REVIEW_NO, REVIEW_TITLE, REVIEW_CONTENT, REVIEW_DATE, CONTENT_ID,
+			FIRST_IMAGE, MEMBER_NO, PROFILE_IMAGE, MEMBER_NICKNAME
+		FROM REVIEW
+		JOIN "MEMBER" USING(MEMBER_NO)
+		WHERE REVIEW_FL = 'N'
+	</select>
+	
 </mapper>
