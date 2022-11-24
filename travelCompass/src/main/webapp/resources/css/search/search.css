@@ -5,6 +5,9 @@
     margin: 0;
 }
 
+header {
+    position: initial;
+}
 /****************************search-input-area(검색창)**************************************/
 
 main {
@@ -24,7 +27,7 @@ main {
     position: sticky;
     top: 0;
     background-color: white;
-    z-index: 100;
+    z-index: 400;
     border-bottom: 5px solid #f2f2f2;
 }
 
@@ -42,11 +45,12 @@ main {
 .search-input-form {
     width: 700px;
     height: 47px;
-    border: #ccc solid 1px;
+    /* border: #ccc solid 1px; */
     background-color: white;
     border-radius: 25px;
     padding: 0 12px;
-
+    position: relative;
+    z-index: 800;
 }
 
 
@@ -355,4 +359,174 @@ main {
     transition-delay: 50ms;
     text-decoration: underline;
     font-weight: bold;
+}
+
+/* 검색 폼 */
+.search-form {
+    border-radius: 40px;
+    width: 100%;
+    /* height: 18%; */
+    min-height: 45px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #ddd;
+    background-color: white;
+    /* box-shadow: rgba(0, 0, 0, 0.4) 0 3px 5px 1px; */
+    position: absolute;
+    /* top: calc((350px / 2) - 30px); */
+    z-index: 800;
+    opacity: 0.8;
+}
+
+.search-form.focus {
+    border-radius: 15px;
+    opacity: 1;
+}
+
+.search-form .search-input-box {
+    width: 97%;
+    position: relative;
+}
+#search-btn{
+    width: 5%;
+    height: 100%;
+    font-size: 20px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+}
+.search-form input[name='searchKeyword'] {
+    width: 100%;
+    height: 45px;
+    padding: 0 50px;
+    font-size: 20px;
+    outline: none;
+    border: none;
+    border-radius: 40px;
+    /* transition-duration: 0.1s;
+    -webkit-backface-visibility: hidden; */
+}
+.search-form input[name='searchKeyword'].input-focus {
+    border-bottom: 1px solid black;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+.search-form select {
+    font-size: 16px;
+    border: 1px solid #ddd;
+    padding: 0px 10px;
+    border-radius: 10px;
+}
+
+
+/************************* search-option-area *************************/
+.search-option-area {
+    padding: 15px 25px;
+    display: flex;
+}
+.search-option-area input[name='contentTypeId'] {
+    display: none;
+}
+.search-option-area label {
+    width: 100px;
+    height: 40px;
+    border: 1px solid #ddd;
+    display: inline-block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition-duration: 0.2s;
+    border-radius: 10px;
+    margin-right: 15px;
+}
+.search-option-area input:checked + label {
+    background-color: black;
+    color: white;
+}
+/************************* search-keyword-area *************************/
+.search-keyword-area {
+    width: 100%;
+    /* margin-top: 15px; */
+    /* display: none; */
+    max-height: 0px;
+    overflow: hidden;
+    transition: max-height 0.2s;
+}
+.search-keyword-area a{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    padding: 15px 25px;
+    font-size: 20px;
+    transition: 0.2s;
+}
+.search-keyword-area a:hover {
+    background-color: #ddd;
+}
+/* .search-keyword-area a:hover + hr{
+    background: none;
+} */
+.search-keyword-area a:last-of-type {
+    margin-bottom: 15px;
+}
+.search-keyword-area a > i {
+    border: 2px solid #ccc;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.search-keyword-area a > span {
+    margin-left: 20px;
+}
+/* .popular-keyword-list a:not(:last-of-type) {
+    border-bottom: 2px solid #ddd;
+} */
+.popular-keyword-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.popular-keyword-list hr {
+    width: 95%;
+    background: #ddd;
+    border: 0;
+    height: 1.5px;
+}
+.search-keyword-title {
+    align-self: flex-start;
+    font-size: 14px;
+    font-weight: bold;
+    display: block;
+    padding: 20px 25px 10px;
+}
+
+.blur-box {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(255, 255, 255);
+    opacity: 0.8;
+    z-index: 200;
+    transition: 0.2s;
+    display: none;
+}
+/* js-style */
+
+.js-visiable {
+    max-height: 100vh;
+    margin-top: 15px;
+}
+.js-blur {
+    display: block;
+}
+.popular-keyword-list .js-border-none {
+    background: none;
 }
