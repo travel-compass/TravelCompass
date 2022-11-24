@@ -349,6 +349,7 @@
     <div class="blur-box" id="blurBox"></div>
     
     <script src="/resources/js/main.js"></script>
+    <script src="/resources/js/common/search-form.js"></script>
     <script src="/resources/js/swiper.min.js"></script>
 </body>
 </html>
