@@ -48,8 +48,10 @@ public class SearchController {
 	@ResponseBody
 	@GetMapping("/searchPlaceKeyword")
 	public String searchPlaceKeyword(String keyword,
-			@RequestParam(value = "areaCode", required = false, defaultValue = "null") String areaCode,
-			@RequestParam(value = "contentTypeId", required = false, defaultValue = "null") String contentTypeId, Model model) {
+			@RequestParam(value = "areaCode", required = false, defaultValue = "null") 
+			String areaCode,
+			@RequestParam(value = "contentTypeId", required = false, defaultValue = "null")
+			String contentTypeId, Model model) {
 
 		try {
 			List<SearchPlace> placeList = service.searchPlaceKeyword(keyword, areaCode, contentTypeId);

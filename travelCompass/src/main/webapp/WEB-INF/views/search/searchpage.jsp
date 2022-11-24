@@ -22,10 +22,10 @@
             <div class="search">
                 
                     <div class="search-input-form">
-                        <form action="#" class="search-form">
+                        <form action="/place/searchPlaceKeyword" class="search-form" >
                             <div class="search-input-box">
                                 <button id="search-btn" class="fa-solid fa-magnifying-glass"></button>
-                                <input id="search-input" type="search" placeholder="어디로 가시나요?" name="searchKeyword" autocomplete="off">
+                                <input id="search-input" type="search" placeholder="어디로 가시나요?" name="keyword" autocomplete="off">
                             </div>
 
                             <div class="search-keyword-area">
@@ -94,26 +94,19 @@
                         </form>
                     </div>	
                    
-                <!--  
-                <div class="search-input-area">
-                    <div class="search-input-form">
-                        <form action="/place/searchPlaceKeyword" method="get" name="search-frm" id="search-frm">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                            <input type="text" name="keyword" id="input-search" placeholder="검색어를 입력하세요" 
-                            maxlength="20" autocomplete="off" required>
-				                    <button>검색</button>
-                        </form>
+                    <div class="search-filter">
+                        <ul>
+                            <li><input type="radio" name="contentTypeId" value="12" id="searchType1" checked>
+                                <label for="searchType1">관광지</label></li>
+                            <li><input type="radio" name="contentTypeId" value="14" id="searchType2">
+                                <label for="searchType2">문화시설</label></li>
+                            <li><input type="radio" name="contentTypeId" value="28" id="searchType3">
+                                <label for="searchType3">레포츠</label></li>
+                            <li><input type="radio" name="contentTypeId" value="39" id="searchType4">
+                                <label for="searchType4">음식점</label></li>
+                        </ul>
                     </div>
-                </div>-->
-                <div class="search-filter">
-                    <ul>
-                        <li><a href="#<!--검색 페이지(모든 결과) (리스트 10개+더보기)-->">모든 결과</a></li>
-                        <li><a href="#<!--검색 페이지(명소) (리스트30개 +페이지 셀렉트)-->">명소</a></li>
-                        <li><a href="#<!--검색 페이지(음식점) (리스트30개 +페이지 셀렉트)-->">음식점</a></li>
-                        <li><a href="#<!--검색 페이지(레포츠) (리스트30개 +페이지 셀렉트)-->">레포츠</a></li>
-                        <li><a href="#<!--검색 페이지(회원) (리스트30개 +페이지 셀렉트)-->">회원</a></li>
-                    </ul>
-                </div>
+		        </div>
             </div>
             <div class="container-main-wrap">
                 <div class="container-main">
@@ -887,6 +880,7 @@
                             <button class="page-select-next">다음</button>
                         </div>
                     </section>
+                    
                     <div class="side-bar">
                         <div class="search-rank">
                             <div class="search-rank-title">
@@ -894,20 +888,21 @@
                             </div>
                             <div class="search-rank-content">
                                 <ul>
-                                    <li><a href="#<!--상세 페이지 최상단-->">1.  '검색어'</a></li>
-                                    <li><a href="#<!--상세 페이지 최상단-->">2.  '검색어'</a></li>
-                                    <li><a href="#<!--상세 페이지 최상단-->">3.  '검색어'</a></li>
-                                    <li><a href="#<!--상세 페이지 최상단-->">4.  '검색어'</a></li>
-                                    <li><a href="#<!--상세 페이지 최상단-->">5.  '검색어'</a></li>
-                                    <li><a href="#<!--상세 페이지 최상단-->">6.  '검색어'</a></li>
-                                    <li><a href="#<!--상세 페이지 최상단-->">7.  '검색어'</a></li>
-                                    <li><a href="#<!--상세 페이지 최상단-->">8.  '검색어'</a></li>
-                                    <li><a href="#<!--상세 페이지 최상단-->">9.  '검색어'</a></li>
-                                    <li><a href="#<!--상세 페이지 최상단-->">10. '검색어'</a></li>
+                                    <li><a href="#">1.  '검색어'</a></li>
+                                    <li><a href="#">2.  '검색어'</a></li>
+                                    <li><a href="#">3.  '검색어'</a></li>
+                                    <li><a href="#">4.  '검색어'</a></li>
+                                    <li><a href="#">5.  '검색어'</a></li>
+                                    <li><a href="#">6.  '검색어'</a></li>
+                                    <li><a href="#">7.  '검색어'</a></li>
+                                    <li><a href="#">8.  '검색어'</a></li>
+                                    <li><a href="#">9.  '검색어'</a></li>
+                                    <li><a href="#">10. '검색어'</a></li>
                                 </ul>
                             </div>
                     </div>
-                </div>
+                </div> 
+            
             </div>
         </div>
         <jsp:include page="/WEB-INF/views/inc/footer.jsp" />
