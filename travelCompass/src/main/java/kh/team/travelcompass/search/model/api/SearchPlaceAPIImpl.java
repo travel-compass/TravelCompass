@@ -117,12 +117,12 @@ public class SearchPlaceAPIImpl implements SearchPlaceAPI{
 			response.append(readline);
 		}
 		br.close();
-		System.out.println(response.toString());
+		System.out.println(response.toString()); //shift+End로 복사 -> Online JSON Viewer로 확인
 		JSONObject json = new JSONObject(response.toString());
-		System.out.println(response.toString());
+		//System.out.println(response.toString());
 		String items = json.getJSONObject("response").getJSONObject("body").getJSONObject("items").getJSONArray("item").toString();
 
-		System.out.println(items);//items 받아오나 확인
+		//System.out.println(items);//items 받아오나 확인
 
 		// ObjectMapper 객체 생성
 		ObjectMapper objectMapper = new ObjectMapper();
@@ -130,8 +130,10 @@ public class SearchPlaceAPIImpl implements SearchPlaceAPI{
 		// JSONArray String -> List
 		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		placeList = objectMapper.readValue(items, new TypeReference<List<SearchPlace>>() {});
-		System.out.println(placeList);
-
+		
+		System.out.println("placeList = "+placeList); //콘솔창으로 확인
+		
+		
 		return placeList;
 	}
 }
