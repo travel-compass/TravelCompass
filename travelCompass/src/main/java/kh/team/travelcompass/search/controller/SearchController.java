@@ -49,7 +49,8 @@ public class SearchController {
 	@GetMapping("/searchPlaceKeyword")
 	public String searchPlaceKeyword(String keyword,
 			@RequestParam(value = "areaCode", required = false, defaultValue = "null") String areaCode,
-			@RequestParam(value = "contentTypeId", required = false, defaultValue = "null") String contentTypeId, Model model) {
+			@RequestParam(value = "contentTypeId", required = false, defaultValue = "null")        //검색form완료시 contentTypeId 필수로
+			String contentTypeId, Model model) {
 
 		try {
 			List<SearchPlace> placeList = service.searchPlaceKeyword(keyword, areaCode, contentTypeId);

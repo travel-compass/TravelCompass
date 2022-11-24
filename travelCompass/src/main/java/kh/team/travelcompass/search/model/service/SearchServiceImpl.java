@@ -36,10 +36,10 @@ public class SearchServiceImpl implements SearchService {
 		// 입력값을 api로 보낸다
 		Map<String, String> paramMap = new HashMap<String, String>();
 		paramMap.put("keyword", URLEncoder.encode(keyword, "UTF-8"));
-		paramMap.put("contentTypeId", "12");
-//		if (areaCode != null) {
-//			paramMap.put("areaCode", areaCode);
-//		}
+		paramMap.put("contentTypeId", contentTypeId);    //URLEncoder.encode(contentTypeId,"UTF-8") 검색폼 완료시 교체
+		if (!areaCode.equals("-1")) {
+			paramMap.put("areaCode", areaCode);
+		}
 
 		List<SearchPlace> placeList = api.searchPlaceKeyword(paramMap);
 
