@@ -15,6 +15,7 @@
 
     <title>Travelcompass</title>
     <script src="https://kit.fontawesome.com/3fe30a9b47.js" crossorigin="anonymous"></script>
+    <script src="/resources/js/common/jQuery-core.js"></script>
     <script src="/resources/js/main-place.js"></script>
 </head>
 <body>
@@ -347,7 +348,6 @@
     
 
     <div class="blur-box" id="blurBox"></div>
-    
     <script src="/resources/js/main.js"></script>
     <script src="/resources/js/common/search-form.js"></script>
     <script src="/resources/js/swiper.min.js"></script>
