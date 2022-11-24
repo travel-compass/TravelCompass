@@ -294,8 +294,27 @@ main {
 .search-result-item {
     display: inline-flex;
     width: 770px;
-    height: 190px;
+    height: 175px;
 }
+
+.search-result-item-title{
+    margin-top: 3px;
+    margin-bottom: 5px;
+}
+
+.search-result-item-grade{
+    margin-bottom: 5px;
+}
+
+.search-result-item-address{
+    margin-bottom: 13px;
+}
+
+.search-result-item-review{
+    margin-bottom: 1px;
+}
+
+
 
 .search-result-item-title a {
     font-weight: bolder;
@@ -339,7 +358,7 @@ main {
     padding: 16px 24px 16px 0;
     display: inline-flex;
     flex-direction: column;
-    justify-content: space-between;
+    /* justify-content: space-between; */
 }
 
 

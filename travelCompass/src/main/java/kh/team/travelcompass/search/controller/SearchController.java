@@ -45,7 +45,7 @@ public class SearchController {
 
 	// jsp에서 keyword, areaCode, contentTypeId를 받아 service -> api
 	// api(검색 결과(json객체)) ->  service -> controller -> jsp
-	@ResponseBody
+	//@ResponseBody 
 	@GetMapping("/searchPlaceKeyword")
 	public String searchPlaceKeyword(String keyword,
 			@RequestParam(value = "areaCode", required = false, defaultValue = "null") 

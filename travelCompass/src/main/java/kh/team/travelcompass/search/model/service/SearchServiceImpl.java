@@ -43,6 +43,9 @@ public class SearchServiceImpl implements SearchService {
 
 		List<SearchPlace> placeList = api.searchPlaceKeyword(paramMap);
 
+		//받아온 값 가공
+		
+		
 		// api에서 List<Place>를 받아서 리턴한다
 		return placeList;
 	}
