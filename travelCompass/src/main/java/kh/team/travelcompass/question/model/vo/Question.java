@@ -2,7 +2,6 @@ package kh.team.travelcompass.question.model.vo;
 
 import java.util.List;
 
-import kh.team.travelcompass.answer.model.vo.Answer;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
