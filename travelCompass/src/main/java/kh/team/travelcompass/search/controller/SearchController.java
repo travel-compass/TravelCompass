@@ -50,7 +50,7 @@ public class SearchController {
 	public String searchPlaceKeyword(String keyword,
 			@RequestParam(value = "areaCode", required = false, defaultValue = "null") 
 			String areaCode,
-			@RequestParam(value = "contentTypeId", required = false, defaultValue = "null")        //검색form완료시 contentTypeId 필수로
+			@RequestParam(value = "contentTypeId", required = false, defaultValue = "null")
 			String contentTypeId, Model model) {
 
 		try {
