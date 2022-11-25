@@ -13,19 +13,30 @@
 		<result property="memberNo" column="MEMBER_NO"/>
 		<result property="contentId" column="CONTENT_ID"/>
 		<result property="firstImage" column="FIRST_IMAGE"/>
+		<result property="reviewImagePath" column="REVIEW_IMAGE_PATH"/>
+		<result property="profileImage" column="PROFILE_IMAGE"/>
+		<result property="memberNickname" column="MEMBER_NICKNAME"/>
+		
+		<!--
+		<collection property="imageList" javaType="java.util.ArrayList"
+		ofType="HSHReviewImage" select="selectReviewList" column="MEMBER_NO"/>
+		
+		<collection property="memberList" javaType="java.util.ArrayList"
+		ofType="Member" select="selectReviewList" column="MEMBER_NO"/>
+		-->
 	</resultMap>
 	
 	
-	<!-- 
-	reviewImgae resultMap
-	<resultMap type="ReviewImage" id="reviewImage_rm">
+	
+	<!-- reviewImgae resultMap -->
+	<resultMap type="HSHReviewImage" id="reviewImage_rm">
 		<id property="reviewImageNo" column="REVIEW_IMAGE_NO"/>
 		<result property="reivewNo" column="REVIEW_NO"/>
 		<result property="reviewImagePath" column="REVIEW_IMAGE_PATH"/>
 		<result property="reviewImageOrder" column="REVIEW_IMAGE_ORDER"/>
 		<result property="reviewImageReName" column="REVIEW_IMAGE_RENAME"/>
 		<result property="reviewImageOriginal" column="REVIEW_IMAGE_ORIGINAL"/>
-	</resultMap> -->
+	</resultMap>
 	
 	<!-- 프로필 페이지 메뉴 별 게시글 수 조회 -->
 	<select id="getListCount" parameterType="string" resultType="_int">
@@ -36,9 +47,10 @@
 	
 	<select id="selectReviewList" resultMap="review_rm">
 		SELECT REVIEW_NO, REVIEW_TITLE, REVIEW_CONTENT, REVIEW_DATE, CONTENT_ID,
-			FIRST_IMAGE, MEMBER_NO, PROFILE_IMAGE, MEMBER_NICKNAME
+			FIRST_IMAGE, MEMBER_NO, PROFILE_IMAGE, MEMBER_NICKNAME, REVIEW_IMAGE_PATH
 		FROM REVIEW
-		JOIN "MEMBER" USING(MEMBER_NO)
+		LEFT JOIN "MEMBER" USING(MEMBER_NO)
+		LEFT JOIN REVIEW_IMAGE USING(REVIEW_NO)
 		WHERE REVIEW_FL = 'N'
 	</select>
 	

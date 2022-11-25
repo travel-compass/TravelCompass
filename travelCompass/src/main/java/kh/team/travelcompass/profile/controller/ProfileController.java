@@ -37,10 +37,21 @@ public class ProfileController {
 		model.addAttribute("map", map);
 		
 		return "profile/MemberPage";
+		
+		// 활동피드, 리뷰, 사진, 스크랩
+		// 활동피드 = 활동한 이력 간단히 출력 예정
+		// 리뷰 = 리뷰 중 글 리뷰 사진 리뷰 포함해서 출력
+		// 지금 현재 리뷰가 없을 때 화면 출력 완료
+		// jsp 에서 사진 있고 없고 분별해서 출력
+		
+		// 사진 = 리뷰 중 사진만 출력
+		// 
+		
+		// 스크랩 = 스크랩 한 이력 출력
 	}
 	
 	// 사진만 있는 리뷰 페이지 목록 조회
-	@GetMapping("/profile/MemberPage/Imgae")
+	@GetMapping("/profile/MemberPage/Image")
 	public String profileOnlyImageReviewPage(Model model,
 			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp
 			) {

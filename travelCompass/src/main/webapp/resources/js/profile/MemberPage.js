@@ -280,7 +280,7 @@ reviewImageColum.classList.add("user-page-review-colums2");
         reviewImageSlideContainer.classList.add("slide-container-style");
 
             const reviewImageSlide = document.createElement("div");
-            reviewImageSlide.classList.add("slide, fade");
+            reviewImageSlide.classList.add("slide", "fade");
 
                 const reviewImageNumber = document.createElement("div");
                 reviewImageNumber.classList.add("numbertext");
@@ -360,7 +360,7 @@ reviewImageColum.classList.add("user-page-review-colums2");
                                 reviewImageNavi_span4.innerHTML = "<i class='fa-solid fa-circle'></i>";
                                 
                                 const reviewImageNavi_span5 = document.createElement("span");
-                                reviewImageavi_span5.innerHTML = "<i class='fa-solid fa-circle'></i>";
+                                reviewImageNavi_span5.innerHTML = "<i class='fa-solid fa-circle'></i>";
 
                             const reviewImageNaviCount = document.createElement("div");
                             reviewImageNaviCount.innerText = "00건의 리뷰";

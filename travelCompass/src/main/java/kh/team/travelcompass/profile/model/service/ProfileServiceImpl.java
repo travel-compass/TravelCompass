@@ -25,6 +25,8 @@ public class ProfileServiceImpl implements ProfileService {
 		
 		List<HSHReview> reviewList = dao.selectReviewList();
 		
+		System.out.println(reviewList);
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		map.put("listCount", listCount);
@@ -42,10 +44,13 @@ public class ProfileServiceImpl implements ProfileService {
 		
 		List<HSHReview> reviewList = dao.selectOnlyImageReviewList();
 		
+		System.out.println(reviewList);
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		map.put("listCount", listCount);
 		map.put("reviewList", reviewList);
+		
+		map.put("listCount", listCount);
 		
 		
 		return map;

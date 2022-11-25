@@ -53,11 +53,11 @@
                         <div class="user-info-left-part">
                             <div class="user-container-image">
                                 <span class="user-info-image">
-                                    <img src="${loginMember.profileImage}" alt="프로필 이미지">
+                                    <img src="${map.reviewList[0].profileImage}" alt="프로필 이미지">
                                 </span>
                             </div>
                             <div class="user-nickname">
-                                닉네임
+                                ${map.reviewList[0].memberNickname}
                             </div>
                             <div class="user-container-PFF">
                                 <div>
@@ -146,14 +146,14 @@
                                 </c:when>
 
                                 <%-- 게시글 목록이 있으면서 사진이 없을 경우 --%>
-                                <c:when test="${(listCount > 0) && (empty map.firstImage)}">
+                                <c:when test="${(map.listCount > 0) && (empty map.reviewList[0].reviewImagePath)}">
                                     <!-- 첫번째 리뷰 테이블 -->
                                     <div class="user-page-review-colums2">
                                         <div class="user-page-review-header-style">
                                             <div class="user-page-review-header-layout">
-                                                <a href="#" class="review-user-image"><img src="${loginMember.profileImage}" alt="프로필 이미지"></a>
+                                                <a href="#" class="review-user-image"><img src="${map.reviewList[0].profileImage}" alt="프로필 이미지"></a>
                                                 <div class="review-user-info-layout">
-                                                    <span class="review-user-nickname"><a href="#">유저닉네임</a>님이 리뷰를 작성했습니다.</span>
+                                                    <span class="review-user-nickname"><a href="#">${map.reviewList[0].memberNickname}</a>님이 리뷰를 작성했습니다.</span>
                                                     <a href="#" class="review-user-dday">
                                                         0000년 0월
                                                     </a>
@@ -233,9 +233,9 @@
                                     <div class="user-page-review-colums2">
                                         <div class="user-page-review-header-style">
                                             <div class="user-page-review-header-layout">
-                                                <a href="#" class="review-user-image"><img src="${loginMember.profileImage}" alt="프로필 이미지"></a>
+                                                <a href="#" class="review-user-image"><img src="${map.reviewList[0].profileImage}" alt="프로필 이미지"></a>
                                                 <div class="review-user-info-layout">
-                                                    <span class="review-user-nickname"><a href="#">유저닉네임</a>님이 리뷰를 작성했습니다.</span>
+                                                    <span class="review-user-nickname"><a href="#">${map.reviewList[0].memberNickname}</a>님이 리뷰를 작성했습니다.</span>
                                                     <a href="#" class="review-user-dday">
                                                         0000년 0월
                                                     </a>
@@ -345,6 +345,8 @@
     <%-- footer:include --%>
     <jsp:include page="/WEB-INF/views/inc/footer.jsp"></jsp:include>
 
+    <script>
+    </script>
     <%-- <script src="/resources/js/main.js"></script>
     <script src="/resources/js/swiper.min.js"></script> --%>
     <script src="/resources/js/profile/MemberPage.js"></script>

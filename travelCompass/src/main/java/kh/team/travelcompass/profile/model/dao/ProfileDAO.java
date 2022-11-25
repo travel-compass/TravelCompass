@@ -28,6 +28,6 @@ public class ProfileDAO {
 	}
 
 	public List<HSHReview> selectOnlyImageReviewList() {
-		return sqlSession.selectList("profileMapper.selectOnlyImageReviewList");
+		return sqlSession.selectList("profileMapper.selectReviewList");
 	}
 }

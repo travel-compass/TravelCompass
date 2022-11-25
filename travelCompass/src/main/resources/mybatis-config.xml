@@ -18,6 +18,7 @@
 	<typeAliases>
 		<typeAlias type="kh.team.travelcompass.member.model.vo.Member" alias="Member"/>
 		<typeAlias type="kh.team.travelcompass.profile.model.vo.HSHReview" alias="HSHReview"/>
+		<typeAlias type="kh.team.travelcompass.profile.model.vo.HSHReviewImage" alias="HSHReviewImage"/>
 	</typeAliases>
 	
 	<!-- mapper 파일(SQL 작성되는파일) 위치 등록 부분 -->
