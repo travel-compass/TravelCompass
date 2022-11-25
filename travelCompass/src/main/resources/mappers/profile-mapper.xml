@@ -4,7 +4,7 @@
 
 	
 	<!-- review resultMap -->
-	<resultMap type="HSHReview" id="review_rm">
+	<!-- <resultMap type="HSHReview" id="review_rm">
 		<id property="reviewNo" column="REVIEW_NO"/>
 		<result property="rating" column="RATING"/>
 		<result property="reviewTitle" column="REVIEW_TITLE"/>
@@ -17,18 +17,18 @@
 		<result property="profileImage" column="PROFILE_IMAGE"/>
 		<result property="memberNickname" column="MEMBER_NICKNAME"/>
 		
-		<!--
+		
 		<collection property="imageList" javaType="java.util.ArrayList"
 		ofType="HSHReviewImage" select="selectReviewList" column="MEMBER_NO"/>
 		
 		<collection property="memberList" javaType="java.util.ArrayList"
 		ofType="Member" select="selectReviewList" column="MEMBER_NO"/>
-		-->
+		
 	</resultMap>
 	
 	
 	
-	<!-- reviewImgae resultMap -->
+	reviewImgae resultMap
 	<resultMap type="HSHReviewImage" id="reviewImage_rm">
 		<id property="reviewImageNo" column="REVIEW_IMAGE_NO"/>
 		<result property="reivewNo" column="REVIEW_NO"/>
@@ -38,7 +38,7 @@
 		<result property="reviewImageOriginal" column="REVIEW_IMAGE_ORIGINAL"/>
 	</resultMap>
 	
-	<!-- 프로필 페이지 메뉴 별 게시글 수 조회 -->
+	프로필 페이지 메뉴 별 게시글 수 조회
 	<select id="getListCount" parameterType="string" resultType="_int">
 		SELECT COUNT(*)
 		FROM REVIEW
@@ -52,6 +52,6 @@
 		LEFT JOIN "MEMBER" USING(MEMBER_NO)
 		LEFT JOIN REVIEW_IMAGE USING(REVIEW_NO)
 		WHERE REVIEW_FL = 'N'
-	</select>
+	</select> -->
 	
 </mapper>

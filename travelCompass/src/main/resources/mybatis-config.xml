@@ -27,6 +27,7 @@
 		<mapper resource="/mappers/myPage-mapper.xml"/>
 		<mapper resource="/mappers/place-mapper.xml"/>
 		<mapper resource="/mappers/review-mapper.xml"/>
+		<mapper resource="/mappers/profile-mapper.xml"/>
 		
 		<!-- resource : src/main/resources -->
 	</mappers>
