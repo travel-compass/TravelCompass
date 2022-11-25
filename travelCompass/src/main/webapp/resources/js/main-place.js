@@ -104,9 +104,13 @@ function createPlaceList(resultList) {
         span2.innerText = "리뷰 갯수";
         grade.append(span1, span2);
         const dist = document.createElement("span");
+
+
         dist.classList.add("dist");
+        const tempDist = Math.round(Number(place.dist)) / 1000 + " km";
+
         dist.innerText = "거리";
-        a.append(img, placeTitle, grade, dist);
+        a.append(img, placeTitle, grade, tempDist);
         placeItem.append(a);
         placeList.append(placeItem);
     }
