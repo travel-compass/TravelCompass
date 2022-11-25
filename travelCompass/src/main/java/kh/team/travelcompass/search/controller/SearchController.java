@@ -45,11 +45,13 @@ public class SearchController {
 
 	// jsp에서 keyword, areaCode, contentTypeId를 받아 service -> api
 	// api(검색 결과(json객체)) ->  service -> controller -> jsp
-	@ResponseBody
+	//@ResponseBody 
 	@GetMapping("/searchPlaceKeyword")
 	public String searchPlaceKeyword(String keyword,
-			@RequestParam(value = "areaCode", required = false, defaultValue = "null") String areaCode,
-			@RequestParam(value = "contentTypeId", required = false, defaultValue = "null") String contentTypeId, Model model) {
+			@RequestParam(value = "areaCode", required = false, defaultValue = "null") 
+			String areaCode,
+			@RequestParam(value = "contentTypeId", required = false, defaultValue = "null")
+			String contentTypeId, Model model) {
 
 		try {
 			List<SearchPlace> placeList = service.searchPlaceKeyword(keyword, areaCode, contentTypeId);

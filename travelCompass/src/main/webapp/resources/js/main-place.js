@@ -1,14 +1,67 @@
-document.addEventListener("DOMContentLoaded", ()=>{
-    createPlaceList();
-});
+// 현재 접속위치 좌표 얻기
+console.log("hello");
+(() => {
+    let latitude;   // 위도
+    let longitude;  // 경도
+    if(navigator.geolocation) {     // GPS 사용가능하면
+        navigator.geolocation.getCurrentPosition(position => {
+            latitude = position.coords.latitude;
+            longitude = position.coords.longitude;
+            console.log(latitude);
+            $.ajax({
+                url: "/location/searchPlace",
+                data: {
+                    "latitude": latitude,
+                    "longitude": longitude,
+                    "contentTypeId" : "12"
+                },
+                type: "GET",
+                success: result => {
+                    console.log(result);
+                    createPlaceList(result);
+                },
+                error: () =>{
+                    console.log("error");
+                }
+            });
+            $.ajax({
+                url: "/location/searchPlace",
+                data: {
+                    "latitude": latitude,
+                    "longitude": longitude,
+                    "contentTypeId" : "39"
+                },
+                type: "GET",
+                success: result => {
+                    console.log(result);
+                    createPlaceList(result);
+                },
+                error: () =>{
+                    console.log("error");
+                }
+            })
+        }, error => {
+            console.log(error);
+            return;
+        }, {
+            enableHighAccuracy: false,
+            maximumAge: 0,
+            timeout: Infinity
+        });
+    } else {
+        alert("GPS를 지원하지 않습니다.");
+    }
+})();
 
-function createPlaceList() {
-    const placeArea = document.createElement("div");
-    placeArea.classList.add("place-item");
+function createPlaceList(resultList) {
 
     const placeAreaTitle = document.createElement("span");
     placeAreaTitle.classList.add("place-area-title");
-    placeAreaTitle.innerText = "주변을 둘러보세요";
+    if(resultList[0].contenttypeid == '12') {
+        placeAreaTitle.innerText = "주변 관광지";
+    } else {
+        placeAreaTitle.innerText = "주변 음식점";
+    }
 
     const slideContainer = document.createElement("div");
     slideContainer.classList.add("slide-container");
@@ -27,18 +80,22 @@ function createPlaceList() {
     const placeList = document.createElement("ul");
     placeList.classList.add("place-list");
 
-    for(let i = 0; i< 5; i++) {
+    for(let place of resultList) {
         const placeItem = document.createElement("li");
         placeItem.classList.add("place-item");
 
         const a = document.createElement("a");
-        /* a태그 href속성에 쿼리스트링 생성 */
+        a.setAttribute("href", "#");
 
         const img = document.createElement("img");
-        img.src = "/resources/images/main-sample.jpg";  // 해당 장소의 썸네일 이미지 경로
+        if(place.firstimage == '') {
+            img.src = `/resources/images/common/${place.contenttypeid}.png`;
+        } else {
+            img.src = place.firstimage;  // 해당 장소의 썸네일 이미지 경로
+        }
         const placeTitle = document.createElement("span");
         placeTitle.classList.add("place-title");
-        placeTitle.innerText = `주변장소${i}`;
+        placeTitle.innerText = place.title;
         const grade = document.createElement("div");
         grade.classList.add("grade");
         const span1 = document.createElement("span");
@@ -56,6 +113,5 @@ function createPlaceList() {
 
     slideContainer.append(prevArrow, nextArrow, placeList);
 
-    placeArea.append(placeAreaTitle, slideContainer);
-    document.querySelector(".place-area").after(placeArea); 
+    document.querySelector(".place-area").append(placeAreaTitle, slideContainer);
 }

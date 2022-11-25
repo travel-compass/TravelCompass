@@ -22,7 +22,7 @@ public class SearchPlace {
 	private String tel; // 전화번호
 	private String title; // 이름
 	private String firstimage; // 대표이미지
-	private String Address; // 주소
+	private String addr1; // 주소
 	private String mapx; // 맵x좌표
 	private String mapy; // 맵y좌표
 	private String overview; //개요(설명)

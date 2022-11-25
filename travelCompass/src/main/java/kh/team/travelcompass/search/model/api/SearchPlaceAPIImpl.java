@@ -24,12 +24,14 @@ import kh.team.travelcompass.search.model.vo.SearchPlace;
 
 @Component
 public class SearchPlaceAPIImpl implements SearchPlaceAPI{
-	private String key = "e+nonJ082FY6zfX+tup0hvcGTRAqHZV2OGGnVkjpa+zYdVpUYTHuuqfHYuIEzFwYXjbQXAhQa9tTuyiYdd0Eyw==";
+	private String key = "e+nonJ082FY6zfX+tup0hvcGTRAqHZV2OGGnVkjpa+zYdVpUYTHuuqfHYuIEzFwYXjbQXAhQa9tTuyiYdd0Eyw=="; //영현 인증키
 	private final String HOST = "http://apis.data.go.kr/B551011/KorService";
 	private final String essentialParam = "MobileOS=ETC&MobileApp=AppTest&_type=json&serviceKey=";
 	public SearchPlaceAPIImpl() throws Exception{
 		this.key = URLEncoder.encode(key, "UTF-8");
 	}
+	
+	private String key2="1LHi8Ns0GDTi1MvhsRINU%2ByqOHB2UaZC7e%2FPj0yPsjPgzSuRE%2FIjhTeUHCVN8q7n%2F0J4RFA8ChYkG8f3gr7heQ%3D%3D"; //용하 인증키
 	
 	private String createQueryString(Map<String, String> paramMap) {
 		StringBuilder sb = new StringBuilder();
@@ -41,7 +43,7 @@ public class SearchPlaceAPIImpl implements SearchPlaceAPI{
 	}
 
 	/**
-	 *좌표 기반 검색
+	 *좌표 기반 검색(위치기반관광정보조회)
 	 */
 	@Override
 	public List<SearchPlace> nearByPlace(Map<String, String> paramMap) throws Exception{
@@ -49,9 +51,11 @@ public class SearchPlaceAPIImpl implements SearchPlaceAPI{
 
 		System.out.println("API 호출");
 		String endPoint = "/locationBasedList?";
+		String radius = "&radius=1000";
 		String param = createQueryString(paramMap);
+		
 
-		URL url = new URL(HOST + endPoint + essentialParam + key + param);
+		URL url = new URL(HOST + endPoint + essentialParam + key + radius + param);
 		System.out.println(url.toString());
 		HttpURLConnection conn = (HttpURLConnection)url.openConnection();
 		conn.setRequestMethod("GET");
@@ -87,7 +91,7 @@ public class SearchPlaceAPIImpl implements SearchPlaceAPI{
 
 
 	/**
-	 *키워드 검색
+	 *키워드 검색(키워드검색조회)
 	 */
 	@Override
 	public List<SearchPlace> searchPlaceKeyword(Map<String, String> paramMap) throws Exception {
@@ -97,7 +101,7 @@ public class SearchPlaceAPIImpl implements SearchPlaceAPI{
 		String endPoint = "/searchKeyword?";
 		String param = createQueryString(paramMap);
 
-		URL url = new URL(HOST + endPoint + essentialParam + key + param);
+		URL url = new URL(HOST + endPoint + essentialParam + key + param);   //key 검색량 소진시 key2
 		System.out.println(url.toString());
 		HttpURLConnection conn = (HttpURLConnection)url.openConnection();
 		conn.setRequestMethod("GET");
@@ -113,12 +117,12 @@ public class SearchPlaceAPIImpl implements SearchPlaceAPI{
 			response.append(readline);
 		}
 		br.close();
-		System.out.println(response.toString());
+		System.out.println(response.toString()); //shift+End로 복사 -> Online JSON Viewer로 확인
 		JSONObject json = new JSONObject(response.toString());
-		System.out.println(response.toString());
+		//System.out.println(response.toString());
 		String items = json.getJSONObject("response").getJSONObject("body").getJSONObject("items").getJSONArray("item").toString();
 
-		System.out.println(items);
+		//System.out.println(items);//items 받아오나 확인
 
 		// ObjectMapper 객체 생성
 		ObjectMapper objectMapper = new ObjectMapper();
@@ -126,8 +130,10 @@ public class SearchPlaceAPIImpl implements SearchPlaceAPI{
 		// JSONArray String -> List
 		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		placeList = objectMapper.readValue(items, new TypeReference<List<SearchPlace>>() {});
-		System.out.println(placeList);
-
+		
+		System.out.println("placeList = "+placeList); //콘솔창으로 확인
+		
+		
 		return placeList;
 	}
 }

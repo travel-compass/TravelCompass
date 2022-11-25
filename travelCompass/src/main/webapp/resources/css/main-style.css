@@ -256,8 +256,9 @@ main > .search-area {
 
 .place-item img {
     width: 285px;
-    height: 85%;
+    height: 65%;
     transition: 0.2s;
+    border: 1px solid #ddd;
 }
 
 .place-item .grade {
@@ -265,6 +266,10 @@ main > .search-area {
 }
 
 /************************* slide *************************/
+.slide-container {
+    margin-bottom: 100px;
+}
+
 .slide-container > span {
     position: absolute;
     display: inline-block;

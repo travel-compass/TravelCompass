@@ -45,10 +45,8 @@
                 <!-- 첫번째 요소 무조건 고정 -->
                 <li id="plusTravel">
                     <div>
-                        <a href="여행 만들기 페이지로">
-                            <i class="fa-solid fa-circle-plus"></i>
-                            <span>여행 만들기</span>
-                        </a>
+                        <i class="fa-solid fa-circle-plus"></i>
+                        <span>여행 만들기</span>
                     </div>
                 </li>
 
@@ -215,7 +213,47 @@
         </div>
     </main>
 
+    <div class="modal-container" id="travelModal">
+        <div class="modal-create-travel">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <i class="fa-solid fa-plane"></i>
+                    <span>여행 만들기</span>
+                </div>
+                <div class="modal-close">&times;</div>
+            </div>
+            <form action="" method="post" name="createTravelForm">
+                <label for="travelTitle" class="travel-title">여행 이름</label>
+                <input type="text" id="travelTitle" name="travelTitle" maxlength="10">
+                <span class="max-length">0/10자</span>
+
+                <label class="scope-label">여행 공개 범위 선택하기</label>
+                <label for="privateScope" class="scope-radio-label">
+                    <input type="radio" name="scope" id="privateScope" checked>
+                    <i class="fa-solid fa-lock"></i>
+                    <div class="scope-description">
+                        <span>비공개</span>
+                        <span>다른 사용자 및 회원에게 표시되지 않습니다.</span>
+                    </div>
+                </label>
+                <label for="publicScope" class="scope-radio-label">
+                    <input type="radio" name="scope" id="publicScope">
+                    <i class="fa-solid fa-unlock"></i>
+                    <div class="scope-description">
+                        <span>공개</span>
+                        <span>트립어드바이저 사용자 및 회원에게 표시되지 않습니다.</span>
+                    </div>
+                </label>
+                
+                
+                
+                <button id="travelBtn">만들기</button>
+            </form>
+        </div>
+    </div>
     <!-- footer:include -->
     <jsp:include page="/WEB-INF/views/inc/footer.jsp"></jsp:include>
+
+    <script src="/resources/js/travel/travel-main.js"></script>
 </body>
 </html>
