@@ -103,7 +103,10 @@ function createPlaceList(resultList) {
         const span2 = document.createElement("span");
         span2.innerText = "리뷰 갯수";
         grade.append(span1, span2);
-        a.append(img, placeTitle, grade);
+        const dist = document.createElement("span");
+        dist.classList.add("dist");
+        dist.innerText = "거리";
+        a.append(img, placeTitle, grade, dist);
         placeItem.append(a);
         placeList.append(placeItem);
     }
