@@ -2,10 +2,6 @@ package kh.team.travelcompass.question.model.vo;
 
 import java.util.List;
 
-<<<<<<< HEAD
-
-=======
->>>>>>> Feat.이성호_1123
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
