@@ -1,0 +1,539 @@
+main {
+    width: 1400px;
+    height: 300vh;
+}
+
+#image-area {
+    display: flex;
+    height: 400px;
+}
+
+#mainImg {
+    width: 50%;
+    height: 100%;
+}
+
+#subImag {
+    width: 50%;
+    height: 100%;
+}
+
+.row {
+    display: flex;
+    width: 700px;
+    height: 50%;
+}
+
+.col {
+    height: 100%;
+    width: 100%;
+    margin: 10px;
+}
+
+.img {
+    width: 100%;
+    height: 100%;
+}
+
+#placeHeart {
+    font-size: 200%;
+    margin: 10px;
+}
+
+
+#title-area {
+    margin: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#title-area>span:first-child {
+    font-size: 35px;
+    font-weight: bold;
+
+    margin-right: 20px;
+}
+
+#rating-area div {
+    border-radius: 50%;
+    background-color: springgreen;
+    width: 30px;
+}
+
+#rating-area {
+    margin: 10px;
+    display: flex;
+
+}
+
+.infoHead {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+#intro-area {
+    margin: 10px;
+    height: 300px;
+    width: 80%;
+    background-color: #ddd;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+#map-area {
+    display: flex;
+    height: 600px;
+}
+
+#map {
+    width: 50%;
+    height: 450px;
+    margin-top: 50px;
+}
+
+#around-map {
+    width: 50%;
+    height: 400px;
+}
+
+.around-area {
+    width: 50%;
+    margin: 10px;
+}
+
+#around-area+div {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.aroundPlace {
+    display: flex;
+    margin: 10px;
+    background-color: #ddd;
+    border-radius: 10px;
+}
+
+.around-list {
+    width: 100%;
+}
+
+.imgPlace {
+    width: 50px;
+    height: 100%;
+}
+
+.infoPlace {
+    width: 100%;
+}
+
+
+#info-area {
+    height: 40px;
+    margin: 10px;
+}
+
+#board-area {
+    display: flex;
+}
+
+#rating {
+    width: 20%;
+}
+
+#boardContent {
+    width: 80%;
+    height: 600px;
+    overflow: auto;
+}
+
+.inputContent {
+    display: flex;
+    padding: 5px;
+    height: 150px;
+}
+
+.inputContent form {
+    width: 100%;
+    display: flex;
+}
+
+.inputContent textarea {
+    flex: 1;
+    height: 100%;
+    resize: none;
+}
+
+#search1 {
+    display: flex;
+    padding: 5px 5px;
+}
+
+#search2 {
+    flex: 1;
+}
+
+#reveiw-head {
+    display: flex;
+}
+
+.review-head1 {
+    display: flex;
+    width: 90%;
+    align-items: center;
+}
+
+.review-head2 {
+    display: flex;
+    width: 10%;
+    align-items: center;
+}
+
+#profileImg {
+    width: 50px;
+    height: 50px;
+    background-color: black;
+    border-radius: 50%;
+}
+
+.around-map {
+    display: flex;
+}
+
+.review-content {
+    height: 150px;
+    padding: 10px;
+}
+
+#userRate {
+    width: 200px;
+
+}
+
+.circle {
+    position: relative;
+    font-size: 1.5rem;
+    color: #ddd;
+}
+
+.circle input {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.circle span {
+    width: 0;
+    position: absolute;
+    left: 0;
+    color: #00AA6C;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.swiper {
+    width: 600px;
+    height: 300px;
+}
+
+
+.page-select {
+    width: 770px;
+    height: 60px;
+    border: #ccc solid 1px;
+    padding: 10px 20px;
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.page-select button {
+    width: 62px;
+    height: 36px;
+    border: none;
+    background-color: black;
+    color: white;
+    font-size: 16px;
+    border-radius: 3px;
+    font-weight: bold;
+    cursor: pointer;
+
+}
+
+.page-select div {
+    padding: 5px 0;
+}
+
+.page-select a {
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+    box-sizing: border-box;
+    font-weight: bolder;
+    padding: 0 10px;
+}
+
+.page-select a:active {
+    background-color: #ccc;
+}
+
+.page-select a:hover {
+    color: #00AA6C;
+}
+
+
+/* --------------------------------------- */
+.gallery {
+    width: 100%;
+    max-width: 1200px;
+    margin: 40px auto;
+    overflow: hidden;
+}
+
+.gallery-slider {
+    width: 100%;
+    height: auto;
+    margin: 0 0 10px 0;
+}
+
+.gallery-slider .swiper-slide {
+    width: auto;
+    height: 400px;
+}
+
+.gallery-slider .swiper-slide img {
+    display: block;
+    width: auto;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.gallery-thumbs {
+    width: 100%;
+    padding: 0;
+    overflow: hidden;
+}
+
+.gallery-thumbs .swiper-slide {
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    overflow: hidden;
+    opacity: 0.1;
+}
+
+.gallery-thumbs .swiper-slide-active {
+    opacity: 1;
+}
+
+.gallery-thumbs .swiper-slide img {
+    width: auto;
+    height: 100%;
+}
+
+
+/* 사진 슬라이드 CSS */
+.slide img {
+    width: 100%;
+}
+
+.slide-container-style {
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
+}
+
+.slide {
+    display: none;
+}
+
+.prev,
+.next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -22px;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+}
+
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+.prev:hover,
+.next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.numbertext {
+    color: #f2f2f2;
+    font-size: 12px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 5px;
+    border-radius: 15%;
+    background-color: rgba(0, 10, 18, 0.6);
+}
+
+.active {
+    background-color: #717171;
+}
+
+.fade {
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 1.5s;
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+/* 리뷰 닷 다운 메뉴 */
+
+.user-page-review-dot-down-menu {
+    /* display: inline-block; */
+    /* border: 1px solid black; */
+    width: 100px;
+    position: relative;
+    top: 40px;
+    right: 30px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0 1px 10px 1px;
+    background: white;
+    border-radius: 10%;
+    padding: 5px;
+    text-align: center;
+    display: none;
+    z-index: 1;
+}
+
+.user-page-review-dot-down-menu li:hover {
+    background-color: #ddd;
+    border-radius: 15px;
+}
+
+/* 리뷰 작성 아무것도 안했을 때 나오는 화면 */
+.user-page-review-none-content {
+    padding: 48px 60px;
+}
+
+.none-content-titel {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.none-content {
+    font-size: 17px;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.none-content-review-create {
+    text-align: center;
+    font-size: 14px;
+}
+
+.none-content-review-create:hover {
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.none-content-review-create:hover i {
+    color: black;
+}
+
+.none-content-review-create i {
+    margin-right: 10px;
+    font-size: 20px;
+    color: gray;
+}
+
+
+
+/* ---------- */
+/* 레이아웃 외곽 너비 400px 제한*/
+.wrap {
+    max-width: 80%;
+    margin: 0 auto;
+    /* 화면 가운데로 */
+    background-color: #ddd;
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 10px;
+
+}
+
+.rating {
+    width: 100px;
+    display: flex;
+    justify-content: space-around;
+    margin: 10px 0;
+}
+
+
+
+.reviewform textarea {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.rating .rate_radio {
+    position: relative;
+    display: inline-block;
+    z-index: 20;
+    opacity: 0.001;
+    width: 30px;
+    height: 30px;
+    background-color: #fff;
+    cursor: pointer;
+    vertical-align: top;
+    display: none;
+}
+
+.rating .rate_radio+label {
+    position: relative;
+    display: inline-block;
+    margin-left: -4px;
+    z-index: 10;
+    width: 15px;
+    height: 15px;
+    /* background-image: url('./img/starrate.png'); */
+    background-repeat: no-repeat;
+    background-size: 60px 60px;
+    cursor: pointer;
+    background-color: #f0f0f0;
+    border-radius: 50%;
+}
+
+.rating .rate_radio:checked+label {
+    background-color: #2DC48D;
+    border-radius: 50%;
+}
+
+.warning_msg {
+    display: none;
+    position: relative;
+    text-align: center;
+    background: #ffffff;
+    line-height: 26px;
+    width: 100%;
+    color: red;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #e0e0e0;
+}

@@ -133,7 +133,7 @@
                                                 <div class="search-result-item">
 
                                                     <div class="search-result-item-img">
-                                                        <a href="#<!--상세페이지 최상단-->">
+                                                        <a href="/detail/place?contentId=${place.contentid}&contentTypeId=${place.contenttypeid}">
                                                             <img src="${place.firstimage}" alt="" width="177px" height="140px">
                                                         </a>
                                                     </div>
@@ -141,7 +141,7 @@
                                                     <div class="search-result-item-content">
 
                                                         <div class="search-result-item-title">
-                                                            <span><a href="#<!--상세페이지-최상단-->">${place.title}</a></span>
+                                                            <span><a href="/detail/place?contentId=${place.contentid}&contentTypeId=${place.contenttypeid}">${place.title}</a></span>
                                                         </div>
 
                                                         <div class="search-result-item-grade">
