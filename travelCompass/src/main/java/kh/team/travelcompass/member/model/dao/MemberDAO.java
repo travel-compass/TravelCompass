@@ -48,4 +48,37 @@ public class MemberDAO {
 	public Member findEmail(Member inputMember) {
 		return sqlSession.selectOne("memberMapper.findEmail", inputMember);
 	}
+	
+	
+	public String findPw(String memberEmail) {
+		return sqlSession.selectOne("memberMapper.findPw", memberEmail);
+	}
+
+
+	/** 비밀번호 변경 DAO
+	 * @param inputMember
+	 * @return result
+	 */
+	public int changePw(Member inputMember) {
+		return sqlSession.update("memberMapper.changePw", inputMember);
+	}
+
+
+	/** 회원 정보 수정 DAO(닉네임, 전화번호, 주소)
+	 * @param inputMember
+	 * @return result
+	 */
+	public int updateInfo(Member inputMember) {
+		return sqlSession.update("memberMapper.updateInfo", inputMember);
+	}
+
+
+	public String getMemberPw(int memberNo) {
+		return sqlSession.selectOne("memberMapper.getMemberPw", memberNo);
+	}
+
+
+	public int secession(int memberNo) {
+		return sqlSession.update("memberMapper.secession", memberNo);
+	}
 }

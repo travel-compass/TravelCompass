@@ -52,7 +52,8 @@ main > .search-area {
     z-index: 800;
     opacity: 0.8;
 }
-.search-area .search-form:focus-within {
+
+.search-area .search-form.focus {
     border-radius: 15px;
     opacity: 1;
 }
@@ -81,10 +82,42 @@ main > .search-area {
     /* transition-duration: 0.1s;
     -webkit-backface-visibility: hidden; */
 }
-.search-area .search-form input[name='searchKeyword']:focus {
+.search-area .search-form input[name='searchKeyword'].input-focus {
     border-bottom: 1px solid black;
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0px;
+}
+.search-area .search-form select {
+    font-size: 16px;
+    border: 1px solid #ddd;
+    padding: 0px 10px;
+    border-radius: 10px;
+}
+
+
+/************************* search-option-area *************************/
+.search-option-area {
+    padding: 15px 25px;
+    display: flex;
+}
+.search-option-area input[name='contentTypeId'] {
+    display: none;
+}
+.search-option-area label {
+    width: 100px;
+    height: 40px;
+    border: 1px solid #ddd;
+    display: inline-block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition-duration: 0.2s;
+    border-radius: 10px;
+    margin-right: 15px;
+}
+.search-option-area input:checked + label {
+    background-color: black;
+    color: white;
 }
 /************************* search-keyword-area *************************/
 .search-keyword-area {
@@ -223,15 +256,20 @@ main > .search-area {
 
 .place-item img {
     width: 285px;
-    height: 85%;
+    height: 65%;
     transition: 0.2s;
+    border: 1px solid #ddd;
 }
 
 .place-item .grade {
-    margin-top: 10px;
+    margin-bottom: 20px;
 }
 
 /************************* slide *************************/
+.slide-container {
+    margin-bottom: 100px;
+}
+
 .slide-container > span {
     position: absolute;
     display: inline-block;
@@ -275,10 +313,10 @@ main > .search-area {
     width: 100%;
     height: 100%;
     background-color: rgb(255, 255, 255);
-    opacity: 0;
+    opacity: 0.8;
     z-index: 400;
-    pointer-events: none;
     transition: 0.2s;
+    display: none;
 }
 /* js-style */
 
@@ -287,7 +325,7 @@ main > .search-area {
     margin-top: 15px;
 }
 .js-blur {
-    opacity: 0.8;
+    display: block;
 }
 .popular-keyword-list .js-border-none {
     background: none;

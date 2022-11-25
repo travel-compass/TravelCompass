@@ -17,15 +17,17 @@
 	<!-- VO클래스의 패키지명 + 클래스명 작성하는 것이 불편하기 때문에 짧은 별칭 부여 -->
 	<typeAliases>
 		<typeAlias type="kh.team.travelcompass.member.model.vo.Member" alias="Member"/>
-		<typeAlias type="kh.team.travelcompass.profile.model.vo.HSHReview" alias="HSHReview"/>
-		<typeAlias type="kh.team.travelcompass.profile.model.vo.HSHReviewImage" alias="HSHReviewImage"/>
+		<typeAlias type="kh.team.travelcompass.place.model.vo.Place" alias="Place"/>
+		<typeAlias type="kh.team.travelcompass.review.model.vo.Review" alias="Review"/>
 	</typeAliases>
 	
 	<!-- mapper 파일(SQL 작성되는파일) 위치 등록 부분 -->
 	<mappers>
 		<mapper resource="/mappers/member-mapper.xml"/>
-		<mapper resource="/mappers/myPage-mapper.xml"/> 
-		<mapper resource="/mappers/profile-mapper.xml"/> 
+		<mapper resource="/mappers/myPage-mapper.xml"/>
+		<mapper resource="/mappers/place-mapper.xml"/>
+		<mapper resource="/mappers/review-mapper.xml"/>
+		
 		<!-- resource : src/main/resources -->
 	</mappers>
 </configuration>

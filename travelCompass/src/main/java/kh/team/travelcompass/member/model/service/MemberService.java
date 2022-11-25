@@ -30,4 +30,40 @@ public interface MemberService {
 	 * @return findMember (이름, 이메일)
 	 */
 	public Member findEmail(Member inputMember);
+
+
+	/** 비밀번호 찾기 서비스
+	 * @param memberEmail
+	 * @return 이메일과 일치하는 회원의 회원번호
+	 */
+	public String findPw(String memberEmail);
+
+
+	/** 비밀번호 변경 서비스(암호화)
+	 * @param inputMember
+	 * @return result
+	 */
+	public int changePw(Member inputMember);
+
+
+	/** 회원 정보 수정 (닉네임, 전화번호, 주소)
+	 * @param inputMember
+	 * @return result
+	 */
+	public int updateInfo(Member inputMember);
+
+
+	/** 현재 비밀번호 확인 서비스
+	 * @param currentMemberPw 비교할 비밀번호 평문
+	 * @param memberNo 로그인한 회원의 암호화된 비밀번호를 가져오기위한 파라미터
+	 * @return 일치:true, 불일치:false
+	 */
+	public boolean checkMemberPw(String inputMemberPw, int memberNo);
+
+
+	/** 회원 탈퇴 서비스
+	 * @param memberNo 회원탈퇴 진행할 회원 번호
+	 * @return result
+	 */
+	public int secession(int memberNo);
 }
