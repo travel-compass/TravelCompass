@@ -110,24 +110,26 @@
             <div class="container-main-wrap">
                 <div class="container-main">
                     <section class="search-result">
+                        <!--검색 결과가 없을 때 -->
+                        <c:choose>
+                            <c:when test="${empty placeList}">
+                                <div class="search-result-title">
+                                    <span id="title-match">"<span id="title-query">${param.keyword}</span>" 과(와) 일치하는 검색결과가 없습니다 </span>
+                                </div>
+                            </c:when>
+                        <c:otherwise>
                         <div class="search-result-title">
                             <span id="title-match">"<span id="title-query">${param.keyword}</span>" 과(와) 일치하는 검색결과 </span>
                         </div>
+                        </c:otherwise>
+                        </c:choose>
                         <div class="search-result-list">
                             
                             <ul class="search-result-list">
-                                <c:choose>
+                                <!-- <c:choose>
                                     <c:when test="${empty placeList}">
-                                        <li class="search-result-item">
-                                            <div class="search-result-item-content">
-                                                <div class="search-result-item-title">
-                                                    <span>검색 결과가 없습니다.</span>
-                                                </div>
-                                            </div>
-                                        </li>
                                     </c:when>
-                                    <c:otherwise>
-                                        
+                                    <c:otherwise> -->
                                         <c:forEach items="${placeList}" var="place">
                                             <li>
                                                 <div class="search-result-item">
@@ -166,12 +168,11 @@
                                                         </div>
                                                     
                                                     </div>
-                                                    
                                                 </div>
                                             </li> 
                                         </c:forEach>
-                                    </c:otherwise>
-                                </c:choose>
+                                    <!-- </c:otherwise>
+                                </c:choose> -->
                             </ul>
                         </div>
                         <div class="show-more">

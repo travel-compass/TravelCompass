@@ -4,6 +4,7 @@ package kh.team.travelcompass.search.controller;
 import java.util.List;
 
 
+
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import kh.team.travelcompass.search.model.service.SearchService;
-import kh.team.travelcompass.search.model.vo.SearchPlace;
+import kh.team.travelcompass.place.model.vo.Place;
 
 @RequestMapping("/place")
 @Controller()
@@ -33,7 +34,7 @@ public class SearchController {
 	
 	@ResponseBody
 	@GetMapping("/nearByPlace")
-	public List<SearchPlace> nearByPlace(String latitude, String longitude) {
+	public List<Place> nearByPlace(String latitude, String longitude) {
 
 		try {
 			service.nearByPlace(latitude, longitude);
@@ -54,7 +55,7 @@ public class SearchController {
 			String contentTypeId, Model model) {
 
 		try {
-			List<SearchPlace> placeList = service.searchPlaceKeyword(keyword, areaCode, contentTypeId);
+			List<Place> placeList = service.searchPlaceKeyword(keyword, areaCode, contentTypeId);
 
 			model.addAttribute("placeList", placeList);
 		} catch (Exception e) {
