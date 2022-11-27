@@ -256,13 +256,18 @@ main > .search-area {
 
 .place-item img {
     width: 285px;
-    height: 65%;
+    height: 250px;
     transition: 0.2s;
     border: 1px solid #ddd;
 }
 
 .place-item .grade {
     margin-bottom: 20px;
+}
+
+.place-item .dist-icon {
+    color: #2DC48D;
+    margin-right: 9px;
 }
 
 /************************* slide *************************/

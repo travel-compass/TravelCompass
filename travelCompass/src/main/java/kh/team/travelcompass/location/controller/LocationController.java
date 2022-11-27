@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,4 +25,12 @@ public class LocationController {
 		
 		return placeList;
 	}
+	
+//	@GetMapping("/aroundSearch")
+//	public String aroundSearch(String latitude, String longitude, String contentTypeId,
+//			Model model) throws Exception {
+//		List<Place> placeList = service.aroundSearch(latitude, longitude, contentTypeId);
+//		
+//		model.addAttribute("placeList", placeList);
+//	}
 }

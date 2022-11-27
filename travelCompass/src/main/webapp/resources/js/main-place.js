@@ -7,7 +7,9 @@ console.log("hello");
         navigator.geolocation.getCurrentPosition(position => {
             latitude = position.coords.latitude;
             longitude = position.coords.longitude;
-            console.log(latitude);
+            const aURL = `latitude=${latitude}&longitude=${longitude}&contentTypeId=12`;
+            document.getElementById("aroundSearch").href += aURL;
+
             $.ajax({
                 url: "/location/searchPlace",
                 data: {
@@ -39,7 +41,7 @@ console.log("hello");
                 error: () =>{
                     console.log("error");
                 }
-            })
+            });
         }, error => {
             console.log(error);
             return;
@@ -103,14 +105,12 @@ function createPlaceList(resultList) {
         const span2 = document.createElement("span");
         span2.innerText = "리뷰 갯수";
         grade.append(span1, span2);
-        const dist = document.createElement("span");
 
+        const distIcon = document.createElement("i");
+        distIcon.className = "fa-solid fa-location-dot dist-icon";
 
-        dist.classList.add("dist");
-        const tempDist = Math.round(Number(place.dist)) / 1000 + " km";
-
-        dist.innerText = "거리";
-        a.append(img, placeTitle, grade, tempDist);
+        const dist = parseInt(place.dist / 100) * 100 / 1000 + "km 떨어짐"
+        a.append(img, placeTitle, grade, distIcon, dist);
         placeItem.append(a);
         placeList.append(placeItem);
     }

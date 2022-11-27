@@ -64,7 +64,7 @@
                             <option value="39">제주도</option>
                         </select>
                     </div>
-                    <a href="#">
+                    <a href="/location/aroundSearch?" id="aroundSearch">
                         <i class="fa-solid fa-location-arrow"></i>
                         <span>주변</span>
                     </a>
