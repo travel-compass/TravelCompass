@@ -98,4 +98,17 @@ document.addEventListener("DOMContentLoaded", ()=>{
             aroundSearch.href = newHref;
         })
     } 
+
+
+    // 최근 검색
+    const form = document.getElementById("searchForm");
+    form.addEventListener("submit", e=>{
+        const keywordInput = document.getElementById("search-input");
+        if(keywordInput.value.trim().length == 0) {     // 검색키워드 입력 x시 무반응
+            e.preventDefault();
+            return;
+        }
+
+        
+    });
 });
