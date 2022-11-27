@@ -18,6 +18,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import kh.team.travelcompass.common.Util;
 import kh.team.travelcompass.place.model.vo.Place;
 import kh.team.travelcompass.search.model.vo.SearchPlace;
 
@@ -83,7 +84,7 @@ public class PlaceAPIImpl implements PlaceAPI{
 	
 	@Override
 	public Place detailPlace(Map<String, String> paramMap) throws Exception {
-		Place place=new Place();
+		Place place=null;
 		
 		System.out.println("API 호출");
 		String endPoint = "/detailCommon?";
@@ -106,19 +107,21 @@ public class PlaceAPIImpl implements PlaceAPI{
 		}
 		br.close();
 		
-		JSONObject json = new JSONObject(response.toString());
-		System.out.println(response.toString());
-		String items = json.getJSONObject("response").getJSONObject("body").getJSONObject("items").getJSONArray("item").getJSONObject(0).toString();
+		place=Util.jsonToPlace(response.toString());
 		
-		System.out.println(items);
+//		JSONObject json = new JSONObject(response.toString());
+//		System.out.println(response.toString());
+//		String items = json.getJSONObject("response").getJSONObject("body").getJSONObject("items").getJSONArray("item").getJSONObject(0).toString();
+//		
+//		System.out.println(items);
 		
-		// ObjectMapper 객체 생성
-		ObjectMapper objectMapper = new ObjectMapper();
-		
-		// JSONArray String -> List
-		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		place = objectMapper.readValue(items, new TypeReference<Place>() {});
-		System.out.println(place);
+//		// ObjectMapper 객체 생성
+//		ObjectMapper objectMapper = new ObjectMapper();
+//		
+//		// JSONArray String -> List
+//		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+//		place = objectMapper.readValue(items, new TypeReference<Place>() {});
+//		System.out.println(place);
 		
 		return place;
 	}
