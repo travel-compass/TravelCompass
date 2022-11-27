@@ -37,7 +37,7 @@ public class LocationAPI {
 	 */
 	public List<Place> serachPlace(Map<String, String> paramMap) throws Exception {
 		// 결과 반환 위한 변수
-		List<Place> placeList = new ArrayList<>();
+		List<Place> placeList = null;
 		
 		
 		String param = Util.createQueryString(paramMap);

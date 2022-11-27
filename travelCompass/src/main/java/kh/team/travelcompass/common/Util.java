@@ -33,7 +33,7 @@ public class Util {
 	 * @return place
 	 */
 	public static Place jsonToPlace(String json) throws Exception{
-		Place place = null;
+		List<Place> placeList = null;
 		
 		// 파싱
 		
@@ -41,10 +41,10 @@ public class Util {
 		if(!items.equals("")) {
 			ObjectMapper om = new ObjectMapper();
 			om.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-			place = om.readValue(items, new TypeReference<Place>() {});			
+			placeList = om.readValue(items, new TypeReference<List<Place>>() {});
 		}
-		System.out.println(place);
-		return place;
+		System.out.println(placeList.get(0));
+		return placeList.get(0);
 	}
 	
 	public static List<Place> jsonToPlaceList(String json) throws Exception {
