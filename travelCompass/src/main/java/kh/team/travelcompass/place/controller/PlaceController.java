@@ -34,9 +34,9 @@ public class PlaceController {
 		Place infoPlace=service.infoPlace(contentId,contentTypeId);
 		
 		// image
-		Place ImagePlace=service.imagePlace(contentId,contentTypeId);
+		Place imagePlace=service.imagePlace(contentId,contentTypeId);
 		
-		model.addAttribute("place", mainPlace);
+		model.addAttribute("place", imagePlace);
 		
 		return "place/detailPlace"; 
 	}

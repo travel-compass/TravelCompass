@@ -70,7 +70,7 @@ public class PlaceServiceImpl implements PlaceService {
 		Map<String, String> paramMap=new HashMap<String, String>();
 		
 		paramMap.put("contentId", contentId);
-		paramMap.put("contentTypeId", contentTypeId);
+		
 		paramMap.put("imageYN", "Y");
 		paramMap.put("subImageYN", "N");
 		

@@ -158,8 +158,22 @@ public class PlaceAPIImpl implements PlaceAPI{
 		}
 		br.close();
 		
-		place=Util.jsonToPlace(response.toString());
-		return null;
+		JSONObject json = new JSONObject(response.toString());
+		
+		System.out.println(response.toString());
+		String items = json.getJSONObject("response").getJSONObject("body").getJSONObject("items").getJSONArray("item").getJSONObject(0).toString();
+		
+		System.out.println(items);
+		
+		// ObjectMapper 객체 생성
+		ObjectMapper objectMapper = new ObjectMapper();
+		
+		// JSONArray String -> List
+		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		place = objectMapper.readValue(items, new TypeReference<Place>() {});
+		System.out.println(place);
+		
+		return place;
 	}
 	
 }
