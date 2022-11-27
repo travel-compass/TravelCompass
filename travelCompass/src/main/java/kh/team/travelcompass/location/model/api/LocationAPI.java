@@ -65,11 +65,8 @@ public class LocationAPI {
 		String str = response.toString();
 		
 		
-		// 파싱
-		String items = new JSONObject(response.toString()).getJSONObject("response").getJSONObject("body").getJSONObject("items").getJSONArray("item").toString();
-		ObjectMapper om = new ObjectMapper();
-		om.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		placeList = om.readValue(items, new TypeReference<List<Place>>() {});
+		placeList = Util.jsonToPlaceList(response.toString());
+		
 		
 		System.out.println(placeList);
 		

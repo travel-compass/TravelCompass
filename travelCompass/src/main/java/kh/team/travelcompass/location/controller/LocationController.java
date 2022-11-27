@@ -26,11 +26,12 @@ public class LocationController {
 		return placeList;
 	}
 	
-//	@GetMapping("/aroundSearch")
-//	public String aroundSearch(String latitude, String longitude, String contentTypeId,
-//			Model model) throws Exception {
-//		List<Place> placeList = service.aroundSearch(latitude, longitude, contentTypeId);
-//		
-//		model.addAttribute("placeList", placeList);
-//	}
+	@GetMapping("/aroundSearch")
+	public String aroundSearch(String latitude, String longitude, String contentTypeId,
+			Model model) throws Exception {
+		List<Place> placeList = service.searchPlace(latitude, longitude, contentTypeId);
+		
+		model.addAttribute("placeList", placeList);
+		return "search/searchpage";
+	}
 }
