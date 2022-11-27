@@ -38,7 +38,4 @@ public class Place {
 	private int travelListNo;
 	private int travelNo;
 	private int travelListOrder;
-	
-	
-	
 }
