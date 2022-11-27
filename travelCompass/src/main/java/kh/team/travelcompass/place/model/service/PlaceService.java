@@ -23,10 +23,10 @@ public interface PlaceService {
 	public Place detailPlace(String contentId, String contentTypeId) throws Exception;
 
 	// 장소 정보 조회
-	public Place infoPlace(String contentId, String contentTypeId);
+	public Place infoPlace(String contentId, String contentTypeId) throws Exception;
 	
 	// 장소 이미지 조회
-	public Place imagePlace(String contentId, String contentTypeId);
+	public Place imagePlace(String contentId, String contentTypeId) throws Exception;
 
 	
 	

@@ -56,7 +56,7 @@ public class PlaceServiceImpl implements PlaceService {
 	}
 	
 	@Override
-	public Place infoPlace(String contentId, String contentTypeId) {
+	public Place infoPlace(String contentId, String contentTypeId) throws Exception {
 		Map<String, String> paramMap=new HashMap<String, String>();
 		
 		paramMap.put("contentId", contentId);
@@ -66,11 +66,14 @@ public class PlaceServiceImpl implements PlaceService {
 	}
 	
 	@Override
-	public Place imagePlace(String contentId, String contentTypeId) {
+	public Place imagePlace(String contentId, String contentTypeId) throws Exception {
 		Map<String, String> paramMap=new HashMap<String, String>();
 		
 		paramMap.put("contentId", contentId);
 		paramMap.put("contentTypeId", contentTypeId);
+		paramMap.put("imageYN", "Y");
+		paramMap.put("subImageYN", "N");
+		
 		
 		return api.imagePlace(paramMap);
 	}

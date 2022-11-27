@@ -134,9 +134,31 @@ public class PlaceAPIImpl implements PlaceAPI{
 	}
 	
 	@Override
-	public Place imagePlace(Map<String, String> paramMap) {
+	public Place imagePlace(Map<String, String> paramMap) throws Exception {
 		Place place=new Place();
 		
+		System.out.println("API 호출");
+		String endPoint = "/detailImage?";
+		String param = createQueryString(paramMap);
+		
+		URL url = new URL(HOST + endPoint + essentialParam + key + param);		
+		System.out.println(url.toString());
+		HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+		conn.setRequestMethod("GET");
+		conn.setDoInput(true);
+		conn.setDoOutput(false);
+		
+		StringBuilder response = new StringBuilder();
+		
+		BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+		String readline = "";
+		
+		while((readline = br.readLine()) != null) {
+			response.append(readline);
+		}
+		br.close();
+		
+		place=Util.jsonToPlace(response.toString());
 		return null;
 	}
 	
