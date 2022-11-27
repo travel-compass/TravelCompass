@@ -71,7 +71,7 @@ main > .search-area {
     cursor: pointer;
     position: absolute;
 }
-.search-area .search-form input[name='searchKeyword'] {
+.search-area .search-form input[name='keyword'] {
     width: 100%;
     height: 60px;
     padding: 0 50px;
@@ -82,7 +82,7 @@ main > .search-area {
     /* transition-duration: 0.1s;
     -webkit-backface-visibility: hidden; */
 }
-.search-area .search-form input[name='searchKeyword'].input-focus {
+.search-area .search-form input[name='keyword'].input-focus {
     border-bottom: 1px solid black;
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0px;
@@ -256,13 +256,18 @@ main > .search-area {
 
 .place-item img {
     width: 285px;
-    height: 65%;
+    height: 250px;
     transition: 0.2s;
     border: 1px solid #ddd;
 }
 
 .place-item .grade {
     margin-bottom: 20px;
+}
+
+.place-item .dist-icon {
+    color: #2DC48D;
+    margin-right: 9px;
 }
 
 /************************* slide *************************/

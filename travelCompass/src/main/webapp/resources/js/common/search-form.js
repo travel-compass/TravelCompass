@@ -88,4 +88,14 @@ document.addEventListener("DOMContentLoaded", ()=>{
             }
         }
     }
+
+    const contentTypeId = document.querySelectorAll("input[name='contentTypeId']");
+    for(let item of contentTypeId) {
+        item.addEventListener("click", function(){
+            const aroundSearch = document.getElementById("aroundSearch");
+            let newHref = aroundSearch.href;
+            newHref = newHref.replaceAll(newHref.substring(newHref.lastIndexOf("&")), `&contentTypeId=${item.value}`);
+            aroundSearch.href = newHref;
+        })
+    } 
 });
