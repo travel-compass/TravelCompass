@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -127,15 +128,40 @@ public class PlaceAPIImpl implements PlaceAPI{
 	}
 	
 	@Override
-	public Place infoPlace(Map<String, String> paramMap) {
+	public Place infoPlace(Map<String, String> paramMap) throws Exception {
 		Place place=new Place();
 		
-		return null;
+		System.out.println("API 호출");
+		String endPoint = "/detailIntro?";
+		String param = createQueryString(paramMap);
+		
+		URL url = new URL(HOST + endPoint + essentialParam + key + param);		
+		System.out.println(url.toString());
+		HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+		conn.setRequestMethod("GET");
+		conn.setDoInput(true);
+		conn.setDoOutput(false);
+		
+		StringBuilder response = new StringBuilder();
+		
+		BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+		String readline = "";
+		
+		while((readline = br.readLine()) != null) {
+			response.append(readline);
+		}
+		br.close();
+		
+		place=Util.jsonToPlace(response.toString());
+		
+//		System.out.println(place);
+		
+		return place;
 	}
 	
 	@Override
-	public Place imagePlace(Map<String, String> paramMap) throws Exception {
-		Place place=new Place();
+	public List<String> imageList(Map<String, String> paramMap) throws Exception {
+		List<String> imageList=null;
 		
 		System.out.println("API 호출");
 		String endPoint = "/detailImage?";
@@ -158,22 +184,11 @@ public class PlaceAPIImpl implements PlaceAPI{
 		}
 		br.close();
 		
-		JSONObject json = new JSONObject(response.toString());
+		imageList=Util.jsonToImageList(response.toString());
 		
-		System.out.println(response.toString());
-		String items = json.getJSONObject("response").getJSONObject("body").getJSONObject("items").getJSONArray("item").getJSONObject(0).toString();
+//		System.out.println(imageList);
 		
-		System.out.println(items);
-		
-		// ObjectMapper 객체 생성
-		ObjectMapper objectMapper = new ObjectMapper();
-		
-		// JSONArray String -> List
-		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		place = objectMapper.readValue(items, new TypeReference<Place>() {});
-		System.out.println(place);
-		
-		return place;
+		return imageList;
 	}
 	
 }

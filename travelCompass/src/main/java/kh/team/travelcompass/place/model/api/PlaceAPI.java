@@ -22,7 +22,7 @@ public interface PlaceAPI{
 
 	public Place infoPlace(Map<String, String> paramMap) throws Exception;
 
-	public Place imagePlace(Map<String, String> paramMap) throws Exception;
+	public List<String> imageList(Map<String, String> paramMap) throws Exception;
 
 	
 	

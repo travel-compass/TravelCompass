@@ -52,6 +52,8 @@ public class PlaceServiceImpl implements PlaceService {
 		paramMap.put("mapinfoYN","Y");
 		paramMap.put("overviewYN","Y");
 		
+		
+		
 		return api.detailPlace(paramMap);
 	}
 	
@@ -66,15 +68,15 @@ public class PlaceServiceImpl implements PlaceService {
 	}
 	
 	@Override
-	public Place imagePlace(String contentId, String contentTypeId) throws Exception {
+	public List<String> imageList(String contentId, String contentTypeId) throws Exception {
 		Map<String, String> paramMap=new HashMap<String, String>();
 		
 		paramMap.put("contentId", contentId);
 		
 		paramMap.put("imageYN", "Y");
-		paramMap.put("subImageYN", "N");
+		paramMap.put("subImageYN", "Y");
 		
 		
-		return api.imagePlace(paramMap);
+		return api.imageList(paramMap);
 	}
 }

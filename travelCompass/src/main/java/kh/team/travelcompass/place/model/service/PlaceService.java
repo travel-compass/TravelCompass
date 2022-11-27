@@ -26,7 +26,7 @@ public interface PlaceService {
 	public Place infoPlace(String contentId, String contentTypeId) throws Exception;
 	
 	// 장소 이미지 조회
-	public Place imagePlace(String contentId, String contentTypeId) throws Exception;
+	public List<String> imageList(String contentId, String contentTypeId) throws Exception;
 
 	
 	
