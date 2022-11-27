@@ -123,6 +123,18 @@ public class PlaceAPIImpl implements PlaceAPI{
 		return place;
 	}
 	
+	@Override
+	public Place infoPlace(Map<String, String> paramMap) {
+		Place place=new Place();
+		
+		return null;
+	}
 	
+	@Override
+	public Place imagePlace(Map<String, String> paramMap) {
+		Place place=new Place();
+		
+		return null;
+	}
 	
 }

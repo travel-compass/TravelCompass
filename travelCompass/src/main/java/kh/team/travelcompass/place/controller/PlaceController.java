@@ -27,9 +27,16 @@ public class PlaceController {
 	@GetMapping("/place")
 	public String page(String contentId,String contentTypeId,Model model) throws Exception {
 		
-		Place place=service.detailPlace(contentId,contentTypeId);
+		// title,overview
+		Place mainPlace=service.detailPlace(contentId,contentTypeId);
 		
-		model.addAttribute("place", place);
+		// info 
+		Place infoPlace=service.infoPlace(contentId,contentTypeId);
+		
+		// image
+		Place ImagePlace=service.imagePlace(contentId,contentTypeId);
+		
+		model.addAttribute("place", mainPlace);
 		
 		return "place/detailPlace"; 
 	}

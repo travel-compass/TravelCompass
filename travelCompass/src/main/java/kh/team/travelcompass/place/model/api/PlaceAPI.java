@@ -20,6 +20,10 @@ public interface PlaceAPI{
 
 	public Place detailPlace(Map<String, String> paramMap) throws Exception;
 
+	public Place infoPlace(Map<String, String> paramMap);
+
+	public Place imagePlace(Map<String, String> paramMap);
+
 	
 	
 }

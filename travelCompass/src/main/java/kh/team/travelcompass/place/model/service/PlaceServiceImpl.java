@@ -47,8 +47,31 @@ public class PlaceServiceImpl implements PlaceService {
 		paramMap.put("contentId", contentId);
 		paramMap.put("contentTypeId", contentTypeId);
 		paramMap.put("defaultYN","Y");
+		paramMap.put("firstImageYN","Y");
+		paramMap.put("addrinfoYN","Y");
+		paramMap.put("mapinfoYN","Y");
+		paramMap.put("overviewYN","Y");
 		
 		return api.detailPlace(paramMap);
 	}
 	
+	@Override
+	public Place infoPlace(String contentId, String contentTypeId) {
+		Map<String, String> paramMap=new HashMap<String, String>();
+		
+		paramMap.put("contentId", contentId);
+		paramMap.put("contentTypeId", contentTypeId);
+		
+		return api.infoPlace(paramMap);
+	}
+	
+	@Override
+	public Place imagePlace(String contentId, String contentTypeId) {
+		Map<String, String> paramMap=new HashMap<String, String>();
+		
+		paramMap.put("contentId", contentId);
+		paramMap.put("contentTypeId", contentTypeId);
+		
+		return api.imagePlace(paramMap);
+	}
 }
