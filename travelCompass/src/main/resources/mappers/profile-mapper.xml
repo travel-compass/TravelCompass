@@ -35,11 +35,14 @@
 		<result property="reviewImageOriginal" column="REVIEW_IMAGE_ORIGINAL"/>
 	</resultMap>
 	
+	
+	
 	<!-- 프로필 페이지 메뉴 별 게시글 수 조회  -->
-	<select id="getListCount" parameterType="string" resultType="_int">
+	<select id="getListCount" resultType="_int">
 		SELECT COUNT(*)
 		FROM REVIEW
 		WHERE REVIEW_FL = 'N'
+		AND MEMBER_NO = #{memberNo}
 	</select>
 	
 	<select id="ReviewSelectList" resultMap="review_rm">
@@ -48,7 +51,7 @@
 		FROM REVIEW
 		LEFT JOIN "MEMBER" USING(MEMBER_NO)
 		WHERE REVIEW_FL = 'N'
-		AND MEMBER_NO = 1
+		AND MEMBER_NO = #{memberNo}
 		ORDER BY REVIEW_NO
 	</select>
 	

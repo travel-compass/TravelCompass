@@ -87,7 +87,7 @@ reviewTextColum.classList.add("user-page-review-colums2");
             const reviewTextUserImage = document.createElement("a");
             reviewTextUserImage.classList.add("review-user-image");
 
-            reviewTextUserImage.innerHTML = "<img src='${loginMember.profileImage}'>";
+            reviewTextUserImage.innerHTML = "<img src=''>";
 
             const reviewTextInfoLayout = document.createElement("div");
             reviewTextInfoLayout.classList.add("review-user-info-layout");
@@ -243,7 +243,7 @@ reviewImageColum.classList.add("user-page-review-colums2");
             const reviewImageUserImage = document.createElement("a");
             reviewImageUserImage.classList.add("review-user-image");
 
-            reviewImageUserImage.innerHTML = "<img src='${loginMember.profileImage}'>";
+            reviewImageUserImage.innerHTML = "<img src=''>";
 
             const reviewImageInfoLayout = document.createElement("div");
             reviewImageInfoLayout.classList.add("review-user-info-layout");
@@ -402,11 +402,10 @@ const aTagReview = document.getElementById("aTagReview");
 
 aTagReview.addEventListener("click", (e) => {
     $.ajax({
-        url : "/profile/MemberPage/Review",
+        url : "/profile/" + memberNo + "/Review",
         type : "GET",
         dataType : "JSON",
         success : (reviewList) => {
-            console.log("1111");
 
             const reviewListContainer = document.getElementById("reviewContainer");
             

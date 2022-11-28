@@ -41,7 +41,7 @@
         <!-- 회원 정보 페이지 검색창 하단 메뉴 시작 부분 -->
         <div class="temp-web">
             
-            
+        
             <!-- 회원 페이지 세부 내용들 시작 부분 중 스타일 -->
             <div class="user-page-content-style">
                 <!-- 
@@ -53,17 +53,17 @@
                         <div class="user-info-left-part">
                             <div class="user-container-image">
                                 <span class="user-info-image">
-                                    <img src="${review.profileImage}" alt="프로필 이미지">
+                                    <img src="${member.profileImage}" alt="프로필 이미지">
                                 </span>
                             </div>
                             <div class="user-nickname">
-                                ${review.memberNickname}
+                                ${member.memberNickname}
                             </div>
                             <div class="user-container-PFF">
                                 <div>
                                     포스팅
                                     <br>
-                                    <a href="#">${map.listCount}</a>
+                                    <a href="#">${map.memberNickname}</a>
                                 </div>
                                 <div>
                                     팔로워
@@ -77,26 +77,28 @@
                                 </div>
                             </div>
                         </div>
+                        <c:if test="${loginMember.memberNo == member.memberNo}">
+                            <!-- 본인 회원 프로필 메뉴 -->
+                            <div class="my-info-right-part">
+                                    <label for="image-input">프로필 사진 변경</label>
+                                    <input type="file" id="image-input" accept="image/*">
+                            </div>
+                        </c:if>
 
-                        <!-- 본인 회원 프로필 메뉴 -->
-                        <div class="my-info-right-part">
-                                <label for="image-input">프로필 사진 변경</label>
-                                <input type="file" id="image-input" accept="image/*">
-                        </div>
-
-
+                        <c:if test="${loginMember.memberNo != member.memberNo}">
                         <!-- 다른 회원 프로필 메뉴 -->
-                        <!-- <div class="user-info-right-part">
-                            <button class="follow-button">
-                                <i class="fa-regular fa-user"></i> 팔로우
-                            </button>
-                            <button class="comment-button">
-                                <i class="fa-regular fa-comments"></i>
-                            </button>
-                            <button class="vesides-button">
-                                <i class="fa-solid fa-ellipsis"></i>
-                            </button>
-                        </div> -->
+                            <div class="user-info-right-part">
+                                <button class="follow-button">
+                                    <i class="fa-regular fa-user"></i> 팔로우
+                                </button>
+                                <button class="comment-button">
+                                    <i class="fa-regular fa-comments"></i>
+                                </button>
+                                <button class="vesides-button">
+                                    <i class="fa-solid fa-ellipsis"></i>
+                                </button>
+                            </div>
+                        </c:if>
                     </div>
                 </div>
         
@@ -347,6 +349,7 @@
 
     <script>
         const reviewImage = "${map.reviewList[0].reviewImagePath}";
+        const memberNo = "${memberNo}";
     </script>
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" 
     integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" 
