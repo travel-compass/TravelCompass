@@ -24,6 +24,7 @@ public class LocationController {
 		List<Place> placeList = service.searchPlace(latitude, longitude, contentTypeId);
 		
 		return placeList;
+		
 	}
 	
 	@GetMapping("/aroundSearch")
