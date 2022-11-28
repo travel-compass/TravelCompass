@@ -56,7 +56,7 @@ public class LocationAPI {
 		}
 		br.close(); 				// 스트림객체 사용 후 자원 반환(APIConnection 반환)
 		
-		String str = response.toString();
+		System.out.printf("검색결과 : %s", response.toString());
 		
 		
 		placeList = Util.jsonToPlaceList(response.toString());

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import kh.team.travelcompass.location.model.service.LocationService;
 import kh.team.travelcompass.place.model.service.PlaceService;
 import kh.team.travelcompass.place.model.vo.Place;
 
@@ -20,6 +21,9 @@ public class PlaceController {
 
 	@Autowired
 	private PlaceService service;
+	
+	@Autowired
+	private LocationService lservice;
 	
 	
 	@GetMapping("/detail")
@@ -35,14 +39,20 @@ public class PlaceController {
 		// image
 		List<String> imageList =service.imageList(contentId,contentTypeId);
 		
+		// aroundPlace list
+		Map<String, List<Place>> aroundPlaceList=lservice.detailAroundSearch(mainPlace.getMapy(), mainPlace.getMapx(), contentTypeId);
+		
 		mainPlace.setImageList(imageList);
 		mainPlace.setRestdate(infoPlace.getRestdate());
 		mainPlace.setUsetime(infoPlace.getUsetime());
 		mainPlace.setTreatmenu(infoPlace.getTreatmenu());
 		
 		model.addAttribute("place", mainPlace);
+		model.addAttribute("aroundPlaceList",aroundPlaceList);
 		
 		System.out.println(mainPlace);
+		
+		System.out.println(aroundPlaceList);
 		
 		return "place/detailPlace"; 
 	}

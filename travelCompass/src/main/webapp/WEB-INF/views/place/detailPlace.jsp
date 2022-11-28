@@ -95,51 +95,52 @@
         <div class="around-container">
           <div class="around-list">
             <div>관광지
-              <li>
-                <div class="search-result-item">
-                  <div class="search-result-item-img">
-                    <a href="/detail/place?contentId=${place.contentid}&contentTypeId=${place.contenttypeid}">
-                      <img class="aitem-image" src="/the-bluest-fox-cursor.png.png" alt=""></a>
+              <c:forEach var="tourPlace" items="${aroundPlaceList.tourPlace}">
+                
+                  <div class="search-result-item">
+                    <div class="search-result-item-img">
+                      <a href="/place/detail/${tourPlace.contenttypeid}/${tourPlace.contentid}">
+                        <img class="aitem-image" src="${tourPlace.firstimage}" alt=""></a>
+                    </div>
+
+                    <div class="search-result-item-content">
+                      <div class="search-result-item-title">
+                        <span><a
+                            href="#">${tourPlace.title}</a></span>
+                      </div>
+
+                      <div class="search-result-item-grade">
+                        <span><a href="#<!--상세페이지-리뷰-->">
+                            <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
+                            <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
+                            <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
+                            <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
+                            <i class="fa-solid fa-circle-half-stroke" style="color: #00AA6C"></i>
+                          </a></span>
+                        <span><a href="#">267건의 리뷰</a></span>
+                      </div>
+
+                      <div class="search-result-item-dist">
+                        <span><a href="#">${tourPlace.dist}</a></span>
+                      </div>
+                    </div>
                   </div>
-
-                  <div class="search-result-item-content">
-                    <div class="search-result-item-title">
-                      <span><a
-                          href="/detail/place?contentId=${place.contentid}&contentTypeId=${place.contenttypeid}">${place.title}</a></span>
-                    </div>
-
-                    <div class="search-result-item-grade">
-                      <span><a href="#<!--상세페이지-리뷰-->">
-                          <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
-                          <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
-                          <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
-                          <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
-                          <i class="fa-solid fa-circle-half-stroke" style="color: #00AA6C"></i>
-                        </a></span>
-                      <span><a href="#">267건의 리뷰</a></span>
-                    </div>
-
-                    <div class="search-result-item-dist">
-                      <span><a href="#">1.5km dist</a></span>
-                    </div>
-                  </div>
-                </div>
-              </li>
+                 
+              </c:forEach>        
             </div>
 
             <!--  -->
-            <div>문화재
-              <li>
+            <div>문화
+              <c:forEach var="culturePlace" items="${aroundPlaceList.culturePlace}">
                 <div class="search-result-item">
                   <div class="search-result-item-img">
-                    <a href="/detail/place?contentId=${place.contentid}&contentTypeId=${place.contenttypeid}">
-                      <img class="aitem-image" src="/the-bluest-fox-cursor.png.png" alt=""></a>
+                    <a href="#">
+                      <img class="aitem-image" src="${culturePlace.firstimage}" alt=""></a>
                   </div>
 
                   <div class="search-result-item-content">
                     <div class="search-result-item-title">
-                      <span><a
-                          href="/detail/place?contentId=${place.contentid}&contentTypeId=${place.contenttypeid}">${place.title}</a></span>
+                      <span><a href="#">${culturePlace.title}</a></span>
                     </div>
 
                     <div class="search-result-item-grade">
@@ -154,28 +155,28 @@
                     </div>
 
                     <div class="search-result-item-dist">
-                      <span><a href="#">1.5km dist</a></span>
+                      <span><a href="#">${culturePlace.dist}</a></span>
                     </div>
                   </div>
                 </div>
-              </li>
+              </c:forEach>
             </div>
             <!--  -->
 
           </div>
           <div class="around-list">
             <div>음식점
-              <li>
+              <c:forEach var="foodPlace" items="${aroundPlaceList.foodPlace}">
                 <div class="search-result-item">
                   <div class="search-result-item-img">
-                    <a href="/detail/place?contentId=${place.contentid}&contentTypeId=${place.contenttypeid}">
-                      <img class="aitem-image" src="/the-bluest-fox-cursor.png.png" alt=""></a>
+                    <a href="#">
+                      <img class="aitem-image" src="${foodPlace.firstimage}"></a>
                   </div>
 
                   <div class="search-result-item-content">
                     <div class="search-result-item-title">
                       <span><a
-                          href="/detail/place?contentId=${place.contentid}&contentTypeId=${place.contenttypeid}">${place.title}</a></span>
+                          href="#">${foodPlace.title}</a></span>
                     </div>
 
                     <div class="search-result-item-grade">
@@ -186,28 +187,28 @@
                           <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
                           <i class="fa-solid fa-circle-half-stroke" style="color: #00AA6C"></i>
                         </a></span>
-                      <span><a href="#">{}</a></span>
+                      <span><a href="#"></a></span>
                     </div>
 
                     <div class="search-result-item-dist">
-                      <span><a href="#">1.5km dist</a></span>
+                      <span><a href="#">${foodPlace.dist}</a></span>
                     </div>
                   </div>
                 </div>
-              </li>
+              </c:forEach>
             </div>
             <div>레포츠
-              <li>
+              <c:forEach var="leisurePlace" items="${aroundPlaceList.leisurePlace}">
                 <div class="search-result-item">
                   <div class="search-result-item-img">
-                    <a href="/detail/place?contentId=${place.contentid}&contentTypeId=${place.contenttypeid}">
-                      <img class="aitem-image" src="/the-bluest-fox-cursor.png.png" alt=""></a>
+                    <a href="#">
+                      <img class="aitem-image" src="${leisurePlace.firstimage}" alt=""></a>
                   </div>
 
                   <div class="search-result-item-content">
                     <div class="search-result-item-title">
                       <span><a
-                          href="/detail/place?contentId=${place.contentid}&contentTypeId=${place.contenttypeid}">${place.title}</a></span>
+                          href="#">${leisurePlace.title}</a></span>
                     </div>
 
                     <div class="search-result-item-grade">
@@ -222,11 +223,11 @@
                     </div>
 
                     <div class="search-result-item-dist">
-                      <span><a href="#">1.5km dist</a></span>
+                      <span><a href="#">${leisurePlace.dist}</a></span>
                     </div>
                   </div>
                 </div>
-              </li>
+              </c:forEach>
             </div>
           </div>
         </div>

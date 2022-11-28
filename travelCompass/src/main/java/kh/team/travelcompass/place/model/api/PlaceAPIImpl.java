@@ -21,7 +21,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import kh.team.travelcompass.common.Util;
 import kh.team.travelcompass.place.model.vo.Place;
-import kh.team.travelcompass.search.model.vo.SearchPlace;
 
 
 @Component
