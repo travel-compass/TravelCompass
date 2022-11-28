@@ -1,5 +1,9 @@
 package kh.team.travelcompass.search.model.vo;
 
+import java.util.List;
+
+import kh.team.travelcompass.place.model.vo.Place;
+
 public class Pagination {
 
 	   private int pageNo;            // 현재 페이지 번호 currentPage -> pageNo
@@ -37,7 +41,7 @@ public class Pagination {
 	   
 	   
 	   
-	   public int getPageNo() {
+	public int getPageNo() {
 		return pageNo;
 	}
 

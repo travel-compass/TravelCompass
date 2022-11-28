@@ -21,7 +21,7 @@
             <div class="search">
                 
                     <div class="search-input-form">
-                        <form action="/place/searchPlaceKeyword" class="search-form" >
+                        <form action="/place/searchPlaceKeyword" class="search-form" id="searchForm">
                             <div class="search-input-box">
                                 <button id="search-btn" class="fa-solid fa-magnifying-glass"></button>
                                 <input id="search-input" type="search" placeholder="어디로 가시나요?" name="keyword" autocomplete="off">
@@ -30,7 +30,7 @@
                             <div class="search-keyword-area">
                                 <div class="search-option-area">
                                     
-                                    <input type="radio" name="contentTypeId" value="12" id="12">
+                                    <input type="radio" name="contentTypeId" value="12" id="12" checked>
                                     <label for="12">관광지</label>
                                     
                                     <input type="radio" name="contentTypeId" value="14" id="14">
@@ -169,6 +169,24 @@
                                     <label for="searchType4">음식점</label>
                                 </li>
                             </c:when>
+                            <c:otherwise >
+                                <li>
+                                    <input type="radio" name="contentTypeId" value="12" id="searchType1" checked>
+                                    <label for="searchType1">관광지</label>
+                                </li>
+                                <li>
+                                    <input type="radio" name="contentTypeId" value="14" id="searchType2">
+                                    <label for="searchType2">문화시설</label>
+                                </li>
+                                <li>
+                                    <input type="radio" name="contentTypeId" value="28" id="searchType3">
+                                    <label for="searchType3">레포츠</label>
+                                </li>
+                                <li>
+                                    <input type="radio" name="contentTypeId" value="39" id="searchType4">
+                                    <label for="searchType4">음식점</label>
+                                </li>
+                            </c:otherwise>
                         </c:choose>
                         </ul>
                     </div>
