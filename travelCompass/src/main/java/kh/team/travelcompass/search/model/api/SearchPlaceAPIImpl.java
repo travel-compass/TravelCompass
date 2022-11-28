@@ -3,6 +3,7 @@ package kh.team.travelcompass.search.model.api;
 
 import java.io.BufferedReader;
 
+
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -19,7 +20,8 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import kh.team.travelcompass.search.model.vo.SearchPlace;
+import kh.team.travelcompass.common.Util;
+import kh.team.travelcompass.place.model.vo.Place;
 
 
 @Component
@@ -46,8 +48,8 @@ public class SearchPlaceAPIImpl implements SearchPlaceAPI{
 	 *좌표 기반 검색(위치기반관광정보조회)
 	 */
 	@Override
-	public List<SearchPlace> nearByPlace(Map<String, String> paramMap) throws Exception{
-		List<SearchPlace> placeList = new ArrayList<>();
+	public List<Place> nearByPlace(Map<String, String> paramMap) throws Exception{
+		List<Place> placeList = new ArrayList<>();
 
 		System.out.println("API 호출");
 		String endPoint = "/locationBasedList?";
@@ -82,7 +84,7 @@ public class SearchPlaceAPIImpl implements SearchPlaceAPI{
 
 		// JSONArray String -> List
 		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		placeList = objectMapper.readValue(items, new TypeReference<List<SearchPlace>>() {});
+		placeList = objectMapper.readValue(items, new TypeReference<List<Place>>() {});
 		System.out.println(placeList);
 
 		return placeList;
@@ -94,8 +96,8 @@ public class SearchPlaceAPIImpl implements SearchPlaceAPI{
 	 *키워드 검색(키워드검색조회)
 	 */
 	@Override
-	public List<SearchPlace> searchPlaceKeyword(Map<String, String> paramMap) throws Exception {
-		List<SearchPlace> placeList = new ArrayList<>();
+	public List<Place> searchPlaceKeyword(Map<String, String> paramMap) throws Exception {
+		List<Place> placeList = new ArrayList<>();
 
 		System.out.println("API 호출");
 		String endPoint = "/searchKeyword?";
@@ -117,22 +119,8 @@ public class SearchPlaceAPIImpl implements SearchPlaceAPI{
 			response.append(readline);
 		}
 		br.close();
-		System.out.println(response.toString()); //shift+End로 복사 -> Online JSON Viewer로 확인
-		JSONObject json = new JSONObject(response.toString());
-		//System.out.println(response.toString());
-		String items = json.getJSONObject("response").getJSONObject("body").getJSONObject("items").getJSONArray("item").toString();
-
-		//System.out.println(items);//items 받아오나 확인
-
-		// ObjectMapper 객체 생성
-		ObjectMapper objectMapper = new ObjectMapper();
-
-		// JSONArray String -> List
-		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		placeList = objectMapper.readValue(items, new TypeReference<List<SearchPlace>>() {});
-		
-		System.out.println("placeList = "+placeList); //콘솔창으로 확인
-		
+		System.out.println(response.toString());
+		placeList=Util.jsonToPlaceList(response.toString());
 		
 		return placeList;
 	}

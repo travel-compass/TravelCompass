@@ -21,7 +21,7 @@
             <div class="search">
                 
                     <div class="search-input-form">
-                        <form action="/place/searchPlaceKeyword" class="search-form" >
+                        <form action="/search" class="search-form" id="searchForm">
                             <div class="search-input-box">
                                 <button id="search-btn" class="fa-solid fa-magnifying-glass"></button>
                                 <input id="search-input" type="search" placeholder="어디로 가시나요?" name="keyword" autocomplete="off">
@@ -29,6 +29,7 @@
 
                             <div class="search-keyword-area">
                                 <div class="search-option-area">
+                                    
                                     <input type="radio" name="contentTypeId" value="12" id="12" checked>
                                     <label for="12">관광지</label>
                                     
@@ -95,14 +96,98 @@
                     
                     <div class="search-filter">
                         <ul>
-                            <li><input type="radio" name="contentTypeId" value="12" id="searchType1" checked>
-                                <label for="searchType1">관광지</label></li>
-                            <li><input type="radio" name="contentTypeId" value="14" id="searchType2">
-                                <label for="searchType2">문화시설</label></li>
-                            <li><input type="radio" name="contentTypeId" value="28" id="searchType3">
-                                <label for="searchType3">레포츠</label></li>
-                            <li><input type="radio" name="contentTypeId" value="39" id="searchType4">
-                                <label for="searchType4">음식점</label></li>
+                        <c:choose>
+                            <c:when test="${param.contentTypeId == 12}">
+                            <li>
+                                <input type="radio" name="contentTypeId" value="12" id="searchType1" checked>
+                                <label for="searchType1">관광지</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="contentTypeId" value="14" id="searchType2">
+                                <label for="searchType2">문화시설</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="contentTypeId" value="28" id="searchType3">
+                                <label for="searchType3">레포츠</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="contentTypeId" value="39" id="searchType4">
+                                <label for="searchType4">음식점</label>
+                            </li>
+                            </c:when>
+                            <c:when test="${param.contentTypeId == 14}">
+                            <li>
+                                <input type="radio" name="contentTypeId" value="12" id="searchType1">
+                                <label for="searchType1">관광지</label>
+                            </li>    
+                            <li>
+                                <input type="radio" name="contentTypeId" value="14" id="searchType2" checked>
+                                <label for="searchType2">문화시설</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="contentTypeId" value="28" id="searchType3">
+                                <label for="searchType3">레포츠</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="contentTypeId" value="39" id="searchType4">
+                                <label for="searchType4">음식점</label>
+                            </li>
+                            </c:when>
+                            <c:when test="${param.contentTypeId == 28}">
+                                <li>
+                                    <input type="radio" name="contentTypeId" value="12" id="searchType1">
+                                    <label for="searchType1">관광지</label>
+                                </li>    
+                                <li>
+                                    <input type="radio" name="contentTypeId" value="14" id="searchType2">
+                                    <label for="searchType2">문화시설</label>
+                                </li>
+                                <li>
+                                    <input type="radio" name="contentTypeId" value="28" id="searchType3"checked>
+                                    <label for="searchType3">레포츠</label>
+                                </li>
+                                <li>
+                                    <input type="radio" name="contentTypeId" value="39" id="searchType4">
+                                    <label for="searchType4">음식점</label>
+                                </li>
+                            </c:when>
+                            <c:when test="${param.contentTypeId == 39}">
+                                <li>
+                                    <input type="radio" name="contentTypeId" value="12" id="searchType1">
+                                    <label for="searchType1">관광지</label>
+                                </li>    
+                                <li>
+                                    <input type="radio" name="contentTypeId" value="14" id="searchType2">
+                                    <label for="searchType2">문화시설</label>
+                                </li>
+                                <li>
+                                    <input type="radio" name="contentTypeId" value="28" id="searchType3">
+                                    <label for="searchType3">레포츠</label>
+                                </li>
+                                <li>
+                                    <input type="radio" name="contentTypeId" value="39" id="searchType4" checked>
+                                    <label for="searchType4">음식점</label>
+                                </li>
+                            </c:when>
+                            <c:otherwise >
+                                <li>
+                                    <input type="radio" name="contentTypeId" value="12" id="searchType1" checked>
+                                    <label for="searchType1">관광지</label>
+                                </li>
+                                <li>
+                                    <input type="radio" name="contentTypeId" value="14" id="searchType2">
+                                    <label for="searchType2">문화시설</label>
+                                </li>
+                                <li>
+                                    <input type="radio" name="contentTypeId" value="28" id="searchType3">
+                                    <label for="searchType3">레포츠</label>
+                                </li>
+                                <li>
+                                    <input type="radio" name="contentTypeId" value="39" id="searchType4">
+                                    <label for="searchType4">음식점</label>
+                                </li>
+                            </c:otherwise>
+                        </c:choose>
                         </ul>
                     </div>
 		        </div>
@@ -110,24 +195,26 @@
             <div class="container-main-wrap">
                 <div class="container-main">
                     <section class="search-result">
+                        <!--검색 결과가 없을 때 -->
+                        <c:choose>
+                            <c:when test="${empty placeList}">
+                                <div class="search-result-title">
+                                    <span id="title-match">"<span id="title-query">${param.keyword}</span>" 과(와) 일치하는 검색결과가 없습니다 </span>
+                                </div>
+                            </c:when>
+                        <c:otherwise>
                         <div class="search-result-title">
                             <span id="title-match">"<span id="title-query">${param.keyword}</span>" 과(와) 일치하는 검색결과 </span>
                         </div>
+                        </c:otherwise>
+                        </c:choose>
                         <div class="search-result-list">
                             
                             <ul class="search-result-list">
-                                <c:choose>
+                                <!-- <c:choose>
                                     <c:when test="${empty placeList}">
-                                        <li class="search-result-item">
-                                            <div class="search-result-item-content">
-                                                <div class="search-result-item-title">
-                                                    <span>검색 결과가 없습니다.</span>
-                                                </div>
-                                            </div>
-                                        </li>
                                     </c:when>
-                                    <c:otherwise>
-                                        
+                                    <c:otherwise> -->
                                         <c:forEach items="${placeList}" var="place">
                                             <li>
                                                 <div class="search-result-item">
@@ -160,18 +247,17 @@
                                                         </div>
                                                             
                                                         <div class="search-result-item-review">
-                                                            <span><a href="#<!--상세페이지-리뷰-->">"서울사당에서 지하철타면 15분이면 도착하는 과천에 자리잡은 서울대공원은 놀이공원,동물원,식물원등이 있고 호수를 가로지르는 리프트를 타거나 셔틀이 있어서 편하게 이용할수 있고 입장료또한 인터넷으로 예매하면 아주 저렴하게 이용할수 있어서 데이트를 하거나 휴식을 하러가기 아주 좋은곳이고 남녀노소 가족 누구나가 이용하기 좋은 곳이네요
+                                                            <a href="#<!--상세페이지-리뷰-->">"서울사당에서 지하철타면 15분이면 도착하는 과천에 자리잡은 서울대공원은 놀이공원,동물원,식물원등이 있고 호수를 가로지르는 리프트를 타거나 셔틀이 있어서 편하게 이용할수 있고 입장료또한 인터넷으로 예매하면 아주 저렴하게 이용할수 있어서 데이트를 하거나 휴식을 하러가기 아주 좋은곳이고 남녀노소 가족 누구나가 이용하기 좋은 곳이네요
                                                                 "</a>
-                                                            </span>
+                                                            
                                                         </div>
                                                     
                                                     </div>
-                                                    
                                                 </div>
                                             </li> 
                                         </c:forEach>
-                                    </c:otherwise>
-                                </c:choose>
+                                    <!-- </c:otherwise>
+                                </c:choose> -->
                             </ul>
                         </div>
                         <div class="show-more">

@@ -194,11 +194,12 @@ main > .search-area {
 }
 .resent-keyword-list > .item {
     margin-right: 10px;
+    max-width: 130px;
 }
 
 .resent-keyword-list > .item > a {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     height: 100%;
     border: 2px solid rgb(224, 224, 224);
@@ -209,6 +210,13 @@ main > .search-area {
 .resent-keyword-list > .item > a > i {
     margin-right: 10px;
 }
+.resent-keyword-list > .item > a > span {
+    max-width: 100px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
 .resent-keyword-list > .item > a:hover {
     background-color: black;
     color: white;

@@ -40,14 +40,17 @@ public class Util {
 		List<Place> placeList = null;
 
 		// 파싱
-
-		String items = new JSONObject(json).getJSONObject("response").getJSONObject("body").getJSONObject("items")
-				.getJSONArray("item").toString();
-		if (!items.equals("")) {
+		
+		System.out.println(json);
+		String items = new JSONObject(json).getJSONObject("response").getJSONObject("body").get("items").toString();
+//		System.out.println("아래는 items");
+//		System.out.println(items.toString());
+		
+		if(!items.equals("")) {
+			String item = new JSONObject(items).getJSONArray("item").toString();
 			ObjectMapper om = new ObjectMapper();
 			om.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-			placeList = om.readValue(items, new TypeReference<List<Place>>() {
-			});
+			placeList = om.readValue(item, new TypeReference<List<Place>>() {});			
 		}
 		System.out.println(placeList.get(0));
 		return placeList.get(0);
@@ -55,14 +58,17 @@ public class Util {
 
 	public static List<Place> jsonToPlaceList(String json) throws Exception {
 		List<Place> placeList = null;
-
-		String items = new JSONObject(json).getJSONObject("response").getJSONObject("body").getJSONObject("items")
-				.getJSONArray("item").toString();
-		if (!items.equals("")) {
+		
+//		System.out.println(json);
+		String items = new JSONObject(json).getJSONObject("response").getJSONObject("body").get("items").toString();
+//		System.out.println("아래는 items");
+//		System.out.println(items.toString());
+		
+		if(!items.equals("")) {
+			String item = new JSONObject(items).getJSONArray("item").toString();
 			ObjectMapper om = new ObjectMapper();
 			om.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-			placeList = om.readValue(items, new TypeReference<List<Place>>() {
-			});
+			placeList = om.readValue(item, new TypeReference<List<Place>>() {});			
 		}
 		return placeList;
 	}

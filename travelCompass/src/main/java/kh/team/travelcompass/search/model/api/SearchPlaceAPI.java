@@ -3,9 +3,10 @@ package kh.team.travelcompass.search.model.api;
 
 import java.util.List;
 
+
 import java.util.Map;
 
-import kh.team.travelcompass.search.model.vo.SearchPlace;
+import kh.team.travelcompass.place.model.vo.Place;
 
 public interface SearchPlaceAPI {
 
@@ -13,7 +14,7 @@ public interface SearchPlaceAPI {
 	 *  api 호출 후 item 부분 파싱해서 리턴
 	 * @return placeList
 	 */
-	public List<SearchPlace> nearByPlace(Map<String, String> paramMap) throws Exception;
+	public List<Place> nearByPlace(Map<String, String> paramMap) throws Exception;
 
 	
 	
@@ -21,7 +22,7 @@ public interface SearchPlaceAPI {
 	 *  api 호출 후 item 부분 파싱해서 리턴
 	 * @return placeList
 	 */
-	public List<SearchPlace> searchPlaceKeyword(Map<String, String> paramMap) throws Exception;
+	public List<Place> searchPlaceKeyword(Map<String, String> paramMap) throws Exception;
 
 }
 
