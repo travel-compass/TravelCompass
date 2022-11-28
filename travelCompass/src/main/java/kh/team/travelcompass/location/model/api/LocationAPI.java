@@ -5,16 +5,10 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.json.JSONObject;
 import org.springframework.stereotype.Component;
-
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import kh.team.travelcompass.common.Util;
 import kh.team.travelcompass.place.model.vo.Place;
@@ -37,7 +31,7 @@ public class LocationAPI {
 	 */
 	public List<Place> serachPlace(Map<String, String> paramMap) throws Exception {
 		// 결과 반환 위한 변수
-		List<Place> placeList = new ArrayList<>();
+		List<Place> placeList = null;
 		
 		
 		String param = Util.createQueryString(paramMap);
@@ -65,15 +59,11 @@ public class LocationAPI {
 		String str = response.toString();
 		
 		
-		// 파싱
-		String items = new JSONObject(response.toString()).getJSONObject("response").getJSONObject("body").getJSONObject("items").getJSONArray("item").toString();
-		ObjectMapper om = new ObjectMapper();
-		om.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		placeList = om.readValue(items, new TypeReference<List<Place>>() {});
+		placeList = Util.jsonToPlaceList(response.toString());
+		
 		
 		System.out.println(placeList);
 		
 		return placeList;
 	}
-	
 }

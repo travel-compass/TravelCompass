@@ -40,5 +40,37 @@ public class LocationServiceImpl implements LocationService {
 		
 		return placeList;
 	}
-	
+
+	@Override
+	public Map<String, List<Place>> detailAroundSearch(String latitude, String longitude, String contentTypeId) throws Exception{
+		Map<String, List<Place>> placeListHash = new HashMap<>(); 
+		Map<String, String> paramMap = new HashMap<>();
+		
+		paramMap.put("mapX", longitude);
+		paramMap.put("mapY", latitude);
+		paramMap.put("radius", "3000");
+		paramMap.put("numOfRows", "3");
+		
+		// 관광지		
+		paramMap.put("contentTypeId", "12");
+		List<Place> tourPlace = api.serachPlace(paramMap);
+		
+		// 문화
+		paramMap.put("contentTypeId", "14");
+		List<Place> culturePlace = api.serachPlace(paramMap);
+		
+		// 레포츠
+		paramMap.put("contentTypeId", "28");
+		List<Place> leisurePlace = api.serachPlace(paramMap);
+		
+		// 음식점
+		paramMap.put("contentTypeId", "39");
+		List<Place> foodPlace = api.serachPlace(paramMap);
+		
+		placeListHash.put("tourPlace", tourPlace);
+		placeListHash.put("culturePlace", culturePlace);
+		placeListHash.put("leisurePlace", leisurePlace);
+		placeListHash.put("foodPlace", foodPlace);
+		return placeListHash;
+	}
 }

@@ -16,17 +16,17 @@
     <title>Travelcompass</title>
     <script src="https://kit.fontawesome.com/3fe30a9b47.js" crossorigin="anonymous"></script>
     <script src="/resources/js/common/jQuery-core.js"></script>
-    <script src="/resources/js/main-place.js"></script>
 </head>
 <body>
     <!-- header:include -->
 	<jsp:include page="/WEB-INF/views/inc/header.jsp"></jsp:include>
     <main>
-        <div class="search-area">
-            <form action="#" class="search-form">
+        <div class="search-area" id="searchArea">
+        <script src="/resources/js/main-place.js"></script>
+            <%-- <form action="/search" class="search-form" id="searchForm">
                 <div class="search-input-box">
                     <button id="search-btn" class="fa-solid fa-magnifying-glass"></button>
-                    <input id="search-input" type="search" placeholder="어디로 가시나요?" name="searchKeyword" autocomplete="off">
+                    <input id="search-input" type="search" placeholder="어디로 가시나요?" name="keyword" autocomplete="off">
                 </div>
 
                 <div class="search-keyword-area">
@@ -64,7 +64,7 @@
                             <option value="39">제주도</option>
                         </select>
                     </div>
-                    <a href="#">
+                    <a href="/location/aroundSearch?" id="aroundSearch">
                         <i class="fa-solid fa-location-arrow"></i>
                         <span>주변</span>
                     </a>
@@ -92,8 +92,10 @@
                     </ol>
                 
                 </div>
-            </form>
-            
+            </form> --%>
+            <%-- search-form.jsp include --%>
+            <jsp:include page="/WEB-INF/views/inc/search-form.jsp"></jsp:include>
+
             <div class="swiper-container">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide"><img src="/resources/images/main-image1.png" alt="메인 이미지"></div>
@@ -104,13 +106,11 @@
                 </div>
             </div>
 
-
-            
         </div>
         
-        <div class="resent-keyword-area">
+        <%-- <div class="resent-keyword-area">
             <span class="resent-keyword-title">최근 검색어</span>
-            <ul class="resent-keyword-list">
+            <ul class="resent-keyword-list" id="resentKeywordList">
                 <li class="item"><a href="#"><i class="fa-solid fa-magnifying-glass"></i>라스베이거스</a>
 
                 </li>
@@ -118,7 +118,7 @@
                 <li class="item"><a href="#"><i class="fa-solid fa-magnifying-glass"></i>동대문</a></li>
                 <li class="item"><a href="#"><i class="fa-solid fa-magnifying-glass"></i>부산 해운대</a></li>
             </ul>
-        </div>
+        </div> --%>
         <section class="place-list-area">
             <div class="place-area">
                 <span class="place-area-title">최근에 본 장소</span>
