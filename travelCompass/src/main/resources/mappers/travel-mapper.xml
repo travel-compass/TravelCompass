@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="travelMapper">
+	<resultMap type="Travel" id="travel_rm">
+		<id property="travelNo" column="TRAVEL_NO"/>
+		<result property="travelTitle" column="TRAVEL_TITLE"/>
+		<result property="travelContent" column="TRAVEL_CONTENT"/>
+		<result property="memberNo" column="MEMBER_NO"/>
+		<result property="memberNickname" column="MEMBER_NICKNAME"/>
+		<result property="profileImage" column="PROFILE_IMAGE"/>
+		<result property="travelPlaceCount" column="TRAVEL_PLACE_COUNT"/>
+		<result property="travelDate" column="TRAVEL_DATE"/>
+		<result property="privateFlag" column="PRIVATE_FL"/>
+		<result property="travelFirstImage" column="TRAVEL_FIRST_IMAGE"/>
+	</resultMap>	
+	
+	
+	<select id="selectTravelList" parameterType="_int" resultMap="travel_rm">
+		SELECT T.TRAVEL_NO, T.TRAVEL_TITLE, T.PRIVATE_FL,
+			TO_CHAR(T.TRAVEL_DATE, 'YYYY"년" MM"월" DD"일"') TRAVEL_DATE,
+			(SELECT PS.FIRST_IMAGE FROM "PLACE_SCRAP" PS
+				WHERE PS.CONTENT_ID = (SELECT TL.CONTENT_ID FROM "TRAVEL_LIST" TL WHERE TRAVEL_LIST_ORDER = 0 AND TL.TRAVEL_NO = T.TRAVEL_NO)) FIRST_IMAGE,
+			(SELECT COUNT(*) FROM "TRAVEL_LIST" TL WHERE TL.TRAVEL_NO = T.TRAVEL_NO) TRAVEL_PLACE_COUNT,
+			(SELECT MEMBER_NICKNAME FROM "MEMBER" M WHERE M.MEMBER_NO = T.MEMBER_NO) MEMBER_NICKNAME,
+			(SELECT PROFILE_IMAGE FROM "MEMBER" M WHERE M.MEMBER_NO = T.MEMBER_NO) PROFILE_IMAGE
+		FROM TRAVEL T
+		WHERE MEMBER_NO = #{memberNo}
+		AND T.TRAVEL_DEL_FL = 'N'
+	</select>
+	
+	<insert id="insertTravel">
+		
+	</insert>
+</mapper>
+
+
+

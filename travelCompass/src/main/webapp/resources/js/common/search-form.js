@@ -165,11 +165,6 @@ function RecentPlace(title, url, contentId, contentTypeId) {
 }
 
 function addRecentViewPlace(title, url, contentId, contentTypeId) {
-    console.log("Hello~~");
-    console.log("Hello~~");
-    console.log("Hello~~");
-    console.log("Hello~~");
-    console.log("Hello~~");
     let recentPlace = localStorage.getItem("recentPlace");
     let recentPlaceArr;
     if (recentPlace == null) {          // 최근 본 장소가 한개도 없다면
