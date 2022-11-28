@@ -23,10 +23,10 @@
 	<jsp:include page="/WEB-INF/views/inc/header.jsp"></jsp:include>
     <main>
         <div class="search-area">
-            <form action="#" class="search-form">
+            <form action="/place/searchPlaceKeyword" class="search-form">
                 <div class="search-input-box">
                     <button id="search-btn" class="fa-solid fa-magnifying-glass"></button>
-                    <input id="search-input" type="search" placeholder="어디로 가시나요?" name="searchKeyword" autocomplete="off">
+                    <input id="search-input" type="search" placeholder="어디로 가시나요?" name="keyword" autocomplete="off">
                 </div>
 
                 <div class="search-keyword-area">
@@ -64,7 +64,7 @@
                             <option value="39">제주도</option>
                         </select>
                     </div>
-                    <a href="#">
+                    <a href="/location/aroundSearch?" id="aroundSearch">
                         <i class="fa-solid fa-location-arrow"></i>
                         <span>주변</span>
                     </a>
