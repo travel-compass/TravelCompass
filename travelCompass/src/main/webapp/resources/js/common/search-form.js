@@ -116,26 +116,72 @@ document.addEventListener("DOMContentLoaded", ()=>{
             return;
         }
 
-        let resentKeyword = localStorage.getItem("resentKeyword");
-        if(resentKeyword == null) {         // 저장된 최근검색어가 존재하지 않으면ㄴ
-            resentKeywordArr = [];          // 최근검색어 객체배열 생성
-            resentKeywordArr.push(new ResentKeyword(       // 검색어 추가
-                keywordInput.value.trim(),
-                document.querySelector("input[name='contentTypeId']:checked").value,
-                document.getElementById("areaCode").value
-            ));
-            localStorage.setItem("resentKeyword", JSON.stringify(resentKeywordArr));
+        // let recentKeyword = localStorage.getItem("recentKeyword");
+        // if(recentKeyword == null) {         // 저장된 최근검색어가 존재하지 않으면ㄴ
+        //     const recentKeywordArr = [];          // 최근검색어 객체배열 생성
+        //     recentKeywordArr.push(new ResentKeyword(       // 검색어 추가
+        //         keywordInput.value.trim(),
+        //         document.querySelector("input[name='contentTypeId']:checked").value,
+        //         document.getElementById("areaCode").value
+        //     ));
+        //     localStorage.setItem("recentKeyword", JSON.stringify(recentKeywordArr));
+        // } else {                            // 저장된 최근검색어가 존재하면       
+        //     recentKeywordArr = JSON.parse(recentKeyword);   // json -> 객체배열 파싱
+        //     if(recentKeywordArr.length >= 10) {             // 저장된 최근검색어가 10개보다 많다면
+        //         recentKeywordArr.shift();                   // 맨 앞에(0번 인덱스)항목 제거
+        //     }
+        //     recentKeywordArr.push(new ResentKeyword(       // 검색어 추가
+        //             keywordInput.value.trim(),
+        //             document.querySelector("input[name='contentTypeId']:checked").value,
+        //             document.getElementById("areaCode").value
+        //     ));
+        //     localStorage.setItem("recentKeyword", JSON.stringify(recentKeywordArr));
+        // }
+        let recentKeyword = localStorage.getItem("recentKeyword");
+        let recentKeywordArr;
+        if(recentKeyword == null) {         // 저장된 최근검색어가 존재하지 않으면ㄴ
+            recentKeywordArr = [];          // 최근검색어 객체배열 생성
+            
         } else {                            // 저장된 최근검색어가 존재하면       
-            resentKeywordArr = JSON.parse(resentKeyword);   // json -> 객체배열 파싱
-            if(resentKeywordArr.length >= 10) {             // 저장된 최근검색어가 10개보다 많다면
-                resentKeywordArr.shift();                   // 맨 앞에(0번 인덱스)항목 제거
+            recentKeywordArr = JSON.parse(recentKeyword);   // json -> 객체배열 파싱
+            if(recentKeywordArr.length >= 10) {             // 저장된 최근검색어가 10개보다 많다면
+                recentKeywordArr.shift();                   // 맨 앞에(0번 인덱스)항목 제거
             }
-            resentKeywordArr.push(new ResentKeyword(       // 검색어 추가
-                    keywordInput.value.trim(),
-                    document.querySelector("input[name='contentTypeId']:checked").value,
-                    document.getElementById("areaCode").value
-            ));
-            localStorage.setItem("resentKeyword", JSON.stringify(resentKeywordArr));
         }
+        recentKeywordArr.push(new ResentKeyword(       // 검색어 추가
+            keywordInput.value.trim(),
+            document.querySelector("input[name='contentTypeId']:checked").value,
+            document.getElementById("areaCode").value
+        ));
+        localStorage.setItem("recentKeyword", JSON.stringify(recentKeywordArr));
     });
 });
+
+function RecentPlace(title, url, contentId, contentTypeId) {
+    this.title = title;
+    this.url = url;
+    this.contentId = contentId;
+    this.contentTypeId = contentTypeId;
+}
+
+function addRecentViewPlace(title, url, contentId, contentTypeId) {
+    console.log("Hello~~");
+    console.log("Hello~~");
+    console.log("Hello~~");
+    console.log("Hello~~");
+    console.log("Hello~~");
+    let recentPlace = localStorage.getItem("recentPlace");
+    let recentPlaceArr;
+    if (recentPlace == null) {          // 최근 본 장소가 한개도 없다면
+        recentPlaceArr = [];
+    } else {                            // 있다면
+        recentPlaceArr = JSON.parse(recentPlace);
+        if(recentPlaceArr.length >= 10) {
+            recentPlaceArr.shift();
+        }
+    }
+    recentPlaceArr.push(new RecentPlace(title, url, contentId, contentTypeId));
+    localStorage.setItem("recentPlace", JSON.stringify(recentPlaceArr));
+
+    return true;
+}
