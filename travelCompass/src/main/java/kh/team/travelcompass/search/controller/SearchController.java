@@ -65,6 +65,9 @@ public class SearchController {
 
 		return "search/searchpage";
 	}
+	
+
+	
 }
 
 
