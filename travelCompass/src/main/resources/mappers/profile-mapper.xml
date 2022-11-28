@@ -4,7 +4,7 @@
 
 	
 	<!-- review resultMap -->
-	  <resultMap type="HSHReview" id="review_rm">
+	  <resultMap type="Review" id="review_rm">
 		<id property="reviewNo" column="REVIEW_NO"/>
 		<result property="rating" column="RATING"/>
 		<result property="reviewTitle" column="REVIEW_TITLE"/>
@@ -17,19 +17,16 @@
 		<result property="profileImage" column="PROFILE_IMAGE"/>
 		<result property="memberNickname" column="MEMBER_NICKNAME"/>
 		
-		<!-- 
-		<collection property="imageList" javaType="java.util.ArrayList"
-		ofType="HSHReviewImage" select="selectReviewList" column="MEMBER_NO"/>
+		 
+		<collection property="reviewImgList" javaType="java.util.ArrayList"
+		ofType="ReviewImage" select="selectReviewImageList" column="REVIEW_NO"/>
 		
-		<collection property="memberList" javaType="java.util.ArrayList"
-		ofType="Member" select="selectReviewList" column="MEMBER_NO"/>
-		 -->
 	</resultMap>
 	
 	
 	
 	<!--reviewImgae resultMap-->
-	<resultMap type="HSHReviewImage" id="reviewImage_rm">
+	<resultMap type="ReviewImage" id="reviewImage_rm">
 		<id property="reviewImageNo" column="REVIEW_IMAGE_NO"/>
 		<result property="reivewNo" column="REVIEW_NO"/>
 		<result property="reviewImagePath" column="REVIEW_IMAGE_PATH"/>
@@ -45,14 +42,21 @@
 		WHERE REVIEW_FL = 'N'
 	</select>
 	
-	<select id="selectReviewList" resultMap="review_rm">
-		SELECT REVIEW_NO, REVIEW_TITLE, REVIEW_CONTENT, TO_CHAR(REVIEW_DATE, 'YYYY"년" MM"월"') REVIEW_DATE,
-				CONTENT_ID, FIRST_IMAGE, MEMBER_NO, PROFILE_IMAGE, MEMBER_NICKNAME, REVIEW_IMAGE_PATH
+	<select id="ReviewSelectList" resultMap="review_rm">
+		SELECT REVIEW_NO, REVIEW_TITLE, REVIEW_CONTENT, TO_CHAR(REVIEW_DATE, 'YYYY"년" MM"월"') REVIEW_DATE, 
+			CONTENT_ID,	FIRST_IMAGE, MEMBER_NO, PROFILE_IMAGE, MEMBER_NICKNAME
 		FROM REVIEW
 		LEFT JOIN "MEMBER" USING(MEMBER_NO)
-		LEFT JOIN REVIEW_IMAGE USING(REVIEW_NO)
 		WHERE REVIEW_FL = 'N'
+		AND MEMBER_NO = 1
 		ORDER BY REVIEW_NO
+	</select>
+	
+	<!-- 특정 게시글의 이미지 목록 조회 -->
+	<select id="selectReviewImageList" resultMap="reviewImage_rm">
+		SELECT * FROM REVIEW_IMAGE
+		WHERE REVIEW_NO = 1
+		ORDER BY REVIEW_IMAGE_NO
 	</select>
 	
 </mapper>

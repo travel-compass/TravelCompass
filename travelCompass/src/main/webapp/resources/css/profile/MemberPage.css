@@ -179,7 +179,7 @@ main {
     
 }
 
-.user-page-content-bottom-layout a{
+.user-page-content-bottom-layout span{
     padding: 0 12px;
     height: 100%;
     font-size: 14px;
@@ -188,9 +188,13 @@ main {
     align-items: center;
 }
 
-.user-page-content-bottom-layout a:focus-within{
+.user-page-content-bottom-layout span:focus-within{
     font-weight: bold;
     border-bottom: 2px solid #009f5e;
+}
+
+.user-page-content-bottom-layout span:hover{
+    cursor: pointer;
 }
 
 .user-page-review-colums-style{
@@ -258,6 +262,10 @@ main {
 .review-bottom-menu-style div, .review-navi-left div, 
 .review-navi-right i{
     cursor: pointer;
+}
+
+.review-navi-right{
+    margin-top: 5px;
 }
 
 .user-page-review-header-layout img{
@@ -565,4 +573,10 @@ animation-duration: 1.5s;
     margin-right: 10px;
     font-size: 20px;
     color: gray;
+}
+
+/* footer 화면 설정 (하단 공백부분 제거) */
+footer{
+    justify-content: flex-end;
+    margin: 0;
 }

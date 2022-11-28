@@ -53,11 +53,11 @@
                         <div class="user-info-left-part">
                             <div class="user-container-image">
                                 <span class="user-info-image">
-                                    <img src="${map.reviewList[0].profileImage}" alt="프로필 이미지">
+                                    <img src="${review.profileImage}" alt="프로필 이미지">
                                 </span>
                             </div>
                             <div class="user-nickname">
-                                ${reviewList.memberNickname}
+                                ${review.memberNickname}
                             </div>
                             <div class="user-container-PFF">
                                 <div>
@@ -103,11 +103,11 @@
                 <!-- 회원 페이지 세부 내용 하단 메뉴 시작 부분 -->
                 <div class="user-page-content-bottom-style">
                     <div class="user-page-content-bottom-layout">
-                        <a href="/profile/MemberPage/Feed">활동 피드</a>
-                        <a href="/profile/MemberPage/Review">리뷰</a>
-                        <a href="/profile/MemberPage/Image">사진</a>
-                        <a href="/profile/MemberPage/Scrap">스크랩</a>
-                        <a href="/profile/MemberPage/5"></a>
+                        <span>활동 피드</span>
+                        <span id="aTagReview">리뷰</span>
+                        <span>사진</span>
+                        <span>스크랩</span>
+                        <span></span>
                     </div>
                 </div>
         
@@ -122,7 +122,7 @@
                             <span><i class="fa-regular fa-envelope"></i> 이메일</span>
                         </div>
 
-                        <ul class="review-list">
+                        <ul class="review-list" id="reviewContainer">
                             <%-- 리뷰 목록 조회 --%>
                             <c:forEach var="reviewList" items="${map.reviewList}">
                                 
@@ -348,6 +348,9 @@
     <script>
         const reviewImage = "${map.reviewList[0].reviewImagePath}";
     </script>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" 
+    integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" 
+    crossorigin="anonymous"></script>
     <%-- <script src="/resources/js/main.js"></script>
     <script src="/resources/js/swiper.min.js"></script> --%>
     <script src="/resources/js/profile/MemberPage.js"></script>
