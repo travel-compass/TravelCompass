@@ -16,13 +16,13 @@
     <title>Travelcompass</title>
     <script src="https://kit.fontawesome.com/3fe30a9b47.js" crossorigin="anonymous"></script>
     <script src="/resources/js/common/jQuery-core.js"></script>
-    <script src="/resources/js/main-place.js"></script>
 </head>
 <body>
     <!-- header:include -->
 	<jsp:include page="/WEB-INF/views/inc/header.jsp"></jsp:include>
     <main>
-        <div class="search-area">
+        <div class="search-area" id="searchArea">
+        <script src="/resources/js/main-place.js"></script>
             <form action="/place/searchPlaceKeyword" class="search-form" id="searchForm">
                 <div class="search-input-box">
                     <button id="search-btn" class="fa-solid fa-magnifying-glass"></button>
@@ -104,13 +104,11 @@
                 </div>
             </div>
 
-
-            
         </div>
         
-        <div class="resent-keyword-area">
+        <%-- <div class="resent-keyword-area">
             <span class="resent-keyword-title">최근 검색어</span>
-            <ul class="resent-keyword-list">
+            <ul class="resent-keyword-list" id="resentKeywordList">
                 <li class="item"><a href="#"><i class="fa-solid fa-magnifying-glass"></i>라스베이거스</a>
 
                 </li>
@@ -118,7 +116,7 @@
                 <li class="item"><a href="#"><i class="fa-solid fa-magnifying-glass"></i>동대문</a></li>
                 <li class="item"><a href="#"><i class="fa-solid fa-magnifying-glass"></i>부산 해운대</a></li>
             </ul>
-        </div>
+        </div> --%>
         <section class="place-list-area">
             <div class="place-area">
                 <span class="place-area-title">최근에 본 장소</span>

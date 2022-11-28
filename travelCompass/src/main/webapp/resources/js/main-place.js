@@ -1,5 +1,56 @@
+// 최근검색어 생성자
+function ResentKeyword(keyword, contentTypeId, areaCode) {
+    this.keyword = keyword;
+    this.contentTypeId = contentTypeId;
+    this.areaCode = areaCode;
+}
+
+// 최근 검색어 생성
+(()=>{
+
+    // 최근 검색어 가져오기 (json -> 객체 파싱)
+    let resentKeywordArr = localStorage.getItem("resentKeyword");
+    if(resentKeywordArr != null) {                                  // 비어있지 않으면
+
+        resentKeywordArr = JSON.parse(resentKeywordArr);
+
+        const resentKeywordArea = document.createElement("div");
+        resentKeywordArea.className = "resent-keyword-area";
+
+        const resentKeywordTitle = document.createElement("span");
+        resentKeywordTitle.className = "resent-keyword-title";
+        resentKeywordTitle.innerText = "최근 검색어";
+        
+        const resentKeywordList = document.createElement("ul");       // 최근 검색어 담을 리스트 생성
+        resentKeywordList.className = "resent-keyword-list";
+        resentKeywordList.setAttribute("id", "resentKeywordList");
+
+        for(keyword of resentKeywordArr) {                              // 저장된 키워드 갯수만큼 반복
+            const item = document.createElement("li");
+            item.className = "item";
+            
+            const a = document.createElement("a");
+            a.href = `/place/searchPlaceKeyword?keyword=${keyword.keyword}&contentTypeId=${keyword.contentTypeId}&areaCode=${keyword.areaCode}`;
+
+            const icon = document.createElement("i");
+            icon.className = "fa-solid fa-magnifying-glass";
+
+            const span = document.createElement("span");
+            span.innerText = keyword.keyword;
+
+            a.append(icon, span);
+            item.append(a);
+
+            resentKeywordList.append(item);
+        }
+
+        resentKeywordArea.append(resentKeywordTitle, resentKeywordList);
+        document.getElementById("searchArea").after(resentKeywordArea);
+    }
+})();
+
+
 // 현재 접속위치 좌표 얻기
-console.log("hello");
 (() => {
     let latitude;   // 위도
     let longitude;  // 경도

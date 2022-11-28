@@ -109,6 +109,26 @@ document.addEventListener("DOMContentLoaded", ()=>{
             return;
         }
 
-        
+        let resentKeyword = localStorage.getItem("resentKeyword");
+        if(resentKeyword == null) {         // 저장된 최근검색어가 존재하지 않으면ㄴ
+            resentKeywordArr = [];          // 최근검색어 객체배열 생성
+            resentKeywordArr.push(new ResentKeyword(       // 검색어 추가
+                keywordInput.value.trim(),
+                document.querySelector("input[name='contentTypeId']:checked").value,
+                document.getElementById("areaCode").value
+            ));
+            localStorage.setItem("resentKeyword", JSON.stringify(resentKeywordArr));
+        } else {                            // 저장된 최근검색어가 존재하면       
+            resentKeywordArr = JSON.parse(resentKeyword);   // json -> 객체배열 파싱
+            if(resentKeywordArr.length >= 10) {             // 저장된 최근검색어가 10개보다 많다면
+                resentKeywordArr.shift();                   // 맨 앞에(0번 인덱스)항목 제거
+            }
+            resentKeywordArr.push(new ResentKeyword(       // 검색어 추가
+                    keywordInput.value.trim(),
+                    document.querySelector("input[name='contentTypeId']:checked").value,
+                    document.getElementById("areaCode").value
+            ));
+            localStorage.setItem("resentKeyword", JSON.stringify(resentKeywordArr));
+        }
     });
 });
