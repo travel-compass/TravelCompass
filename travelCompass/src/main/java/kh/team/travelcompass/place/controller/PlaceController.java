@@ -15,15 +15,16 @@ import kh.team.travelcompass.place.model.service.PlaceService;
 import kh.team.travelcompass.place.model.vo.Place;
 
 @Controller
-@RequestMapping("/detail")
+@RequestMapping("/place")
 public class PlaceController {
 
 	@Autowired
 	private PlaceService service;
 	
 	
-	@GetMapping("/place/{contentId}")
-	public String page(@PathVariable String contentId,String contentTypeId,Model model) throws Exception {
+	@GetMapping("/detail")
+	public String page(String contentId,
+			String contentTypeId,Model model) throws Exception {
 		
 		// title,overview
 		Place mainPlace=service.detailPlace(contentId,contentTypeId);
