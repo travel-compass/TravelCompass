@@ -3,6 +3,7 @@ package kh.team.travelcompass.search.model.service;
 
 import java.net.URLEncoder;
 
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kh.team.travelcompass.search.model.api.SearchPlaceAPI;
-import kh.team.travelcompass.search.model.vo.SearchPlace;
+import kh.team.travelcompass.place.model.vo.Place;
 
 @Service
 public class SearchServiceImpl implements SearchService {
@@ -19,19 +20,20 @@ public class SearchServiceImpl implements SearchService {
 	SearchPlaceAPI api;
 	
 	@Override
-	public List<SearchPlace> nearByPlace(String latitude, String longitude) throws Exception {
+	public List<Place> nearByPlace(String latitude, String longitude) throws Exception {
 
 		Map<String, String> paramMap = new HashMap<String, String>();
 		paramMap.put("mapY", latitude);
 		paramMap.put("mapX", longitude);
 		paramMap.put("contentTypeId", "12");
 
-		List<SearchPlace> placeList = api.nearByPlace(paramMap);
+		List<Place> placeList = api.nearByPlace(paramMap);
 		return null;
 	}
-
+	
+	//키워드 검색
 	@Override
-	public List<SearchPlace> searchPlaceKeyword(String keyword, String areaCode,
+	public List<Place> searchPlaceKeyword(String keyword, String areaCode,
 			String contentTypeId) throws Exception {
 		// 입력값을 api로 보낸다
 		Map<String, String> paramMap = new HashMap<String, String>();
@@ -41,7 +43,7 @@ public class SearchServiceImpl implements SearchService {
 			paramMap.put("areaCode", areaCode);
 		}
 
-		List<SearchPlace> placeList = api.searchPlaceKeyword(paramMap);
+		List<Place> placeList = api.searchPlaceKeyword(paramMap);
 
 		//받아온 값 가공
 		

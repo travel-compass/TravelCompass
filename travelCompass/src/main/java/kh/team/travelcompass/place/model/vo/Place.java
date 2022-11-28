@@ -21,13 +21,14 @@ public class Place {
 	private String title; // 이름
 	private String firstimage; // 대표이미지
 	private List<String> imageList;
-	private String address; // 주소
+	private String addr1; // 주소
 	private String mapx; // 맵x좌표
 	private String mapy; // 맵y좌표
 	private String overview; //개요(설명)
 	private String restdate; // 쉬는날
 	private String usetime; // 이용시간
 	private String treatmenu; // 취급메뉴
+	private String dist;		  // 중심좌포로부터거리 (m)
 	
 	private List<Review> reviewList; // 장소에 달린 리뷰리스트
 	private List<Question> questionList;  // 장소에 달린 리뷰리스트
@@ -37,6 +38,10 @@ public class Place {
 	private int travelListNo;
 	private int travelNo;
 	private int travelListOrder;
+	
+	
+	
+
 	
 	
 	
