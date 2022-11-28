@@ -20,17 +20,12 @@ import org.springframework.web.bind.annotation.RestController;
 import kh.team.travelcompass.search.model.service.SearchService;
 import kh.team.travelcompass.place.model.vo.Place;
 
-@RequestMapping("/place")
-@Controller()
+@Controller
 public class SearchController {
 	@Autowired
 	SearchService service;
 	
 	
-	@GetMapping("/search")
-	public String search() {
-		return "search/searchpage";
-	}
 	
 	@ResponseBody
 	@GetMapping("/nearByPlace")
@@ -47,7 +42,7 @@ public class SearchController {
 	// jsp에서 keyword, areaCode, contentTypeId를 받아 service -> api
 	// api(검색 결과(json객체)) ->  service -> controller -> jsp
 	//@ResponseBody 
-	@GetMapping("/searchPlaceKeyword")
+	@GetMapping("/search")
 	public String searchPlaceKeyword(String keyword,
 			@RequestParam(value = "areaCode", required = false, defaultValue = "null") 
 			String areaCode,
@@ -65,6 +60,9 @@ public class SearchController {
 
 		return "search/searchpage";
 	}
+	
+
+	
 }
 
 
