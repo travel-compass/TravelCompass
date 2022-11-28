@@ -5,16 +5,10 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.json.JSONObject;
 import org.springframework.stereotype.Component;
-
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import kh.team.travelcompass.common.Util;
 import kh.team.travelcompass.place.model.vo.Place;
@@ -72,5 +66,4 @@ public class LocationAPI {
 		
 		return placeList;
 	}
-	
 }
