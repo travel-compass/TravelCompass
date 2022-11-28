@@ -52,6 +52,7 @@ public class SearchServiceImpl implements SearchService {
 		return placeList;
 	}
 
+
 }
 
 

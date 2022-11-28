@@ -260,22 +260,25 @@
                                 </c:choose> -->
                             </ul>
                         </div>
-                        <div class="show-more">
-                            <span><a href="#<!--검색 페이지(리스트 아이템30개)-->" class="show-more-text">더보기</a></span>
-                            <span ><i class="fa-solid fa-caret-down"></i></span>
-                        </div>
-                        <div class="page-select">
-                            <button class="page-select-before">이전</button>
-                            <div>
-                                <a href="#" class="page-select-btn">1</a>
-                                <a href="#" class="page-select-btn">2</a>
-                                <a href="#" class="page-select-btn">3</a>
-                                <a href="#" class="page-select-btn">4</a>
-                                <a href="#" class="page-select-btn">5</a>
-                                <span class="page-select-btn">...</span>
-                                <a href="#" class="page-select-btn">6</a>
-                            </div>
-                            <button class="page-select-next">다음</button>
+                        
+                        <div class="pagination-area">
+                            <ul class="pagination">
+                                <li class="page-select-before"><a href="#">이전</a></li>
+                                    <c:forEach var="i" begin="${place.startPage}" end="${place.endPage}" step="1">
+                                        <c:choose>
+                                            <c:when test="${i==place.currentPage}">
+                                                <!-- 현재 보고있는 페이지 -->
+                                                <li><a class="current">${i}</a></li>
+                                            </c:when>
+
+                                            <c:otherwise>
+                                                <!-- 현재 페이지를 제외한 나머지 -->
+                                                <li><a href="#">${i}</a></li>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </c:forEach>
+                                <li class="page-select-next"><a href="#">다음</a></li>
+                            </ul>   
                         </div>
                     </section>
                     
@@ -309,5 +312,6 @@
     <div class="blur-box" id="blurBox"></div>
 
     <script src="/resources/js/common/search-form.js"></script>
+    <script src="/resources/js/search/search.js"></script>
 </body>
 </html>

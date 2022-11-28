@@ -28,7 +28,7 @@ import kh.team.travelcompass.place.model.vo.Place;
 public class SearchPlaceAPIImpl implements SearchPlaceAPI{
 	private String key = "e+nonJ082FY6zfX+tup0hvcGTRAqHZV2OGGnVkjpa+zYdVpUYTHuuqfHYuIEzFwYXjbQXAhQa9tTuyiYdd0Eyw=="; //영현 인증키
 	private final String HOST = "http://apis.data.go.kr/B551011/KorService";
-	private final String essentialParam = "MobileOS=ETC&MobileApp=AppTest&_type=json&serviceKey=";
+	private final String essentialParam = "MobileOS=ETC&MobileApp=AppTest&_type=json&listYN=Y&serviceKey=";
 	public SearchPlaceAPIImpl() throws Exception{
 		this.key = URLEncoder.encode(key, "UTF-8");
 	}

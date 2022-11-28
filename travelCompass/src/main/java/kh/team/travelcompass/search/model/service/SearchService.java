@@ -22,6 +22,7 @@ public interface SearchService {
 	 * @param keyword
 	 * @param areaCode
 	 * @param contentTypeId
+	 * @param pageNo 
 	 * @return
 	 */
 	public List<Place> searchPlaceKeyword( String keyword, String areaCode,

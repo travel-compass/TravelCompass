@@ -47,7 +47,8 @@ public class SearchController {
 			@RequestParam(value = "areaCode", required = false, defaultValue = "null") 
 			String areaCode,
 			@RequestParam(value = "contentTypeId", required = false, defaultValue = "null")
-			String contentTypeId, Model model) {
+			String contentTypeId, Model model
+			) {
 
 		try {
 			List<Place> placeList = service.searchPlaceKeyword(keyword, areaCode, contentTypeId);
