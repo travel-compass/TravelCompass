@@ -23,7 +23,7 @@
     <main>
         <div class="search-area" id="searchArea">
         <script src="/resources/js/main-place.js"></script>
-            <form action="/search" class="search-form" id="searchForm">
+            <%-- <form action="/search" class="search-form" id="searchForm">
                 <div class="search-input-box">
                     <button id="search-btn" class="fa-solid fa-magnifying-glass"></button>
                     <input id="search-input" type="search" placeholder="어디로 가시나요?" name="keyword" autocomplete="off">
@@ -92,8 +92,10 @@
                     </ol>
                 
                 </div>
-            </form>
-            
+            </form> --%>
+            <%-- search-form.jsp include --%>
+            <jsp:include page="/WEB-INF/views/inc/search-form.jsp"></jsp:include>
+
             <div class="swiper-container">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide"><img src="/resources/images/main-image1.png" alt="메인 이미지"></div>
