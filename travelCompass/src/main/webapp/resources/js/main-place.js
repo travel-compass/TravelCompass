@@ -1,7 +1,7 @@
 // 최근 검색어 생성
 (()=> {
     // 최근 검색어 가져오기 (json -> 객체 파싱)
-    let resentKeywordArr = localStorage.getItem("resentKeyword");
+    let resentKeywordArr = localStorage.getItem("recentKeyword");
     if(resentKeywordArr != null) {                                  // 비어있지 않으면
 
         resentKeywordArr = JSON.parse(resentKeywordArr);
@@ -22,7 +22,7 @@
             item.className = "item";
             
             const a = document.createElement("a");
-            a.href = `/place/searchPlaceKeyword?keyword=${keyword.keyword}&contentTypeId=${keyword.contentTypeId}&areaCode=${keyword.areaCode}`;
+            a.href = `search?keyword=${keyword.keyword}&contentTypeId=${keyword.contentTypeId}&areaCode=${keyword.areaCode}`;
 
             const icon = document.createElement("i");
             icon.className = "fa-solid fa-magnifying-glass";
@@ -133,7 +133,8 @@ function createPlaceList(resultList) {
         placeItem.classList.add("place-item");
 
         const a = document.createElement("a");
-        a.setAttribute("href", "#");
+        a.setAttribute("href", `/place/detail/${place.contenttypeid}/${place.contentid}`);
+        a.setAttribute("onclick", `return addRecentViewPlace("${place.title}", "${place.firstimage}", "${place.contentid}", "${place.contenttypeid}")`)
 
         const img = document.createElement("img");
         if(place.firstimage == '') {
