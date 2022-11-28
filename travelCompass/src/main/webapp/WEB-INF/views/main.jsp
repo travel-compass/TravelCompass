@@ -23,7 +23,7 @@
     <main>
         <div class="search-area" id="searchArea">
         <script src="/resources/js/main-place.js"></script>
-            <form action="/place/searchPlaceKeyword" class="search-form" id="searchForm">
+            <form action="/search" class="search-form" id="searchForm">
                 <div class="search-input-box">
                     <button id="search-btn" class="fa-solid fa-magnifying-glass"></button>
                     <input id="search-input" type="search" placeholder="어디로 가시나요?" name="keyword" autocomplete="off">
