@@ -1,10 +1,3 @@
-// 최근검색어 생성자
-function ResentKeyword(keyword, contentTypeId, areaCode) {
-    this.keyword = keyword;
-    this.contentTypeId = contentTypeId;
-    this.areaCode = areaCode;
-}
-
 // 최근 검색어 생성
 (()=> {
     // 최근 검색어 가져오기 (json -> 객체 파싱)

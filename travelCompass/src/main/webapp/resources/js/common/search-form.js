@@ -1,3 +1,10 @@
+// 최근검색어 생성자
+function ResentKeyword(keyword, contentTypeId, areaCode) {
+    this.keyword = keyword;
+    this.contentTypeId = contentTypeId;
+    this.areaCode = areaCode;
+}
+
 document.addEventListener("DOMContentLoaded", ()=>{
     const blurBox = document.querySelector(".blur-box");
     const searchForm = document.querySelector(".search-form");
