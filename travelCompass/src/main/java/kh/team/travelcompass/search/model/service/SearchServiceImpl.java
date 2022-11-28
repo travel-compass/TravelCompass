@@ -30,7 +30,8 @@ public class SearchServiceImpl implements SearchService {
 		List<Place> placeList = api.nearByPlace(paramMap);
 		return null;
 	}
-
+	
+	//키워드 검색
 	@Override
 	public List<Place> searchPlaceKeyword(String keyword, String areaCode,
 			String contentTypeId) throws Exception {
