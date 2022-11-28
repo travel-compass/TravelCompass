@@ -6,8 +6,7 @@ function ResentKeyword(keyword, contentTypeId, areaCode) {
 }
 
 // 최근 검색어 생성
-(()=>{
-
+(()=> {
     // 최근 검색어 가져오기 (json -> 객체 파싱)
     let resentKeywordArr = localStorage.getItem("resentKeyword");
     if(resentKeywordArr != null) {                                  // 비어있지 않으면
@@ -41,9 +40,12 @@ function ResentKeyword(keyword, contentTypeId, areaCode) {
             a.append(icon, span);
             item.append(a);
 
-            resentKeywordList.append(item);
+            if(resentKeywordList.firstChild != null) {
+                resentKeywordList.insertBefore(item, resentKeywordList.firstChild);
+            } else {
+                resentKeywordList.append(item);
+            }
         }
-
         resentKeywordArea.append(resentKeywordTitle, resentKeywordList);
         document.getElementById("searchArea").after(resentKeywordArea);
     }
