@@ -21,7 +21,7 @@
             <div class="search">
                 
                     <div class="search-input-form">
-                        <form action="/place/searchPlaceKeyword" class="search-form" id="searchForm">
+                        <form action="/search" class="search-form" id="searchForm">
                             <div class="search-input-box">
                                 <button id="search-btn" class="fa-solid fa-magnifying-glass"></button>
                                 <input id="search-input" type="search" placeholder="어디로 가시나요?" name="keyword" autocomplete="off">
