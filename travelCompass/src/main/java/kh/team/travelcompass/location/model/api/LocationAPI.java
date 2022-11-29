@@ -5,16 +5,10 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.json.JSONObject;
 import org.springframework.stereotype.Component;
-
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import kh.team.travelcompass.common.Util;
 import kh.team.travelcompass.place.model.vo.Place;
@@ -62,7 +56,7 @@ public class LocationAPI {
 		}
 		br.close(); 				// 스트림객체 사용 후 자원 반환(APIConnection 반환)
 		
-		String str = response.toString();
+		System.out.printf("검색결과 : %s", response.toString());
 		
 		
 		placeList = Util.jsonToPlaceList(response.toString());
@@ -72,5 +66,4 @@ public class LocationAPI {
 		
 		return placeList;
 	}
-	
 }

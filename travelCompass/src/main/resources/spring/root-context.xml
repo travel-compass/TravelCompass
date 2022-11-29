@@ -10,9 +10,9 @@
 		- web.xml에서 가장 먼저 읽어들이는 설정 파일
 		- 하나의 프로젝트에서 공용으로 사용되는 자원들을 정의하는 목적
 		- 자원 : DBCP(DB 연결 정보), 트랜잭션, AOP, 파일 업로드 등
-	 -->
-	 
-	    <!-- 1. DBCP 사용을 위한 DataSource를 bean 등록 -->
+	-->
+	
+	<!-- 1. DBCP 사용을 위한 DataSource를 bean 등록 -->
    
    <!-- DataSource : java에서 Connection Pool을 지원하기 위한 인터페이스(Connection 상위호환) -->
    <!-- destroy-method="close" : 주어진 세션을 자동으로 반환(close)하는 설정 -->
@@ -67,5 +67,5 @@
    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
       <property name="dataSource" ref="dataSource" />
    </bean>
-   	
+   
 </beans>

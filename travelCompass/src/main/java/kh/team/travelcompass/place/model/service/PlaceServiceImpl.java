@@ -1,5 +1,6 @@
 package kh.team.travelcompass.place.model.service;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,18 +41,42 @@ public class PlaceServiceImpl implements PlaceService {
 	}
 	
 	@Override
-	public Place page(String contentId, String contentTypeId) {
+	public Place detailPlace(String contentId, String contentTypeId) throws Exception {
+		Map<String, String> paramMap=new HashMap<String, String>();
 		
-		// api에서 요청받은 객체 - 리뷰,qna 연결해야함
-//		Place place=api.place(contentId,contentTypeId);
-//		
-//		List<Review> reviewList=rDao.select(contentId);
-//		List<Question> questionList=qDao.select(contentId);
-//		
-//		place.setReviewList(reviewList);
-//		place.setQuestionList(questionList);
+		paramMap.put("contentId", contentId);
+		paramMap.put("contentTypeId", contentTypeId);
+		paramMap.put("defaultYN","Y");
+		paramMap.put("firstImageYN","Y");
+		paramMap.put("addrinfoYN","Y");
+		paramMap.put("mapinfoYN","Y");
+		paramMap.put("overviewYN","Y");
 		
-		return null;
+		
+		
+		return api.detailPlace(paramMap);
 	}
 	
+	@Override
+	public Place infoPlace(String contentId, String contentTypeId) throws Exception {
+		Map<String, String> paramMap=new HashMap<String, String>();
+		
+		paramMap.put("contentId", contentId);
+		paramMap.put("contentTypeId", contentTypeId);
+		
+		return api.infoPlace(paramMap);
+	}
+	
+	@Override
+	public List<String> imageList(String contentId, String contentTypeId) throws Exception {
+		Map<String, String> paramMap=new HashMap<String, String>();
+		
+		paramMap.put("contentId", contentId);
+		
+		paramMap.put("imageYN", "Y");
+		paramMap.put("subImageYN", "Y");
+		
+		
+		return api.imageList(paramMap);
+	}
 }

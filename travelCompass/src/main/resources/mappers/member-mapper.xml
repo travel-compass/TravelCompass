@@ -88,6 +88,12 @@
 		SECESSION_FL = 'Y'
 		WHERE MEMBER_NO = #{memberNo}
 	</update>
+	
+	<select id="selectMember" resultMap="member_rm">
+	SELECT * 
+	FROM MEMBER
+	WHERE MEMBER_NO = #{memberNo}
+	</select>
 </mapper>
 
 

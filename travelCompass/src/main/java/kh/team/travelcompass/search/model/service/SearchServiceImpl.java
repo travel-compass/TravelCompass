@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kh.team.travelcompass.search.model.api.SearchPlaceAPI;
+import kh.team.travelcompass.place.model.vo.Pagination;
 import kh.team.travelcompass.place.model.vo.Place;
 
 @Service
@@ -33,7 +34,7 @@ public class SearchServiceImpl implements SearchService {
 	
 	//키워드 검색
 	@Override
-	public List<Place> searchPlaceKeyword(String keyword, String areaCode,
+	public Map<String,Object> searchPlaceKeyword(String keyword, String areaCode,
 			String contentTypeId) throws Exception {
 		// 입력값을 api로 보낸다
 		Map<String, String> paramMap = new HashMap<String, String>();
@@ -43,14 +44,14 @@ public class SearchServiceImpl implements SearchService {
 			paramMap.put("areaCode", areaCode);
 		}
 
-		List<Place> placeList = api.searchPlaceKeyword(paramMap);
+		Map<String,Object> placeMap = api.searchPlaceKeyword(paramMap);
 
-		//받아온 값 가공
+
 		
-		
-		// api에서 List<Place>를 받아서 리턴한다
-		return placeList;
+		// api에서 placeMap를 받아서 리턴한다
+		return placeMap;
 	}
+
 
 }
 
