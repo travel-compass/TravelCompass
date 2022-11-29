@@ -51,9 +51,9 @@ public class SearchController {
 			) {
 
 		try {
-			List<Place> placeList = service.searchPlaceKeyword(keyword, areaCode, contentTypeId);
+			Map<String, Object> placeMap = service.searchPlaceKeyword(keyword, areaCode, contentTypeId);
 
-			model.addAttribute("placeList", placeList);
+			model.addAttribute("placeMap", placeMap);
 		} catch (Exception e) {
 
 			e.printStackTrace();
@@ -63,6 +63,7 @@ public class SearchController {
 	}
 	
 
+	
 	
 }
 

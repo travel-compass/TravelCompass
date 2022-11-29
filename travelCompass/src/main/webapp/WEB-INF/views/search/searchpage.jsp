@@ -21,7 +21,8 @@
             <div class="search">
                 
                     <div class="search-input-form">
-                        <form action="/search" class="search-form" id="searchForm">
+                        <jsp:include page="/WEB-INF/views/inc/search-form.jsp" />
+                        <!-- <form action="/search" class="search-form" id="searchForm">
                             <div class="search-input-box">
                                 <button id="search-btn" class="fa-solid fa-magnifying-glass"></button>
                                 <input id="search-input" type="search" placeholder="어디로 가시나요?" name="keyword" autocomplete="off">
@@ -87,11 +88,11 @@
                                     <a href="">
                                         <i class="fa-solid fa-location-dot"></i>
                                         <span>부산 해운대</span>
-                                    </a> -->
+                                    </a> 
                                 </ol>
                             
                             </div>
-                        </form>
+                        </form> -->
                     </div>	
                     
                     <div class="search-filter">
@@ -197,7 +198,7 @@
                     <section class="search-result">
                         <!--검색 결과가 없을 때 -->
                         <c:choose>
-                            <c:when test="${empty placeList}">
+                            <c:when test="${placeMap.items == ''}">
                                 <div class="search-result-title">
                                     <span id="title-match">"<span id="title-query">${param.keyword}</span>" 과(와) 일치하는 검색결과가 없습니다 </span>
                                 </div>
@@ -212,10 +213,11 @@
                             
                             <ul class="search-result-list">
                                 <!-- <c:choose>
-                                    <c:when test="${empty placeList}">
+                                    <c:when test="${empty placeMap}">
                                     </c:when>
-                                    <c:otherwise> -->
-                                        <c:forEach items="${placeList}" var="place">
+                                    <c:otherwise>  -->
+                                        <!--items의 배열을 place에 저장한다-->
+                                        <c:forEach items="${placeMap.placeList}" var="place">
                                             <li>
                                                 <div class="search-result-item">
 
@@ -260,24 +262,24 @@
                                 </c:choose> -->
                             </ul>
                         </div>
-                        
+                        ${body.totalCount}
                         <div class="pagination-area">
                             <ul class="pagination">
-                                <li class="page-select-before"><a href="#">이전</a></li>
-                                    <c:forEach var="i" begin="${place.startPage}" end="${place.endPage}" step="1">
+                                <li class="page-item"><a href="/search?keyword=${param.keyword}&contentTypeId=${param.contentTypeId}&areaCode=${param.areaCode}&pageNo=${placeMap.prevPage}" class="page-link">이전</a></li>
+                                    <c:forEach var="i" begin="${placeMap.startPage}" end="${placeMap.endPage}" step="1">
                                         <c:choose>
-                                            <c:when test="${i==place.currentPage}">
+                                            <c:when test="${i==place.pageNo}">
                                                 <!-- 현재 보고있는 페이지 -->
                                                 <li><a class="current">${i}</a></li>
                                             </c:when>
 
                                             <c:otherwise>
                                                 <!-- 현재 페이지를 제외한 나머지 -->
-                                                <li><a href="#">${i}</a></li>
+                                                <li><a class="/search?keyword=${param.keyword}&contentTypeId=${param.contentTypeId}&areaCode=${param.areaCode}&pageNo=${i}">${i}</a></li>
                                             </c:otherwise>
                                         </c:choose>
                                     </c:forEach>
-                                <li class="page-select-next"><a href="#">다음</a></li>
+                                <li class="page-select-next"><a href="/search?keyword=${param.keyword}&contentTypeId=${param.contentTypeId}&areaCode=${param.areaCode}&pageNo=${placeMap.nextPage}">다음</a></li>
                             </ul>   
                         </div>
                     </section>

@@ -9,6 +9,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -28,7 +29,7 @@ import kh.team.travelcompass.place.model.vo.Place;
 public class SearchPlaceAPIImpl implements SearchPlaceAPI{
 	private String key = "e+nonJ082FY6zfX+tup0hvcGTRAqHZV2OGGnVkjpa+zYdVpUYTHuuqfHYuIEzFwYXjbQXAhQa9tTuyiYdd0Eyw=="; //영현 인증키
 	private final String HOST = "http://apis.data.go.kr/B551011/KorService";
-	private final String essentialParam = "MobileOS=ETC&MobileApp=AppTest&_type=json&listYN=Y&serviceKey=";
+	private final String essentialParam = "MobileOS=ETC&MobileApp=AppTest&_type=json&pageNo=1&numOfRows=10&serviceKey=";
 	public SearchPlaceAPIImpl() throws Exception{
 		this.key = URLEncoder.encode(key, "UTF-8");
 	}
@@ -96,8 +97,8 @@ public class SearchPlaceAPIImpl implements SearchPlaceAPI{
 	 *키워드 검색(키워드검색조회)
 	 */
 	@Override
-	public List<Place> searchPlaceKeyword(Map<String, String> paramMap) throws Exception {
-		List<Place> placeList = new ArrayList<>();
+	public Map<String,Object> searchPlaceKeyword(Map<String, String> paramMap) throws Exception {
+		Map<String,Object> placeMap = new HashMap<String,Object>();
 
 		System.out.println("API 호출");
 		String endPoint = "/searchKeyword?";
@@ -119,11 +120,42 @@ public class SearchPlaceAPIImpl implements SearchPlaceAPI{
 			response.append(readline);
 		}
 		br.close();
+
 		System.out.println(response.toString());
-		placeList=Util.jsonToPlaceList(response.toString());
+		try {
+			
 		
-		return placeList;
+		int numOfRows = Integer.parseInt( new JSONObject(response.toString()).getJSONObject("response").getJSONObject("body").get("numOfRows").toString() );
+		int pageNo = Integer.parseInt( new JSONObject(response.toString()).getJSONObject("response").getJSONObject("body").get("pageNo").toString() );
+		int totalCount = Integer.parseInt( new JSONObject(response.toString()).getJSONObject("response").getJSONObject("body").get("totalCount").toString() );
+		String items = new JSONObject(response.toString()).getJSONObject("response").getJSONObject("body").get("items").toString();
+
+		List<Place>placeList=null;
+		
+		if(!items.equals("")) {
+			String item = new JSONObject(items).getJSONArray("item").toString();
+			ObjectMapper om = new ObjectMapper();
+			om.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			
+			placeList = om.readValue(item, new TypeReference<List<Place>>() {});			
+		
+		}
+	
+		
+		placeMap.put("placeList",  placeList);
+//		placeMap.put("items",      items);
+		placeMap.put("numOfRows",  numOfRows);
+		placeMap.put("pageNo",     pageNo);
+		placeMap.put("totalCount", totalCount);
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		
+		return placeMap;
 	}
+
+	
 }
 
 

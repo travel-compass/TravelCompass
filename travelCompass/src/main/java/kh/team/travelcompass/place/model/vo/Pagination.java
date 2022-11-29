@@ -3,6 +3,9 @@ package kh.team.travelcompass.place.model.vo;
 public class Pagination {
 
 	
+	
+	//pagination
+	
 	private int pageNo;        //현재 페이지 번호 
 	private int totalCount;    //전체 게시글 수
 	private int numOfRows=10;     //한 페이지 목록에 보여지는 게시글 수
@@ -34,7 +37,8 @@ public class Pagination {
 	   }
 	   
 	   
-	   
+	  
+
 	public int getPageNo() {
 		return pageNo;
 	}
@@ -162,5 +166,13 @@ public class Pagination {
 	      
 	   }
 
-
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
