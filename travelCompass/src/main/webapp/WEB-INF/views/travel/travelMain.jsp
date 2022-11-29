@@ -121,9 +121,9 @@
                     <i class="fa-solid fa-plane"></i>
                     <span>여행 만들기</span>
                 </div>
-                <div class="modal-close">&times;</div>
+                <div class="modal-close" id="modalClose">&times;</div>
             </div>
-            <form action="" method="post" name="createTravelForm" id="createTravelForm">
+            <form action="" method="get" name="createTravelForm" id="createTravelForm">
                 <label for="travelTitle" class="travel-title">여행 이름</label>
                 <input type="text" id="travelTitle" name="travelTitle" maxlength="9">
                 <span class="max-length"><span id="maxLength">0</span>/10자</span>

@@ -12,6 +12,11 @@ travelModal.addEventListener("click", e=>{
     }
 });
 
+// 모달 닫기 버튼
+document.getElementById("modalClose").addEventListener("click", ()=>{
+    travelModal.classList.remove("show");
+});
+
 
 // travelTitle 글자수 표시
 (()=>{
@@ -40,6 +45,7 @@ travelModal.addEventListener("click", e=>{
             success: result=> {
                 if(result > 0) {        // 여행 생성에 성공했을 때
                     createTravelList(); // 여행목록 다시 불러오기
+                    travelModal.classList.remove("show"); // 여행추가 모달 창 닫기
                 } else {                // 실패했을 때
                     alert("여행 추가에 실패하였습니다.")
                 }
