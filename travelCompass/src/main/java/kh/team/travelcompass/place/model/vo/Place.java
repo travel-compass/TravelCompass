@@ -4,6 +4,7 @@ import java.util.List;
 
 import kh.team.travelcompass.question.model.vo.Question;
 import kh.team.travelcompass.review.model.vo.Review;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -39,10 +40,8 @@ public class Place {
 	private int travelNo;
 	private int travelListOrder;
 	
-	
-	
-
-	
-	
-	
+	private int pageNo;        //현재 페이지 번호 
+	private int totalCount;    //전체 게시글 수
+	private int numOfRows;     //한 페이지 목록에 보여지는 게시글 수
+	private int pageSize=10 ;     // 보여질 페이지 번호 개수
 }
