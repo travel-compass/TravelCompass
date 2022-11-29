@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
+import kh.team.travelcompass.member.model.vo.Member;
 import kh.team.travelcompass.travel.model.service.TravelService;
 import kh.team.travelcompass.travel.model.vo.Travel;
 
@@ -35,13 +37,13 @@ public class TravelController {
 		return "/travel/travelMain";
 	}
 	
-//	@GetMapping("/create")
-//	public int createTravel() {
-//		
-//		int result = service.createTravel();
-//		
-//		return result;
-//	}
+	@ResponseBody
+	@GetMapping("/create")
+	public int createTravel(Travel travel, @SessionAttribute("loginMember") Member loginMember) {
+		
+		travel.setMemberNo(loginMember.getMemberNo());
+		return service.createTravel(travel);
+	}
 	
 	@ResponseBody
 	@GetMapping("/select")

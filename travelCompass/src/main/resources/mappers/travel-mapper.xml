@@ -29,8 +29,9 @@
 		AND T.TRAVEL_DEL_FL = 'N'
 	</select>
 	
-	<insert id="insertTravel">
-		
+	<insert id="createTravel">
+		INSERT INTO TRAVEL (TRAVEL_NO, TRAVEL_TITLE, MEMBER_NO, TRAVEL_DATE, PRIVATE_FL) VALUES(SEQ_TRAVEL_NO.NEXTVAL,
+			#{travelTitle}, #{memberNo}, DEFAULT, #{privateFlag})
 	</insert>
 </mapper>
 

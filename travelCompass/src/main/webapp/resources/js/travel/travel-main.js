@@ -39,15 +39,14 @@ travelModal.addEventListener("click", e=>{
             },
             success: result=> {
                 if(result > 0) {        // 여행 생성에 성공했을 때
-
+                    createTravelList(); // 여행목록 다시 불러오기
                 } else {                // 실패했을 때
-
+                    alert("여행 추가에 실패하였습니다.")
                 }
             },
             error: () =>{
-
+                console.log("여행 생성중 에러 발생");
             }
-
         });
     });  
 })();
@@ -61,6 +60,7 @@ function createTravelList() {
         success: result => {
             console.log(result);
             const travelList = document.getElementById("travel-list");
+            travelList.innerHTML = "";
             // 여행추가 만들기
             // 내 여행 페이지면
             const plusTravel = document.createElement("li");

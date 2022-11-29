@@ -14,8 +14,15 @@ public class TravelServiceImpl implements TravelService{
 	@Autowired
 	private TravelDAO dao; 
 
+	// 회원별 모든 여행 조회 서비스
 	@Override
 	public List<Travel> selectTravelList(int memberNo) {
 		return dao.selectTravelList(memberNo);
+	}
+
+	// 여행 추가 서비스
+	@Override
+	public int createTravel(Travel travel) {
+		return dao.createTravel(travel);
 	}
 }
