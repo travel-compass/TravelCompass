@@ -33,6 +33,6 @@ public class ProfileDAO {
 	 * @return list
 	 */
 	public Member selectMember(int memberNo) {
-		return sqlSession.selectOne("memberMapper.selectMember", memberNo);
+		return sqlSession.selectOne("memberMapper.totalSelectMember", memberNo);
 	}
 }

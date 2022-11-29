@@ -42,6 +42,8 @@ public class ProfileController {
 		
 		List<Review> reviewList = service.ReviewSelectList(memberNo);
 		
+		model.addAttribute("reviewList", reviewList);
+		
 		return reviewList;
 	}
 	
