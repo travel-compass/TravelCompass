@@ -45,12 +45,14 @@
             </ul>
             <ul id="travel-list">
                 <!-- 첫번째 요소 무조건 고정 -->
-                <li id="plusTravel">
-                    <div>
-                        <i class="fa-solid fa-circle-plus"></i>
-                        <span>여행 만들기</span>
-                    </div>
-                </li>
+                <c:if test="${loginMember.memberNo eq memberNo }">
+                    <li id="plusTravel">
+                        <div>
+                            <i class="fa-solid fa-circle-plus"></i>
+                            <span>여행 만들기</span>
+                        </div>
+                    </li>
+                </c:if>
 
                 <c:forEach var="travel" items="${travelList}">
                 <li class="travel-item">
@@ -153,6 +155,10 @@
     <!-- footer:include -->
     <script>
         const memberNo = ${loginMember.memberNo}
+        const hostNo = ${memberNo}
+
+        console.log(memberNo);
+        console.log(hostNo);
     </script>
     <jsp:include page="/WEB-INF/views/inc/footer.jsp"></jsp:include>
     <script src="/resources/js/common/jQuery-core.js"></script>
