@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,7 +52,7 @@
                     </div>
                 </li>
 
-                <!-- 데이터갯수에 따라 동적으로 생성되는 리스트 아이템 -->
+                <c:forEach var="travel" items="${travelList}">
                 <li class="travel-item">
                     <div>
                         <a href="해당 여행 상세 페이지">
@@ -58,157 +60,56 @@
                         </a>
                         <!-- 썸네일 이미지 -->
                         <div class="travel-first-image">
-                            <img src="http://tong.visitkorea.or.kr/cms/resource/39/2680839_image2_1.jpg" alt="">
+                            <c:choose>
+                                <c:when test="${empty travel.travelFirstImage}">
+                                    <img src="/resources/images/common/compass.png" art="" />
+                                </c:when>
+                                <c:otherwise>
+                                    <img src="${travel.travelFirstImage}" alt="">
+                                </c:otherwise>
+                            </c:choose>
                         </div>
     
                         <!-- 여행 제목, 작성자 -->
                         <div class="travel-description">
                             <div>
-                                <span class="travel-title">테스트 여행</span>
+                                <span class="travel-title">${travel.travelTitle}</span>
                             </div>
                             <div>
-                                작성자: <a href="프로필 페이지로" class="travel-writer">Tonic</a>
+                                작성자: <a href="프로필 페이지로" class="travel-writer">${travel.memberNickname}</a>
                             </div>
                         </div>
     
                         <!-- 여행의 장소 갯수 -->
                         <div class="travel-place-count">
-                            포함: <span class="">1개의 항목</span>
+                            포함: <span class="">${travel.travelPlaceCount}개의 장소</span>
                         </div>
 
                         <!-- 접근범위 -->
                         <div class="access-scope-area">
                             <div class="access-profile-image">
                                 <a href="작성자 프로필 페이지로">
-                                    <img src="https://cdn.pixabay.com/photo/2022/02/23/17/08/planets-7031048__480.jpg" alt="">
+                                    <img src="${travel.profileImage}" alt="">
                                 </a>
                             </div>
+                            <c:choose>
+                                <c:when test="${travel.privateFlag eq 'N'}">
+                                    <div class="access-scope-public">
+                                        <span><i class="fa-solid fa-lock-open"></i></span>
+                                    </div>
+                                </c:when>
+                                <c:otherwise>
+                                    <div class="access-scope-private">
+                                        <span class="private"><i class="fa-solid fa-lock"></i></span>
+                                    </div>
+                                </c:otherwise>
+                            </c:choose>
                             <!-- 비공개 일경우 -->
-                            <div class="access-scope-private">
-                                <span class="private"><i class="fa-solid fa-lock"></i></span>
-                            </div>
                         </div>
                     </div>
-                </li>                
-
-                <li class="travel-item">
-                    <div>
-                        <a href="해당 여행 상세 페이지">
-                            <!-- position absolute 화면 전체 덮기 -->
-                        </a>
-                        <!-- 썸네일 이미지 -->
-                        <div class="travel-first-image">
-                            <img src="http://tong.visitkorea.or.kr/cms/resource/39/2680839_image2_1.jpg" alt="">
-                        </div>
-    
-                        <!-- 여행 제목, 작성자 -->
-                        <div class="travel-description">
-                            <div>
-                                <span class="travel-title">테스트 여행</span>
-                            </div>
-                            <div>
-                                작성자: <a href="프로필 페이지로" class="travel-writer">Tonic</a>
-                            </div>
-                        </div>
-    
-                        <!-- 여행의 장소 갯수 -->
-                        <div class="travel-place-count">
-                            포함: <span class="">1개의 항목</span>
-                        </div>
-
-                        <%-- 접근 범위 --%>
-                        <div class="access-scope-area">
-                            <div class="access-profile-image">
-                                <a href="작성자 프로필 페이지로">
-                                    <img src="https://cdn.pixabay.com/photo/2022/02/23/17/08/planets-7031048__480.jpg" alt="">
-                                </a>
-                            </div>
-                            <!-- 공개일 경우 -->
-                            <div class="access-scope-public">
-                                <span><i class="fa-solid fa-lock-open"></i></span>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li class="travel-item">
-                    <div>
-                        <a href="해당 여행 상세 페이지">
-                            <!-- position absolute 화면 전체 덮기 -->
-                        </a>
-                        <!-- 썸네일 이미지 -->
-                        <div class="travel-first-image">
-                            <img src="http://tong.visitkorea.or.kr/cms/resource/39/2680839_image2_1.jpg" alt="">
-                        </div>
-    
-                        <!-- 여행 제목, 작성자 -->
-                        <div class="travel-description">
-                            <div>
-                                <span class="travel-title">테스트 여행</span>
-                            </div>
-                            <div>
-                                작성자: <a href="프로필 페이지로" class="travel-writer">Tonic</a>
-                            </div>
-                        </div>
-    
-                        <!-- 여행의 장소 갯수 -->
-                        <div class="travel-place-count">
-                            포함: <span class="">1개의 항목</span>
-                        </div>
-
-                        <%-- 접근 범위 --%>
-                        <div class="access-scope-area">
-                            <div class="access-profile-image">
-                                <a href="작성자 프로필 페이지로">
-                                    <img src="https://cdn.pixabay.com/photo/2022/02/23/17/08/planets-7031048__480.jpg" alt="">
-                                </a>
-                            </div>
-                            <!-- 공개일 경우 -->
-                            <div class="access-scope-public">
-                                <span><i class="fa-solid fa-lock-open"></i></span>
-                            </div>
-                        </div>
-                    </div>
-                </li>      
-                <li class="travel-item">
-                    <div>
-                        <a href="해당 여행 상세 페이지">
-                            <!-- position absolute 화면 전체 덮기 -->
-                        </a>
-                        <!-- 썸네일 이미지 -->
-                        <div class="travel-first-image">
-                            <img src="http://tong.visitkorea.or.kr/cms/resource/39/2680839_image2_1.jpg" alt="">
-                        </div>
-    
-                        <!-- 여행 제목, 작성자 -->
-                        <div class="travel-description">
-                            <div>
-                                <span class="travel-title">테스트 여행</span>
-                            </div>
-                            <div>
-                                작성자: <a href="프로필 페이지로" class="travel-writer">Tonic</a>
-                            </div>
-                        </div>
-    
-                        <!-- 여행의 장소 갯수 -->
-                        <div class="travel-place-count">
-                            포함: <span class="">1개의 항목</span>
-                        </div>
-
-                        <%-- 접근 범위 --%>
-                        <div class="access-scope-area">
-                            <div class="access-profile-image">
-                                <a href="작성자 프로필 페이지로">
-                                    <img src="https://cdn.pixabay.com/photo/2022/02/23/17/08/planets-7031048__480.jpg" alt="">
-                                </a>
-                            </div>
-                            <!-- 공개일 경우 -->
-                            <div class="access-scope-public">
-                                <span><i class="fa-solid fa-lock-open"></i></span>
-                            </div>
-                        </div>
-                    </div>
-                </li>      
-                      
+                </li>    
+                </c:forEach>
+                <!-- 데이터갯수에 따라 동적으로 생성되는 리스트 아이템 --> 
             </ul>
         </div>
     </main>
@@ -222,14 +123,14 @@
                 </div>
                 <div class="modal-close">&times;</div>
             </div>
-            <form action="" method="post" name="createTravelForm">
+            <form action="" method="post" name="createTravelForm" id="createTravelForm">
                 <label for="travelTitle" class="travel-title">여행 이름</label>
-                <input type="text" id="travelTitle" name="travelTitle" maxlength="10">
-                <span class="max-length">0/10자</span>
+                <input type="text" id="travelTitle" name="travelTitle" maxlength="9">
+                <span class="max-length"><span id="maxLength">0</span>/10자</span>
 
                 <label class="scope-label">여행 공개 범위 선택하기</label>
                 <label for="privateScope" class="scope-radio-label">
-                    <input type="radio" name="scope" id="privateScope" checked>
+                    <input type="radio" name="scope" id="privateScope" checked value="Y">
                     <i class="fa-solid fa-lock"></i>
                     <div class="scope-description">
                         <span>비공개</span>
@@ -237,7 +138,7 @@
                     </div>
                 </label>
                 <label for="publicScope" class="scope-radio-label">
-                    <input type="radio" name="scope" id="publicScope">
+                    <input type="radio" name="scope" id="publicScope" value="N">
                     <i class="fa-solid fa-unlock"></i>
                     <div class="scope-description">
                         <span>공개</span>
@@ -245,15 +146,16 @@
                     </div>
                 </label>
                 
-                
-                
                 <button id="travelBtn">만들기</button>
             </form>
         </div>
     </div>
     <!-- footer:include -->
+    <script>
+        const memberNo = ${loginMember.memberNo}
+    </script>
     <jsp:include page="/WEB-INF/views/inc/footer.jsp"></jsp:include>
-
+    <script src="/resources/js/common/jQuery-core.js"></script>
     <script src="/resources/js/travel/travel-main.js"></script>
 </body>
 </html>

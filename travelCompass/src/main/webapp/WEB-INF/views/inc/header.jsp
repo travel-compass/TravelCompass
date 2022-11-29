@@ -10,14 +10,13 @@
         <!-- <span>Tripadvisor</span> -->
     </section>
     <section class="right-column">
-        <ul class="header-nav">
-            <li><a href="프로필페이지/리뷰"><i class="fa-solid fa-pen"></i>리뷰</a></li>
-            <li><a href="/travel/main"><i class="fa-solid fa-bell"></i>여행</a></li>
-        </ul>
-
 		<c:choose>
 			<%-- 로그인 상태라면--%>
 			<c:when test="${not empty loginMember}">
+				<ul class="header-nav">
+					<li><a href="프로필페이지/리뷰"><i class="fa-solid fa-pen"></i>리뷰</a></li>
+					<li><a href="/travel/list/${loginMember.memberNo}"><i class="fa-solid fa-bell"></i>여행</a></li>
+				</ul>
 				<div class="profile-img">
 		            <label for="header-menu-toggle">
 		                <img src="${loginMember.profileImage}" alt="프로필 이미지">
