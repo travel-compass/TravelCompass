@@ -14,7 +14,21 @@ public interface PlaceService {
 	 */
 	public List<Place> nearByPlace(String x, String y) throws Exception;
 
-	public Place page(String contentId, String contentTypeId);
+	/** 장소 상세페이지 조회
+	 * @param contentId
+	 * @param contentTypeId
+	 * @return
+	 * @throws Exception
+	 */
+	public Place detailPlace(String contentId, String contentTypeId) throws Exception;
+
+	// 장소 정보 조회
+	public Place infoPlace(String contentId, String contentTypeId) throws Exception;
+	
+	// 장소 이미지 조회
+	public List<String> imageList(String contentId, String contentTypeId) throws Exception;
+
+	
 	
 	
 	

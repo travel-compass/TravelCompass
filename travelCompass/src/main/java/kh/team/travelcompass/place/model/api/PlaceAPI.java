@@ -1,5 +1,6 @@
 package kh.team.travelcompass.place.model.api;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -16,6 +17,13 @@ public interface PlaceAPI{
 	 * @return placeList
 	 */
 	public List<Place> nearByPlace(Map<String, String> paramMap) throws Exception;
+
+	public Place detailPlace(Map<String, String> paramMap) throws Exception;
+
+	public Place infoPlace(Map<String, String> paramMap) throws Exception;
+
+	public List<String> imageList(Map<String, String> paramMap) throws Exception;
+
 	
 	
 }
