@@ -2,16 +2,23 @@
 const plusTravel = document.getElementById("plusTravel");
 const travelModal = document.getElementById("travelModal");
 // 여행추가버튼 클릭 시 모달 생성
-plusTravel.addEventListener("click", ()=>{
-    travelModal.classList.add("show");
-});
-travelModal.addEventListener("click", e=>{
-    console.log(e.target);
-    if(e.target.classList.contains("modal-container")) {
+if(plusTravel != null) {            // 자신의 여행목록 페이지면
+    plusTravel.addEventListener("click", ()=>{
+        travelModal.classList.add("show");
+    });
+    travelModal.addEventListener("click", e=>{
+        console.log(e.target);
+        if(e.target.classList.contains("modal-container")) {
+            travelModal.classList.remove("show");
+        }
+    });
+    
+    // 모달 닫기 버튼
+    const modalClose = document.getElementById("modalClose");
+    modalClose.addEventListener("click", ()=>{
         travelModal.classList.remove("show");
-    }
-});
-
+    });
+}
 
 // travelTitle 글자수 표시
 (()=>{
@@ -31,6 +38,7 @@ travelModal.addEventListener("click", e=>{
             return;
         }
 
+
         $.ajax({
             url: "/travel/create",
             data: {
@@ -40,6 +48,7 @@ travelModal.addEventListener("click", e=>{
             success: result=> {
                 if(result > 0) {        // 여행 생성에 성공했을 때
                     createTravelList(); // 여행목록 다시 불러오기
+                    travelModal.classList.remove("show"); // 여행추가 모달 창 닫기
                 } else {                // 실패했을 때
                     alert("여행 추가에 실패하였습니다.")
                 }
@@ -61,27 +70,28 @@ function createTravelList() {
             console.log(result);
             const travelList = document.getElementById("travel-list");
             travelList.innerHTML = "";
-            // 여행추가 만들기
-            // 내 여행 페이지면
-            const plusTravel = document.createElement("li");
-            plusTravel.setAttribute("id", "plusTravel");
-            plusTravel.addEventListener("click", ()=>{
-                travelModal.classList.add("show");
-            });
-        
-            const div = document.createElement("div");
-        
-            const icon = document.createElement("i");
-            icon.className = "fa-solid fa-circle-plus";
-        
-            const span = document.createElement("span");
-            span.innerText = "여행 만들기";
             
-            div.append(icon, span);
-        
-            plusTravel.append(div);
-            travelList.append(plusTravel);
+            if(memberNo == hostNo) { // 내 여행 페이지면 여행추가 만들기
+                const plusTravel = document.createElement("li");
+                plusTravel.setAttribute("id", "plusTravel");
+                plusTravel.addEventListener("click", ()=>{
+                    travelModal.classList.add("show");
+                });
             
+                const div = document.createElement("div");
+            
+                const icon = document.createElement("i");
+                icon.className = "fa-solid fa-circle-plus";
+            
+                const span = document.createElement("span");
+                span.innerText = "여행 만들기";
+                
+                div.append(icon, span);
+            
+                plusTravel.append(div);
+                travelList.append(plusTravel);
+            }
+
             for(let travel of result) {         // 여행리스트에서 여행을 하나씩 접근하여
         
                 // 여행 리스트아이템 최상위 부모
@@ -185,4 +195,5 @@ function createTravelList() {
         }
     })
 }
+
 

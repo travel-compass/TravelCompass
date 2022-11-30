@@ -45,12 +45,14 @@
             </ul>
             <ul id="travel-list">
                 <!-- 첫번째 요소 무조건 고정 -->
-                <li id="plusTravel">
-                    <div>
-                        <i class="fa-solid fa-circle-plus"></i>
-                        <span>여행 만들기</span>
-                    </div>
-                </li>
+                <c:if test="${loginMember.memberNo eq memberNo }">
+                    <li id="plusTravel">
+                        <div>
+                            <i class="fa-solid fa-circle-plus"></i>
+                            <span>여행 만들기</span>
+                        </div>
+                    </li>
+                </c:if>
 
                 <c:forEach var="travel" items="${travelList}">
                 <li class="travel-item">
@@ -121,9 +123,9 @@
                     <i class="fa-solid fa-plane"></i>
                     <span>여행 만들기</span>
                 </div>
-                <div class="modal-close">&times;</div>
+                <div class="modal-close" id="modalClose">&times;</div>
             </div>
-            <form action="" method="post" name="createTravelForm" id="createTravelForm">
+            <form action="" method="get" name="createTravelForm" id="createTravelForm">
                 <label for="travelTitle" class="travel-title">여행 이름</label>
                 <input type="text" id="travelTitle" name="travelTitle" maxlength="9">
                 <span class="max-length"><span id="maxLength">0</span>/10자</span>
@@ -153,6 +155,10 @@
     <!-- footer:include -->
     <script>
         const memberNo = ${loginMember.memberNo}
+        const hostNo = ${memberNo}
+
+        console.log(memberNo);
+        console.log(hostNo);
     </script>
     <jsp:include page="/WEB-INF/views/inc/footer.jsp"></jsp:include>
     <script src="/resources/js/common/jQuery-core.js"></script>

@@ -4,7 +4,9 @@
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:task="http://www.springframework.org/schema/task"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
@@ -56,6 +58,15 @@
 	-->
 	<context:component-scan base-package="kh.team.travelcompass" />
 	
+	<interceptors>
+		<interceptor>
+			<!-- beans라는 태그안에서 bean을 만들기 위한 태그 -->
+			<mapping path="/search"/>  <!-- 모든 요청 주소 -->
+			<beans:bean id="searchInterceptor" class="kh.team.travelcompass.common.interceptor.SearchInterceptorTest" />
+		</interceptor>
+	</interceptors>
 	
 	
+	<!-- 스케쥴링 어노테이션 인식 -->
+	<task:annotation-driven />
 </beans:beans>

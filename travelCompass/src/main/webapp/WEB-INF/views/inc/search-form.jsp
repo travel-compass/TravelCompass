@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <form action="/search" class="search-form" id="searchForm">
     <div class="search-input-box">
         <button id="search-btn" class="fa-solid fa-magnifying-glass"></button>
@@ -44,28 +46,40 @@
             <i class="fa-solid fa-location-arrow"></i>
             <span>주변</span>
         </a>
-        <label class="search-keyword-title">인기 검색어</label>
-        <ol class="popular-keyword-list">
-            <!-- <a href="">
-                <i class="fa-solid fa-location-dot"></i>
-                <span>라스베이거스</span>
-            </a>
-            <hr>
-            <a href="">
-                <i class="fa-solid fa-location-dot"></i>
-                <span>서울</span>
-            </a>
-            <hr>
-            <a href="">
-                <i class="fa-solid fa-location-dot"></i>
-                <span>동대문</span>
-            </a>
-            <hr>
-            <a href="">
-                <i class="fa-solid fa-location-dot"></i>
-                <span>부산 해운대</span>
-            </a> -->
-        </ol>
+        <c:if test="${not empty popularKeyword}">
+            <label class="search-keyword-title">인기 검색어</label>
+            <ul class="popular-keyword-list">
+                <c:forEach var="keyword" items="${popularKeyword}" varStatus="vs">
+                    <a href="/search?keyword=${keyword}&contentTypeId=12&areaCode=-1">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <span>${keyword}</span>
+                    </a>
+                    <c:if test="${!vs.last}">
+                        <hr>
+                    </c:if>
+                </c:forEach>
+                <!-- <a href="">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span>라스베이거스</span>
+                </a>
+                <hr>
+                <a href="">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span>서울</span>
+                </a>
+                <hr>
+                <a href="">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span>동대문</span>
+                </a>
+                <hr>
+                <a href="">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span>부산 해운대</span>
+                </a> -->
+            </ul>
+        </c:if>
+        
     
     </div>
 </form>
