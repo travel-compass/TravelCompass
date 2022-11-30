@@ -1,6 +1,7 @@
 package kh.team.travelcompass.place.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import kh.team.travelcompass.place.model.vo.Place;
 
@@ -27,6 +28,24 @@ public interface PlaceService {
 	
 	// 장소 이미지 조회
 	public List<String> imageList(String contentId, String contentTypeId) throws Exception;
+
+	/** 스크랩 체크
+	 * @param map
+	 * @return
+	 */
+	public int scrapCheck(Map<String, Object> map);
+
+	/** 장소 스크랩
+	 * @param paramMap
+	 * @return
+	 */
+	public int scrap(Map<String, Object> paramMap);
+
+	/** 스크랩 취소
+	 * @param paramMap
+	 * @return
+	 */
+	public int scrapCancel(Map<String, Object> paramMap);
 
 	
 	

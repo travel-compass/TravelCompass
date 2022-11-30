@@ -1,3 +1,65 @@
+/* ------------------------------ 스크랩 --------------------------------- */
+const placeScrap = document.getElementById("placeScrap");
+placeScrap.addEventListener("click", (e) => {
+  if (memberNo == "") {
+    alert("로그인 후 이용해주세요");
+    return;
+  }
+  // 로그인 상태이면서 스크랩 상태가 아닌 경우
+  if (e.target.classList.contains("fa-regular")) {
+    // 빈 모양일때
+    $.ajax({
+      url: "/place/scrap",
+      data: {
+        contentid: contentid,
+        contenttypeid: contenttypeid,
+        memberNo: memberNo,
+        firstimage: firstimage,
+        addr1: addr1,
+        mapx: mapx,
+        mapy: mapy,
+      },
+      type: "GET",
+      success: (result) => {
+        if (result > 0) {
+          // 성공
+          e.target.classList.remove("fa-regular"); // 빈 스크랩 클래스 삭제
+          e.target.classList.add("fa-solid"); // 꽉 찬 스크랩 클래스 추가
+        } else {
+          // 실패
+          console.log("스크랩 실패");
+        }
+      },
+      error: () => {
+        console.log("스크랩 에러");
+      },
+    });
+  } else {
+    // 로그인 상태이면서 스크랩 상태인 경우
+    if (confirm("정말 스크랩을 취소할까요?")) {
+      $.ajax({
+        url: "/place/scrapCancel",
+        data: { contentid: contentid, memberNo: memberNo },
+        type: "GET",
+        success: (result) => {
+          if (result > 0) {
+            // 성공
+            e.target.classList.remove("fa-solid");
+            e.target.classList.add("fa-regular");
+          } else {
+            // 실패
+            console.log("스크랩 취소 실패");
+          }
+        },
+        error: () => {
+          console.log("스크랩 취소 에러");
+        },
+      });
+    }
+  }
+});
+
+/* ------------------------------- 지도 -----------------------------------*/
 // 카카오 지도 api js
 var container = document.getElementById("map"); //지도를 담을 영역의 DOM 레퍼런스
 var options = {
@@ -8,6 +70,7 @@ var options = {
 
 var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
 
+/* ----------------------------- 리뷰 ----------------------------------- */
 //별점 마킹 모듈 프로토타입으로 생성
 function Rating() {}
 Rating.prototype.rate = 0;
@@ -49,7 +112,7 @@ document
   });
 
 //저장 전송전 필드 체크 이벤트 리스너
-document.querySelector("#save").addEventListener("click", function (e) {
+document.querySelector("#rate").addEventListener("click", function (e) {
   //별점 선택 안했으면 메시지 표시
   if (rating.rate == 0) {
     rating.showMessage("rate");
