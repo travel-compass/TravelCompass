@@ -22,10 +22,11 @@ public interface SearchService {
 	 * @param keyword
 	 * @param areaCode
 	 * @param contentTypeId 
+	 * @param pageNo 
 	 * @return 
 	 */
 	public Map<String, Object> searchPlaceKeyword( String keyword, String areaCode,
-			String contentTypeId) throws Exception;
+			String contentTypeId, String pageNo) throws Exception;
 
 	
 }

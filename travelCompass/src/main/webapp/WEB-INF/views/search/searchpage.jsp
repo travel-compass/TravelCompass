@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<c:set var="pagination" value="${placeMap.pagination}"/>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -211,6 +213,8 @@
                         </c:choose>
                         <div class="search-result-list">
                             
+                            <c:set var="totalCount" value="${placeMap.totalCount}"/>
+
                             <ul class="search-result-list">
                                 <!-- <c:choose>
                                     <c:when test="${empty placeMap}">
@@ -262,26 +266,41 @@
                                 </c:choose> -->
                             </ul>
                         </div>
-                        ${body.totalCount}
+                    
                         <div class="pagination-area">
                             <ul class="pagination">
-                                <li class="page-item"><a href="/search?keyword=${param.keyword}&contentTypeId=${param.contentTypeId}&areaCode=${param.areaCode}&pageNo=${placeMap.prevPage}" class="page-link">이전</a></li>
-                                    <c:forEach var="i" begin="${placeMap.startPage}" end="${placeMap.endPage}" step="1">
-                                        <c:choose>
-                                            <c:when test="${i==place.pageNo}">
-                                                <!-- 현재 보고있는 페이지 -->
-                                                <li><a class="current">${i}</a></li>
-                                            </c:when>
-
-                                            <c:otherwise>
-                                                <!-- 현재 페이지를 제외한 나머지 -->
-                                                <li><a class="/search?keyword=${param.keyword}&contentTypeId=${param.contentTypeId}&areaCode=${param.areaCode}&pageNo=${i}">${i}</a></li>
-                                            </c:otherwise>
-                                        </c:choose>
-                                    </c:forEach>
-                                <li class="page-select-next"><a href="/search?keyword=${param.keyword}&contentTypeId=${param.contentTypeId}&areaCode=${param.areaCode}&pageNo=${placeMap.nextPage}">다음</a></li>
-                            </ul>   
-                        </div>
+                                
+                                <!-- 첫 페이지로 이동 -->
+                                <li><a href="/search?keyword=${param.keyword}&contentTypeId=${param.contentTypeId}&areaCode=${param.areaCode}&pageNo=1"
+                                    class="arrow pprev">&lt;&lt;</a></li>
+                                <!-- 이전 목록 마지막 번호로 이동 -->
+                                <li><a href="/search?keyword=${param.keyword}&contentTypeId=${param.contentTypeId}&areaCode=${param.areaCode}&pageNo=${pagination.prevPage}"
+                                    class="arrow prev">&lt;</a></li>
+                    
+                                <c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}" step="1">
+                                    <c:choose>
+                                        <c:when test="${i==pagination.pageNo}">
+                                            <!-- 현재 보고있는 페이지 -->
+                                            <li><a class="current">${i}</a></li>
+                                        </c:when>
+                    
+                                        <c:otherwise>
+                                            <!-- 현재 페이지를 제외한 나머지 -->
+                                            <li><a href="/search?keyword=${param.keyword}&contentTypeId=${param.contentTypeId}&areaCode=${param.areaCode}&pageNo=${i}">${i}</a></li>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </c:forEach>
+                    
+                                <!-- 다음 목록 시작 번호로 이동 -->
+                                <li><a href="/search?keyword=${param.keyword}&contentTypeId=${param.contentTypeId}&areaCode=${param.areaCode}&pageNo=${pagination.nextPage}"
+                                    class="arrow next">&gt;</a></li>
+                    
+                                <!-- 끝 페이지로 이동 -->
+                                <li><a href="/search?keyword=${param.keyword}&contentTypeId=${param.contentTypeId}&areaCode=${param.areaCode}&pageNo=${pagination.maxPage}"
+                                    class="arrow nnext">&gt;&gt;</a></li>
+                    
+                            </ul>
+                            </div>
                     </section>
                     
                     <div class="side-bar">
@@ -291,9 +310,9 @@
                             </div>
                             <div class="search-rank-content">
                                 <ul>
-                                    <li><a href="#">1.  '검색어'</a></li>
-                                    <li><a href="#">2.  '검색어'</a></li>
-                                    <li><a href="#">3.  '검색어'</a></li>
+                                    <li><a href="#">1. ${placeMap.totalCount}</a></li>
+                                    <li><a href="#">2. ${placeMap.numOfRows}</a></li>
+                                    <li><a href="#">3. ${placeMap.pageNo}</a></li>
                                     <li><a href="#">4.  '검색어'</a></li>
                                     <li><a href="#">5.  '검색어'</a></li>
                                     <li><a href="#">6.  '검색어'</a></li>
