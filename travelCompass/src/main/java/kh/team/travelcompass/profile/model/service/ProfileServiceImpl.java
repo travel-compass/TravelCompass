@@ -35,5 +35,14 @@ public class ProfileServiceImpl implements ProfileService {
 		
 		return member;
 	}
+
+	// 프로필 페이지 이동 시 회원이 쓴 리뷰리스트 가져오기
+	@Override
+	public List<Review> selectAllReviewList(int memberNo) {
+		
+		List<Review> reviewList = dao.selectAllReviewList(memberNo);
+		
+		return reviewList;
+	}
 	
 }

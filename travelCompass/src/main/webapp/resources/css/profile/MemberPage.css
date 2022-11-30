@@ -467,6 +467,10 @@ main {
     margin: auto;
 }
 
+.slide-container-style img{
+    height: 350px;
+}
+
 .slide{
     display: none;
 }

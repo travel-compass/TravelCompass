@@ -14,4 +14,7 @@ public interface ProfileService {
 	// 프로필 페이지 이동 시 프로필 페이지의 회원 정보 받아오기
 	Member selectMember(int memberNo);
 
+	// 프로필 페이지 이동 시 회원이 쓴 리뷰리스트 가져오기
+	List<Review> selectAllReviewList(int memberNo);
+
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -145,216 +146,196 @@
 
                         <ul class="review-list" id="reviewContainer">
                                 
-                            <!-- 리뷰가 아무것도 없을 때 나오는 테이블 -->
-                            <div class="user-page-review-colums2">
-                                <div class="user-page-review-none-content">
-                                    <div class="none-content-titel">
-                                        프로필 작성
-                                    </div>
-                                    <div class="none-content">
-                                        사람들이 회원님을 쉽게 찾고 더 알아갈 수 있도록 하려면 사진과 정보를 프로필에 추가하세요!
-                                    </div>
-                                    <div class="none-content-review-create">
-                                        <a href="#"><i class="fa-solid fa-pen-to-square"></i>리뷰 작성하러 가기</a>
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- 리뷰가 아무것도 없을 때 나오는 테이블 -->
-                            <div class="user-page-review-colums2">
-                                <div class="user-page-review-none-content">
-                                    <div class="none-content-titel">
-                                        프로필 작성
-                                    </div>
-                                    <div class="none-content">
-                                        사람들이 회원님을 쉽게 찾고 더 알아갈 수 있도록 하려면 사진과 정보를 프로필에 추가하세요!
-                                    </div>
-                                    <div class="none-content-review-create">
-                                        <a href="#"><i class="fa-solid fa-pen-to-square"></i>리뷰 작성하러 가기</a>
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                            
+                            <c:forEach var="reviewList" items="${reviewList}" begin="0" end="9">
 
-                            <!-- 첫번째 리뷰 테이블 -->
-                            <div class="user-page-review-colums2">
-                                <div class="user-page-review-header-style">
-                                    <div class="user-page-review-header-layout">
-                                        <a href="#" class="review-user-image"><img src="${member.profileImage}" alt="프로필 이미지"></a>
-                                        <div class="review-user-info-layout">
-                                            <span class="review-user-nickname"><a href="#">${member.memberNickname}</a>님이 리뷰를 작성했습니다.</span>
-                                            <a href="#" class="review-user-dday">
-                                                ${reviewList.reviewDate}
-                                            </a>
+                                <c:if test="${reviewList == null}">
+                                    <!-- 리뷰가 아무것도 없을 때 나오는 테이블 -->
+                                    <div class="user-page-review-colums2">
+                                        <div class="user-page-review-none-content">
+                                            <div class="none-content-titel">
+                                                프로필 작성
+                                            </div>
+                                            <div class="none-content">
+                                                사람들이 회원님을 쉽게 찾고 더 알아갈 수 있도록 하려면 사진과 정보를 프로필에 추가하세요!
+                                            </div>
+                                            <div class="none-content-review-create">
+                                                <a href="#"><i class="fa-solid fa-pen-to-square"></i>리뷰 작성하러 가기</a>
+                                                
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="user-page-review-dot-style"><i class="fa-solid fa-ellipsis"></i></div>
-                                    <div class="user-page-review-dot-down-menu">
-                                        <ul class="down-menu">
-                                            <li><a href="#">수정</a></li>
-                                            <li><a href="#">삭제</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="review-data-table-style">
-                                    <div class="review-point">
-                                        <span><i class="fa-solid fa-circle"></i></span>
-                                        <span><i class="fa-solid fa-circle"></i></span>
-                                        <span><i class="fa-solid fa-circle"></i></span>
-                                        <span><i class="fa-solid fa-circle"></i></span>
-                                        <span><i class="fa-solid fa-circle"></i></span>
-                                    </div>
-                                    <div class="review-title">${reviewList.reviewTitle}</div>
-                                    <div class="review-content">"${reviewList.reviewContent}"</div>
-                                    <div class="review-date">
-                                        <span class="rdt">방문 날짜 :</span>
-                                        2019년 12월
-                                    </div>
-                                </div>
-                                <div class="review-navi-style">
-                                    <div class="review-navi-layout">
-                                        <a href="#" class="review-navi-left">
-                                            <div>
-                                                <img src="/resources/images/profile/venis.webp">
-                                            </div>
-                                            <div class="review-navi-title">
-                                                <div>배니스</div>
-                                                <div class="review-navi-deep">
-                                                    <div class="review-navi-deep-point">
-                                                        <span><i class="fa-solid fa-circle"></i></span>
-                                                        <span><i class="fa-solid fa-circle"></i></span>
-                                                        <span><i class="fa-solid fa-circle"></i></span>
-                                                        <span><i class="fa-solid fa-circle"></i></span>
-                                                        <span><i class="fa-solid fa-circle"></i></span>
-                                                    </div>
-                                                    <div>00건의 리뷰</div>
+                                </c:if>
+                                
+                                <%-- 사진이 없을 때 reivewImgList에 담겨있는게 없어서 size가 0 --%>
+                                <c:if test="${(reviewList != null) && (fn:length(reviewList.reviewImgList) == 0)}">
+                                    <!-- 첫번째 리뷰 테이블 -->
+                                    <div class="user-page-review-colums2">
+                                        <div class="user-page-review-header-style">
+                                            <div class="user-page-review-header-layout">
+                                                <a href="#" class="review-user-image"><img src="${member.profileImage}" alt="프로필 이미지"></a>
+                                                <div class="review-user-info-layout">
+                                                    <span class="review-user-nickname"><a href="#">${member.memberNickname}</a>님이 리뷰를 작성했습니다.</span>
+                                                    <a href="#" class="review-user-dday">
+                                                        ${reviewList.reviewDate}
+                                                    </a>
                                                 </div>
-                                                <div>배니스, 이탈리아</div>
                                             </div>
-                                        </a>
-                                        <div class="review-navi-right">
-                                            <i class="fa-solid fa-heart"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="review-support"></div>
-                                <div class="review-bottom-menu-style">
-                                    <div class="suport-button">
-                                        <i class="fa-regular fa-thumbs-up"></i>도움이 됨
-                                    </div>
-                                    <div class="save-button">
-                                        <i class="fa-solid fa-heart"></i>저장
-                                    </div>
-                                    <div class="share-button">
-                                        <i class="fa-solid fa-arrow-up-from-bracket"></i>공유
-                                    </div>
-                                </div>
-                            </div>
-
-                        
-                        <%-- 리뷰도 있고 사진도 있을 경우 --%>
-                            <!-- 두번째 리뷰 테이블 (사진 슬라이드 넣어보기) -->
-                            <div class="user-page-review-colums2">
-                                <div class="user-page-review-header-style">
-                                    <div class="user-page-review-header-layout">
-                                        <a href="#" class="review-user-image"><img src="${member.profileImage}" alt="프로필 이미지"></a>
-                                        <div class="review-user-info-layout">
-                                            <span class="review-user-nickname"><a href="#">${member.memberNickname}</a>님이 리뷰를 작성했습니다.</span>
-                                            <a href="#" class="review-user-dday">
-                                                ${reviewList.reviewDate}
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="user-page-review-dot-style"><i class="fa-solid fa-ellipsis" ></i></div>
-                                    <div class="user-page-review-dot-down-menu">
-                                        <ul class="down-menu">
-                                            <li><a href="#">수정</a></li>
-                                            <li><a href="#">삭제</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <!-- 사진 슬라이드 div태그 시작 -->
-                                <div class="slide-container-style">
-                                    <div class="slide fade">
-                                        <div class="numbertext">1 / 3</div>
-                                        <img src="/resources/images/profile/flower.jpg">
-                                    </div>
-                                    
-                                    <div class="slide fade">
-                                        <div class="numbertext">2 / 3</div>
-                                        <img src="/resources/images/profile/fox.jpg">
-                                    </div>
-
-                                    <div class="slide fade">
-                                        <div class="numbertext">3 / 3</div>
-                                        <img src="/resources/images/profile/lightning.jpg">
-                                    </div>
-
-                                    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-                                    <a class="next" onclick="plusSlides(1)">&#10095;</a>
-
-                                </div>
-                                <br>
-
-                                <div class="review-data-table-style">
-                                    <div class="review-point">
-                                        <span><i class="fa-solid fa-circle"></i></span>
-                                        <span><i class="fa-solid fa-circle"></i></span>
-                                        <span><i class="fa-solid fa-circle"></i></span>
-                                        <span><i class="fa-solid fa-circle"></i></span>
-                                        <span><i class="fa-solid fa-circle"></i></span>
-                                    </div>
-                                    <div class="review-title">리뷰 제목</div>
-                                    <div class="review-content">"좌석수가 많지 않은지 잘 모르겠으나 대기시간이 엄청 났고 
-                                        느끼기에 종업원들이 대기손님을 대하는 태도가 별로였다.
-                                        손님을 잡으려기는 커녕 오히려 그냥 가세요 하는 태도.
-                                        그외에 카페는 분위기와 위치 뛰어났다"</div>
-                                    <div class="review-date">
-                                        <span class="rdt">방문 날짜 :</span>
-                                        2019년 12월
-                                    </div>
-                                </div>
-                                <div class="review-navi-style">
-                                    <div class="review-navi-layout">
-                                        <a href="#" class="review-navi-left">
-                                            <div>
-                                                <img src="/resources/images/profile/venis.webp">
+                                            <div class="user-page-review-dot-style"><i class="fa-solid fa-ellipsis"></i></div>
+                                            <div class="user-page-review-dot-down-menu">
+                                                <ul class="down-menu">
+                                                    <li><a href="#">수정</a></li>
+                                                    <li><a href="#">삭제</a></li>
+                                                </ul>
                                             </div>
-                                            <div class="review-navi-title">
-                                                <div>배니스</div>
-                                                <div class="review-navi-deep">
-                                                    <div class="review-navi-deep-point">
-                                                        <span><i class="fa-solid fa-circle"></i></span>
-                                                        <span><i class="fa-solid fa-circle"></i></span>
-                                                        <span><i class="fa-solid fa-circle"></i></span>
-                                                        <span><i class="fa-solid fa-circle"></i></span>
-                                                        <span><i class="fa-solid fa-circle"></i></span>
+                                        </div>
+                                        <div class="review-data-table-style">
+                                            <div class="review-point">
+                                                <span><i class="fa-solid fa-circle"></i></span>
+                                                <span><i class="fa-solid fa-circle"></i></span>
+                                                <span><i class="fa-solid fa-circle"></i></span>
+                                                <span><i class="fa-solid fa-circle"></i></span>
+                                                <span><i class="fa-solid fa-circle"></i></span>
+                                            </div>
+                                            <div class="review-title">${reviewList.reviewTitle}</div>
+                                            <div class="review-content">"${reviewList.reviewContent}"</div>
+                                            <div class="review-date">
+                                                <span class="rdt">방문 날짜 :</span>
+                                                2019년 12월
+                                            </div>
+                                        </div>
+                                        <div class="review-navi-style">
+                                            <div class="review-navi-layout">
+                                                <a href="#" class="review-navi-left">
+                                                    <div>
+                                                        <img src="/resources/images/profile/venis.webp">
                                                     </div>
-                                                    <div>00건의 리뷰</div>
+                                                    <div class="review-navi-title">
+                                                        <div>배니스</div>
+                                                        <div class="review-navi-deep">
+                                                            <div class="review-navi-deep-point">
+                                                                <span><i class="fa-solid fa-circle"></i></span>
+                                                                <span><i class="fa-solid fa-circle"></i></span>
+                                                                <span><i class="fa-solid fa-circle"></i></span>
+                                                                <span><i class="fa-solid fa-circle"></i></span>
+                                                                <span><i class="fa-solid fa-circle"></i></span>
+                                                            </div>
+                                                            <div>00건의 리뷰</div>
+                                                        </div>
+                                                        <div>배니스, 이탈리아</div>
+                                                    </div>
+                                                </a>
+                                                <div class="review-navi-right">
+                                                    <i class="fa-solid fa-heart"></i>
                                                 </div>
-                                                <div>배니스, 이탈리아</div>
                                             </div>
-                                        </a>
-                                        <div class="review-navi-right">
-                                            <i class="fa-solid fa-heart"></i>
+                                        </div>
+                                        <div class="review-support"></div>
+                                        <div class="review-bottom-menu-style">
+                                            <div class="suport-button">
+                                                <i class="fa-regular fa-thumbs-up"></i>도움이 됨
+                                            </div>
+                                            <div class="save-button">
+                                                <i class="fa-solid fa-heart"></i>저장
+                                            </div>
+                                            <div class="share-button">
+                                                <i class="fa-solid fa-arrow-up-from-bracket"></i>공유
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="review-support">n개의 도움이 되는 리뷰</div>
-                                <div class="review-bottom-menu-style">
-                                    <div class="suport-button">
-                                        <i class="fa-regular fa-thumbs-up"></i>도움이 됨
+                                </c:if>
+
+                                <%-- 이미지가 있어서 reivewImgList의 size가 0이 아닐 때 --%>
+                                <c:if test="${(reviewList != null) && (fn:length(reviewList.reviewImgList) != 0)}">
+                                    <%-- 리뷰도 있고 사진도 있을 경우 --%>
+                                    <!-- 두번째 리뷰 테이블 (사진 슬라이드 넣어보기) -->
+                                    <div class="user-page-review-colums2">
+                                        <div class="user-page-review-header-style">
+                                            <div class="user-page-review-header-layout">
+                                                <a href="#" class="review-user-image"><img src="${member.profileImage}" alt="프로필 이미지"></a>
+                                                <div class="review-user-info-layout">
+                                                    <span class="review-user-nickname"><a href="#">${member.memberNickname}</a>님이 리뷰를 작성했습니다.</span>
+                                                    <a href="#" class="review-user-dday">
+                                                        ${reviewList.reviewDate}
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="user-page-review-dot-style"><i class="fa-solid fa-ellipsis" ></i></div>
+                                            <div class="user-page-review-dot-down-menu">
+                                                <ul class="down-menu">
+                                                    <li><a href="#">수정</a></li>
+                                                    <li><a href="#">삭제</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <!-- 사진 슬라이드 div태그 시작 -->
+                                        <div class="slide-container-style">
+                                            <c:forEach var="i" begin="0" end="${fn:length(reviewList.reviewImgList) - 1}">
+                                                    <div class="slide fade">
+                                                        <div class="numbertext">${i+1} / ${fn:length(reviewList.reviewImgList)}</div>
+                                                        <img src="${reviewList.reviewImgList[i].reviewImgPath}${reviewList.reviewImgList[i].reviewImgOriginal}">
+                                                    </div>
+                                            </c:forEach>
+                                            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                                            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                                        </div>
+                                        <br>
+
+                                        <div class="review-data-table-style">
+                                            <div class="review-point">
+                                                <span><i class="fa-solid fa-circle"></i></span>
+                                                <span><i class="fa-solid fa-circle"></i></span>
+                                                <span><i class="fa-solid fa-circle"></i></span>
+                                                <span><i class="fa-solid fa-circle"></i></span>
+                                                <span><i class="fa-solid fa-circle"></i></span>
+                                            </div>
+                                            <div class="review-title">${reviewList.reviewTitle}</div>
+                                            <div class="review-content">"${reviewList.reviewContent}"</div>
+                                            <div class="review-date">
+                                                <span class="rdt">방문 날짜 :</span>
+                                                2019년 12월
+                                            </div>
+                                        </div>
+                                        <div class="review-navi-style">
+                                            <div class="review-navi-layout">
+                                                <a href="#" class="review-navi-left">
+                                                    <div>
+                                                        <img src="/resources/images/profile/venis.webp">
+                                                    </div>
+                                                    <div class="review-navi-title">
+                                                        <div>배니스</div>
+                                                        <div class="review-navi-deep">
+                                                            <div class="review-navi-deep-point">
+                                                                <span><i class="fa-solid fa-circle"></i></span>
+                                                                <span><i class="fa-solid fa-circle"></i></span>
+                                                                <span><i class="fa-solid fa-circle"></i></span>
+                                                                <span><i class="fa-solid fa-circle"></i></span>
+                                                                <span><i class="fa-solid fa-circle"></i></span>
+                                                            </div>
+                                                            <div>00건의 리뷰</div>
+                                                        </div>
+                                                        <div>배니스, 이탈리아</div>
+                                                    </div>
+                                                </a>
+                                                <div class="review-navi-right">
+                                                    <i class="fa-solid fa-heart"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="review-support">n개의 도움이 되는 리뷰</div>
+                                        <div class="review-bottom-menu-style">
+                                            <div class="suport-button">
+                                                <i class="fa-regular fa-thumbs-up"></i>도움이 됨
+                                            </div>
+                                            <div class="save-button">
+                                                <i class="fa-solid fa-heart"></i>저장
+                                            </div>
+                                            <div class="share-button">
+                                                <i class="fa-solid fa-arrow-up-from-bracket"></i>공유
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="save-button">
-                                        <i class="fa-solid fa-heart"></i>저장
-                                    </div>
-                                    <div class="share-button">
-                                        <i class="fa-solid fa-arrow-up-from-bracket"></i>공유
-                                    </div>
-                                </div>
-                            </div>
+                                </c:if>
+                            </c:forEach>
                         </ul>
 
                         <div class="user-page-review-colums3">

@@ -35,4 +35,12 @@ public class ProfileDAO {
 	public Member selectMember(int memberNo) {
 		return sqlSession.selectOne("memberMapper.totalSelectMember", memberNo);
 	}
+
+	/** 프로필 페이지 이동 시 회원이 쓴 리뷰리스트 가져오기
+	 * @param memberNo
+	 * @return reviewList
+	 */
+	public List<Review> selectAllReviewList(int memberNo) {
+		return sqlSession.selectList("profileMapper.selectAllReviewList", memberNo);
+	}
 }

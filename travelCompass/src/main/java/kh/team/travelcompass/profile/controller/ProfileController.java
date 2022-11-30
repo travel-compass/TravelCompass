@@ -2,7 +2,6 @@ package kh.team.travelcompass.profile.controller;
 
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,9 +25,17 @@ public class ProfileController {
 	public String MemberPage(@PathVariable("memberNo") int memberNo,
 			Model model) {
 		
+		// 프로필 페이지의 회원정보 가져오기
 		Member member = service.selectMember(memberNo);
 		
+		// 프로필 페이지의 리뷰 리스트 가져오기
+		List<Review> reviewList = service.selectAllReviewList(memberNo);
+		
+		
 		model.addAttribute("member", member);
+		model.addAttribute("reviewList", reviewList);
+		
+		System.out.println(reviewList);
 		
 		return "profile/MemberPage";
 	}
