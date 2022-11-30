@@ -199,15 +199,6 @@ main {
     list-style: none;
 }
 
-.search-filter>li {
-
-    width: 100px;
-    height: 100%;
-    font-size: 14px;
-    font-weight: bold;
-    color: #00AA6C;
-    cursor: pointer;
-}
 
 .search-filter input[name='contentTypeId'] {
     display: none;
@@ -227,6 +218,7 @@ main {
 .search-filter label:hover {
     background-color: #ccc;
     transition-delay: 50ms;
+    cursor: pointer;
 }
 
 .search-filter input:checked + label {
