@@ -27,10 +27,12 @@
     const mapx=${place.mapx};
     const mapy=${place.mapy};
     const memberNo="${loginMember.memberNo}";
+    const memberNickname="${loginMember.memberNickname}"
     const contentid="${place.contentid}";
     const firstimage="${place.firstimage}";
     const addr1="${place.addr1}";
     const contenttypeid="${place.contenttypeid}";
+    const title="${place.title}"
   </script>
   <!-- header:include -->
 	<jsp:include page="/WEB-INF/views/inc/header.jsp"></jsp:include>
@@ -91,7 +93,7 @@
         <span class="info-detail-content"><i class="fa-solid fa-phone"></i> 전화번호 : </span>
         <span>${place.tel}</span><br>
         <span class="info-detail-content"><i class="fa-solid fa-clock"></i> 이용 시간 : </span>
-        <span>${place.usetime}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+        <span>${place.usetime}</span><br>
         <span class="info-detail-content"><i class="fa-solid fa-calendar-days"></i> 쉬는날 : </span><span>${place.restdate}</span>
       </div>
 
@@ -310,7 +312,7 @@
           <div>
             <div class="wrap">
               <h4>별점과 리뷰를 남겨주세요</h4>
-              <form name="reviewform" class="reviewform" method="post" action="/save">
+              <form name="reviewform" class="reviewform" method="post" action="/insert">
                 <input type="hidden" name="rate" id="rate" value="0" />
                 <!-- <span class="review_id">포댕이김영현</span> -->
 
@@ -332,8 +334,8 @@
                 </div>
                 <div class="review_contents">
                   <div class="warning_msg">5자 이상으로 작성해 주세요.</div>
-                  <textarea rows="1" class="review_titlearea"></textarea>
-                  <textarea rows="10" class="review_textarea"></textarea>
+                  <textarea name="reviewTitle" rows="1" class="review_titlearea"></textarea>
+                  <textarea name="reviewContent" rows="10" class="review_textarea"></textarea>
                 </div>
                 <div class="cmd">
                   <button>등록</button>
@@ -615,9 +617,9 @@
 
   <!-- 카카오지도 api script -->
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d960da26337b79bb7d208d7a89db4003"></script>
+  <script src="/resources/js/common/jQuery-core.js"></script>
   <script src="/resources/js/place/detailPlace.js"></script>
 	<script src="/resources/js/place/swiper.js"></script>
-  <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 </body>
 
 </html>

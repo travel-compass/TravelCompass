@@ -57,7 +57,7 @@ public class PlaceController {
 		Map<String, List<Place>> aroundPlaceList=lservice.detailAroundSearch(mainPlace.getMapy(), mainPlace.getMapx(), contentTypeId);
 		
 		// reviewList
-//		Map<String, Object> reviewMap=rservice.selectReviewList(contentId, cp);
+		Map<String, Object> reviewMap=rservice.selectReviewList(contentId, cp);
 
 		if(mainPlace!=null) {
 			// PLACE_SCRAP 테이블 확인
@@ -82,9 +82,10 @@ public class PlaceController {
 		
 		model.addAttribute("place", mainPlace);
 		model.addAttribute("aroundPlaceList",aroundPlaceList);
-//		model.addAttribute("reviewMap", reviewMap);
+		model.addAttribute("reviewMap", reviewMap);
 		
 		
+		System.out.println(reviewMap);
 		System.out.println(mainPlace);
 		System.out.println(aroundPlaceList);
 		

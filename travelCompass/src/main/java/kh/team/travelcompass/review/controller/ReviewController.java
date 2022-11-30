@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.multipart.MultipartFile;
 
+import kh.team.travelcompass.member.model.vo.Member;
 import kh.team.travelcompass.review.model.service.ReviewService;
 import kh.team.travelcompass.review.model.vo.Review;
 
@@ -23,19 +26,20 @@ public class ReviewController {
 	private ReviewService service;
 
 	// 리뷰 목록 정렬 리스트(추천,최신,평점 순 조회)
-	@GetMapping("/reviewList")
-	public Map<String, Object> orderReviewList(String contentid, @RequestParam Map<String, Object> paramMap,
-			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp, Model model) {
-
-		paramMap.put("contentid", contentid);
-		// pm=={contentid,key,query,cp}
-
-		Map<String, Object> reviewMap = service.orderReviewList(paramMap, cp);
-
-		model.addAttribute("reviewMap", reviewMap);
-
-		return reviewMap;
-	}
+//	@GetMapping("/reviewList")
+//	public Map<String, Object> orderReviewList(String contentid, @RequestParam Map<String, Object> paramMap,
+//			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp, Model model) {
+//
+//		paramMap.put("contentid", contentid);
+//		// pm=={contentid,key,query,cp}
+//
+//		Map<String, Object> reviewMap = service.orderReviewList(paramMap, cp);
+//
+//		model.addAttribute("reviewMap", reviewMap);
+//
+//		return reviewMap;
+//	}
+	
 
 	// 리뷰 등록
 	@PostMapping("/insert")
@@ -54,6 +58,5 @@ public class ReviewController {
 //	public int updateComment(Comment comment) {
 //		return service.updateComment(comment);
 //	}
-	
-	
+
 }

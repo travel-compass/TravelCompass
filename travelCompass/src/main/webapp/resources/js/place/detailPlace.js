@@ -70,6 +70,20 @@ var options = {
 
 var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
 
+// 마커가 표시될 위치입니다
+var markerPosition = new kakao.maps.LatLng(mapy, mapx);
+
+// 마커를 생성합니다
+var marker = new kakao.maps.Marker({
+  position: markerPosition,
+});
+
+// 마커가 지도 위에 표시되도록 설정합니다
+marker.setMap(map);
+
+// 지도에 교통정보를 표시하도록 지도타입을 추가합니다
+// map.addOverlayMapTypeId(kakao.maps.MapTypeId.TRAFFIC);
+
 /* ----------------------------- 리뷰 ----------------------------------- */
 //별점 마킹 모듈 프로토타입으로 생성
 function Rating() {}
