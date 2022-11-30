@@ -102,6 +102,10 @@ main {
   line-height: 200%;
 }
 
+#placeScrap {
+  cursor: pointer;
+}
+
 
 /* 평점 */
 /* 레이아웃 외곽 너비 400px 제한*/

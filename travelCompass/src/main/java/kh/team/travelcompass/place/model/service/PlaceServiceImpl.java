@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kh.team.travelcompass.place.model.api.PlaceAPI;
+import kh.team.travelcompass.place.model.dao.PlaceDAO;
 import kh.team.travelcompass.place.model.vo.Place;
 import kh.team.travelcompass.question.model.dao.QuestionDAO;
 import kh.team.travelcompass.question.model.vo.Question;
@@ -20,6 +21,9 @@ public class PlaceServiceImpl implements PlaceService {
 
 	@Autowired
 	private PlaceAPI api;
+	
+	@Autowired
+	private PlaceDAO dao;
 	
 	@Autowired
 	private ReviewDAO rDao;
@@ -78,5 +82,23 @@ public class PlaceServiceImpl implements PlaceService {
 		
 		
 		return api.imageList(paramMap);
+	}
+	
+	// 스크랩 체크
+	@Override
+	public int scrapCheck(Map<String, Object> map) {
+		return dao.scrapCheck(map);
+	}
+	
+	// 장소 스크랩
+	@Override
+	public int scrap(Map<String, Object> paramMap) {
+		return dao.scrap(paramMap);
+	}
+	
+	// 스크랩 취소
+	@Override
+	public int scrapCancel(Map<String, Object> paramMap) {
+		return dao.scrapCancel(paramMap);
 	}
 }

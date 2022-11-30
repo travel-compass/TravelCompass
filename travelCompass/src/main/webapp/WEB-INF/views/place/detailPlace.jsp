@@ -4,6 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,12 +19,18 @@
   <script src="https://kit.fontawesome.com/72842759a7.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+  
 </head>
 
 <body>
   <script>
     const mapx=${place.mapx};
     const mapy=${place.mapy};
+    const memberNo="${loginMember.memberNo}";
+    const contentid="${place.contentid}";
+    const firstimage="${place.firstimage}";
+    const addr1="${place.addr1}";
+    const contenttypeid="${place.contenttypeid}";
   </script>
   <!-- header:include -->
 	<jsp:include page="/WEB-INF/views/inc/header.jsp"></jsp:include>
@@ -56,12 +63,18 @@
     <section>
       <div class="info-header">
         <h1><span>${place.title}</span></h1>
-        <span class="place-scrap">
-          <!-- 빈 하트 모양 -->
-          <i class="fa-regular fa-heart" id="boardLike"></i>
-          <!-- 채워진 모양 -->
-          <!-- <i class="fa-solid fa-heart" id="boardLike"></i>  -->
-        </span>
+        <span class="like-area">
+          <%-- scrapCheck가 없다면 ==로그인X또는 좋아요X --%>
+          <c:if test="${empty scrapCheck}">
+              <!-- 빈 스크랩 모양 -->
+              <i class="fa-regular fa-bookmark" id=placeScrap></i>                         
+          </c:if>
+          <%-- scrapCheck가 있다면 == 로그인O, 좋아요O --%>
+          <c:if test="${not empty scrapCheck}">
+              <!-- 채워진 모양 -->
+              <i class="fa-solid fa-bookmark" id=placeScrap></i> 
+          </c:if>
+        </span>  
       </div>
 
       <div class="avg-rating">
@@ -602,9 +615,9 @@
 
   <!-- 카카오지도 api script -->
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d960da26337b79bb7d208d7a89db4003"></script>
-
   <script src="/resources/js/place/detailPlace.js"></script>
 	<script src="/resources/js/place/swiper.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 </body>
 
 </html>

@@ -2,5 +2,32 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 <mapper namespace="placeMapper">
+	
+	<resultMap type="Place" id="place_rm">
+		<id property="contentid" column="MEMBER_NO"/>
+		<result property="contentid" column="CONTENT_ID"/>
+		<result property="contenttypeid" column="MEMBER_PW"/>
+		<result property="firstimage" column="MEMBER_TEL"/>
+		<result property="addr1" column="PLACE_ADDR"/>
+		<result property="mapx" column="MAPX"/>
+		<result property="mapy" column="MAPY"/>
+	</resultMap>
 
+
+	<select id="scrapCheck" resultType="_int" >
+		SELECT COUNT(*) FROM PLACE_SCRAP
+		WHERE CONTENT_ID=#{contentid}
+		AND MEMBER_NO=#{memberNo}
+	</select>
+
+	<insert id="scrap">
+		INSERT INTO PLACE_SCRAP
+		VALUES (SEQ_PLACE_SCRAP_NO.NEXTVAL,DEFAULT, #{firstimage}, #{mapx}, #{mapy}, #{contentid}, #{memberNo}, #{addr1}, #{contenttypeid})
+	</insert>
+	
+	<delete id="scrapCancel">
+		DELETE FROM PLACE_SCRAP
+		WHERE MEMBER_NO=#{memberNo}
+		AND CONTENT_ID=#{contentid}
+	</delete>
 </mapper>
