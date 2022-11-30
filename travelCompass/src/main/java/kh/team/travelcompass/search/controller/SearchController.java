@@ -47,13 +47,15 @@ public class SearchController {
 			@RequestParam(value = "areaCode", required = false, defaultValue = "null") 
 			String areaCode,
 			@RequestParam(value = "contentTypeId", required = false, defaultValue = "null")
-			String contentTypeId, Model model
+			String contentTypeId, Model model,
+			@RequestParam(value="pageNo",required=false, defaultValue="1")String pageNo
 			) {
 
 		try {
-			Map<String, Object> placeMap = service.searchPlaceKeyword(keyword, areaCode, contentTypeId);
+			Map<String, Object> placeMap = service.searchPlaceKeyword(keyword, areaCode, contentTypeId, pageNo);
 
 			model.addAttribute("placeMap", placeMap);
+		 
 		} catch (Exception e) {
 
 			e.printStackTrace();

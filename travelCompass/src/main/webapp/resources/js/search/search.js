@@ -1,65 +1,119 @@
+// //페이징을 위한 전역변수
 
-const LIMIT = 3;
-// 페이지 내 목록 제한
-let wrap = document.querySelector('#wrap');
-// 카드리스트 컨테이너 노드
-let paging = document.querySelector('#paging');
-// 페이지처리 컨테이너 노드
-let origin = window.location.origin;
-// origin 경로
-let path = window.location.pathname;
-// 페이지 경로
-// origin+path로 request.getParameter를 만들고 태그에 파라미터 넘기기 위함
+// let totalCount;
+// let pageNo = 1 ;           //현재 페이지 번호(globalCurrentPage)
+// let numOfRows = 10 ;       //한 페이지에 보여줄 게시글 수 = dataPerPage
+// let pageCount=10;          //한 화면에 보여줄 페이지 수
 
-let total = jsonList.length / LIMIT;
-// 전체 공연 개수에 3(LIMIT)을 나누면 잘 페이지 수가 총 나옵니다
-let page = request.getParameter("page");
-// 파라미터를 가져오는 함수로 page값을 가져옵니다.
-let end = LIMIT * page;
-let start = (page-1) * LIMIT;
-// Array.slice(시작인덱스번호=start, 잘라낼번호=end);
+// //검색시 pageNo를 1로 초기화
+// function search(){
+//     pageNo = 1;
+// }
 
-let pagination = jsonList.slice(start,end);
+// //페이지 번호 클릭시 해당 페이지 데이터 출력
+// $(document).on("click", "#pagination a", function(){
+//     pageNo = $(this).attr("data-pageNo");
+// });
 
-for(let key in pagination){
-    wrap.innerHTML += (pagination[key].template());
-}
 
-paging.innerHTML = // 페이지 감소 버튼입니다.
-// 페이지가 1페이지이면 더이상 감소하지 않게 합니다.
-// =입니다. +=아닙니다. 
-`
-<li class="page-item">
-    <a href="${origin+path}?page=${page==1?page:parseInt(page)-1}" class="page-link">&lt;&lt;</a>
-</li>
-`;
+// $(document).ready(function(){
 
-for(let i=0; i<total; i++){
-if(i>(total/2)-5 && i<(total/2)+5){
-        // 화면을 벗어나서 ... 처리했습니다.
-        // if 구문 지우면 전체 페이지가 나옵니다.
-        if(i<(total/2)-4){
-            paging.innerHTML += `
-            <li class="page-item fw-bold">
-                ...
-            </li>
-            `;
-        }
-        continue;
-    } else {
-        // 이 부분만 있어도 됩니다.
-        paging.innerHTML += `
-        <li class="page-item${i+1==page?" fw-bold":""}">
-            <a href="${origin+path}?page=${i+1}" class="page-link">${i+1}</a>
-        </li>
-        `;
-    }
-}
+//     //$ajax로 데이터 가져오기
+//     $.ajax({
+//         url: "localhost/search?keyword=${param.keyword}&contentTypeId=${param.contentTypeId}&areaCode=${param.areaCode}",
+//         method: "GET",
+//         dataType: "json",
+//         success: function(data){
+//             totalCount = ${totalCount};
+//         }
+//     });
 
-paging.innerHTML += // 페이지 증가 버튼입니다.
-// 페이지가 total값이면 getParameter 받은 값으로 유지합니다.
-`
-<li class="page-item">
-    <a href="${origin+path}?page=${page==total?page:parseInt(page)+1}" class="page-link">&gt;&gt;</a>
-</li>
-`
+//     //페이징 표시 호출
+//     paging(totalCount, numOfRows, pageCount , globalPageNo );
+// });
+
+// //페이징 표시 함수
+// function paging(totalCount, numOfRows, pageCount, currentpageNo){
+//     console.log("currentPageNo :" + currentPageNo);
+//     totalPage = Math.ceil(totalCount/numOfRows); //총 페이지 수
+
+//     if(totalPage<pageCount){
+//         pageCount = totalPage;
+//     }
+
+//     let pageGroup = Math.ceil(currentPageNo/pageCount); //페이지 그룹
+//     let last = pageGroup * pageCount; //화면에 보여질 마지막 페이지 번호
+//     if(last > totalPage){
+//         last = totalPage;
+//     }
+//     let first = last - (pageCount-1); //화면에 보여질 첫번째 페이지 번호
+//     let next = last+1;
+//     let prev = first-1;
+
+//     let pageHtml = "";
+
+//     if(prev > 0){
+//         pageHtml += "<li><a href='#' id='prev'>이전</a></li>";
+//     }
+
+//     //페이징 번호 표시
+//     for(let i=first; i<=last; i++){
+//         if(currentPage == i ){
+//             pageHtml += "<li><a href='#' id='" + i + "'>" + i + "</a></li>";
+//         }else{
+//             pageHtml += "<li><a href='#' id='" + i + "'>" + i + "</a></li>";
+//         }
+//     }
+
+//     if(last < totalPage){
+//         pageHtml += "<li><a href='#' id='next'>다음</a></li>";
+//     }
+
+//     $("#pagination").html(pageHtml);
+//     let displayCount = "";
+//     displayCount = "현재 -1" + totalPage + "페이지 / " + totalCount + "개의 게시글";
+//     $("#displayCount").text(displayCount);
+
+    
+// }
+
+// // 현재 페이지와 페이지당 글 개수 반영
+// function displayData(currentPageNo, numOfRows){
+//     let chartHtml = "";
+
+//     currentPageNo = Number(currentPageNo);
+//     numOfRows = Number(numOfRows);
+
+//     for(
+//         var i = (currentPageNo-1)*numOfRows;
+//         i<(currentPageNo-1)*numOfRows + numOfRows;
+//         i++
+//     ){
+//         chartHtml +=
+//         "<tr><td>" +
+//         dataList[i].d1 +
+//         "</td><td>" +
+//         dataList[i].d2 +
+//         "</td><td>" +
+//         dataList[i].d3 +
+//         "</td></tr>";
+//     } //dataList는 임의의 데이터임.. 각 소스에 맞게 변수를 넣어주면 됨...
+//     $("#dataTableBody").html(chartHtml);
+// }
+
+
+// //페이지 번호 클릭시 이벤트
+// $("#pagination li a").click(function(){
+//     let $id = $(this).attr("id");
+//     selectedPage = $(this).text();
+
+//     if($id == "next")selectedPage = next;
+//     if($id == "prev")selectedPage = prev;
+
+//     //pageNo에 선태된 페이지 번호를 저장
+//     globalPageNo = selectedPage;
+//     //페이징 표시
+//     paging(totalCount, numOfRows, pageCount, selectedPage);
+
+//     displayData(selectedPage, numOfRows);
+// });

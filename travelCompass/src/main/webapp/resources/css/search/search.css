@@ -390,17 +390,15 @@ main {
 
 /*********************page-select(리스트 페이지)******************************/
 
-.page-select {
+.pagination-area {
     width: 770px;
     height: 60px;
     border: #ccc solid 1px;
     padding: 10px 20px;
     margin-top: 30px;
-    display: flex;
-    justify-content: space-between;
 }
 
-.page-select button {
+/* .page-select button {
     width: 62px;
     height: 36px;
     border: none;
@@ -410,28 +408,69 @@ main {
     border-radius: 3px;
     font-weight: bold;
     cursor: pointer;
+} */
+
+.pagination {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+}
+
+.pagination li {
+    width: 20px;
+    margin: 0 5px;
+    text-align: center;
 
 }
 
-.page-select div {
-    padding: 5px 0;
-}
-
-.page-select a {
+.pagination a {
+    /* display: block;
+    width: 100%;
+    height: 100%;
+    
     text-decoration: none;
     color: black;
     font-size: 16px;
     box-sizing: border-box;
-    font-weight: bolder;
-    padding: 0 10px;
+    font-weight: bolder; */
+
+    display:block;
+	margin-top: 5px;
+    margin-right: 10px;
+	float:left;
+	border:1px solid #e6e6e6;
+	width:28px;
+	height:28px;
+	line-height:28px;
+	text-align:center;
+	background-color:#fff;
+	font-size:16px;
+	color:#333;
+    font-weight: bolder; 
+	text-decoration:none;
 }
 
-.page-select a:active {
-    background-color: #ccc;
+.arrow {
+	border:1px solid #ccc;
+
 }
 
-.page-select a:hover {
-    color: #00AA6C;
+.pagination a:active {
+    color : #333;
+    background-color: #fff;
+    
+}
+
+.pagination a:hover {
+    color: #fff;
+    background-color: #0a5a4a;
+    transition: 0.4s;
+}
+
+a.current {
+    background-color: #0a5a4a;
+    color: #fff;
 }
 
 
