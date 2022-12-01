@@ -164,51 +164,37 @@ main {
   cursor: pointer;
 }
 
-.rating .rate_radio {
-  position: relative;
-  display: inline-block;
-  z-index: 20;
-  opacity: 0.001;
-  width: 60px;
-  height: 60px;
-  background-color: #fff;
-  cursor: pointer;
-  vertical-align: top;
-  display: none;
-}
 
-.rating .rate_radio+label {
-  position: relative;
-  display: inline-block;
-  margin-left: -4px;
-  z-index: 10;
-  width: 30px;
-  height: 30px;
-  background-repeat: no-repeat;
-  background-size: 60px 60px;
-  cursor: pointer;
-  background-color: #ccc;
-  border-radius: 50%;
-  margin: 10px 0;
-}
+/* component */
 
-.rating .rate_radio:checked+label {
-  background-color: #2DC48D;
-}
-
-.warning_msg {
-  display: none;
-  position: relative;
+.star-rating {
+  border: solid 1px #ccc;
+  display: flex;
+  flex-direction: row-reverse;
+  font-size: 1.5em;
+  justify-content: space-around;
+  padding: 0 .2em;
   text-align: center;
-  background: #ffffff;
-  line-height: 26px;
-  width: 100%;
-  color: red;
-  padding: 10px;
-  box-sizing: border-box;
-  border: 1px solid #e0e0e0;
+  width: 5em;
 }
 
+.star-rating input {
+  display: none;
+}
+
+.star-rating label {
+  color: #ccc;
+  cursor: pointer;
+}
+
+.star-rating :checked~label {
+  color: #2dcd8f;
+}
+
+.star-rating label:hover,
+.star-rating label:hover~label {
+  color: #66d1a8;
+}
 
 
 /* ------------------------ 지도 섹션 ------------------------ */

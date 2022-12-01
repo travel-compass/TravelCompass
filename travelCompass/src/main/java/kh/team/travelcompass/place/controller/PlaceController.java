@@ -36,9 +36,9 @@ public class PlaceController {
 	private ReviewService rservice;
 	
 	
-	@GetMapping("/detail")
-	public String page(String contentId,
-			String contentTypeId,
+	@GetMapping("/detail/${contentTypeId}/${contentId}")
+	public String page(@PathVariable String contentId,
+			@PathVariable String contentTypeId,
 			@RequestParam(value="cp",required=false, defaultValue="1") int cp,
 			@RequestParam Map<String,Object> paramMap,
 			@SessionAttribute(value="loginMember",required=false) Member loginMember,
@@ -57,7 +57,7 @@ public class PlaceController {
 		Map<String, List<Place>> aroundPlaceList=lservice.detailAroundSearch(mainPlace.getMapy(), mainPlace.getMapx(), contentTypeId);
 		
 		// reviewList
-//		Map<String, Object> reviewMap=rservice.selectReviewList(contentId, cp);
+		Map<String, Object> reviewMap=rservice.selectReviewList(contentId, cp);
 
 		if(mainPlace!=null) {
 			// PLACE_SCRAP 테이블 확인
@@ -82,9 +82,10 @@ public class PlaceController {
 		
 		model.addAttribute("place", mainPlace);
 		model.addAttribute("aroundPlaceList",aroundPlaceList);
-//		model.addAttribute("reviewMap", reviewMap);
+		model.addAttribute("reviewMap", reviewMap);
 		
 		
+		System.out.println(reviewMap);
 		System.out.println(mainPlace);
 		System.out.println(aroundPlaceList);
 		

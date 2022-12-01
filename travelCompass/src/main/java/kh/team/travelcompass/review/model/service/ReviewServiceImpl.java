@@ -63,6 +63,8 @@ public class ReviewServiceImpl implements ReviewService {
 	// 리뷰 삽입(작성)
 	@Override
 	public int insertReview(Review review) {
+		
+		// XSS 방지, 개행문자 처리
 		review.setReviewTitle(Util.XSSHandling(review.getReviewTitle()));
 		review.setReviewContent(Util.XSSHandling(review.getReviewContent()));
 		
