@@ -18,4 +18,11 @@ public interface TravelService {
 	 * @return result
 	 */
 	public int createTravel(Travel travel);
+
+
+	/** 여행 조회
+	 * @param travelNo
+	 * @return travel
+	 */
+	public Travel selectTravel(int travelNo);
 }

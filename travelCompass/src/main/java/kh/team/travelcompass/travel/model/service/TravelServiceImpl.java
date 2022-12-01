@@ -25,4 +25,13 @@ public class TravelServiceImpl implements TravelService{
 	public int createTravel(Travel travel) {
 		return dao.createTravel(travel);
 	}
+
+	// 여행 조회
+	@Override
+	public Travel selectTravel(int travelNo) {
+		
+		
+		
+		return ;
+	}
 }

@@ -36,7 +36,8 @@
                 <span class="travel-writer">작성자: <a href="작성자 프로필 페이지"> 예비군김영현</a></span>
                 <div class="input-row">
                     <textarea name="travelContent" id="travelContent" maxlength="33" placeholder="여행 설명을 입력하세요." class="travel-content read-only" readonly></textarea>
-                    <button class="fa-solid fa-pen-to-square update-btn" type="button"><!-- 수정버튼 --></button>
+                    <button class="fa-solid fa-pen-to-square update-btn" type="button"><!-- 수
+                    정버튼 --></button>
                     <button class="fa-solid fa-xmark cancel-btn" type="button"><!-- 취소 --></button>
                 </div>
                 <span class="last-update-date">2021년 11월 12일</span>
@@ -65,26 +66,13 @@
                             </button>
                         </div>
                         <div class="review-area">
-                            <span>평균 리뷰</span>
-                            <span>모든 리뷰 수</span>
+                            <div class="rating">
+                                <span class="empty">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                                <span class="fill">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                            </div>
+                            <span class="review-count">3231</span>
                         </div>
                         <span class="place-addr">장소 주소</span>
-                    </div>
-                </li>
-                <li class="travel-item">
-                    <div class="travel-first-image">
-                        <img src="https://a.cdn-hotels.com/gdcs/production97/d1351/a274bc26-9643-4bae-a91f-cebaf7f9fa56.jpg?impolicy=fcrop&w=800&h=533&q=medium" alt="">
-                    </div>
-                    <div class="place-info">
-                        <div class="place-title-area">
-                            <a href="<!-- 장소 상세페이지로 -->">장소 이름</a>
-                            <span class="fa-solid fa-ellipsis drop-down"></span>
-                        </div>
-                        <div class="review-area">
-                            <span>평균 리뷰</span>
-                            <span>모든 리뷰 수</span>
-                        </div>
-                        <span class>장소 주소</span>
                     </div>
                 </li>
             </ul>
@@ -110,8 +98,13 @@
                             </button>
                         </div>
                         <div class="review-area">
-                            <span>평균 리뷰</span>
-                            <span>모든 리뷰 수</span>
+                            <div class="review-area">
+                            <div class="rating">
+                                <span class="empty">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                                <span class="fill">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                            </div>
+                            <span class="review-count">3231</span>
+                        </div>
                         </div>
                         <span class="place-addr">장소 주소</span>
                         <span class="scrap-date">스크랩 날짜</span>
@@ -124,17 +117,26 @@
                     <div class="scrap-place-info">
                         <div class="place-title-area">
                             <a href="해당 장소 상세페이지">스크렙 장소 이름</a>
-                            <span class="fa-solid fa-ellipsis drop-down"></span>
+                            <button class="fa-solid fa-ellipsis drop-down">
+                                <ul class="drop-down_box">
+                                    <li>여행에 추가</li>
+                                    <li>스크랩 삭제</li>
+                                </ul>
+                            </button>
                         </div>
-                        
                         <div class="review-area">
-                            <span>평균 리뷰</span>
-                            <span>모든 리뷰 수</span>
+                            <div class="review-area">
+                            <div class="rating">
+                                <span class="empty">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                                <span class="fill">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                            </div>
+                            <span class="review-count">3231</span>
+                        </div>
                         </div>
                         <span class="place-addr">장소 주소</span>
                         <span class="scrap-date">스크랩 날짜</span>
                     </div>
-                </li>
+                </li>  
                 <li class="scrap-place-item">
                     <a class="place-first-image">
                         <img src="https://a.cdn-hotels.com/gdcs/production97/d1351/a274bc26-9643-4bae-a91f-cebaf7f9fa56.jpg?impolicy=fcrop&w=800&h=533&q=medium" alt="">
@@ -142,17 +144,27 @@
                     <div class="scrap-place-info">
                         <div class="place-title-area">
                             <a href="해당 장소 상세페이지">스크렙 장소 이름</a>
-                            <span class="fa-solid fa-ellipsis drop-down"></span>
+                            <button class="fa-solid fa-ellipsis drop-down">
+                                <ul class="drop-down_box">
+                                    <li>여행에 추가</li>
+                                    <li>스크랩 삭제</li>
+                                </ul>
+                            </button>
                         </div>
-                        
                         <div class="review-area">
-                            <span>평균 리뷰</span>
-                            <span>모든 리뷰 수</span>
+                            <div class="review-area">
+                            <div class="rating">
+                                <span class="empty">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                                <span class="fill">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                            </div>
+                            <span class="review-count">3231</span>
+                        </div>
                         </div>
                         <span class="place-addr">장소 주소</span>
                         <span class="scrap-date">스크랩 날짜</span>
                     </div>
-                </li> 
+                </li>  
+                
                 <div class="empty-scrap">
                     텅...
                 </div>

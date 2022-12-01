@@ -30,8 +30,6 @@ public class Test {
 		}
 		List<String> keywordList = new ArrayList<>(map.keySet());
 		
-		
-		
 		System.out.println(keywordList);
 		keywordList = keywordList.subList(0, 3);
 		System.out.println(keywordList);

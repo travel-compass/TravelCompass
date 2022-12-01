@@ -37,8 +37,15 @@ public class TravelController {
 		return "/travel/travelMain";
 	}
 	
-	@GetMapping("/create/page")
-	public String createTravel() {
+	@GetMapping("/create/{travelNo}")
+	public String createTravel(@PathVariable("travelNo") int travelNo, Model model) {
+		
+		// 여행 번호에 맞는 여행 조회
+		Travel travel = service.selectTravel(travelNo);
+		
+		
+		// 로그인한 회원이 스크랩한 모든 장소 조회
+		
 		return "/travel/travelCreate";
 	}
 	
