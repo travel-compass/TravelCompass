@@ -164,7 +164,7 @@
 		</selectKey>
 		
 		INSERT INTO REVIEW
-		VALUES 
+		VALUES (#{reviewNo},#{rating},#{reviewTitle},#{reviewContent},DEFAULT,#{memberNo},#{contentid},#{firstimage})
 	</insert>
 	
 </mapper>

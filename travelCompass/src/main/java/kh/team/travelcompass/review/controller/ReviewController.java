@@ -55,37 +55,37 @@ public class ReviewController {
 	}
 	
 	@PostMapping("/insertReview")
-	public int insertReview(HttpServletRequest req, HttpServletResponse resp) {
+	public int insertReview(Review review) {
 		
-		String contentid=req.getParameter("contentid");
+//		String contentid=req.getParameter("contentid");
+//		
+//		Cookie[] cookies=req.getCookies();
+//		Cookie cookie=null;
+//		
+//		// reviewContentid 쿠키가 있는지 확인 후 세팅
+//		for(Cookie c:cookies) {
+//			if(c.getName().equals("reviewContentid")) {
+//				cookie=c;
+//				break;
+//			}
+//		}
+//		
+//		// contentid기 쿠키value에 있는지 확인
+//		if(cookie!=null) {
+//			if(cookie.getValue().indexOf("|"+contentid+"|")==-1) {
+//				cookie.setValue(cookie.getValue()+"|"+contentid+"|");
+//			}
+//		} else { // 없으면 새로운 쿠키 생성하여 contentid 저장
+//			cookie=new Cookie("reviewContentid", "|"+contentid+"|");
+//		}
+//		
+//		cookie.setPath("/");
+//		cookie.setMaxAge(7000);
+//		
+//		resp.addCookie(cookie);
+//		
 		
-		Cookie[] cookies=req.getCookies();
-		Cookie cookie=null;
-		
-		// reviewContentid 쿠키가 있는지 확인 후 세팅
-		for(Cookie c:cookies) {
-			if(c.getName().equals("reviewContentid")) {
-				cookie=c;
-				break;
-			}
-		}
-		
-		// contentid기 쿠키value에 있는지 확인
-		if(cookie!=null) {
-			if(cookie.getValue().indexOf("|"+contentid+"|")==-1) {
-				cookie.setValue(cookie.getValue()+"|"+contentid+"|");
-			}
-		} else { // 없으면 새로운 쿠키 생성하여 contentid 저장
-			cookie=new Cookie("reviewContentid", "|"+contentid+"|");
-		}
-		
-		cookie.setPath("/");
-		cookie.setMaxAge(7000);
-		
-		resp.addCookie(cookie);
-		
-		
-		return 0;
+		return service.insertReview(review);
 	}
 
 

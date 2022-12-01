@@ -36,9 +36,9 @@ public class PlaceController {
 	private ReviewService rservice;
 	
 	
-	@GetMapping("/detail")
-	public String page(String contentId,
-			String contentTypeId,
+	@GetMapping("/detail/${contentTypeId}/${contentId}")
+	public String page(@PathVariable String contentId,
+			@PathVariable String contentTypeId,
 			@RequestParam(value="cp",required=false, defaultValue="1") int cp,
 			@RequestParam Map<String,Object> paramMap,
 			@SessionAttribute(value="loginMember",required=false) Member loginMember,
