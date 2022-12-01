@@ -55,7 +55,7 @@ for(let category of categoryList) {
             url: "/categorySearch",
             type: "GET",
             data: {
-                "keyword": keyword,
+                "keyword": decodeUTF8(keyword),
                 "contentTypeId": this.value,
                 "areaCode": areaCode
             },
@@ -63,6 +63,7 @@ for(let category of categoryList) {
                 //search-result-list의 내용을 지운다(searchResultList[0]==search-result-list)
                 const searchResultList = document.getElementsByClassName("search-result-list");
                 searchResultList[0].innerHTML = "";
+                console.log(result);
                 //search-result-list에 결과를 넣는다
                 searchResultList[0].innerHTML = result;
                 },

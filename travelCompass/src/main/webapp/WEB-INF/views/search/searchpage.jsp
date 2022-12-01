@@ -139,7 +139,7 @@
                                                 <div class="search-result-item">
 
                                                     <div class="search-result-item-img">
-                                                        <a href="/place/detail/${place.contentid}/${place.contenttypeid}">
+                                                        <a href="/place/detail/${place.contenttypeid}/${place.contentid}">
                                                             <c:choose>
                                                                 <c:when test="${!empty place.firstimage}">
                                                                     <img src="${place.firstimage}" alt="" width="177px" height="140px">
@@ -154,7 +154,7 @@
                                                     <div class="search-result-item-content">
 
                                                         <div class="search-result-item-title">
-                                                            <span><a href="/place/detail/${place.contentid}/${place.contenttypeid}">${place.title}</a></span>
+                                                            <span><a href="/place/detail/${place.contenttypeid}/${place.contentid}">${place.title}</a></span>
                                                         </div>
 
                                                         <div class="search-result-item-grade">
@@ -169,7 +169,7 @@
                                                         </div>
                                                             
                                                         <div class="search-result-item-address">
-                                                            <span><a href="/place/detail/${place.contentid}/${place.contenttypeid}">${place.addr1}</a></span>
+                                                            <span><a href="/place/detail/${place.contenttypeid}/${place.contentid}">${place.addr1}</a></span>
                                                         </div>
                                                             
                                                         <div class="search-result-item-review">
