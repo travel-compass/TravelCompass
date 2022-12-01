@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="/resources/css/search/search.css">
     <link rel="stylesheet" href="/resources/css/inc/footer.css">
     <script src="https://kit.fontawesome.com/72842759a7.js" crossorigin="anonymous"></script>
+    <script src="/resources/js/common/jQuery-core.js"></script>
 </head>
 
 <body>
@@ -89,98 +90,22 @@
                     
                     <div class="search-filter">
                         <ul>
-                        <c:choose>
-                            <c:when test="${param.contentTypeId == 12}">
                             <li>
-                                <input type="radio" name="contentTypeId" value="12" id="searchType1" checked>
+                                <input type="radio" name="contentTypeId" value="12" id="searchType1" checked class="category">
                                 <label for="searchType1"><a id="search-filter">관광지</a></label>
                             </li>
                             <li>
-                                <input type="radio" name="contentTypeId" value="14" id="searchType2">
+                                <input type="radio" name="contentTypeId" value="14" id="searchType2" class="category">
                                 <label for="searchType2"><a id="search-filter">문화시설</a></label>
                             </li>
                             <li>
-                                <input type="radio" name="contentTypeId" value="28" id="searchType3">
+                                <input type="radio" name="contentTypeId" value="28" id="searchType3" class="category">
                                 <label for="searchType3"><a id="search-filter">레포츠</a></label>
                             </li>
                             <li>
-                                <input type="radio" name="contentTypeId" value="39" id="searchType4">
+                                <input type="radio" name="contentTypeId" value="39" id="searchType4" class="category">
                                 <label for="searchType4"><a id="search-filter">음식점</a></label>
                             </li>
-                            </c:when>
-                            <c:when test="${param.contentTypeId == 14}">
-                            <li>
-                                <input type="radio" name="contentTypeId" value="12" id="searchType1">
-                                <label for="searchType1"><a id="search-filter">관광지</a></label>
-                            </li>    
-                            <li>
-                                <input type="radio" name="contentTypeId" value="14" id="searchType2" checked>
-                                <label for="searchType2"><a id="search-filter">문화시설</a></label>
-                            </li>
-                            <li>
-                                <input type="radio" name="contentTypeId" value="28" id="searchType3">
-                                <label for="searchType3"><a id="search-filter">레포츠</a></label>
-                            </li>
-                            <li>
-                                <input type="radio" name="contentTypeId" value="39" id="searchType4">
-                                <label for="searchType4"><a id="search-filter">음식점</a></label>
-                            </li>
-                            </c:when>
-                            <c:when test="${param.contentTypeId == 28}">
-                                <li>
-                                    <input type="radio" name="contentTypeId" value="12" id="searchType1">
-                                    <label for="searchType1"><a id="search-filter">관광지</a></label>
-                                </li>    
-                                <li>
-                                    <input type="radio" name="contentTypeId" value="14" id="searchType2">
-                                    <label for="searchType2"><a id="search-filter">문화시설</a></label>
-                                </li>
-                                <li>
-                                    <input type="radio" name="contentTypeId" value="28" id="searchType3"checked>
-                                    <label for="searchType3"><a id="search-filter">레포츠</a></label>
-                                </li>
-                                <li>
-                                    <input type="radio" name="contentTypeId" value="39" id="searchType4">
-                                    <label for="searchType4"><a id="search-filter">음식점</a></label>
-                                </li>
-                            </c:when>
-                            <c:when test="${param.contentTypeId == 39}">
-                                <li>
-                                    <input type="radio" name="contentTypeId" value="12" id="searchType1">
-                                    <label for="searchType1"><a id="search-filter">관광지</a></label>
-                                </li>    
-                                <li>
-                                    <input type="radio" name="contentTypeId" value="14" id="searchType2">
-                                    <label for="searchType2"><a id="search-filter">문화시설</a></label>
-                                </li>
-                                <li>
-                                    <input type="radio" name="contentTypeId" value="28" id="searchType3">
-                                    <label for="searchType3"><a id="search-filter">레포츠</a></label>
-                                </li>
-                                <li>
-                                    <input type="radio" name="contentTypeId" value="39" id="searchType4" checked>
-                                    <label for="searchType4"><a id="search-filter">음식점</a></label>
-                                </li>
-                            </c:when>
-                            <c:otherwise >
-                                <li>
-                                    <input type="radio" name="contentTypeId" value="12" id="searchType1" checked>
-                                    <label for="searchType1"><a id="search-filter">관광지</a></label>
-                                </li>
-                                <li>
-                                    <input type="radio" name="contentTypeId" value="14" id="searchType2">
-                                    <label for="searchType2"><a id="search-filter">문화시설</a></label>
-                                </li>
-                                <li>
-                                    <input type="radio" name="contentTypeId" value="28" id="searchType3">
-                                    <label for="searchType3"><a id="search-filter">레포츠</a></label>
-                                </li>
-                                <li>
-                                    <input type="radio" name="contentTypeId" value="39" id="searchType4">
-                                    <label for="searchType4"><a id="search-filter">음식점</a></label>
-                                </li>
-                            </c:otherwise>
-                        </c:choose>
                         </ul>
                     </div>
 		        </div>
@@ -214,7 +139,7 @@
                                                 <div class="search-result-item">
 
                                                     <div class="search-result-item-img">
-                                                        <a href="/place/detail?contentId=${place.contentid}&contentTypeId=${place.contenttypeid}">
+                                                        <a href="/place/detail/${place.contentid}/${place.contenttypeid}">
                                                             <c:choose>
                                                                 <c:when test="${!empty place.firstimage}">
                                                                     <img src="${place.firstimage}" alt="" width="177px" height="140px">
@@ -229,7 +154,7 @@
                                                     <div class="search-result-item-content">
 
                                                         <div class="search-result-item-title">
-                                                            <span><a href="/place/detail?contentId=${place.contentid}&contentTypeId=${place.contenttypeid}">${place.title}</a></span>
+                                                            <span><a href="/place/detail/${place.contentid}/${place.contenttypeid}">${place.title}</a></span>
                                                         </div>
 
                                                         <div class="search-result-item-grade">
@@ -244,7 +169,7 @@
                                                         </div>
                                                             
                                                         <div class="search-result-item-address">
-                                                            <span><a href="/place/detail?contentId=${place.contentid}&contentTypeId=${place.contenttypeid}">${place.addr1}</a></span>
+                                                            <span><a href="/place/detail/${place.contentid}/${place.contenttypeid}">${place.addr1}</a></span>
                                                         </div>
                                                             
                                                         <div class="search-result-item-review">
