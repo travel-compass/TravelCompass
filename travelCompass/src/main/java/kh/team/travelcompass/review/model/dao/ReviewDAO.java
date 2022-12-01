@@ -80,4 +80,12 @@ public class ReviewDAO {
 		return sqlSession.insert("reviewMapper.insertReview", review);
 	}
 
+	/** 리뷰 삭제
+	 * @param contentid
+	 * @return result
+	 */
+	public int deleteReview(int reviewNo) {
+		return sqlSession.delete("reviewMapper.deleteReview", reviewNo);
+	}
+
 }

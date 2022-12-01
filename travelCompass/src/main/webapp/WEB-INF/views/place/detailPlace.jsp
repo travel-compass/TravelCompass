@@ -325,7 +325,7 @@
                   <label for="3-stars" class="star">&#9679;</label>
                   <input type="radio" id="2-stars" name="rating" value="2" />
                   <label for="2-stars" class="star">&#9679;</label>
-                  <input type="radio" id="1-star" name="rating" value="1" />
+                  <input type="radio" id="1-star" name="rating" value="1" checked/>
                   <label for="1-star" class="star">&#9679;</label>
                 </div>
 

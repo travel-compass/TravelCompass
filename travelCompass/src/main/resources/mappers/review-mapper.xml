@@ -167,4 +167,10 @@
 		VALUES (#{reviewNo},#{rating},#{reviewTitle},#{reviewContent},DEFAULT,#{memberNo},#{contentid},#{firstimage})
 	</insert>
 	
+	<delete id="deleteReview">
+		UPDATE "REVIEW" SET
+		REVIEW_FL='Y'
+		WHERE REVIEW_NO=#{reviewNo}
+	</delete>
+	
 </mapper>

@@ -100,8 +100,7 @@ function selectReview() {
 /* 리뷰 작성 등록 */
 const addReview = document.getElementById("addReview");
 const reviewTitle = document.getElementById("reviewTitle");
-const reviewContent = document.getElementById("revivewContent");
-const reviewRate = document.querySelector('input[name="rating"]');
+const reviewContent = document.getElementById("reviewContent");
 
 addReview.addEventListener("click", () => {
   // 로그인 확인
@@ -110,13 +109,14 @@ addReview.addEventListener("click", () => {
     if (confirm("로그인하시겠습니까?")) {
       location.href = "/member/login";
     } else {
-      alert("로그인 후 이용해주세요");
+      // alert("로그인 후 이용해주세요");
     }
     return;
   }
 
-  if ((reviewRate.value = null)) {
-    alert("평점을 선택해주세요");
+  if (reviewTitle.value.trim().length == 0) {
+    alert("제목을 입력해주세요");
+    reviewTitle.focus();
 
     return;
   }
