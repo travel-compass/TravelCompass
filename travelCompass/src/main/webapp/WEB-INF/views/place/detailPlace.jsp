@@ -19,7 +19,7 @@
   <script src="https://kit.fontawesome.com/72842759a7.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
-  
+
 </head>
 
 <body>
@@ -27,10 +27,12 @@
     const mapx=${place.mapx};
     const mapy=${place.mapy};
     const memberNo="${loginMember.memberNo}";
+    const memberNickname="${loginMember.memberNickname}"
     const contentid="${place.contentid}";
     const firstimage="${place.firstimage}";
     const addr1="${place.addr1}";
     const contenttypeid="${place.contenttypeid}";
+    const title="${place.title}"
   </script>
   <!-- header:include -->
 	<jsp:include page="/WEB-INF/views/inc/header.jsp"></jsp:include>
@@ -91,7 +93,7 @@
         <span class="info-detail-content"><i class="fa-solid fa-phone"></i> 전화번호 : </span>
         <span>${place.tel}</span><br>
         <span class="info-detail-content"><i class="fa-solid fa-clock"></i> 이용 시간 : </span>
-        <span>${place.usetime}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+        <span>${place.usetime}</span><br>
         <span class="info-detail-content"><i class="fa-solid fa-calendar-days"></i> 쉬는날 : </span><span>${place.restdate}</span>
       </div>
 
@@ -310,32 +312,29 @@
           <div>
             <div class="wrap">
               <h4>별점과 리뷰를 남겨주세요</h4>
-              <form name="reviewform" class="reviewform" method="post" action="/save">
+              <form name="reviewform" class="reviewform" method="post" action="/insert">
                 <input type="hidden" name="rate" id="rate" value="0" />
                 <!-- <span class="review_id">포댕이김영현</span> -->
 
-                <div class="review_rating">
-                  <div class="warning_msg">별점을 선택해 주세요.</div>
-                  <div class="rating">
-                    <!-- 해당 별점을 클릭하면 해당 별과 그 왼쪽의 모든 별의 체크박스에 checked 적용 -->
-                    <input type="checkbox" name="rating" id="rating1" value="1" class="rate_radio" title="1점">
-                    <label for="rating1"></label>
-                    <input type="checkbox" name="rating" id="rating2" value="2" class="rate_radio" title="2점">
-                    <label for="rating2"></label>
-                    <input type="checkbox" name="rating" id="rating3" value="3" class="rate_radio" title="3점">
-                    <label for="rating3"></label>
-                    <input type="checkbox" name="rating" id="rating4" value="4" class="rate_radio" title="4점">
-                    <label for="rating4"></label>
-                    <input type="checkbox" name="rating" id="rating5" value="5" class="rate_radio" title="5점">
-                    <label for="rating5"></label>
-                  </div>
+                <div class="star-rating">
+                  <input type="radio" id="5-stars" name="rating" value="5" />
+                  <label for="5-stars" class="star">&#9679;</label>
+                  <input type="radio" id="4-stars" name="rating" value="4" />
+                  <label for="4-stars" class="star">&#9679;</label>
+                  <input type="radio" id="3-stars" name="rating" value="3" />
+                  <label for="3-stars" class="star">&#9679;</label>
+                  <input type="radio" id="2-stars" name="rating" value="2" />
+                  <label for="2-stars" class="star">&#9679;</label>
+                  <input type="radio" id="1-star" name="rating" value="1" />
+                  <label for="1-star" class="star">&#9679;</label>
                 </div>
+
                 <div class="review_contents">
                   <div class="warning_msg">5자 이상으로 작성해 주세요.</div>
-                  <textarea rows="1" class="review_titlearea"></textarea>
-                  <textarea rows="10" class="review_textarea"></textarea>
+                  <textarea name="reviewTitle" rows="1" class="review_titlearea" id="reviewTitle"></textarea>
+                  <textarea name="reviewContent" rows="10" class="review_textarea" id="reviewContent"></textarea>
                 </div>
-                <div class="cmd">
+                <div class="cmd" id="addReview">
                   <button>등록</button>
                 </div>
               </form>
@@ -605,7 +604,6 @@
           <button class="page-select-next">다음</button>
         </div>
 
-
     </section>
 
   </main>
@@ -615,9 +613,9 @@
 
   <!-- 카카오지도 api script -->
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d960da26337b79bb7d208d7a89db4003"></script>
+  <script src="/resources/js/common/jQuery-core.js"></script>
   <script src="/resources/js/place/detailPlace.js"></script>
 	<script src="/resources/js/place/swiper.js"></script>
-  <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 </body>
 
 </html>

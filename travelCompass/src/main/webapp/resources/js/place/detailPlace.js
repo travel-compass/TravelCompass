@@ -18,6 +18,7 @@ placeScrap.addEventListener("click", (e) => {
         addr1: addr1,
         mapx: mapx,
         mapy: mapy,
+        title: title,
       },
       type: "GET",
       success: (result) => {
@@ -70,33 +71,21 @@ var options = {
 
 var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
 
-/* ----------------------------- 리뷰 ----------------------------------- */
-//별점 마킹 모듈 프로토타입으로 생성
-function Rating() {}
-Rating.prototype.rate = 0;
-Rating.prototype.setRate = function (newrate) {
-  //별점 마킹 - 클릭한 별 이하 모든 별 체크 처리
-  this.rate = newrate;
-  let items = document.querySelectorAll(".rate_radio");
-  items.forEach(function (item, idx) {
-    if (idx < newrate) {
-      item.checked = true;
-    } else {
-      item.checked = false;
-    }
-  });
-};
-let rating = new Rating(); //별점 인스턴스 생성
+// 마커가 표시될 위치입니다
+var markerPosition = new kakao.maps.LatLng(mapy, mapx);
 
-document.addEventListener("DOMContentLoaded", function () {
-  //별점선택 이벤트 리스너
-  document.querySelector(".rating").addEventListener("click", function (e) {
-    let elem = e.target;
-    if (elem.classList.contains("rate_radio")) {
-      rating.setRate(parseInt(elem.value));
-    }
-  });
+// 마커를 생성합니다
+var marker = new kakao.maps.Marker({
+  position: markerPosition,
 });
+
+// 마커가 지도 위에 표시되도록 설정합니다
+marker.setMap(map);
+
+// 지도에 교통정보를 표시하도록 지도타입을 추가합니다
+// map.addOverlayMapTypeId(kakao.maps.MapTypeId.TRAFFIC);
+
+/* ----------------------------- 리뷰 ----------------------------------- */
 
 //상품평 작성 글자수 초과 체크 이벤트 리스너
 document
@@ -112,7 +101,7 @@ document
   });
 
 //저장 전송전 필드 체크 이벤트 리스너
-document.querySelector("#rate").addEventListener("click", function (e) {
+document.querySelector("#rating").addEventListener("click", function (e) {
   //별점 선택 안했으면 메시지 표시
   if (rating.rate == 0) {
     rating.showMessage("rate");
@@ -151,6 +140,77 @@ Rating.prototype.showMessage = function (type) {
       break;
   }
 };
+
+// 리뷰 목록 조회(AJAX)
+function selectReview() {
+  $.ajax({
+    url: "selectReview",
+    data: {
+      contentid: contentid,
+    },
+  });
+}
+
+/* 리뷰 작성 등록 */
+const addReview = document.getElementById("addReview");
+const reviewTitle = document.getElementById("reviewTitle");
+const reviewContent = document.getElementById("revivewContent");
+
+addReview.addEventListener("click", () => {
+  // 로그인 확인
+  if (memberNo == "") {
+    // 로그인X
+    if (confirm("로그인하시겠습니까?")) {
+      location.href = "/member/login";
+    } else {
+      alert("로그인 후 이용해주세요");
+    }
+
+    return;
+  }
+
+  //별점 선택 안했으면 메시지 표시
+  if (rating.rate == 0) {
+    rating.showMessage("rate");
+    rating.focus();
+    return false;
+  }
+  //리뷰 5자 미만이면 메시지 표시
+  if (document.querySelector(".review_textarea").value.length < 5) {
+    rating.showMessage("review");
+    reviewContent.focus();
+    return false;
+  }
+
+  // 비동기화 리뷰 DB 등록
+  $.ajax({
+    url: "/insertReview",
+    data: {
+      memberNo: memberNo,
+      reviewTitle: reviewTitle.value,
+      reivewContent: reviewContent.value,
+      contentid: contentid,
+    },
+    type: "post",
+    success: (result) => {
+      if (result > 0) {
+        //댓글 등록 성공
+        reviewTitle.value = "";
+        reviewContent.value = "";
+
+        selectReview(); // 비동기 리뷰 목록 조회 함수 호출
+        // -> 새로운 리뷰 추가
+      } else {
+        // 실패
+        alert("리뷰 등록에 실패했습니다");
+      }
+    },
+
+    error: function (req, status, error) {
+      console.log("리뷰 등록 에러");
+    },
+  });
+});
 
 // 리뷰 테이블
 // 비동기 리뷰 테이블 작성 (사진 없는 테이블)
