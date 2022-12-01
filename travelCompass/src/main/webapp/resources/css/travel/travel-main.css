@@ -68,7 +68,6 @@ main {
 
 #travel-list li:first-child div{
     display: flex;
-    height: 100%;
     flex-direction: row;
     align-items: center;
     justify-content: center;
