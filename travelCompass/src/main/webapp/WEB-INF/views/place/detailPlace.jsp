@@ -330,7 +330,6 @@
                 </div>
 
                 <div class="review_contents">
-                  <div class="warning_msg">5자 이상으로 작성해 주세요.</div>
                   <textarea name="reviewTitle" rows="1" class="review_titlearea" id="reviewTitle"></textarea>
                   <textarea name="reviewContent" rows="10" class="review_textarea" id="reviewContent"></textarea>
                 </div>

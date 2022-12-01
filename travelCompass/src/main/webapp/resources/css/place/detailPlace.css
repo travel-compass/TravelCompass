@@ -66,10 +66,10 @@ main {
 /* title/overview */
 .info-header {
   display: flex;
-  font-size: 1.5em;
+  font-size: 2em;
   justify-content: space-between;
   font-weight: bold;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .info-content {
@@ -77,7 +77,7 @@ main {
 }
 
 .info-detail-content {
-  font-size: 20px;
+  font-size: 25px;
   font-weight: bold;
   line-height: 150%;
 }
@@ -87,7 +87,7 @@ main {
 }
 
 .info-detail-content+span {
-  font-size: 15px;
+  font-size: 20px;
 }
 
 .info-overview {
@@ -109,11 +109,6 @@ main {
 
 /* 평점 */
 /* 레이아웃 외곽 너비 400px 제한*/
-
-
-
-
-
 .wrap {
   max-width: 950px;
   margin: 0 auto;
@@ -169,10 +164,11 @@ main {
   cursor: pointer;
 }
 
-/* 리뷰 레이팅 */
+
+/* component */
 
 .star-rating {
-  border: none;
+  border: solid 1px #ccc;
   display: flex;
   flex-direction: row-reverse;
   font-size: 1.5em;
@@ -192,14 +188,13 @@ main {
 }
 
 .star-rating :checked~label {
-  color: #2DC48D;
+  color: #2dcd8f;
 }
 
 .star-rating label:hover,
 .star-rating label:hover~label {
-  color: #53dfab;
+  color: #66d1a8;
 }
-
 
 
 /* ------------------------ 지도 섹션 ------------------------ */

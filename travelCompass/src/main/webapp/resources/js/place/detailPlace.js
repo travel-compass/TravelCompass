@@ -87,60 +87,6 @@ marker.setMap(map);
 
 /* ----------------------------- 리뷰 ----------------------------------- */
 
-//상품평 작성 글자수 초과 체크 이벤트 리스너
-document
-  .querySelector(".review_textarea")
-  .addEventListener("keydown", function () {
-    //리뷰 400자 초과 안되게 자동 자름
-    let review = document.querySelector(".review_textarea");
-    let lengthCheckEx = /^.{400,}$/;
-    if (lengthCheckEx.test(review.value)) {
-      //400자 초과 컷
-      review.value = review.value.substr(0, 400);
-    }
-  });
-
-//저장 전송전 필드 체크 이벤트 리스너
-document.querySelector("#rating").addEventListener("click", function (e) {
-  //별점 선택 안했으면 메시지 표시
-  if (rating.rate == 0) {
-    rating.showMessage("rate");
-    return false;
-  }
-  //리뷰 5자 미만이면 메시지 표시
-  if (document.querySelector(".review_textarea").value.length < 5) {
-    rating.showMessage("review");
-    return false;
-  }
-  //폼 서밋
-});
-
-Rating.prototype.showMessage = function (type) {
-  //경고메시지 표시
-  switch (type) {
-    case "rate":
-      //안내메시지 표시
-      document.querySelector(".review_rating .warning_msg").style.display =
-        "block";
-      //지정된 시간 후 안내 메시지 감춤
-      setTimeout(function () {
-        document.querySelector(".review_rating .warning_msg").style.display =
-          "none";
-      }, 1000);
-      break;
-    case "review":
-      //안내메시지 표시
-      document.querySelector(".review_contents .warning_msg").style.display =
-        "block";
-      //지정된 시간 후 안내 메시지 감춤
-      setTimeout(function () {
-        document.querySelector(".review_contents .warning_msg").style.display =
-          "none";
-      }, 1000);
-      break;
-  }
-};
-
 // 리뷰 목록 조회(AJAX)
 function selectReview() {
   $.ajax({
@@ -155,6 +101,7 @@ function selectReview() {
 const addReview = document.getElementById("addReview");
 const reviewTitle = document.getElementById("reviewTitle");
 const reviewContent = document.getElementById("revivewContent");
+const reviewRate = document.querySelector('input[name="rating"]');
 
 addReview.addEventListener("click", () => {
   // 로그인 확인
@@ -165,31 +112,32 @@ addReview.addEventListener("click", () => {
     } else {
       alert("로그인 후 이용해주세요");
     }
+    return;
+  }
+
+  if ((reviewRate.value = null)) {
+    alert("평점을 선택해주세요");
 
     return;
   }
 
-  //별점 선택 안했으면 메시지 표시
-  if (rating.rate == 0) {
-    rating.showMessage("rate");
-    rating.focus();
-    return false;
-  }
-  //리뷰 5자 미만이면 메시지 표시
-  if (document.querySelector(".review_textarea").value.length < 5) {
-    rating.showMessage("review");
+  if (reviewContent.value.trim().length == 0) {
+    alert("내용을 입력해주세요");
     reviewContent.focus();
-    return false;
+
+    return;
   }
 
-  // 비동기화 리뷰 DB 등록
+  // 비동기화 리뷰 작성(등록)
   $.ajax({
     url: "/insertReview",
     data: {
-      memberNo: memberNo,
+      rating: document.querySelector('input[name="gender"]:checked').value,
       reviewTitle: reviewTitle.value,
-      reivewContent: reviewContent.value,
+      reviewContent: reviewContent.value,
+      memberNo: memberNo,
       contentid: contentid,
+      firstimage: firstimage,
     },
     type: "post",
     success: (result) => {
