@@ -25,15 +25,15 @@
                 
                     <div class="search-input-form">
                         <jsp:include page="/WEB-INF/views/inc/search-form.jsp" />
-                        <!-- <form action="/search" class="search-form" id="searchForm">
+                        <!--참조용
+                            <form action="/search" class="search-form" id="searchForm">
                             <div class="search-input-box">
                                 <button id="search-btn" class="fa-solid fa-magnifying-glass"></button>
                                 <input id="search-input" type="search" placeholder="어디로 가시나요?" name="keyword" autocomplete="off">
                             </div>
-
+                        
                             <div class="search-keyword-area">
                                 <div class="search-option-area">
-                                    
                                     <input type="radio" name="contentTypeId" value="12" id="12" checked>
                                     <label for="12">관광지</label>
                                     
@@ -45,7 +45,7 @@
                                     
                                     <input type="radio" name="contentTypeId" value="39" id="39">
                                     <label for="39">음식점</label>
-
+                        
                                     <select name="areaCode" id="areaCode">
                                         <option value="-1">지역(전체)</option>
                                         <option value="1">서울</option>
@@ -67,35 +67,24 @@
                                         <option value="39">제주도</option>
                                     </select>
                                 </div>
-                                <a href="#">
+                                <a href="/location/aroundSearch?" id="aroundSearch">
                                     <i class="fa-solid fa-location-arrow"></i>
                                     <span>주변</span>
                                 </a>
-                                <label class="search-keyword-title">인기 검색어</label>
-                                <ol class="popular-keyword-list">
-                                        <!-- <a href="">
-                                        <i class="fa-solid fa-location-dot"></i>
-                                        <span>라스베이거스</span>
-                                    </a>
-                                    <hr>
-                                    <a href="">
-                                        <i class="fa-solid fa-location-dot"></i>
-                                        <span>서울</span>
-                                    </a>
-                                    <hr>
-                                    <a href="">
-                                        <i class="fa-solid fa-location-dot"></i>
-                                        <span>동대문</span>
-                                    </a>
-                                    <hr>
-                                    <a href="">
-                                        <i class="fa-solid fa-location-dot"></i>
-                                        <span>부산 해운대</span>
-                                    </a>  
-                                </ol>
-                            
-                            </div>
-                        </form> -->
+                                <c:if test="${not empty popularKeyword}">
+                                    <label class="search-keyword-title">인기 검색어</label>
+                                    <ul class="popular-keyword-list">
+                                        <c:forEach var="keyword" items="${popularKeyword}" varStatus="vs">
+                                            <a href="/search?keyword=${keyword}&contentTypeId=12&areaCode=-1">
+                                                <i class="fa-solid fa-location-dot"></i>
+                                                <span>${keyword}</span>
+                                            </a>
+                                            <c:if test="${!vs.last}">
+                                                <hr>
+                                            </c:if>
+                                        </c:forEach>
+                                    </ul>
+                                </c:if> -->
                     </div>
                     
                     <div class="search-filter">
