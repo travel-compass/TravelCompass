@@ -440,7 +440,7 @@ main {
 }
 
 /* 미디어쿼리 화면 반응형 */
-@media (max-width: 1024px){
+@media (max-width: 1070px){
 
     .temp-web{
         padding: 0;

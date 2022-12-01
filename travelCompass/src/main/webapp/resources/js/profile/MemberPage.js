@@ -1,24 +1,75 @@
-let slideIndex = 1;
-showSlides(slideIndex);
+// 슬라이드 함수
 
-function plusSlides(n) {
-    showSlides(slideIndex += n);
+// let slideIndex = 1;
+
+const prev = document.getElementsByClassName("prev");
+// const next = document.getElementsByClassName("next");
+// const slideArr = new Array(prev.length);
+
+for(let i = 0; i < prev.length; i++) {
+    showSlides(0, prev[i]);
 }
 
-function currentSlide(n) {
-    showSlides(slideIndex = n);
+// for(let i = 0; i < prev.length; i++) {
+//     prev[i].addEventListener("click", () => {
+//         showSlides(slideIndex += n, element);
+//     })
+// }
+
+// 페이지 버튼을 눌렀을 때
+function plusSlides(n, element) {
+    // showSlides(slideIndex += n, element);
+    showSlides(n, element);
 }
 
-function showSlides(n) {
-    let i;
-    let slides = document.getElementsByClassName("slide");
-    if (n > slides.length) {slideIndex = 1}
-    if (n < 1) {slideIndex = slides.length}
-    for (i = 0; i < slides.length; i++) {
+function showSlides(n, element) {
+    
+    // 이벤트가 발생한 버튼(plusSlides 또는 currentSlide)의
+    // 부모(div class="slide-container-style")의 자식을 모두 배열로 가져옴
+    const arr = element.parentElement.children;
+
+    // 슬라이드 배열 선언
+    const slides = [];
+
+    // arr 배열에서 자식 요소를 하나씩 꺼내옴
+    for(let temp of arr){
+
+        // 만약에 클래스명에 slide가 포함되는 자식이 있다면
+        if(temp.classList.contains("slide")) {
+
+            // slides 배열에 해당 자식 요소를 추가
+            slides.push(temp);
+        }
+    }
+
+// console.log(slides);
+    let idx = 0;
+    for(let i=0 ; i<slides.length ; i++){
+        if( slides[i].style.display == "block" ){
+            idx = i;
+            break;
+        }
+    }
+    // console.log("idx : " + idx);
+    n += idx;
+    // console.log("n : " + n);
+    // let slides = document.getElementsByClassName("slide");
+
+    // slideIndex가 slides 배열의 크기보다 크면, slideIndex = 1로 (1번 사진으로 다시 되돌아옴)
+    if (n == slides.length) {n = 0}
+
+    // slideIndex가 1보다 작으면 slideIndex를 slides 배열의 크기로 설정 (마지막 사진으로 돌아옴)
+    //if (n < 1) {slideIndex = slides.length}
+
+    // 선택된 슬라이드만 보이게 만들고 선택되지 않은 슬라이드는 display = "none";
+    for (let i = 0; i < slides.length; i++) {
         slides[i].style.display = "none"; 
     }
-    slides[slideIndex-1].style.display = "block"; 
+    
+    slides[n].style.display = "block"; 
 } 
+
+// -------------------------------------------------------------------------
 
 const dotmenu = document.getElementsByClassName("user-page-review-dot-style");
 
@@ -276,16 +327,9 @@ reviewImageColum.classList.add("user-page-review-colums2");
                     reivewImageDownMenu_li2_a.innerText = "삭제";
 
         /* 사진 슬라이드 비동기 테이블 작성 위치 */
-        const reviewImageSlideContainer = document.createElement("div");
-        reviewImageSlideContainer.classList.add("slide-container-style");
 
-            const reviewImageSlide = document.createElement("div");
-            reviewImageSlide.classList.add("slide", "fade");
+        
 
-                const reviewImageNumber = document.createElement("div");
-                reviewImageNumber.classList.add("numbertext");
-
-                const reviewImageSlideImage = document.createElement("img");
 
         const reviewImageDataTableStyle = document.createElement("div");
         reviewImageDataTableStyle.classList.add("review-date-table-style");
@@ -554,10 +598,61 @@ Review.addEventListener("click", (e) => {
                                 // 최종 부모인 <ul class="review-list" id="reviewContainer"></ul> 에 append
                                 reviewListContainer.append(reviewTextColum);
 
-                                // A 리뷰 시작 태그인 reviewTextColum append
-                                reviewTextColum.append(reviewTextHeaderStyle, reviewTextDataTableStyle, reviewTextNaviStyle,
-                                    reviewTextSupport, reviewTextBottomMenu);
-                                
+                                // 슬라이드 if문 위치 여기 예상합니다.
+
+                                // 슬라이드 검사해서 추가
+
+                                // 슬라이드 조립 시작
+                                    console.log(list.imageList.isEmpty());
+                                if (list.imageList != ""){
+                                    console.log(list.imageList);
+
+                                    const reviewImageSlideContainer = document.createElement("div");
+                                    reviewImageSlideContainer.classList.add("slide-container-style");
+                                    
+                                        const reviewImageSlide = document.createElement("div");
+                                        reviewImageSlide.classList.add("slide", "fade");
+
+                                        for(let i = 0 ; i < list.ImageList.size(); i++){
+
+                                            const reviewImageSlideNumber = document.createElement("div");
+                                            reviewImageSlideNumber.classList.add("numbertext");
+                                            reviewImageSlideNumber.innerHTML = "${"+ i + "+1} / ${fn:length(reviewList.reviewImgList)}";
+                                        
+                                            const reviewImageSlidePath = document.createElement("img");
+                                            reviewImageSlidePath.setAttribute("src", "${reviewList.reviewImgList[" + i + "].reviewImgPath}${reviewList.reviewImgList[" + i + "].reviewImgOriginal}");
+                                        
+                                            
+                                            reviewImageSlideContainer.append(reviewImageSlide);
+                                            
+                                            reviewImageSlide.append(reviewImageSlideNumber, reviewImageSlidePath);
+                                        }
+                                        
+                                            
+                                    const reviewImageSlidePrevButton = document.createElement("a");
+                                    reviewImageSlidePrevButton.classList.add("prev");
+                                    reviewImageSlidePrevButton.setAttribute("onclick", "plusSlides(-1, this)");
+                                    reviewImageSlidePrevButton.innerHTML = "&#10094;";
+                                    
+                                    const reviewImageSlideNextButton = document.createElement("a");
+                                    reviewImageSlideNextButton.classList.add("next");
+                                    reviewImageSlideNextButton.setAttribute("onclick", "plusSlides(1, this)");
+                                    reviewImageSlideNextButton.innerHTML = "&#10095;";
+
+                                    reviewImageSlideContainer.append(reviewImageSlidePrevButton, reviewImageSlideNextButton);
+                                    // 슬라이드 조립 끝
+
+                                    // 사진이 있을 땐 사이에 슬라이드 디브 테이블 append
+                                    reviewTextColum.append(reviewTextHeaderStyle, reviewImageSlideContainer, reviewTextDataTableStyle, reviewTextNaviStyle,
+                                        reviewTextSupport, reviewTextBottomMenu);
+
+                                } else {
+                                    // 사진이 없을 땐 밑에께 바로 실행
+                                    // A 리뷰 시작 태그인 reviewTextColum append
+                                    reviewTextColum.append(reviewTextHeaderStyle, reviewTextDataTableStyle, reviewTextNaviStyle,
+                                        reviewTextSupport, reviewTextBottomMenu);
+
+                                }
                                     // A-0 (A 리뷰 시작의 0번 인덱스 위치에 있는 태그 )의 append
                                     reviewTextHeaderStyle.append(reviewTextHeaderLayout, reviewTextDotStyle,
                                         reivewTextDotDownMenu);
@@ -614,6 +709,8 @@ Review.addEventListener("click", (e) => {
                                         reviewTextShareButton);
 
                                     // A-4 번 완성
+
+                                    
                 }
 
             }

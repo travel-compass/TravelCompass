@@ -51,6 +51,7 @@ public class ProfileController {
 		
 		model.addAttribute("reviewList", reviewList);
 		
+		System.out.println("김바바");
 		return reviewList;
 	}
 	

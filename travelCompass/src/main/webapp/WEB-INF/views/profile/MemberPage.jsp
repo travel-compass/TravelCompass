@@ -275,8 +275,8 @@
                                                         <img src="${reviewList.reviewImgList[i].reviewImgPath}${reviewList.reviewImgList[i].reviewImgOriginal}">
                                                     </div>
                                             </c:forEach>
-                                            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-                                            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                                            <a class="prev" onclick="plusSlides(-1, this)">&#10094;</a>
+                                            <a class="next" onclick="plusSlides(1, this)">&#10095;</a>
                                         </div>
                                         <br>
 
