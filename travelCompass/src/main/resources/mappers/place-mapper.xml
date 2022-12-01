@@ -22,7 +22,7 @@
 
 	<insert id="scrap">
 		INSERT INTO PLACE_SCRAP
-		VALUES (SEQ_PLACE_SCRAP_NO.NEXTVAL,DEFAULT, #{firstimage}, #{mapx}, #{mapy}, #{contentid}, #{memberNo}, #{addr1}, #{contenttypeid})
+		VALUES (SEQ_PLACE_SCRAP_NO.NEXTVAL, #{title} ,DEFAULT, #{firstimage}, #{mapx}, #{mapy}, #{contentid}, #{memberNo}, #{addr1}, #{contenttypeid})
 	</insert>
 	
 	<delete id="scrapCancel">

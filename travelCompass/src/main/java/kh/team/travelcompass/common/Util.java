@@ -79,16 +79,16 @@ public class Util {
 	public static List<String> jsonToImageList(String json) throws Exception {
 		List<String> imageList = new ArrayList<String>();
 		System.out.println(json);
-		String items = new JSONObject(json).getJSONObject("response").getJSONObject("body").getJSONObject("items")
-				.getJSONArray("item").toString();
+		String items = new JSONObject(json).getJSONObject("response").getJSONObject("body").get("items").toString();
 		if (!items.equals("")) {
+			String item = new JSONObject(items).getJSONArray("item").toString();
 			ObjectMapper om = new ObjectMapper();
 			om.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-			List<Map<String, String>> tempList = om.readValue(items, new TypeReference<List<Map<String, String>>>() {
+			List<Map<String, String>> tempList = om.readValue(item, new TypeReference<List<Map<String, String>>>() {
 			});
 
-			for (Map<String, String> item : tempList) {
-				imageList.add(item.get("originimgurl"));
+			for (Map<String, String> image : tempList) {
+				imageList.add(image.get("originimgurl"));
 			}
 		}
 

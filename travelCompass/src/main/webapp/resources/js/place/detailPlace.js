@@ -18,6 +18,7 @@ placeScrap.addEventListener("click", (e) => {
         addr1: addr1,
         mapx: mapx,
         mapy: mapy,
+        title: title,
       },
       type: "GET",
       success: (result) => {
@@ -70,87 +71,94 @@ var options = {
 
 var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
 
+// 마커가 표시될 위치입니다
+var markerPosition = new kakao.maps.LatLng(mapy, mapx);
+
+// 마커를 생성합니다
+var marker = new kakao.maps.Marker({
+  position: markerPosition,
+});
+
+// 마커가 지도 위에 표시되도록 설정합니다
+marker.setMap(map);
+
+// 지도에 교통정보를 표시하도록 지도타입을 추가합니다
+// map.addOverlayMapTypeId(kakao.maps.MapTypeId.TRAFFIC);
+
 /* ----------------------------- 리뷰 ----------------------------------- */
-//별점 마킹 모듈 프로토타입으로 생성
-function Rating() {}
-Rating.prototype.rate = 0;
-Rating.prototype.setRate = function (newrate) {
-  //별점 마킹 - 클릭한 별 이하 모든 별 체크 처리
-  this.rate = newrate;
-  let items = document.querySelectorAll(".rate_radio");
-  items.forEach(function (item, idx) {
-    if (idx < newrate) {
-      item.checked = true;
+
+// 리뷰 목록 조회(AJAX)
+function selectReview() {
+  $.ajax({
+    url: "selectReview",
+    data: {
+      contentid: contentid,
+    },
+  });
+}
+
+/* 리뷰 작성 등록 */
+const addReview = document.getElementById("addReview");
+const reviewTitle = document.getElementById("reviewTitle");
+const reviewContent = document.getElementById("revivewContent");
+const reviewRate = document.querySelector('input[name="rating"]');
+
+addReview.addEventListener("click", () => {
+  // 로그인 확인
+  if (memberNo == "") {
+    // 로그인X
+    if (confirm("로그인하시겠습니까?")) {
+      location.href = "/member/login";
     } else {
-      item.checked = false;
+      alert("로그인 후 이용해주세요");
     }
-  });
-};
-let rating = new Rating(); //별점 인스턴스 생성
+    return;
+  }
 
-document.addEventListener("DOMContentLoaded", function () {
-  //별점선택 이벤트 리스너
-  document.querySelector(".rating").addEventListener("click", function (e) {
-    let elem = e.target;
-    if (elem.classList.contains("rate_radio")) {
-      rating.setRate(parseInt(elem.value));
-    }
+  if ((reviewRate.value = null)) {
+    alert("평점을 선택해주세요");
+
+    return;
+  }
+
+  if (reviewContent.value.trim().length == 0) {
+    alert("내용을 입력해주세요");
+    reviewContent.focus();
+
+    return;
+  }
+
+  // 비동기화 리뷰 작성(등록)
+  $.ajax({
+    url: "/insertReview",
+    data: {
+      rating: document.querySelector('input[name="gender"]:checked').value,
+      reviewTitle: reviewTitle.value,
+      reviewContent: reviewContent.value,
+      memberNo: memberNo,
+      contentid: contentid,
+      firstimage: firstimage,
+    },
+    type: "post",
+    success: (result) => {
+      if (result > 0) {
+        //댓글 등록 성공
+        reviewTitle.value = "";
+        reviewContent.value = "";
+
+        selectReview(); // 비동기 리뷰 목록 조회 함수 호출
+        // -> 새로운 리뷰 추가
+      } else {
+        // 실패
+        alert("리뷰 등록에 실패했습니다");
+      }
+    },
+
+    error: function (req, status, error) {
+      console.log("리뷰 등록 에러");
+    },
   });
 });
-
-//상품평 작성 글자수 초과 체크 이벤트 리스너
-document
-  .querySelector(".review_textarea")
-  .addEventListener("keydown", function () {
-    //리뷰 400자 초과 안되게 자동 자름
-    let review = document.querySelector(".review_textarea");
-    let lengthCheckEx = /^.{400,}$/;
-    if (lengthCheckEx.test(review.value)) {
-      //400자 초과 컷
-      review.value = review.value.substr(0, 400);
-    }
-  });
-
-//저장 전송전 필드 체크 이벤트 리스너
-document.querySelector("#rate").addEventListener("click", function (e) {
-  //별점 선택 안했으면 메시지 표시
-  if (rating.rate == 0) {
-    rating.showMessage("rate");
-    return false;
-  }
-  //리뷰 5자 미만이면 메시지 표시
-  if (document.querySelector(".review_textarea").value.length < 5) {
-    rating.showMessage("review");
-    return false;
-  }
-  //폼 서밋
-});
-
-Rating.prototype.showMessage = function (type) {
-  //경고메시지 표시
-  switch (type) {
-    case "rate":
-      //안내메시지 표시
-      document.querySelector(".review_rating .warning_msg").style.display =
-        "block";
-      //지정된 시간 후 안내 메시지 감춤
-      setTimeout(function () {
-        document.querySelector(".review_rating .warning_msg").style.display =
-          "none";
-      }, 1000);
-      break;
-    case "review":
-      //안내메시지 표시
-      document.querySelector(".review_contents .warning_msg").style.display =
-        "block";
-      //지정된 시간 후 안내 메시지 감춤
-      setTimeout(function () {
-        document.querySelector(".review_contents .warning_msg").style.display =
-          "none";
-      }, 1000);
-      break;
-  }
-};
 
 // 리뷰 테이블
 // 비동기 리뷰 테이블 작성 (사진 없는 테이블)
