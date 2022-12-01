@@ -1,8 +1,15 @@
 package kh.team.travelcompass.review.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,13 +47,49 @@ public class ReviewController {
 //		return reviewMap;
 //	}
 	
-
-	// 리뷰 등록
-	@PostMapping("/insert")
-	public int insertComment(Review review) {
-		return service.insertReview(review);
+	@GetMapping("reviewList")
+	public Map<String, Object> selectReviewList(String contentid, int cp) {
+		Map<String, Object> reviewList=service.selectReviewList(contentid, cp);
+		
+		return reviewList;
 	}
-//
+	
+	@PostMapping("/insertReview")
+	public int insertReview(HttpServletRequest req, HttpServletResponse resp) {
+		
+		String contentid=req.getParameter("contentid");
+		
+		Cookie[] cookies=req.getCookies();
+		Cookie cookie=null;
+		
+		// reviewContentid 쿠키가 있는지 확인 후 세팅
+		for(Cookie c:cookies) {
+			if(c.getName().equals("reviewContentid")) {
+				cookie=c;
+				break;
+			}
+		}
+		
+		// contentid기 쿠키value에 있는지 확인
+		if(cookie!=null) {
+			if(cookie.getValue().indexOf("|"+contentid+"|")==-1) {
+				cookie.setValue(cookie.getValue()+"|"+contentid+"|");
+			}
+		} else { // 없으면 새로운 쿠키 생성하여 contentid 저장
+			cookie=new Cookie("reviewContentid", "|"+contentid+"|");
+		}
+		
+		cookie.setPath("/");
+		cookie.setMaxAge(7000);
+		
+		resp.addCookie(cookie);
+		
+		
+		return service.;
+	}
+
+
+
 //	// 리뷰 삭제
 //	@GetMapping("/delete")
 //	public int deleteComment(int commentNo) {
@@ -58,5 +101,6 @@ public class ReviewController {
 //	public int updateComment(Comment comment) {
 //		return service.updateComment(comment);
 //	}
+	
 
 }

@@ -166,6 +166,77 @@ Rating.prototype.showMessage = function (type) {
   }
 };
 
+// 리뷰 목록 조회(AJAX)
+function selectReview() {
+  $.ajax({
+    url: "selectReview",
+    data: {
+      contentid: contentid,
+    },
+  });
+}
+
+/* 리뷰 작성 등록 */
+const addReview = document.getElementById("addReview");
+const reviewTitle = document.getElementById("reviewTitle");
+const reviewContent = document.getElementById("revivewContent");
+
+addReview.addEventListener("click", () => {
+  // 로그인 확인
+  if (memberNo == "") {
+    // 로그인X
+    if (confirm("로그인하시겠습니까?")) {
+      location.href = "/member/login";
+    } else {
+      alert("로그인 후 이용해주세요");
+    }
+
+    return;
+  }
+
+  //별점 선택 안했으면 메시지 표시
+  if (rating.rate == 0) {
+    rating.showMessage("rate");
+    rating.focus();
+    return false;
+  }
+  //리뷰 5자 미만이면 메시지 표시
+  if (document.querySelector(".review_textarea").value.length < 5) {
+    rating.showMessage("review");
+    reviewContent.focus();
+    return false;
+  }
+
+  // 비동기화 리뷰 DB 등록
+  $.ajax({
+    url: "/insertReview",
+    data: {
+      memberNo: memberNo,
+      reviewTitle: reviewTitle.value,
+      reivewContent: reviewContent.value,
+      contentid: contentid,
+    },
+    type: "post",
+    success: (result) => {
+      if (result > 0) {
+        //댓글 등록 성공
+        reviewTitle.value = "";
+        reviewContent.value = "";
+
+        selectReview(); // 비동기 리뷰 목록 조회 함수 호출
+        // -> 새로운 리뷰 추가
+      } else {
+        // 실패
+        alert("리뷰 등록에 실패했습니다");
+      }
+    },
+
+    error: function (req, status, error) {
+      console.log("리뷰 등록 에러");
+    },
+  });
+});
+
 // 리뷰 테이블
 // 비동기 리뷰 테이블 작성 (사진 없는 테이블)
 
