@@ -78,6 +78,7 @@ public class Util {
 
 	public static List<String> jsonToImageList(String json) throws Exception {
 		List<String> imageList = new ArrayList<String>();
+		System.out.println(json);
 		String items = new JSONObject(json).getJSONObject("response").getJSONObject("body").getJSONObject("items")
 				.getJSONArray("item").toString();
 		if (!items.equals("")) {

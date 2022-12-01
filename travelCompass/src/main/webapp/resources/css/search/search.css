@@ -488,7 +488,7 @@ a.current {
 
 .search-rank-content {
     width: 250px;
-    height: 430px;
+    height: 100%;
     padding: 4px 24px;
     font-size: 14px;
     font-weight: normal;
@@ -498,14 +498,13 @@ a.current {
     list-style: none;
 }
 
-.search-rank-content>li {
-    padding: 8px 0;
-    margin: 20px 0;
+.search-rank-content li {
     width: 100%;
+    border-bottom: #ccc solid 1px;
 }
 
 .search-rank-content a {
-    display: inline-block;
+    display: flex;
     color: black;
     padding: 10px 5px;
     font-size: 16px;
