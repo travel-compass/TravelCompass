@@ -3,6 +3,7 @@
 
 <c:set var="pagination" value="${placeMap.pagination}"/>
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -103,91 +104,91 @@
                             <c:when test="${param.contentTypeId == 12}">
                             <li>
                                 <input type="radio" name="contentTypeId" value="12" id="searchType1" checked>
-                                <label for="searchType1"><a>관광지</a></label>
+                                <label for="searchType1"><a id="search-filter">관광지</a></label>
                             </li>
                             <li>
                                 <input type="radio" name="contentTypeId" value="14" id="searchType2">
-                                <label for="searchType2"><a>문화시설</a></label>
+                                <label for="searchType2"><a id="search-filter">문화시설</a></label>
                             </li>
                             <li>
                                 <input type="radio" name="contentTypeId" value="28" id="searchType3">
-                                <label for="searchType3"><a>레포츠</a></label>
+                                <label for="searchType3"><a id="search-filter">레포츠</a></label>
                             </li>
                             <li>
                                 <input type="radio" name="contentTypeId" value="39" id="searchType4">
-                                <label for="searchType4"><a>음식점</a></label>
+                                <label for="searchType4"><a id="search-filter">음식점</a></label>
                             </li>
                             </c:when>
                             <c:when test="${param.contentTypeId == 14}">
                             <li>
                                 <input type="radio" name="contentTypeId" value="12" id="searchType1">
-                                <label for="searchType1"><a>관광지</a></label>
+                                <label for="searchType1"><a id="search-filter">관광지</a></label>
                             </li>    
                             <li>
                                 <input type="radio" name="contentTypeId" value="14" id="searchType2" checked>
-                                <label for="searchType2"><a>문화시설</a></label>
+                                <label for="searchType2"><a id="search-filter">문화시설</a></label>
                             </li>
                             <li>
                                 <input type="radio" name="contentTypeId" value="28" id="searchType3">
-                                <label for="searchType3"><a>레포츠</a></label>
+                                <label for="searchType3"><a id="search-filter">레포츠</a></label>
                             </li>
                             <li>
                                 <input type="radio" name="contentTypeId" value="39" id="searchType4">
-                                <label for="searchType4"><a>음식점</a></label>
+                                <label for="searchType4"><a id="search-filter">음식점</a></label>
                             </li>
                             </c:when>
                             <c:when test="${param.contentTypeId == 28}">
                                 <li>
                                     <input type="radio" name="contentTypeId" value="12" id="searchType1">
-                                    <label for="searchType1"><a>관광지</a></label>
+                                    <label for="searchType1"><a id="search-filter">관광지</a></label>
                                 </li>    
                                 <li>
                                     <input type="radio" name="contentTypeId" value="14" id="searchType2">
-                                    <label for="searchType2"><a>문화시설</a></label>
+                                    <label for="searchType2"><a id="search-filter">문화시설</a></label>
                                 </li>
                                 <li>
                                     <input type="radio" name="contentTypeId" value="28" id="searchType3"checked>
-                                    <label for="searchType3"><a>레포츠</a></label>
+                                    <label for="searchType3"><a id="search-filter">레포츠</a></label>
                                 </li>
                                 <li>
                                     <input type="radio" name="contentTypeId" value="39" id="searchType4">
-                                    <label for="searchType4"><a>음식점</a></label>
+                                    <label for="searchType4"><a id="search-filter">음식점</a></label>
                                 </li>
                             </c:when>
                             <c:when test="${param.contentTypeId == 39}">
                                 <li>
                                     <input type="radio" name="contentTypeId" value="12" id="searchType1">
-                                    <label for="searchType1"><a>관광지</a></label>
+                                    <label for="searchType1"><a id="search-filter">관광지</a></label>
                                 </li>    
                                 <li>
                                     <input type="radio" name="contentTypeId" value="14" id="searchType2">
-                                    <label for="searchType2"><a>문화시설</a></label>
+                                    <label for="searchType2"><a id="search-filter">문화시설</a></label>
                                 </li>
                                 <li>
                                     <input type="radio" name="contentTypeId" value="28" id="searchType3">
-                                    <label for="searchType3"><a>레포츠</a></label>
+                                    <label for="searchType3"><a id="search-filter">레포츠</a></label>
                                 </li>
                                 <li>
                                     <input type="radio" name="contentTypeId" value="39" id="searchType4" checked>
-                                    <label for="searchType4"><a>음식점</a></label>
+                                    <label for="searchType4"><a id="search-filter">음식점</a></label>
                                 </li>
                             </c:when>
                             <c:otherwise >
                                 <li>
                                     <input type="radio" name="contentTypeId" value="12" id="searchType1" checked>
-                                    <label for="searchType1"><a>관광지</a></label>
+                                    <label for="searchType1"><a id="search-filter">관광지</a></label>
                                 </li>
                                 <li>
                                     <input type="radio" name="contentTypeId" value="14" id="searchType2">
-                                    <label for="searchType2"><a>문화시설</a></label>
+                                    <label for="searchType2"><a id="search-filter">문화시설</a></label>
                                 </li>
                                 <li>
                                     <input type="radio" name="contentTypeId" value="28" id="searchType3">
-                                    <label for="searchType3"><a>레포츠</a></label>
+                                    <label for="searchType3"><a id="search-filter">레포츠</a></label>
                                 </li>
                                 <li>
                                     <input type="radio" name="contentTypeId" value="39" id="searchType4">
-                                    <label for="searchType4"><a>음식점</a></label>
+                                    <label for="searchType4"><a id="search-filter">음식점</a></label>
                                 </li>
                             </c:otherwise>
                         </c:choose>
@@ -200,21 +201,19 @@
                     <section class="search-result">
                         <!--검색 결과가 없을 때 -->
                         <c:choose>
-                            <c:when test="${placeMap.items == ''}">
+                            <c:when test="${pagination.totalCount == 0}">
                                 <div class="search-result-title">
-                                    <span id="title-match">"<span id="title-query">${param.keyword}</span>" 과(와) 일치하는 검색결과가 없습니다 </span>
+                                    <span id="title-match search-fail">"<span id="title-query">${param.keyword}</span>" 과(와) 일치하는 검색결과가 없습니다 </span>
                                 </div>
                             </c:when>
-                        <c:otherwise>
-                        <div class="search-result-title">
-                            <span id="title-match">"<span id="title-query">${param.keyword}</span>" 과(와) 일치하는 검색결과 </span>
-                        </div>
-                        </c:otherwise>
+                            <c:when test="${pagination.totalCount != 0}">
+                                <div class="search-result-title">
+                                    <span id="title-match">"<span id="title-query">${param.keyword}</span>" 과(와) 일치하는 검색결과 </span>
+                                </div>
+                            </c:when>
                         </c:choose>
                         <div class="search-result-list">
-                            
-                            <c:set var="totalCount" value="${placeMap.totalCount}"/>
-
+                    
                             <ul class="search-result-list">
                                 <!-- <c:choose>
                                     <c:when test="${empty placeMap}">
@@ -227,7 +226,14 @@
 
                                                     <div class="search-result-item-img">
                                                         <a href="/place/detail?contentId=${place.contentid}&contentTypeId=${place.contenttypeid}">
-                                                            <img src="${place.firstimage}" alt="" width="177px" height="140px">
+                                                            <c:choose>
+                                                                <c:when test="${!empty place.firstimage}">
+                                                                    <img src="${place.firstimage}" alt="" width="177px" height="140px">
+                                                                </c:when>
+                                                                <c:when test="${empty place.firstimage}">
+                                                                    <img src="/resources/images/common/${place.contenttypeid}.png" alt="" width="177px" height="140px">
+                                                                </c:when>
+                                                            </c:choose>
                                                         </a>
                                                     </div>
                                                         
@@ -310,7 +316,18 @@
                             </div>
                             <div class="search-rank-content">
                                 <ul>
-                                    <li><a href="#">1. ${placeMap.totalCount}</a></li>
+                                    <c:forEach var="keyword" items="${popularKeyword}" begin="0" end="9" step="1"
+                                    varStatus="status">
+                                        <li>
+                                            <a href="/search?keyword=${keyword}&contentTypeId=12&areaCode=-1">
+                                                ${status.index+1}. ${keyword}
+                                            </a>
+                                        </li>
+                                        <!-- <c:if test="${!vs.last}">
+                                            <hr>
+                                        </c:if> -->
+                                    </c:forEach>
+                                <!--<li><a href="#">1. ${placeMap.totalCount}</a></li>
                                     <li><a href="#">2. ${placeMap.numOfRows}</a></li>
                                     <li><a href="#">3. ${placeMap.pageNo}</a></li>
                                     <li><a href="#">4.  '검색어'</a></li>
@@ -319,7 +336,7 @@
                                     <li><a href="#">7.  '검색어'</a></li>
                                     <li><a href="#">8.  '검색어'</a></li>
                                     <li><a href="#">9.  '검색어'</a></li>
-                                    <li><a href="#">10. '검색어'</a></li>
+                                    <li><a href="#">10. '검색어'</a></li> -->
                                 </ul>
                             </div>
                     </div>
