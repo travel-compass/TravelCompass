@@ -37,6 +37,12 @@ public class TravelController {
 		return "/travel/travelMain";
 	}
 	
+	@GetMapping("/create/page")
+	public String createTravel() {
+		return "/travel/travelCreate";
+	}
+	
+	
 	@ResponseBody
 	@GetMapping("/create")
 	public int createTravel(Travel travel, @SessionAttribute("loginMember") Member loginMember) {

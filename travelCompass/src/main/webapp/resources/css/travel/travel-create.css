@@ -1,0 +1,300 @@
+html, body {
+    height: initial;
+}
+main {
+    height: 100vh;
+    display: flex;
+    width: 100%;
+}
+/* 여행 사이드 */
+.travel-create-side {
+    width: 25%;
+    overflow: auto;
+    background-color: #f2f2f2;
+    box-shadow: 5px 0px 10px -4px rgba(0, 0, 0, 0.1);
+}
+.travel-create-side::-webkit-scrollbar {
+    display: none;
+}
+
+/* 여행 콘텐츠 */
+.travel-create-content {
+    width: 75%;
+}
+
+/* 여행 정보 */
+.travel-info {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    background-color: white;
+}
+
+/* 여행 정보 헤더 */
+.travel-info-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* 프로필 이미지 */
+.profile-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.profile-image img{
+    width: inherit;
+    height: 100%;
+}
+
+/* 입력 창 */
+.input-row {
+    display: flex;
+}
+.input-row > button {
+    border: none;
+    background-color: transparent;
+    width: 50px;
+    font-size: 19px;
+    cursor: pointer;
+}
+
+button.cancel-btn {
+    display: none;
+}
+/* 여행 이름 */
+.travel-title {
+    width: 100%;
+    padding: 5px;
+    font-size: 25px;
+    font-weight: bold;
+    outline: none;
+    margin-top: 5px;
+    border: none;
+    border-bottom: 2px solid #2DC48D;
+}
+/* 여행 작성자 */
+.travel-writer {
+    margin: 15px 0px;
+}
+.travel-writer a{
+    font-weight: bold;
+}
+.travel-content {
+    width: 100%;
+    resize: none;
+    outline: none;
+    border: none;
+    border-bottom: 2px solid #2DC48D;
+    font-size: 20px;
+}
+.travel-content::placeholder {
+    font-size: 17px;
+}
+
+/* 드롭 다운 버튼*/
+.drop-down {
+    background-color: transparent;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    font-size: 25px;
+    cursor: pointer;
+
+    position: relative;
+}
+.drop-down_box {
+    font-weight: normal;
+	position: absolute;
+    top: 100%;
+    right: 0%;
+    width: 130px;
+    text-align: end;
+	background: white;
+	border: 1px solid black;
+    font-size: 15px;
+    display: none;
+}
+.drop-down_box li {
+    padding: 10px 10px;
+}
+/* .arrow_box:after, .arrow_box:before {
+	bottom: 100%;
+	left: 50%;
+	border: solid transparent;
+	content: "";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.arrow_box:after {
+	border-color: rgba(136, 183, 213, 0);
+	border-bottom-color: black;
+	border-width: 10px;
+	margin-left: -10px;
+} */
+
+
+/* 마지막 수정일 */
+.last-update-date {
+    font-size: 14px;
+    margin-top: 10px;
+    color: grey;
+}
+
+/* 공유 버튼 */
+#share {
+    margin: 30px 5px;
+    width: 70px;
+    height: 40px;
+    border: none;
+    background-color: transparent;
+    display: flex;
+    font-size: 16px;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.travel-list > li {
+    background-color: white;
+    margin-bottom: 10px;
+}
+/* 아이템이 없을때 출력하는 항목 */
+.empty-item {
+    width: 100%;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.empty-image {
+    width: 70px;
+    height: 70px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+.empty-image img {
+    width: inherit;;
+    height: 100%;
+}
+.empty-item p{
+    text-align: center;
+}
+
+/* 장소 아이템 */
+.travel-item {
+    width: 100%;
+}
+.travel-first-image {
+    height: 250px;
+}
+.travel-first-image img{
+    width: 100%;
+    height: 100%;
+}
+.place-info {
+    padding: 15px;
+}
+.place-title-area {
+    font-size: 25px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* 스크렙 장소 리스트 */
+.travel-create-content {
+    overflow: auto;
+}
+.travel-create-content::-webkit-scrollbar {
+    display: none;
+}
+#scrapPlaceList {
+    padding: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+}
+
+
+.scrap-place-item {
+    display: flex;
+    margin-bottom: 20px;
+    width: 50%;
+}
+.place-first-image {
+    width:50%;
+    height: 180px;
+}
+.place-first-image img {
+    width: 100%;
+    height: 100%;
+}
+.scrap-place-info {
+    width: 50%;
+    padding: 0px 10px;
+    display: flex;
+    flex-direction: column;
+}
+.add-item {
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    width: 40px;
+    cursor: pointer;
+}
+.scrap-date {
+    margin-top: auto;
+}
+
+/* JS-style */
+.read-only {
+    border-color: transparent;
+}
+
+/* 스크랩 검색폼 */
+.scrap-place-search {
+    height: 80px;
+    padding: 15px;
+}
+.scrap-place-search-input {
+    width: 400px;
+    height: 100%;
+    border: 2px solid #ddd;
+    border-radius: 25px;
+    padding: 5px 22px;
+    font-size: 20px;
+    outline-color: #2DC48D;
+}
+.scrap-place-search-input::placeholder {
+    color: #bbb;
+}
+#sortBtn {
+    background-color: #2DC48D;
+    color: white;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* 빈 스크렙 조회 결과 */
+.empty-scrap {
+    width: 100%;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #aaa;
+    font-size: 50px;
+}
