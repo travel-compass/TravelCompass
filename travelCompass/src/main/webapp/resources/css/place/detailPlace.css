@@ -252,52 +252,45 @@ main {
 }
 
 
-
-
-/* -------------------------------------------------------------- */
-
-/* 리뷰 섹션 */
-
-
-/* 리뷰 nav */
-/* ul 스타일 지정 */
-nav {
+/* --------------------------- 보드 내비게이션 --------------------------- */
+.boardNav {
+  height: 100%;
+  padding: 12px 12px 0;
   margin-top: 20px;
-  margin-bottom: 10px;
+  background-color: white;
 }
 
-nav>ul {
-  margin: 0;
-  padding: 0;
+
+.boardNav>ul {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
   list-style: none;
+}
+
+
+.boardNav input[name='boardNav'] {
+  display: none;
+}
+
+.boardNav label {
+  color: black;
+  text-decoration: none;
+  padding: 0 30px;
   display: flex;
   height: 100%;
-}
-
-/* 네이게이터 메뉴 */
-nav li {
-  flex-basis: 100px;
-  /* display: flex; */
-}
-
-/* 메뉴 내부 a태그 */
-nav li>a {
-  text-decoration: none;
-  /* 밑줄 없애기 */
-  font-size: 20px;
-  /* font-weight: bold; */
-  color: black;
-
-  display: block;
-  height: 100%;
-
-  padding: 5px 0;
-  /* 세로 가로 */
-  text-align: center;
+  align-items: center;
+  justify-content: center;
 
 }
 
-/* 메뉴에 마우스가 올라왔을 때 */
-nav li>a:hover {
-  border-bottom: 5px solid #2DC48D;
+.boardNav label:hover {
+  background-color: #ccc;
+  transition-delay: 50ms;
+  cursor: pointer;
+}
+
+.boardNav input:checked+label {
+  border-bottom: #00AA6C solid 4px;
+  transition-delay: 50ms;
 }

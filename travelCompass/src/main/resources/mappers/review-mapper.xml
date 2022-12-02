@@ -158,6 +158,7 @@
 		ORDER BY REVIEW_IMAGE_NO
 	</select>
 	
+	<!-- 리뷰 등록 -->
 	<insert id="insertReview" parameterType="Review" useGeneratedKeys="true">
 		<selectKey keyProperty="reviewNo" resultType="_int" order="BEFORE">
 			SELECT SEQ_REVIEW_NO.NEXTVAL FROM DUAL
@@ -167,6 +168,7 @@
 		VALUES (#{reviewNo},#{rating},#{reviewTitle},#{reviewContent},DEFAULT,#{memberNo},#{contentid},#{firstimage})
 	</insert>
 	
+	<!-- 리뷰 삭제 -->
 	<delete id="deleteReview">
 		UPDATE "REVIEW" SET
 		REVIEW_FL='Y'

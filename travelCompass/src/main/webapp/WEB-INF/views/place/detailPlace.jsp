@@ -254,10 +254,16 @@
       </div>
     </section>
 
-    <nav review>
-      <ul class="list-group">
-        <li><a href="">리뷰</a></li>
-        <li><a href="">QnA</a></li>
+    <nav class="boardNav">
+      <ul>
+        <li>
+          <input type="radio" name="boardNav" id="reviewBoard" checked>
+          <label for="reviewBoard"><a id="boardNav1">리뷰</a></label>
+        </li>
+        <li>
+          <input type="radio" name="boardNav" id="qnaBoard">
+          <label for="qnaBoard"><a id="boardNav1">Q&A</a></label>
+        </li>
       </ul>
     </nav>
 

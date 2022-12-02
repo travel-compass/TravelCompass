@@ -48,11 +48,11 @@ public class ReviewController {
 //		return reviewMap;
 //	}
 	
-	@GetMapping("reviewList")
+	@GetMapping("/reviewList")
 	public Map<String, Object> selectReviewList(String contentid, int cp) {
-		Map<String, Object> reviewList=service.selectReviewList(contentid, cp);
+		Map<String, Object> reviewMap=service.selectReviewList(contentid, cp);
 		
-		return reviewList;
+		return reviewMap;
 	}
 	
 	@PostMapping("/insertReview")
