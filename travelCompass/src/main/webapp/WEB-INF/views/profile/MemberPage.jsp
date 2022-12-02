@@ -109,7 +109,7 @@
                         <li>
                             <input type="radio" id="checkFed" name="profileCategory" checked>
                             <label for="checkFed">
-                                <span id="Fed"> 활동피드 </span>
+                                <span id="Fed" OnClick="location.href='/profile/${loginMember.memberNo}'"> 활동피드 </span>
                             </label>
                         </li>
                         <li>
@@ -146,13 +146,12 @@
 
                         <ul class="review-list" id="reviewContainer">
                                 
-                            <c:forEach var="reviewList" items="${reviewList}" begin="0" end="9">
 
-                                <c:if test="${reviewList == null}">
+                                <c:if test="${empty reviewList}">
                                     <!-- 리뷰가 아무것도 없을 때 나오는 테이블 -->
                                     <div class="user-page-review-colums2">
                                         <div class="user-page-review-none-content">
-                                            <div class="none-content-titel">
+                                            <div class="none-content-title">
                                                 프로필 작성
                                             </div>
                                             <div class="none-content">
@@ -165,9 +164,11 @@
                                         </div>
                                     </div>
                                 </c:if>
+
+                            <c:forEach var="FedList" items="${reviewList}" begin="0" end="9">
                                 
                                 <%-- 사진이 없을 때 reivewImgList에 담겨있는게 없어서 size가 0 --%>
-                                <c:if test="${(reviewList != null) && (fn:length(reviewList.reviewImgList) == 0)}">
+                                <c:if test="${(not empty FedList) && (fn:length(FedList.reviewImgList) == 0)}">
                                     <!-- 첫번째 리뷰 테이블 -->
                                     <div class="user-page-review-colums2">
                                         <div class="user-page-review-header-style">
@@ -176,7 +177,7 @@
                                                 <div class="review-user-info-layout">
                                                     <span class="review-user-nickname"><a href="#">${member.memberNickname}</a>님이 리뷰를 작성했습니다.</span>
                                                     <a href="#" class="review-user-dday">
-                                                        ${reviewList.reviewDate}
+                                                        ${FedList.reviewDate}
                                                     </a>
                                                 </div>
                                             </div>
@@ -196,8 +197,8 @@
                                                 <span><i class="fa-solid fa-circle"></i></span>
                                                 <span><i class="fa-solid fa-circle"></i></span>
                                             </div>
-                                            <div class="review-title">${reviewList.reviewTitle}</div>
-                                            <div class="review-content">"${reviewList.reviewContent}"</div>
+                                            <div class="review-title">${FedList.reviewTitle}</div>
+                                            <div class="review-content">"${FedList.reviewContent}"</div>
                                             <div class="review-date">
                                                 <span class="rdt">방문 날짜 :</span>
                                                 2019년 12월
@@ -245,7 +246,7 @@
                                 </c:if>
 
                                 <%-- 이미지가 있어서 reivewImgList의 size가 0이 아닐 때 --%>
-                                <c:if test="${(reviewList != null) && (fn:length(reviewList.reviewImgList) != 0)}">
+                                <c:if test="${(not empty FedList) && (fn:length(FedList.reviewImgList) != 0)}">
                                     <%-- 리뷰도 있고 사진도 있을 경우 --%>
                                     <!-- 두번째 리뷰 테이블 (사진 슬라이드 넣어보기) -->
                                     <div class="user-page-review-colums2">
@@ -255,7 +256,7 @@
                                                 <div class="review-user-info-layout">
                                                     <span class="review-user-nickname"><a href="#">${member.memberNickname}</a>님이 리뷰를 작성했습니다.</span>
                                                     <a href="#" class="review-user-dday">
-                                                        ${reviewList.reviewDate}
+                                                        ${FedList.reviewDate}
                                                     </a>
                                                 </div>
                                             </div>
@@ -269,10 +270,10 @@
                                         </div>
                                         <!-- 사진 슬라이드 div태그 시작 -->
                                         <div class="slide-container-style">
-                                            <c:forEach var="i" begin="0" end="${fn:length(reviewList.reviewImgList) - 1}">
+                                            <c:forEach var="i" begin="0" end="${fn:length(FedList.reviewImgList) - 1}">
                                                     <div class="slide fade">
-                                                        <div class="numbertext">${i+1} / ${fn:length(reviewList.reviewImgList)}</div>
-                                                        <img src="${reviewList.reviewImgList[i].reviewImgPath}${reviewList.reviewImgList[i].reviewImgOriginal}">
+                                                        <div class="numbertext">${i+1} / ${fn:length(FedList.reviewImgList)}</div>
+                                                        <img src="${FedList.reviewImgList[i].reviewImgPath}${FedList.reviewImgList[i].reviewImgOriginal}">
                                                     </div>
                                             </c:forEach>
                                             <a class="prev" onclick="plusSlides(-1, this)">&#10094;</a>
@@ -288,8 +289,8 @@
                                                 <span><i class="fa-solid fa-circle"></i></span>
                                                 <span><i class="fa-solid fa-circle"></i></span>
                                             </div>
-                                            <div class="review-title">${reviewList.reviewTitle}</div>
-                                            <div class="review-content">"${reviewList.reviewContent}"</div>
+                                            <div class="review-title">${FedList.reviewTitle}</div>
+                                            <div class="review-content">"${FedList.reviewContent}"</div>
                                             <div class="review-date">
                                                 <span class="rdt">방문 날짜 :</span>
                                                 2019년 12월

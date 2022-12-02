@@ -62,9 +62,4 @@
 		ORDER BY REVIEW_IMAGE_ORDER
 	</select>
 	
-	<select id="selectAllReviewList" resultMap="review_rm">
-		SELECT * FROM REVIEW
-		WHERE MEMBER_NO = #{memberNo}
-	</select>
-	
 </mapper>

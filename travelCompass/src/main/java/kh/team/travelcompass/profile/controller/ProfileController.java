@@ -29,7 +29,7 @@ public class ProfileController {
 		Member member = service.selectMember(memberNo);
 		
 		// 프로필 페이지의 리뷰 리스트 가져오기
-		List<Review> reviewList = service.selectAllReviewList(memberNo);
+		List<Review> reviewList = service.ReviewSelectList(memberNo);
 		
 		
 		model.addAttribute("member", member);
@@ -51,7 +51,8 @@ public class ProfileController {
 		
 		model.addAttribute("reviewList", reviewList);
 		
-		System.out.println("김바바");
+		System.out.println(reviewList);
+		
 		return reviewList;
 	}
 	
