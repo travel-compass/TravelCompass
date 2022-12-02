@@ -531,6 +531,7 @@ animation-duration: 1.5s;
     position: relative;
     top: 40px;
     right: 30px;
+    border: none;
     box-shadow: rgba(0, 0, 0, 0.2) 0 1px 10px 1px;
     background: white;
     border-radius: 10%;

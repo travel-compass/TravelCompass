@@ -71,17 +71,25 @@ function showSlides(n, element) {
 // -------------------------------------------------------------------------
 
 
+
+    
 // 클릭 이벤트로 실행 하기
 const dotmenu = document.getElementsByClassName("user-page-review-dot-style");
 
-for(let item of dotmenu){
-    item.addEventListener("click", function(){
-        item.nextElementSibling.style.display = "inline-block";
+for (let items of dotmenu) {
+
+    items.addEventListener("click", function() {
+
+        if (items.nextElementSibling.style.display == ""){
+            
+            items.nextElementSibling.style.display = "inline-block";
+
+        }
+        
     });
-    item.nextElementSibling.addEventListener("click", function(){
-        item.nextElementSibling.style.display = "none";
-    });
+
 }
+
 
 const suportButton = document.getElementsByClassName("suport-button");
 
@@ -133,6 +141,9 @@ Review.addEventListener("click", (e) => {
             reviewListContainer.innerHTML = "";
 
             if (reviewList.length == 0){
+
+                const reviewTextColum = document.createElement("div");
+                reviewTextColum.classList.add("user-page-review-colums2");
 
                 const reviewNoneContainner = document.createElement("div");
                 reviewNoneContainner.classList.add("user-page-review-none-content");
@@ -195,17 +206,17 @@ Review.addEventListener("click", (e) => {
                     reviewTextDotStyle.classList.add("user-page-review-dot-style");
                     reviewTextDotStyle.innerHTML= "<i class='fa-solid fa-ellipsis' ></i>";
             
-                    const reivewTextDotDownMenu = document.createElement("div");
+                    const reivewTextDotDownMenu = document.createElement("button");
                     reivewTextDotDownMenu.classList.add("user-page-review-dot-down-menu");
                     
                     const reivewTextDownMenu = document.createElement("ul");
                     reivewTextDownMenu.classList.add("down-menu");
         
                     const reivewTextDownMenu_li1 = document.createElement("li");
-                    reivewTextDownMenu_li1.innerHTML = "<li><a href='아직 미정'>수정</a></li>";
+                    reivewTextDownMenu_li1.innerHTML = "<li><a href='#'>수정</a></li>";
                     
                     const reivewTextDownMenu_li2 = document.createElement("li");
-                    reivewTextDownMenu_li2.innerHTML = "<li><a href='아직 미정'>삭제</a></li>";
+                    reivewTextDownMenu_li2.innerHTML = "<li><a href='#'>삭제</a></li>";
                     
                     const reviewTextDataTableStyle = document.createElement("div");
                     reviewTextDataTableStyle.classList.add("review-data-table-style");
@@ -423,10 +434,12 @@ Review.addEventListener("click", (e) => {
             
 
         },
-        error : console.log("리뷰 리스트 불러오기 실패")
-
+        error : () => {
+            console.log("리뷰 리스트 불러오기 실패");
+        }
 
     });
+
 });
         
 
