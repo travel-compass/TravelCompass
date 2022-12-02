@@ -126,15 +126,13 @@
                             href="#">${tourPlace.title}</a></span>
                       </div>
 
-                      <div class="search-result-item-grade">
-                        <span><a href="#<!--상세페이지-리뷰-->">
-                            <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
-                            <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
-                            <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
-                            <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
-                            <i class="fa-solid fa-circle-half-stroke" style="color: #00AA6C"></i>
-                          </a></span>
-                        <span><a href="#">267건의 리뷰</a></span>
+                      <div class="review-area">
+                        <div class="review-area">
+                          <div class="rating">
+                            <span class="empty">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                            <span class="fill">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                          </div>
+                        <span class="review-count">3231</span>
                       </div>
 
                       <div class="search-result-item-dist">
@@ -160,15 +158,13 @@
                       <span><a href="#">${culturePlace.title}</a></span>
                     </div>
 
-                    <div class="search-result-item-grade">
-                      <span><a href="#<!--상세페이지-리뷰-->">
-                          <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
-                          <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
-                          <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
-                          <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
-                          <i class="fa-solid fa-circle-half-stroke" style="color: #00AA6C"></i>
-                        </a></span>
-                      <span><a href="#">267건의 리뷰</a></span>
+                    <div class="review-area">
+                      <div class="review-area">
+                        <div class="rating">
+                          <span class="empty">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                          <span class="fill">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                        </div>
+                      <span class="review-count">3231</span>
                     </div>
 
                     <div class="search-result-item-dist">
@@ -196,15 +192,13 @@
                           href="#">${foodPlace.title}</a></span>
                     </div>
 
-                    <div class="search-result-item-grade">
-                      <span><a href="#<!--상세페이지-리뷰-->">
-                          <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
-                          <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
-                          <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
-                          <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
-                          <i class="fa-solid fa-circle-half-stroke" style="color: #00AA6C"></i>
-                        </a></span>
-                      <span><a href="#"></a></span>
+                    <div class="review-area">
+                      <div class="review-area">
+                        <div class="rating">
+                          <span class="empty">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                          <span class="fill">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                        </div>
+                      <span class="review-count">3231</span>
                     </div>
 
                     <div class="search-result-item-dist">
@@ -228,15 +222,13 @@
                           href="#">${leisurePlace.title}</a></span>
                     </div>
 
-                    <div class="search-result-item-grade">
-                      <span><a href="#">
-                          <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
-                          <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
-                          <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
-                          <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
-                          <i class="fa-solid fa-circle-half-stroke" style="color: #00AA6C"></i>
-                        </a></span>
-                      <span><a href="#">267건의 리뷰</a></span>
+                    <div class="review-area">
+                      <div class="review-area">
+                        <div class="rating">
+                          <span class="empty">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                          <span class="fill">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                        </div>
+                      <span class="review-count">3231</span>
                     </div>
 
                     <div class="search-result-item-dist">

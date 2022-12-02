@@ -147,17 +147,6 @@ main {
   padding: 10px;
 }
 
-.search-result-item-title {
-  /* margin-bottom: 3px; */
-}
-
-.search-result-item-grade {
-  /* margin-bottom: 3px; */
-}
-
-.search-result-item-dist {}
-
-
 
 .search-result-item-title a {
   font-weight: bolder;
@@ -210,6 +199,18 @@ main {
   flex-direction: column;
   justify-content: space-around;
 }
+
+/* 주변장소 리뷰스타일 */
+
+
+
+
+
+
+
+
+
+
 
 /* 카카오 지도 api */
 .map {
