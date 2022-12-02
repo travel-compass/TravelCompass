@@ -269,7 +269,7 @@ main {
     list-style: none;
 }
 
-.search-result-list>li {
+.search-result-list li {
     border: #ccc solid 1px;
 }
 
@@ -325,9 +325,41 @@ main {
     padding: 16px 16px 16px 24px;
 }
 
-.search-result-item-grade a:last-child {
-    font-size: 14px;
+
+
+.search-result-item-grade{
+    display: flex;
 }
+
+.search-result-item-grade a:last-child {
+    font-size: 12px;
+}
+
+/*평점***************************************************/
+.rating {
+    position: relative;
+    height: 15px;
+    margin-bottom: 5px;
+    width: 80px;
+}
+.empty, .fill{
+    position: absolute;
+    font-size: 15px;
+}
+
+.empty{
+    z-index: 1;
+    color: #ddd;
+}
+.fill{
+    z-index: 2;
+    overflow: hidden;
+    color: #2DC48D;
+    width: 40px;
+}
+
+/******************************************************/
+
 
 .search-result-item-address a {
     font-size: 14px;
@@ -362,7 +394,7 @@ main {
 
 /********************show-more-text(더보기)************************************8***/
 
-
+/* 
 .show-more-text {
     text-decoration: none;
     color: #070707;
@@ -378,9 +410,9 @@ main {
 
 .fa-solid fa-caret-down {
     color: #070707;
-}
+} */
 
-/*********************page-select(리스트 페이지)******************************/
+/*********************page-select(페이지네이션)******************************/
 
 .pagination-area {
     width: 770px;
@@ -409,12 +441,17 @@ main {
     padding: 0;
 }
 
+
 .pagination li {
     width: 20px;
     margin: 0 5px;
     text-align: center;
 
 }
+
+/* .pagination-ajax {
+    display: inline-flex;
+} */
 
 .pagination a {
     /* display: block;
@@ -464,6 +501,7 @@ a.current {
     background-color: #0a5a4a;
     color: #fff;
 }
+
 
 
 /*******************search-rank(인기 검색어)*********************************/

@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="/resources/css/search/search.css">
     <link rel="stylesheet" href="/resources/css/inc/footer.css">
     <script src="https://kit.fontawesome.com/72842759a7.js" crossorigin="anonymous"></script>
+    <script src="/resources/js/common/jQuery-core.js"></script>
 </head>
 
 <body>
@@ -25,15 +26,15 @@
                 
                     <div class="search-input-form">
                         <jsp:include page="/WEB-INF/views/inc/search-form.jsp" />
-                        <!-- <form action="/search" class="search-form" id="searchForm">
+                        <!--참조용
+                            <form action="/search" class="search-form" id="searchForm">
                             <div class="search-input-box">
                                 <button id="search-btn" class="fa-solid fa-magnifying-glass"></button>
                                 <input id="search-input" type="search" placeholder="어디로 가시나요?" name="keyword" autocomplete="off">
                             </div>
-
+                        
                             <div class="search-keyword-area">
                                 <div class="search-option-area">
-                                    
                                     <input type="radio" name="contentTypeId" value="12" id="12" checked>
                                     <label for="12">관광지</label>
                                     
@@ -45,7 +46,7 @@
                                     
                                     <input type="radio" name="contentTypeId" value="39" id="39">
                                     <label for="39">음식점</label>
-
+                        
                                     <select name="areaCode" id="areaCode">
                                         <option value="-1">지역(전체)</option>
                                         <option value="1">서울</option>
@@ -67,131 +68,44 @@
                                         <option value="39">제주도</option>
                                     </select>
                                 </div>
-                                <a href="#">
+                                <a href="/location/aroundSearch?" id="aroundSearch">
                                     <i class="fa-solid fa-location-arrow"></i>
                                     <span>주변</span>
                                 </a>
-                                <label class="search-keyword-title">인기 검색어</label>
-                                <ol class="popular-keyword-list">
-                                        <!-- <a href="">
-                                        <i class="fa-solid fa-location-dot"></i>
-                                        <span>라스베이거스</span>
-                                    </a>
-                                    <hr>
-                                    <a href="">
-                                        <i class="fa-solid fa-location-dot"></i>
-                                        <span>서울</span>
-                                    </a>
-                                    <hr>
-                                    <a href="">
-                                        <i class="fa-solid fa-location-dot"></i>
-                                        <span>동대문</span>
-                                    </a>
-                                    <hr>
-                                    <a href="">
-                                        <i class="fa-solid fa-location-dot"></i>
-                                        <span>부산 해운대</span>
-                                    </a>  
-                                </ol>
-                            
-                            </div>
-                        </form> -->
+                                <c:if test="${not empty popularKeyword}">
+                                    <label class="search-keyword-title">인기 검색어</label>
+                                    <ul class="popular-keyword-list">
+                                        <c:forEach var="keyword" items="${popularKeyword}" varStatus="vs">
+                                            <a href="/search?keyword=${keyword}&contentTypeId=12&areaCode=-1">
+                                                <i class="fa-solid fa-location-dot"></i>
+                                                <span>${keyword}</span>
+                                            </a>
+                                            <c:if test="${!vs.last}">
+                                                <hr>
+                                            </c:if>
+                                        </c:forEach>
+                                    </ul>
+                                </c:if> -->
                     </div>
                     
                     <div class="search-filter">
                         <ul>
-                        <c:choose>
-                            <c:when test="${param.contentTypeId == 12}">
                             <li>
-                                <input type="radio" name="contentTypeId" value="12" id="searchType1" checked>
+                                <input type="radio" name="contentTypeId" value="12" id="searchType1" checked class="category">
                                 <label for="searchType1"><a id="search-filter">관광지</a></label>
                             </li>
                             <li>
-                                <input type="radio" name="contentTypeId" value="14" id="searchType2">
+                                <input type="radio" name="contentTypeId" value="14" id="searchType2" class="category">
                                 <label for="searchType2"><a id="search-filter">문화시설</a></label>
                             </li>
                             <li>
-                                <input type="radio" name="contentTypeId" value="28" id="searchType3">
+                                <input type="radio" name="contentTypeId" value="28" id="searchType3" class="category">
                                 <label for="searchType3"><a id="search-filter">레포츠</a></label>
                             </li>
                             <li>
-                                <input type="radio" name="contentTypeId" value="39" id="searchType4">
+                                <input type="radio" name="contentTypeId" value="39" id="searchType4" class="category">
                                 <label for="searchType4"><a id="search-filter">음식점</a></label>
                             </li>
-                            </c:when>
-                            <c:when test="${param.contentTypeId == 14}">
-                            <li>
-                                <input type="radio" name="contentTypeId" value="12" id="searchType1">
-                                <label for="searchType1"><a id="search-filter">관광지</a></label>
-                            </li>    
-                            <li>
-                                <input type="radio" name="contentTypeId" value="14" id="searchType2" checked>
-                                <label for="searchType2"><a id="search-filter">문화시설</a></label>
-                            </li>
-                            <li>
-                                <input type="radio" name="contentTypeId" value="28" id="searchType3">
-                                <label for="searchType3"><a id="search-filter">레포츠</a></label>
-                            </li>
-                            <li>
-                                <input type="radio" name="contentTypeId" value="39" id="searchType4">
-                                <label for="searchType4"><a id="search-filter">음식점</a></label>
-                            </li>
-                            </c:when>
-                            <c:when test="${param.contentTypeId == 28}">
-                                <li>
-                                    <input type="radio" name="contentTypeId" value="12" id="searchType1">
-                                    <label for="searchType1"><a id="search-filter">관광지</a></label>
-                                </li>    
-                                <li>
-                                    <input type="radio" name="contentTypeId" value="14" id="searchType2">
-                                    <label for="searchType2"><a id="search-filter">문화시설</a></label>
-                                </li>
-                                <li>
-                                    <input type="radio" name="contentTypeId" value="28" id="searchType3"checked>
-                                    <label for="searchType3"><a id="search-filter">레포츠</a></label>
-                                </li>
-                                <li>
-                                    <input type="radio" name="contentTypeId" value="39" id="searchType4">
-                                    <label for="searchType4"><a id="search-filter">음식점</a></label>
-                                </li>
-                            </c:when>
-                            <c:when test="${param.contentTypeId == 39}">
-                                <li>
-                                    <input type="radio" name="contentTypeId" value="12" id="searchType1">
-                                    <label for="searchType1"><a id="search-filter">관광지</a></label>
-                                </li>    
-                                <li>
-                                    <input type="radio" name="contentTypeId" value="14" id="searchType2">
-                                    <label for="searchType2"><a id="search-filter">문화시설</a></label>
-                                </li>
-                                <li>
-                                    <input type="radio" name="contentTypeId" value="28" id="searchType3">
-                                    <label for="searchType3"><a id="search-filter">레포츠</a></label>
-                                </li>
-                                <li>
-                                    <input type="radio" name="contentTypeId" value="39" id="searchType4" checked>
-                                    <label for="searchType4"><a id="search-filter">음식점</a></label>
-                                </li>
-                            </c:when>
-                            <c:otherwise >
-                                <li>
-                                    <input type="radio" name="contentTypeId" value="12" id="searchType1" checked>
-                                    <label for="searchType1"><a id="search-filter">관광지</a></label>
-                                </li>
-                                <li>
-                                    <input type="radio" name="contentTypeId" value="14" id="searchType2">
-                                    <label for="searchType2"><a id="search-filter">문화시설</a></label>
-                                </li>
-                                <li>
-                                    <input type="radio" name="contentTypeId" value="28" id="searchType3">
-                                    <label for="searchType3"><a id="search-filter">레포츠</a></label>
-                                </li>
-                                <li>
-                                    <input type="radio" name="contentTypeId" value="39" id="searchType4">
-                                    <label for="searchType4"><a id="search-filter">음식점</a></label>
-                                </li>
-                            </c:otherwise>
-                        </c:choose>
                         </ul>
                     </div>
 		        </div>
@@ -212,7 +126,7 @@
                                 </div>
                             </c:when>
                         </c:choose>
-                        <div class="search-result-list">
+                        <div>
                     
                             <ul class="search-result-list">
                                 <!-- <c:choose>
@@ -225,7 +139,7 @@
                                                 <div class="search-result-item">
 
                                                     <div class="search-result-item-img">
-                                                        <a href="/place/detail?contentId=${place.contentid}&contentTypeId=${place.contenttypeid}">
+                                                        <a href="/place/detail/${place.contenttypeid}/${place.contentid}">
                                                             <c:choose>
                                                                 <c:when test="${!empty place.firstimage}">
                                                                     <img src="${place.firstimage}" alt="" width="177px" height="140px">
@@ -236,26 +150,23 @@
                                                             </c:choose>
                                                         </a>
                                                     </div>
-                                                        
+                                                    
                                                     <div class="search-result-item-content">
 
                                                         <div class="search-result-item-title">
-                                                            <span><a href="/place/detail?contentId=${place.contentid}&contentTypeId=${place.contenttypeid}">${place.title}</a></span>
+                                                            <span><a href="/place/detail/${place.contenttypeid}/${place.contentid}">${place.title}</a></span>
                                                         </div>
 
                                                         <div class="search-result-item-grade">
-                                                            <span><a href="#<!--상세페이지-리뷰-->">
-                                                                <i class="fa-solid fa-circle" style = "color: #00AA6C"></i>
-                                                                <i class="fa-solid fa-circle" style = "color: #00AA6C"></i>
-                                                                <i class="fa-solid fa-circle" style = "color: #00AA6C"></i>
-                                                                <i class="fa-solid fa-circle" style = "color: #00AA6C"></i>
-                                                                <i class="fa-solid fa-circle-half-stroke" style = "color: #00AA6C"></i>
-                                                                </a></span>
+                                                            <div class="rating">
+                                                                <span class="empty">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                                                                <span class="fill">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                                                            </div>
                                                             <span><a href="#<!--상세페이지-리뷰-->">267건의 리뷰</a></span>
                                                         </div>
                                                             
                                                         <div class="search-result-item-address">
-                                                            <span><a href="/place/detail?contentId=${place.contentid}&contentTypeId=${place.contenttypeid}">${place.addr1}</a></span>
+                                                            <span><a href="/place/detail/${place.contenttypeid}/${place.contentid}">${place.addr1}</a></span>
                                                         </div>
                                                             
                                                         <div class="search-result-item-review">
@@ -283,6 +194,7 @@
                                 <li><a href="/search?keyword=${param.keyword}&contentTypeId=${param.contentTypeId}&areaCode=${param.areaCode}&pageNo=${pagination.prevPage}"
                                     class="arrow prev">&lt;</a></li>
                     
+                                
                                 <c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}" step="1">
                                     <c:choose>
                                         <c:when test="${i==pagination.pageNo}">
@@ -296,7 +208,8 @@
                                         </c:otherwise>
                                     </c:choose>
                                 </c:forEach>
-                    
+                                
+
                                 <!-- 다음 목록 시작 번호로 이동 -->
                                 <li><a href="/search?keyword=${param.keyword}&contentTypeId=${param.contentTypeId}&areaCode=${param.areaCode}&pageNo=${pagination.nextPage}"
                                     class="arrow next">&gt;</a></li>
