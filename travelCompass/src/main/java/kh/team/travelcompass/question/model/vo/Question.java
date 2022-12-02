@@ -23,4 +23,9 @@ public class Question {
 	
 	private int parentNo; // 부모글 식별번호
 	
+	// 필드 추가
+	private String memberNickName;
+	private String profileImage; 
+	
+	
 }
