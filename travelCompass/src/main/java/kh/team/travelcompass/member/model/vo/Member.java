@@ -24,7 +24,7 @@ public class Member {
 	private String lastLoginDate;	// 마지막 로그인 날짜 
 	private String profileImage;	// 프로필 이미지 경로
 	private String authority;		// 권한
-	private int totalPosting;		// 총 포스팅 갯수	(여행, 리뷰 갯수 카운트)
+	private int totalPosting;		// 총 포스팅 갯수	(여행, 리뷰, QnA 갯수 카운트)
 	private int totalFollower;		// 총 팔로워 수
 	private int totalFollowing;		// 총 팔로잉 수
 }

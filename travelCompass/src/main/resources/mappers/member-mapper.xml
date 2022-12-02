@@ -15,6 +15,9 @@
 		<result property="enrollDate" column="ENROLL_DATE"/>
 		<result property="profileImage" column="PROFILE_IMAGE"/>
 		<result property="authority" column="AUTHORITY"/>
+		<result property="totalPosting" column="TOTAL_POSTING"/>
+		<result property="totalFollower" column="TOTAL_FOLLOWER"/>
+		<result property="totalFollowing" column="TOTAL_FOLLOWING"/>
 	</resultMap>
 	
 	
@@ -94,6 +97,34 @@
 	FROM MEMBER
 	WHERE MEMBER_NO = #{memberNo}
 	</select>
+	
+	<select id="totalSelectMember" resultMap="member_rm">
+		SELECT MEMBER_NO, MEMBER_EMAIL, MEMBER_NICKNAME, MEMBER_NAME, PROFILE_IMAGE, 
+		SUBSTR(MEMBER_ADDRESS, 8, 6) MEMBER_ADDRESS, TO_CHAR(ENROLL_DATE, 'YYYY"년" MM"월"') ENROLL_DATE, 
+		(SELECT COUNT(*)
+		FROM REVIEW
+		WHERE REVIEW_FL = 'N'
+		AND MEMBER_NO = #{memberNo})
+		+
+		(SELECT COUNT(*)
+		FROM TRAVEL
+		WHERE PRIVATE_FL = 'N'
+		AND MEMBER_NO = #{memberNo})
+		+
+		(SELECT COUNT(*)
+		FROM QUESTION
+		WHERE BLIND_FL = 'N'
+		AND MEMBER_NO = #{memberNo}) TOTAL_POSTING,
+		(SELECT COUNT(*)
+		FROM FOLLOW
+		WHERE MEMBER_NO = #{memberNo}) TOTAL_FOLLOWER,
+		(SELECT COUNT(*)
+		FROM FOLLOW
+		WHERE FOLLOW_MEMBER_NO = #{memberNo}) TOTAL_FOLLOWING
+		FROM MEMBER
+		WHERE MEMBER_NO = #{memberNo}
+	</select>
+	
 </mapper>
 
 

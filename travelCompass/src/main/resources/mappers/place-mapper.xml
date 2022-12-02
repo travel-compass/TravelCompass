@@ -4,15 +4,33 @@
 <mapper namespace="placeMapper">
 	
 	<resultMap type="Place" id="place_rm">
-		<id property="contentid" column="MEMBER_NO"/>
+		<id property="placeScrapNo" column="PLACE_SCRAP_NO"/>
 		<result property="contentid" column="CONTENT_ID"/>
-		<result property="contenttypeid" column="MEMBER_PW"/>
-		<result property="firstimage" column="MEMBER_TEL"/>
+		<result property="contenttypeid" column="CONTENT_TYPE_ID"/>
+		<result property="title" column="PLACE_TITLE"/>		
+		<result property="firstimage" column="FIRST_IMAGE"/>
 		<result property="addr1" column="PLACE_ADDR"/>
 		<result property="mapx" column="MAPX"/>
 		<result property="mapy" column="MAPY"/>
+		
+		<result property="scrapDate" column="SCRAP_DATE"/>
+		<result property="reviewCount" column="REVIEW_COUNT"/>
+		<result property="averageRating" column="AVERAGE_RATING"/>
 	</resultMap>
 
+	<resultMap type="Travel" id="travelDetail_rm">
+		<id property="travelNo" column="TRAVEL_NO"/>
+		<result property="travelTitle" column="TRAVEL_TITLE"/>
+		<result property="travelContent" column="TRAVEL_CONTENT"/>
+		<result property="memberNo" column="MEMBER_NO"/>
+		<result property="memberNickname" column="MEMBER_NICKNAME"/>
+		<result property="profileImage" column="PROFILE_IMAGE"/>
+		
+		<result property="privateFlag" column="PRIVATE_FL"/>
+		<result property="travelDate" column="TRAVEL_DATE"/>
+		
+		<collection property="placeList" javaType="java.util.ArrayList" ofType="Place" select="selectTravelPlaceList" column="TRAVEL_NO"/>
+	</resultMap>
 
 	<select id="scrapCheck" resultType="_int" >
 		SELECT COUNT(*) FROM PLACE_SCRAP
@@ -30,4 +48,34 @@
 		WHERE MEMBER_NO=#{memberNo}
 		AND CONTENT_ID=#{contentid}
 	</delete>
+	
+	<!-- 스크랩한 장소 목록 조회 -->
+	<select id="selectScrapPlaceList" resultMap="place_rm" parameterType="_int">
+		SELECT PLACE_SCRAP_NO, PLACE_TITLE, FIRST_IMAGE, MAPX, MAPY, CONTENT_ID, PLACE_ADDR, CONTENT_TYPE_ID,
+			TO_CHAR(SCRAP_DATE, 'YYYY"년" MM"월" DD"일"') SCRAP_DATE,
+			(SELECT COUNT(*) FROM REVIEW R WHERE R.CONTENT_ID = PS.CONTENT_ID) REVIEW_COUNT,
+			(SELECT NVL(AVG(RATING), 0)  FROM REVIEW R WHERE R.CONTENT_ID = PS.CONTENT_ID) AVERAGE_RATING
+		FROM PLACE_SCRAP PS
+		WHERE MEMBER_NO = #{memberNo}
+	</select>
+	
+	<!-- 여행 상세 조회 -->
+	<select id="selectTravel" resultMap="travelDetail_rm" parameterType="_int">
+		SELECT T.TRAVEL_NO, T.TRAVEL_TITLE, TRAVEL_CONTENT, MEMBER_NO, MEMBER_NICKNAME, PROFILE_IMAGE, PRIVATE_FL,
+			TO_CHAR(TRAVEL_DATE, 'YYYY"년" MM"월" DD"일"') TRAVEL_DATE
+		FROM "TRAVEL" T
+		JOIN "MEMBER" USING(MEMBER_NO)
+		WHERE TRAVEL_NO = #{travelNo}
+	</select>
+	
+	<!-- 여행의 장소 목록 조회 -->
+	<select id="selectTravelPlaceList" resultMap="place_rm" parameterType="_int">
+		SELECT PLACE_SCRAP_NO, TRAVEL_LIST_NO, TRAVEL_LIST_ORDER, PLACE_TITLE, SCRAP_DATE, FIRST_IMAGE,
+			MAPX, MAPY, CONTENT_ID, CONTENT_TYPE_ID, PLACE_ADDR,
+			(SELECT COUNT(*) FROM REVIEW R WHERE R.CONTENT_ID = PS.CONTENT_ID) REVIEW_COUNT,
+			(SELECT NVL(AVG(RATING), 0)  FROM REVIEW R WHERE R.CONTENT_ID = PS.CONTENT_ID) AVERAGE_RATING
+		FROM TRAVEL_LIST TL
+		JOIN PLACE_SCRAP PS USING (PLACE_SCRAP_NO) 
+		WHERE TRAVEL_NO = #{travelNo}
+	</select>
 </mapper>

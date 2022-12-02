@@ -140,7 +140,6 @@ button.cancel-btn {
 	margin-left: -10px;
 } */
 
-
 /* 마지막 수정일 */
 .last-update-date {
     font-size: 14px;
@@ -253,6 +252,7 @@ button.cancel-btn {
 }
 .scrap-date {
     margin-top: auto;
+    color: #aaa;
 }
 
 /* JS-style */
@@ -297,4 +297,29 @@ button.cancel-btn {
     justify-content: center;
     color: #aaa;
     font-size: 50px;
+}
+.rating {
+    position: relative;
+    height: 15px;
+    margin-bottom: 10px;
+    width: 100px;
+}
+.empty, .fill{
+    position: absolute;
+    font-size: 20px;
+}
+
+.empty{
+    z-index: 1;
+    color: #ddd;
+}
+.fill{
+    z-index: 2;
+    overflow: hidden;
+    color: #2DC48D;
+    width: 40px;
+}
+
+.review-area {
+    display: flex;
 }

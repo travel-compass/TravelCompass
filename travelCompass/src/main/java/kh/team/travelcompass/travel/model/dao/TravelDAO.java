@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kh.team.travelcompass.place.model.vo.Place;
 import kh.team.travelcompass.travel.model.vo.Travel;
 
 @Repository
@@ -28,5 +29,22 @@ public class TravelDAO {
 	 */
 	public int createTravel(Travel travel) {
 		return sqlSession.insert("travelMapper.createTravel", travel);
+	}
+
+
+	/** 스크랩한 장소 목록 조회
+	 * @param memberNo
+	 * @return placeList
+	 */
+	public List<Place> selectScrapPlaceList(int memberNo) {
+		return sqlSession.selectList("placeMapper.selectScrapPlaceList", memberNo);
+	}
+
+
+	/** 여행 상세 조회
+	 * @param travelNo
+	 */
+	public Travel selectTravel(int travelNo) {
+		return sqlSession.selectOne("placeMapper.selectTravel", travelNo);
 	}
 }

@@ -175,26 +175,29 @@ main {
 .user-page-content-bottom-layout{
     display: flex;
     height: 100%;
-    margin: 0 8px;
-    
 }
 
-.user-page-content-bottom-layout span{
-    padding: 0 12px;
-    height: 100%;
-    font-size: 14px;
+.user-page-content-bottom-layout li:first-child{
+    margin-left: 5px;
+}
 
+.user-page-content-bottom-layout > li span{
     display: flex;
+    width: 70px;
+    height: 100%;
+    justify-content: center;
     align-items: center;
+    font-size: 15px;
+    cursor: pointer;
 }
 
-.user-page-content-bottom-layout span:focus-within{
+.user-page-content-bottom-layout input {
+    display: none;
+}
+
+.user-page-content-bottom-layout input:checked + label > span {
     font-weight: bold;
     border-bottom: 2px solid #009f5e;
-}
-
-.user-page-content-bottom-layout span:hover{
-    cursor: pointer;
 }
 
 .user-page-review-colums-style{
@@ -210,6 +213,7 @@ main {
     background-color: white;
     padding: 24px;
     width: 35%;
+    margin-bottom: 30px;
 
     display: flex;
     flex-direction: column;
@@ -436,7 +440,7 @@ main {
 }
 
 /* 미디어쿼리 화면 반응형 */
-@media (max-width: 1024px){
+@media (max-width: 1070px){
 
     .temp-web{
         padding: 0;
@@ -461,6 +465,10 @@ main {
     max-width: 1000px;
     position: relative;
     margin: auto;
+}
+
+.slide-container-style img{
+    height: 350px;
 }
 
 .slide{
@@ -542,7 +550,7 @@ animation-duration: 1.5s;
     padding: 48px 60px;
 }
 
-.none-content-titel{
+.none-content-title{
     font-size: 24px;
     font-weight: bold;
     text-align: center;
