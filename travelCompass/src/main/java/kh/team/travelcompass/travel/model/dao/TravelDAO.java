@@ -39,4 +39,12 @@ public class TravelDAO {
 	public List<Place> selectScrapPlaceList(int memberNo) {
 		return sqlSession.selectList("placeMapper.selectScrapPlaceList", memberNo);
 	}
+
+
+	/** 여행 상세 조회
+	 * @param travelNo
+	 */
+	public Travel selectTravel(int travelNo) {
+		return sqlSession.selectOne("placeMapper.selectTravel", travelNo);
+	}
 }

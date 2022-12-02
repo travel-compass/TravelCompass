@@ -44,15 +44,14 @@ public class TravelController {
 			@SessionAttribute("loginMember") Member loginMember) {
 		
 		// 여행 번호에 맞는 여행 조회
-//		Travel travel = service.selectTravel(travelNo);
-		
+		Travel travel = service.selectTravel(travelNo);
 		
 		// 로그인한 회원이 스크랩한 모든 장소 조회
 		List<Place> scrapPlaceList = service.selectScrapPlaceList(loginMember.getMemberNo());
 		model.addAttribute("scrapPlaceList", scrapPlaceList);
+		model.addAttribute("travel", travel);
 		return "/travel/travelCreate";
 	}
-	
 	
 	/** 비동기 여행 생성
 	 * @param travel
