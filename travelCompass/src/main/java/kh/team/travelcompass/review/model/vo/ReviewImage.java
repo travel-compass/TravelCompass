@@ -14,5 +14,9 @@ public class ReviewImage {
 	private String reviewImgPath; // 리뷰 이미지 경로
 	private String reviewImgDelFlag; // 리뷰 이미지 삭제 여부
 	private int reviewImgOrder; // 리뷰 이미지 순서
+	
+	
+	private String reviewImgReName; // 리뷰 이미지 변경명
+	private String reviewImgOriginal; // 리뷰 이미지 원본명
 
 }
