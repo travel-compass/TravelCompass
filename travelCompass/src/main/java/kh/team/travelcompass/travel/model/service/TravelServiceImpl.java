@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kh.team.travelcompass.place.model.vo.Place;
 import kh.team.travelcompass.travel.model.dao.TravelDAO;
 import kh.team.travelcompass.travel.model.vo.Travel;
 
@@ -30,8 +31,11 @@ public class TravelServiceImpl implements TravelService{
 	@Override
 	public Travel selectTravel(int travelNo) {
 		
-		
-		
-		return ;
+		return null;
+	}
+
+	@Override
+	public List<Place> selectScrapPlaceList(int memberNo) {
+		return dao.selectScrapPlaceList(memberNo);
 	}
 }

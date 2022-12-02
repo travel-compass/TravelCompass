@@ -18,6 +18,10 @@
 		<result property="averageRating" column="AVERAGE_RATING"/>
 	</resultMap>
 
+	<resultMap type="Travel" id="travel">
+		<id property="travelNo" column="TRAVEL_NO"/>
+	</resultMap>
+
 	<select id="scrapCheck" resultType="_int" >
 		SELECT COUNT(*) FROM PLACE_SCRAP
 		WHERE CONTENT_ID=#{contentid}
@@ -43,5 +47,17 @@
 			(SELECT NVL(AVG(RATING), 0)  FROM REVIEW R WHERE R.CONTENT_ID = PS.CONTENT_ID) AVERAGE_RATING
 		FROM PLACE_SCRAP PS
 		WHERE MEMBER_NO = #{memberNo}
+	</select>
+	
+	
+	<!-- 여행의 장소 목록 조회 -->
+	<select id="selectTravelPlaceList">
+		SELECT PLACE_SCRAP_NO, TRAVEL_LIST_NO, TRAVEL_LIST_ORDER, PLACE_TITLE, SCRAP_DATE, FIRST_IMAGE,
+			MAPX, MAPY, CONTENT_ID, CONTENT_TYPE_ID, PLACE_ADDR,
+			(SELECT COUNT(*) FROM REVIEW R WHERE R.CONTENT_ID = PS.CONTENT_ID) REVIEW_COUNT,
+			(SELECT NVL(AVG(RATING), 0)  FROM REVIEW R WHERE R.CONTENT_ID = PS.CONTENT_ID) AVERAGE_RATING
+		FROM TRAVEL_LIST TL
+		JOIN PLACE_SCRAP PS USING (PLACE_SCRAP_NO) 
+		WHERE TRAVEL_NO = #{travelNo}
 	</select>
 </mapper>

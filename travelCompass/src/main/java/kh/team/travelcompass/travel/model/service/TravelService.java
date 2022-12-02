@@ -2,6 +2,7 @@ package kh.team.travelcompass.travel.model.service;
 
 import java.util.List;
 
+import kh.team.travelcompass.place.model.vo.Place;
 import kh.team.travelcompass.travel.model.vo.Travel;
 
 public interface TravelService {
@@ -25,4 +26,11 @@ public interface TravelService {
 	 * @return travel
 	 */
 	public Travel selectTravel(int travelNo);
+
+
+	/** 스크랩한 장소 목록 조회
+	 * @param memberNo
+	 * @return placeList
+	 */
+	public List<Place> selectScrapPlaceList(int memberNo);
 }

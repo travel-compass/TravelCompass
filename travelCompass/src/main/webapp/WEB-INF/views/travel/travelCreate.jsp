@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -83,91 +84,46 @@
                 <button type="button" class="fa-solid fa-sort" id="sortBtn"></button>
             </form>
             <ul id="scrapPlaceList">
-                <li class="scrap-place-item">
-                    <a class="place-first-image">
-                        <img src="https://a.cdn-hotels.com/gdcs/production97/d1351/a274bc26-9643-4bae-a91f-cebaf7f9fa56.jpg?impolicy=fcrop&w=800&h=533&q=medium" alt="">
-                    </a>
-                    <div class="scrap-place-info">
-                        <div class="place-title-area">
-                            <a href="해당 장소 상세페이지">스크렙 장소 이름</a>
-                            <button class="fa-solid fa-ellipsis drop-down">
-                                <ul class="drop-down_box">
-                                    <li>여행에 추가</li>
-                                    <li>스크랩 삭제</li>
-                                </ul>
-                            </button>
+                <c:choose>
+                    <c:when test="${empty scrapPlaceList}">
+                        <div class="empty-scrap">
+                            텅...
                         </div>
-                        <div class="review-area">
-                            <div class="review-area">
-                            <div class="rating">
-                                <span class="empty">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
-                                <span class="fill">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
-                            </div>
-                            <span class="review-count">3231</span>
-                        </div>
-                        </div>
-                        <span class="place-addr">장소 주소</span>
-                        <span class="scrap-date">스크랩 날짜</span>
-                    </div>
-                </li>  
-                <li class="scrap-place-item">
-                    <a class="place-first-image">
-                        <img src="https://a.cdn-hotels.com/gdcs/production97/d1351/a274bc26-9643-4bae-a91f-cebaf7f9fa56.jpg?impolicy=fcrop&w=800&h=533&q=medium" alt="">
-                    </a>
-                    <div class="scrap-place-info">
-                        <div class="place-title-area">
-                            <a href="해당 장소 상세페이지">스크렙 장소 이름</a>
-                            <button class="fa-solid fa-ellipsis drop-down">
-                                <ul class="drop-down_box">
-                                    <li>여행에 추가</li>
-                                    <li>스크랩 삭제</li>
-                                </ul>
-                            </button>
-                        </div>
-                        <div class="review-area">
-                            <div class="review-area">
-                            <div class="rating">
-                                <span class="empty">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
-                                <span class="fill">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
-                            </div>
-                            <span class="review-count">3231</span>
-                        </div>
-                        </div>
-                        <span class="place-addr">장소 주소</span>
-                        <span class="scrap-date">스크랩 날짜</span>
-                    </div>
-                </li>  
-                <li class="scrap-place-item">
-                    <a class="place-first-image">
-                        <img src="https://a.cdn-hotels.com/gdcs/production97/d1351/a274bc26-9643-4bae-a91f-cebaf7f9fa56.jpg?impolicy=fcrop&w=800&h=533&q=medium" alt="">
-                    </a>
-                    <div class="scrap-place-info">
-                        <div class="place-title-area">
-                            <a href="해당 장소 상세페이지">스크렙 장소 이름</a>
-                            <button class="fa-solid fa-ellipsis drop-down">
-                                <ul class="drop-down_box">
-                                    <li>여행에 추가</li>
-                                    <li>스크랩 삭제</li>
-                                </ul>
-                            </button>
-                        </div>
-                        <div class="review-area">
-                            <div class="review-area">
-                            <div class="rating">
-                                <span class="empty">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
-                                <span class="fill">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
-                            </div>
-                            <span class="review-count">3231</span>
-                        </div>
-                        </div>
-                        <span class="place-addr">장소 주소</span>
-                        <span class="scrap-date">스크랩 날짜</span>
-                    </div>
-                </li>  
+                    </c:when>
+                    <c:otherwise>
+                        <c:forEach var="scrapPlace" items="${scrapPlaceList}" varStatus="vs">
+                            <li class="scrap-place-item">
+                                <a class="place-first-image">
+                                <%-- 기본이미지 조건문 처리 필요 --%>
+                                    <img src="${scrapPlace.firstimage}" alt="장소 썸네일">
+                                </a>
+                                <div class="scrap-place-info">
+                                    <div class="place-title-area">
+                                        <a href="해당 장소 상세페이지">${scrapPlace.title}</a>
+                                        <button class="fa-solid fa-ellipsis drop-down">
+                                            <ul class="drop-down_box">
+                                                <li onclick="addToPlaceTravel(${vs.index})">여행에 추가</li>
+                                                <li onclick="deleteScrap(${vs.index})">스크랩 삭제</li>
+                                            </ul>
+                                        </button>
+                                    </div>
+                                    <div class="review-area">
+                                        <div class="review-area">
+                                        <div class="rating">
+                                            <span class="empty">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                                            <span class="fill" style="width:${92 * (scrapPlace.averageRating * 20) / 100}px;">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                                        </div>
+                                        <span class="review-count">${scrapPlace.reviewCount}</span>
+                                    </div>
+                                    </div>
+                                    <span class="place-addr">${scrapPlace.addr1}</span>
+                                    <span class="scrap-date">스크랩 날짜: ${scrapPlace.scrapDate}</span>
+                                </div>
+                            </li>
+                        </c:forEach>
+                    </c:otherwise>
+                </c:choose>
                 
-                <div class="empty-scrap">
-                    텅...
-                </div>
             </ul>
         </section>
     </main>
