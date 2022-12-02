@@ -88,17 +88,28 @@
             <span class="fill" style="width:${92*(place.averageRating*20)/100}px;">
             &#9679;&#9679;&#9679;&#9679;&#9679;</span>
           </div>
-        <span class="review-count">${place.reviewCount}</span>
+        <span class="review-count">${place.reviewCount} 건의 리뷰</span>
       </div>
 
       <div class="info-content">
-        <span class="info-detail-content"><i class="fa-solid fa-location-dot"> </i> 주소: </span><span>${place.addr1}
-          1</span>&nbsp;&nbsp;&nbsp;&nbsp;
-        <span class="info-detail-content"><i class="fa-solid fa-phone"></i> 전화번호 : </span>
-        <span>${place.tel}</span><br>
-        <span class="info-detail-content"><i class="fa-solid fa-clock"></i> 이용 시간 : </span>
-        <span>${place.usetime}</span><br>
-        <span class="info-detail-content"><i class="fa-solid fa-calendar-days"></i> 쉬는날 : </span><span>${place.restdate}</span>
+        <span class="info-detail-content"><i class="fa-solid fa-location-dot"></i></span>
+        <span>${place.addr1}</span><br>
+        <c:if test="${!empty place.tel}">
+          <span class="info-detail-content"><i class="fa-solid fa-phone"></i></span>
+          <span>${place.tel}</span><br>
+        </c:if>
+        <c:if test="${!empty place.treatmenu}">
+          <span class="info-detail-content"><i class="fa-solid fa-utensils"></i></span>
+          <span>${place.treatmenu}</span><br>
+        </c:if>
+        <c:if test="${!empty place.usetime}">
+          <span class="info-detail-content"><i class="fa-solid fa-clock"></i></span>
+          <span>${place.usetime}</span><br>
+        </c:if>
+        <c:if test="${!empty place.restdate}">
+          <span class="info-detail-content"><i class="fa-solid fa-calendar-days"></i></span>
+          <span>${place.restdate}</span>
+        </c:if>
       </div>
 
       <div class="info-overview">
@@ -115,34 +126,46 @@
           <div class="around-list">
             <div>관광지
               <c:forEach var="tourPlace" items="${aroundPlaceList.tourPlace}">
-                
+                <li>
                   <div class="search-result-item">
-                    <div class="search-result-item-img">
-                      <a href="/place/detail/${tourPlace.contenttypeid}/${tourPlace.contentid}">
-                        <img class="aitem-image" src="${tourPlace.firstimage}" alt=""></a>
-                    </div>
 
-                    <div class="search-result-item-content">
-                      <div class="search-result-item-title">
-                        <span><a
-                            href="#">${tourPlace.title}</a></span>
+                      <div class="search-result-item-img">
+                          <a href="/place/detail/${tourPlace.contenttypeid}/${tourPlace.contentid}">
+                              <c:choose>
+                                  <c:when test="${!empty tourPlace.firstimage}">
+                                      <img src="${tourPlace.firstimage}" alt="" width="89px" height="70px">
+                                  </c:when>
+                                  <c:when test="${empty tourPlace.firstimage}">
+                                      <img src="/resources/images/common/${tourPlace.contenttypeid}.png" alt="" width="177px" height="140px">
+                                  </c:when>
+                              </c:choose>
+                          </a>
                       </div>
+                      
+                      <div class="search-result-item-content">
 
-                      <div class="review-area">
-                        <div class="review-area">
-                          <div class="rating">
-                            <span class="empty">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
-                            <span class="fill" style="width:${92*(tourPlace.averageRating*20)/100}px;">
-                            &#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                          <div class="search-result-item-title">
+                              <span><a href="/place/detail/${tourPlace.contenttypeid}/${tourPlace.contentid}">${tourPlace.title}</a></span>
                           </div>
-                        <span class="review-count">${tourPlace.reviewCount}</span>
-                      </div>
 
-                      <div class="search-result-item-dist">
-                        <span><a href="#">${tourPlace.dist}</a></span>
+                          <div class="search-result-item-grade">
+                              <div class="a-rating">
+                                  <span class="empty">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                                  <span class="fill">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                              </div>
+                              <span><a href="#<!--상세페이지-리뷰-->">${tourPlace.reviewCount}</a></span>
+                          </div>
+                              
+                          <div class="search-result-item-address">
+                              <span><a href="/place/detail/${tourPlace.contenttypeid}/${tourPlace.contentid}">${tourPlace.addr1}</a></span>
+                          </div>
+                              
+                          <div class="search-result-item-review">
+                              <a href="#<!--상세페이지-리뷰-->">${tourPlace.dist}</a>
+                          </div>
                       </div>
-                    </div>
                   </div>
+                </li> 
                  
               </c:forEach>        
             </div>
@@ -150,32 +173,46 @@
             <!--  -->
             <div>문화
               <c:forEach var="culturePlace" items="${aroundPlaceList.culturePlace}">
-                <div class="search-result-item">
-                  <div class="search-result-item-img">
-                    <a href="#">
-                      <img class="aitem-image" src="${culturePlace.firstimage}" alt=""></a>
-                  </div>
+                 <li>
+                  <div class="search-result-item">
 
-                  <div class="search-result-item-content">
-                    <div class="search-result-item-title">
-                      <span><a href="#">${culturePlace.title}</a></span>
-                    </div>
-
-                    <div class="review-area">
-                        <div class="review-area">
-                          <div class="rating">
-                            <span class="empty">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
-                            <span class="fill" style="width:${92*(culturePlace.averageRating*20)/100}px;">
-                            &#9679;&#9679;&#9679;&#9679;&#9679;</span>
-                          </div>
-                        <span class="review-count">${culturePlace.reviewCount}</span>
+                      <div class="search-result-item-img">
+                          <a href="/place/detail/${culturePlace.contenttypeid}/${culturePlace.contentid}">
+                              <c:choose>
+                                  <c:when test="${!empty culturePlace.firstimage}">
+                                      <img src="${culturePlace.firstimage}" alt="" width="89px" height="70px">
+                                  </c:when>
+                                  <c:when test="${empty culturePlace.firstimage}">
+                                      <img src="/resources/images/common/${culturePlace.contenttypeid}.png" alt="" width="89px" height="70px">
+                                  </c:when>
+                              </c:choose>
+                          </a>
                       </div>
+                      
+                      <div class="search-result-item-content">
 
-                    <div class="search-result-item-dist">
-                      <span><a href="#">${culturePlace.dist}</a></span>
-                    </div>
+                          <div class="search-result-item-title">
+                              <span><a href="/place/detail/${culturePlace.contenttypeid}/${culturePlace.contentid}">${culturePlace.title}</a></span>
+                          </div>
+
+                          <div class="search-result-item-grade">
+                              <div class="a-rating">
+                                  <span class="empty">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                                  <span class="fill">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                              </div>
+                              <span><a href="#<!--상세페이지-리뷰-->">${culturePlace.reviewCount}</a></span>
+                          </div>
+                              
+                          <div class="search-result-item-address">
+                              <span><a href="/place/detail/${culturePlace.contenttypeid}/${culturePlace.contentid}">${culturePlace.addr1}</a></span>
+                          </div>
+                              
+                          <div class="search-result-item-review">
+                              <a href="#<!--상세페이지-리뷰-->">${culturePlace.dist}</a>
+                          </div>
+                      </div>
                   </div>
-                </div>
+                </li> 
               </c:forEach>
             </div>
             <!--  -->
@@ -184,64 +221,90 @@
           <div class="around-list">
             <div>음식점
               <c:forEach var="foodPlace" items="${aroundPlaceList.foodPlace}">
-                <div class="search-result-item">
-                  <div class="search-result-item-img">
-                    <a href="#">
-                      <img class="aitem-image" src="${foodPlace.firstimage}"></a>
-                  </div>
+                <li>
+                  <div class="search-result-item">
 
-                  <div class="search-result-item-content">
-                    <div class="search-result-item-title">
-                      <span><a
-                          href="#">${foodPlace.title}</a></span>
-                    </div>
-
-                    <div class="review-area">
-                        <div class="review-area">
-                          <div class="rating">
-                            <span class="empty">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
-                            <span class="fill" style="width:${92*(foodPlace.averageRating*20)/100}px;">
-                            &#9679;&#9679;&#9679;&#9679;&#9679;</span>
-                          </div>
-                        <span class="review-count">${foodPlace.reviewCount}</span>
+                      <div class="search-result-item-img">
+                          <a href="/place/detail/${foodPlace.contenttypeid}/${foodPlace.contentid}">
+                              <c:choose>
+                                  <c:when test="${!empty foodPlace.firstimage}">
+                                      <img src="${foodPlace.firstimage}" alt="" width="89px" height="70px">
+                                  </c:when>
+                                  <c:when test="${empty foodPlace.firstimage}">
+                                      <img src="/resources/images/common/${foodPlace.contenttypeid}.png" alt="" width="89px" height="70px">
+                                  </c:when>
+                              </c:choose>
+                          </a>
                       </div>
+                      
+                      <div class="search-result-item-content">
 
-                    <div class="search-result-item-dist">
-                      <span><a href="#">${foodPlace.dist}</a></span>
-                    </div>
+                          <div class="search-result-item-title">
+                              <span><a href="/place/detail/${foodPlace.contenttypeid}/${foodPlace.contentid}">${foodPlace.title}</a></span>
+                          </div>
+
+                          <div class="search-result-item-grade">
+                              <div class="a-rating">
+                                  <span class="empty">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                                  <span class="fill">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                              </div>
+                              <span><a href="#<!--상세페이지-리뷰-->">${foodPlace.reviewCount}</a></span>
+                          </div>
+                              
+                          <div class="search-result-item-address">
+                              <span><a href="/place/detail/${foodPlace.contenttypeid}/${foodPlace.contentid}">${foodPlace.addr1}</a></span>
+                          </div>
+                              
+                          <div class="search-result-item-review">
+                              <a href="#<!--상세페이지-리뷰-->">${foodPlace.dist}</a>
+                          </div>
+                      </div>
                   </div>
-                </div>
+                </li> 
               </c:forEach>
             </div>
             <div>레포츠
               <c:forEach var="leisurePlace" items="${aroundPlaceList.leisurePlace}">
-                <div class="search-result-item">
-                  <div class="search-result-item-img">
-                    <a href="#">
-                      <img class="aitem-image" src="${leisurePlace.firstimage}" alt=""></a>
-                  </div>
+                <li>
+                  <div class="search-result-item">
 
-                  <div class="search-result-item-content">
-                    <div class="search-result-item-title">
-                      <span><a
-                          href="#">${leisurePlace.title}</a></span>
-                    </div>
-
-                    <div class="review-area">
-                        <div class="review-area">
-                          <div class="rating">
-                            <span class="empty">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
-                            <span class="fill" style="width:${92*(leisurePlace.averageRating*20)/100}px;">
-                            &#9679;&#9679;&#9679;&#9679;&#9679;</span>
-                          </div>
-                        <span class="review-count">${leisurePlace.reviewCount}</span>
+                      <div class="search-result-item-img">
+                          <a href="/place/detail/${leisurePlace.contenttypeid}/${leisurePlace.contentid}">
+                              <c:choose>
+                                  <c:when test="${!empty leisurePlace.firstimage}">
+                                      <img src="${leisurePlace.firstimage}" alt="" width="89px" height="70px">
+                                  </c:when>
+                                  <c:when test="${empty leisurePlace.firstimage}">
+                                      <img src="/resources/images/common/${leisurePlace.contenttypeid}.png" alt="" width="89px" height="70px">
+                                  </c:when>
+                              </c:choose>
+                          </a>
                       </div>
+                      
+                      <div class="search-result-item-content">
 
-                    <div class="search-result-item-dist">
-                      <span><a href="#">${leisurePlace.dist}</a></span>
-                    </div>
+                          <div class="search-result-item-title">
+                              <span><a href="/place/detail/${leisurePlace.contenttypeid}/${leisurePlace.contentid}">${leisurePlace.title}</a></span>
+                          </div>
+
+                          <div class="search-result-item-grade">
+                              <div class="a-rating">
+                                  <span class="empty">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                                  <span class="fill">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                              </div>
+                              <span><a href="#<!--상세페이지-리뷰-->">${leisurePlace.reviewCount}</a></span>
+                          </div>
+                              
+                          <div class="search-result-item-address">
+                              <span><a href="/place/detail/${leisurePlace.contenttypeid}/${leisurePlace.contentid}">${leisurePlace.addr1}</a></span>
+                          </div>
+                              
+                          <div class="search-result-item-review">
+                              <a href="#<!--상세페이지-리뷰-->">${leisurePlace.dist}</a>
+                          </div>
+                      </div>
                   </div>
-                </div>
+                </li> 
               </c:forEach>
             </div>
           </div>
@@ -258,11 +321,11 @@
       <ul>
         <li>
           <input type="radio" name="boardNav" id="reviewBoard" checked>
-          <label for="reviewBoard"><a id="boardNav1">리뷰</a></label>
+          <label for="reviewBoard" id="moveReview"><a id="boardNav1">리뷰</a></label>
         </li>
         <li>
           <input type="radio" name="boardNav" id="qnaBoard">
-          <label for="qnaBoard"><a id="boardNav1">Q&A</a></label>
+          <label for="qnaBoard" id="moveQna"><a id="boardNav1">Q&A</a></label>
         </li>
       </ul>
     </nav>
@@ -271,7 +334,7 @@
     <jsp:include page="/WEB-INF/views/place/review.jsp"></jsp:include>
 
     <%-- QnA 섹션 --%>
-    <jsp:include page="/WEB-INF/views/place/QnA.jsp"></jsp:include>
+    <%-- <jsp:include page="/WEB-INF/views/place/QnA.jsp"></jsp:include> --%>
   
 
   </main>

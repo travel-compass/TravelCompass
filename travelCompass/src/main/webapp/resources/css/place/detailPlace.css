@@ -80,10 +80,12 @@ main {
   font-size: 25px;
   font-weight: bold;
   line-height: 150%;
+  margin-right: 10px;
 }
 
 .info-detail-content>i {
-  color: #2DC48D;
+  color: black;
+  width: 20px;
 }
 
 .info-detail-content+span {
@@ -140,18 +142,33 @@ main {
 /* 주변 장소 아이템 */
 .search-result-item {
   display: inline-flex;
-  width: 360px;
-  height: 100px;
-  background-color: #eee;
-  border-radius: 20px;
-  padding: 10px;
+  width: 335px;
+  height: 87px;
 }
+
+.search-result-item-title {
+  margin-top: 3px;
+  /* margin-bottom: 2px; */
+}
+
+.search-result-item-grade {
+  /* margin-bottom: 2px; */
+}
+
+.search-result-item-address {
+  /* margin-bottom: 6px; */
+}
+
+.search-result-item-review {
+  /* margin-bottom: 1px; */
+}
+
 
 
 .search-result-item-title a {
   font-weight: bolder;
   font-size: 15px;
-  margin-left: 10px;
+
 }
 
 .search-result-item span {
@@ -160,44 +177,19 @@ main {
 
 
 .search-result-item-img {
-  width: 120px;
-  height: 80px;
-  border-radius: 20px;
-  /* padding: 10px; */
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
+  width: 108px;
+  height: 90px;
+  padding: 8px 8px 8px 12px;
 }
 
-.aitem-image {
-  height: 100%;
-  /* width: 100%; */
+
+
+.search-result-item-grade {
+  display: flex;
 }
 
 .search-result-item-grade a:last-child {
-  font-size: 12px;
-  margin-left: 10px;
-}
-
-.search-result-item-address a {
-  font-size: 14px;
-  margin-left: 10px;
-}
-
-
-.search-result-item-dist a {
-  font-size: 13px;
-  margin-left: 10px;
-}
-
-.search-result-item-content {
-  width: auto;
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+  font-size: 6px;
 }
 
 /* 주변장소 리뷰스타일 */
@@ -205,14 +197,14 @@ main {
 .rating {
   position: relative;
   height: 15px;
-  margin-bottom: 10px;
-  width: 100px;
+  margin-bottom: 5px;
+  width: 80px;
 }
 
 .empty,
 .fill {
   position: absolute;
-  font-size: 20px;
+  font-size: 15px;
 }
 
 .empty {

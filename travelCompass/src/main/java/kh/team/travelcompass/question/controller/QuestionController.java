@@ -21,7 +21,7 @@ public class QuestionController {
 	
 
 	// QnA 목록 조회
-	@GetMapping("/selectList")
+	@GetMapping("/selectQnaList")
 	public Map<String, Object> selectQuestionList(String contentid, int cp) {
 		Map<String, Object> questionMap=service.selectQuestionList(contentid, cp);
 		

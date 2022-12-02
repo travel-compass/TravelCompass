@@ -2,13 +2,12 @@
 function selectCommentList() {
   // boardNo, memberNo 전역 변수 사용
   $.ajax({
-    url: "/comment/list",
-    data: { boardNo: boardNo },
+    url: "/question/selectQuestionList",
+    data: { contentid: contentid },
     type: "GET",
-    dataType: "JSON", // JSON 형태의 문자열 응답 데이터를 JS 객체로 자동 변환
-    success: function (rList) {
+    success: function (questionMap) {
       // rList : 반환 받은 댓글 목록
-      console.log(rList);
+      console.log(questionMap);
 
       // 화면에 출력되어 있는 댓글 목록 삭제
       const commentList = document.getElementById("comment-list"); // ul태그

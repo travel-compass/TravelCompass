@@ -365,6 +365,4 @@ const reviewListContainer = document.getElementById("reviewContainer");
                                         reviewTextShareButton);
 
                                     // A-4 번 완성
-
                                     
-                    
