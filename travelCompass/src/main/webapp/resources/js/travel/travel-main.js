@@ -64,7 +64,7 @@ function createTravelList() {
     $.ajax({
         url: "/travel/select",
         data: {
-            "memberNo": memberNo
+            "memberNo": hostNo
         },
         success: result => {
             console.log(result);
@@ -103,8 +103,7 @@ function createTravelList() {
         
                 /* 여행 상세페이지 a태그 */
                 const aDetail = document.createElement("a");
-                /* 여행 상세페이지 가는 주소 */
-                aDetail.href = "#";
+                aDetail.href = `/travel/detail/${travel.travelNo}`;
 
                 /* 여행 썸네일 이미지 영역 */
                 const travelFirstImage = document.createElement("div");
@@ -130,7 +129,7 @@ function createTravelList() {
                 const travelWriterDiv = document.createElement("div");
                 travelWriterDiv.innerText = "작성자: ";
                 const aTravelWriter = document.createElement("a");
-                aTravelWriter.href = "#";
+                aTravelWriter.href = `/profile/${hostNo}`;
                 aTravelWriter.className = "travel-writer";
                 aTravelWriter.innerText = travel.memberNickname;
                 
@@ -147,7 +146,7 @@ function createTravelList() {
                 const accessProfileImage = document.createElement("div");
                 accessProfileImage.className = "access-profile-image";
                 const aProfile = document.createElement("a");
-                aProfile.href = "#";
+                aProfile.href = `/profile/${hostNo}`;
                 const profileImage = document.createElement("img");
                 profileImage.src = travel.profileImage;
         

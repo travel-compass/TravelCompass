@@ -36,7 +36,7 @@ public class PlaceController {
 	private ReviewService rservice;
 	
 	
-	@GetMapping("/detail/${contentTypeId}/${contentId}")
+	@GetMapping("/detail/{contentTypeId}/{contentId}")
 	public String page(@PathVariable String contentId,
 			@PathVariable String contentTypeId,
 			@RequestParam(value="cp",required=false, defaultValue="1") int cp,
