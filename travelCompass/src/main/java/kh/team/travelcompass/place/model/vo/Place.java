@@ -32,7 +32,12 @@ public class Place {
 	private String dist;		  // 중심좌포로부터거리 (m)
 	
 	private List<Review> reviewList; // 장소에 달린 리뷰리스트
+	private int reviewCount;		 // 장소에 달린 모든 리뷰 갯수
+	private int averageRating;       // 장소의 평균평점
 	private List<Question> questionList;  // 장소에 달린 리뷰리스트
+	
+	// 스크랩 관련 필드
+	private int placeScrapNo; // 스크랩 번호
 	
 	// 여행 관련 필드
 	private String scrapDate;
@@ -40,8 +45,8 @@ public class Place {
 	private int travelNo;
 	private int travelListOrder;
 	
-	private int pageNo;        //현재 페이지 번호 
-	private int totalCount;    //전체 게시글 수
-	private int numOfRows;     //한 페이지 목록에 보여지는 게시글 수
-	private int pageSize=10 ;     // 보여질 페이지 번호 개수
+//	private int pageNo;        // 현재 페이지 번호 
+//	private int totalCount;    // 전체 게시글 수
+//	private int numOfRows;     // 한 페이지 목록에 보여지는 게시글 수
+//	private int pageSize=10 ;  // 보여질 페이지 번호 개수
 }

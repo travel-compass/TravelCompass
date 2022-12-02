@@ -145,19 +145,19 @@ function createPlaceList(resultList) {
         const placeTitle = document.createElement("span");
         placeTitle.classList.add("place-title");
         placeTitle.innerText = place.title;
-        const grade = document.createElement("div");
-        grade.classList.add("grade");
+        const rating = document.createElement("div");
+        rating.classList.add("grade");
         const span1 = document.createElement("span");
         span1.innerText = "평점";
         const span2 = document.createElement("span");
         span2.innerText = "리뷰 갯수";
-        grade.append(span1, span2);
+        rating.append(span1, span2);
 
         const distIcon = document.createElement("i");
         distIcon.className = "fa-solid fa-location-dot dist-icon";
 
         const dist = parseInt(place.dist / 100) * 100 / 1000 + "km 떨어짐"
-        a.append(img, placeTitle, grade, distIcon, dist);
+        a.append(img, placeTitle, rating, distIcon, dist);
         placeItem.append(a);
         placeList.append(placeItem);
     }

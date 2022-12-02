@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -17,8 +18,8 @@
         <section class="travel-create-side">
             <div class="travel-info">
                 <div class="travel-info-header">
-                    <a class="profile-image" href="">
-                        <img src="https://cdn.crowdpic.net/list-thumb/thumb_l_572442AD59D1F0170C27B68AC7F4377A.jpg" alt="">
+                    <a class="profile-image" href="/profile/${travel.memberNo}">
+                        <img src="${travel.profileImage}" alt="프로필 이미지">
                     </a>
                 
                     <button class="fa-solid fa-ellipsis drop-down">
@@ -29,64 +30,59 @@
                     </button>
                 </div>
                 <div class="input-row">
-                    <input type="text" class="travel-title read-only" maxlength="10" id="travelTitle" name="travelTitle" readonly value="여행 이름">
+                    <input type="text" class="travel-title read-only" maxlength="10" id="travelTitle" name="travelTitle" readonly value="${travel.travelTitle}">
                     <button class="fa-solid fa-pen-to-square update-btn" type="button"><!-- 수정버튼 --></button>
                     <button class="fa-solid fa-xmark cancel-btn"><!-- 취소 --></button>
                 </div>
-                <span class="travel-writer">작성자: <a href="작성자 프로필 페이지"> 예비군김영현</a></span>
+                <span class="travel-writer">작성자: <a href="/profile/${travel.memberNo}">${travel.memberNickname}</a></span>
                 <div class="input-row">
-                    <textarea name="travelContent" id="travelContent" maxlength="33" placeholder="여행 설명을 입력하세요." class="travel-content read-only" readonly></textarea>
-                    <button class="fa-solid fa-pen-to-square update-btn" type="button"><!-- 수정버튼 --></button>
+                    <textarea name="travelContent" id="travelContent" maxlength="33" placeholder="여행 설명을 입력하세요." class="travel-content read-only" readonly>${travel.travelContent}</textarea>
+                    <button class="fa-solid fa-pen-to-square update-btn" type="button"><!-- 수
+                    정버튼 --></button>
                     <button class="fa-solid fa-xmark cancel-btn" type="button"><!-- 취소 --></button>
                 </div>
-                <span class="last-update-date">2021년 11월 12일</span>
+                <span class="last-update-date">${travel.travelDate}</span>
                 <button id="share" type="button"><i class="fa-solid fa-arrow-up-from-bracket"></i><span>공유</span></button>
             </div>
             <ul class="travel-list" id="travelList">
-                <li class="empty-item">
-                    <div class="empty-image">
-                        <img src="https://cdn.crowdpic.net/list-thumb/thumb_l_572442AD59D1F0170C27B68AC7F4377A.jpg" alt="">
-                    </div>
-                    <h1>방금 여행을 만들었습니다!</h1>
-                    <p>원하는 장소를 저장한 다음 계획을 정리하고 지도에서 볼 수 있습니다.</p>
-                </li>
-
-                <li class="travel-item">
-                    <a href="#" class="travel-first-image">
-                        <img src="https://a.cdn-hotels.com/gdcs/production97/d1351/a274bc26-9643-4bae-a91f-cebaf7f9fa56.jpg?impolicy=fcrop&w=800&h=533&q=medium" alt="">
-                    </a>
-                    <div class="place-info">
-                        <div class="place-title-area">
-                            <a href="<!-- 장소 상세페이지로 -->">장소 이름</a>
-                            <button class="fa-solid fa-ellipsis drop-down">
-                                <ul class="drop-down_box">
-                                    <li>여행에서 제외</li>
-                                </ul>
-                            </button>
-                        </div>
-                        <div class="review-area">
-                            <span>평균 리뷰</span>
-                            <span>모든 리뷰 수</span>
-                        </div>
-                        <span class="place-addr">장소 주소</span>
-                    </div>
-                </li>
-                <li class="travel-item">
-                    <div class="travel-first-image">
-                        <img src="https://a.cdn-hotels.com/gdcs/production97/d1351/a274bc26-9643-4bae-a91f-cebaf7f9fa56.jpg?impolicy=fcrop&w=800&h=533&q=medium" alt="">
-                    </div>
-                    <div class="place-info">
-                        <div class="place-title-area">
-                            <a href="<!-- 장소 상세페이지로 -->">장소 이름</a>
-                            <span class="fa-solid fa-ellipsis drop-down"></span>
-                        </div>
-                        <div class="review-area">
-                            <span>평균 리뷰</span>
-                            <span>모든 리뷰 수</span>
-                        </div>
-                        <span class>장소 주소</span>
-                    </div>
-                </li>
+                <c:choose>
+                    <c:when test="${empty travel.placeList}">   <%-- 여행목록이 비어있으면 --%>
+                        <li class="empty-item">
+                            <div class="empty-image">
+                                <img src="https://cdn.crowdpic.net/list-thumb/thumb_l_572442AD59D1F0170C27B68AC7F4377A.jpg" alt="로고 이미지">
+                            </div>
+                            <h1>방금 여행을 만들었습니다!</h1>
+                            <p>원하는 장소를 저장한 다음 계획을 정리하고 지도에서 볼 수 있습니다.</p>
+                        </li>
+                    </c:when>
+                    <c:otherwise>
+                        <c:forEach var="travelPlace" items="${travel.placeList}" varStatus="vs">
+                            <li class="travel-item">
+                                <a href="/place/detail/${travelPlace.contenttypeid}/${travelPlace.contentid}" target="_blank" class="travel-first-image">
+                                    <img src="${travelPlace.firstimage}" alt="썸네일">
+                                </a>
+                                <div class="place-info">
+                                    <div class="place-title-area">
+                                        <a href="/place/detail/${travelPlace.contenttypeid}/${travelPlace.contentid}" target="_blank">${travelPlace.title}</a>
+                                        <button class="fa-solid fa-ellipsis drop-down">
+                                            <ul class="drop-down_box">
+                                                <li onclick="deleteTravelPlace(${vs.index})">여행에서 제외</li>
+                                            </ul>
+                                        </button>
+                                    </div>
+                                    <div class="review-area">
+                                        <div class="rating">
+                                            <span class="empty">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                                            <span class="fill" style="width:${92 * (travelPlace.averageRating * 20) / 100}px;">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                                        </div>
+                                        <span class="review-count">${travelPlace.reviewCount}</span>
+                                    </div>
+                                    <span class="place-addr">${travelPlace.addr1}</span>
+                                </div>
+                            </li>
+                        </c:forEach>
+                    </c:otherwise>
+                </c:choose>
             </ul>
         </section>
         <section class="travel-create-content">
@@ -95,67 +91,46 @@
                 <button type="button" class="fa-solid fa-sort" id="sortBtn"></button>
             </form>
             <ul id="scrapPlaceList">
-                <li class="scrap-place-item">
-                    <a class="place-first-image">
-                        <img src="https://a.cdn-hotels.com/gdcs/production97/d1351/a274bc26-9643-4bae-a91f-cebaf7f9fa56.jpg?impolicy=fcrop&w=800&h=533&q=medium" alt="">
-                    </a>
-                    <div class="scrap-place-info">
-                        <div class="place-title-area">
-                            <a href="해당 장소 상세페이지">스크렙 장소 이름</a>
-                            <button class="fa-solid fa-ellipsis drop-down">
-                                <ul class="drop-down_box">
-                                    <li>여행에 추가</li>
-                                    <li>스크랩 삭제</li>
-                                </ul>
-                            </button>
+                <c:choose>
+                    <c:when test="${empty scrapPlaceList}">
+                        <div class="empty-scrap">
+                            텅...
                         </div>
-                        <div class="review-area">
-                            <span>평균 리뷰</span>
-                            <span>모든 리뷰 수</span>
-                        </div>
-                        <span class="place-addr">장소 주소</span>
-                        <span class="scrap-date">스크랩 날짜</span>
-                    </div>
-                </li>  
-                <li class="scrap-place-item">
-                    <a class="place-first-image">
-                        <img src="https://a.cdn-hotels.com/gdcs/production97/d1351/a274bc26-9643-4bae-a91f-cebaf7f9fa56.jpg?impolicy=fcrop&w=800&h=533&q=medium" alt="">
-                    </a>
-                    <div class="scrap-place-info">
-                        <div class="place-title-area">
-                            <a href="해당 장소 상세페이지">스크렙 장소 이름</a>
-                            <span class="fa-solid fa-ellipsis drop-down"></span>
-                        </div>
-                        
-                        <div class="review-area">
-                            <span>평균 리뷰</span>
-                            <span>모든 리뷰 수</span>
-                        </div>
-                        <span class="place-addr">장소 주소</span>
-                        <span class="scrap-date">스크랩 날짜</span>
-                    </div>
-                </li>
-                <li class="scrap-place-item">
-                    <a class="place-first-image">
-                        <img src="https://a.cdn-hotels.com/gdcs/production97/d1351/a274bc26-9643-4bae-a91f-cebaf7f9fa56.jpg?impolicy=fcrop&w=800&h=533&q=medium" alt="">
-                    </a>
-                    <div class="scrap-place-info">
-                        <div class="place-title-area">
-                            <a href="해당 장소 상세페이지">스크렙 장소 이름</a>
-                            <span class="fa-solid fa-ellipsis drop-down"></span>
-                        </div>
-                        
-                        <div class="review-area">
-                            <span>평균 리뷰</span>
-                            <span>모든 리뷰 수</span>
-                        </div>
-                        <span class="place-addr">장소 주소</span>
-                        <span class="scrap-date">스크랩 날짜</span>
-                    </div>
-                </li> 
-                <div class="empty-scrap">
-                    텅...
-                </div>
+                    </c:when>
+                    <c:otherwise>
+                        <c:forEach var="scrapPlace" items="${scrapPlaceList}" varStatus="vs">
+                            <li class="scrap-place-item">
+                                <a class="place-first-image">
+                                <%-- 기본이미지 조건문 처리 필요 --%>
+                                    <img src="${scrapPlace.firstimage}" alt="장소 썸네일">
+                                </a>
+                                <div class="scrap-place-info">
+                                    <div class="place-title-area">
+                                        <a href="해당 장소 상세페이지">${scrapPlace.title}</a>
+                                        <button class="fa-solid fa-ellipsis drop-down">
+                                            <ul class="drop-down_box">
+                                                <li onclick="addToPlaceTravel(${vs.index})">여행에 추가</li>
+                                                <li onclick="deleteScrap(${vs.index})">스크랩 삭제</li>
+                                            </ul>
+                                        </button>
+                                    </div>
+                                    <div class="review-area">
+                                        <div class="review-area">
+                                        <div class="rating">
+                                            <span class="empty">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                                            <span class="fill" style="width:${92 * (scrapPlace.averageRating * 20) / 100}px;">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                                        </div>
+                                        <span class="review-count">${scrapPlace.reviewCount}</span>
+                                    </div>
+                                    </div>
+                                    <span class="place-addr">${scrapPlace.addr1}</span>
+                                    <span class="scrap-date">스크랩 날짜: ${scrapPlace.scrapDate}</span>
+                                </div>
+                            </li>
+                        </c:forEach>
+                    </c:otherwise>
+                </c:choose>
+                
             </ul>
         </section>
     </main>
