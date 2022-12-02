@@ -57,7 +57,7 @@
                 <c:forEach var="travel" items="${travelList}">
                 <li class="travel-item">
                     <div>
-                        <a href="/travel/create/${travel.travelNo}">
+                        <a href="/travel/detail/${travel.travelNo}">
                             <!-- position absolute 화면 전체 덮기 -->
                         </a>
                         <!-- 썸네일 이미지 -->
@@ -78,7 +78,7 @@
                                 <span class="travel-title">${travel.travelTitle}</span>
                             </div>
                             <div>
-                                작성자: <a href="프로필 페이지로" class="travel-writer">${travel.memberNickname}</a>
+                                작성자: <a href="/profile/${memberNo}" class="travel-writer">${travel.memberNickname}</a>
                             </div>
                         </div>
     
@@ -90,7 +90,7 @@
                         <!-- 접근범위 -->
                         <div class="access-scope-area">
                             <div class="access-profile-image">
-                                <a href="작성자 프로필 페이지로">
+                                <a href="/profile/${memberNo}">
                                     <img src="${travel.profileImage}" alt="">
                                 </a>
                             </div>
@@ -154,7 +154,7 @@
     </div>
     <!-- footer:include -->
     <script>
-        const memberNo = ${loginMember.memberNo}
+        const memberNo = '${loginMember.memberNo}'
         const hostNo = ${memberNo}
 
         console.log(memberNo);
