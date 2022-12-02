@@ -39,18 +39,25 @@ public class TravelController {
 	}
 	
 	
-	@GetMapping("/create/{travelNo}")
+	@GetMapping("/detail/{travelNo}")
 	public String createTravel(@PathVariable("travelNo") int travelNo, Model model,
-			@SessionAttribute("loginMember") Member loginMember) {
+			@SessionAttribute(value="loginMember", required=false) Member loginMember) {
+		String path = "";
 		
+		if(loginMember != null) {		// 로그인 중이라면
+			if(travelNo == loginMember.getMemberNo()) {		// 조회하려는 여행 페이지가 자신이 만든 여행이라면
+				// 로그인한 회원이 스크랩한 모든 장소 조회
+				List<Place> scrapPlaceList = service.selectScrapPlaceList(loginMember.getMemberNo());
+				model.addAttribute("scrapPlaceList", scrapPlaceList);
+				path = "/travel/travelCreate";
+			}
+		} else {						// 로그인 중이 아니면 무조건 다른사람의 여행 페이지
+			path = "/travel/travelDetail";
+		}
 		// 여행 번호에 맞는 여행 조회
 		Travel travel = service.selectTravel(travelNo);
-		
-		// 로그인한 회원이 스크랩한 모든 장소 조회
-		List<Place> scrapPlaceList = service.selectScrapPlaceList(loginMember.getMemberNo());
-		model.addAttribute("scrapPlaceList", scrapPlaceList);
 		model.addAttribute("travel", travel);
-		return "/travel/travelCreate";
+		return path;
 	}
 	
 	/** 비동기 여행 생성
