@@ -202,13 +202,30 @@ main {
 
 /* 주변장소 리뷰스타일 */
 
+.rating {
+  position: relative;
+  height: 15px;
+  margin-bottom: 10px;
+  width: 100px;
+}
 
+.empty,
+.fill {
+  position: absolute;
+  font-size: 20px;
+}
 
+.empty {
+  z-index: 1;
+  color: #ddd;
+}
 
-
-
-
-
+.fill {
+  z-index: 2;
+  overflow: hidden;
+  color: #2DC48D;
+  width: 40px;
+}
 
 
 

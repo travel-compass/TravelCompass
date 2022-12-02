@@ -81,12 +81,14 @@
         </span>  
       </div>
 
-      <div class="avg-rating">
-        <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
-        <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
-        <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
-        <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
-        <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
+      <div class="review-area">
+        <div class="review-area">
+          <div class="rating">
+            <span class="empty">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+            <span class="fill" style="width:${92*(place.averageRating*20)/100}px;">
+            &#9679;&#9679;&#9679;&#9679;&#9679;</span>
+          </div>
+        <span class="review-count">${place.reviewCount}</span>
       </div>
 
       <div class="info-content">
@@ -130,9 +132,10 @@
                         <div class="review-area">
                           <div class="rating">
                             <span class="empty">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
-                            <span class="fill">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                            <span class="fill" style="width:${92*(tourPlace.averageRating*20)/100}px;">
+                            &#9679;&#9679;&#9679;&#9679;&#9679;</span>
                           </div>
-                        <span class="review-count">3231</span>
+                        <span class="review-count">${tourPlace.reviewCount}</span>
                       </div>
 
                       <div class="search-result-item-dist">
@@ -159,13 +162,14 @@
                     </div>
 
                     <div class="review-area">
-                      <div class="review-area">
-                        <div class="rating">
-                          <span class="empty">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
-                          <span class="fill">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
-                        </div>
-                      <span class="review-count">3231</span>
-                    </div>
+                        <div class="review-area">
+                          <div class="rating">
+                            <span class="empty">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                            <span class="fill" style="width:${92*(culturePlace.averageRating*20)/100}px;">
+                            &#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                          </div>
+                        <span class="review-count">${culturePlace.reviewCount}</span>
+                      </div>
 
                     <div class="search-result-item-dist">
                       <span><a href="#">${culturePlace.dist}</a></span>
@@ -193,13 +197,14 @@
                     </div>
 
                     <div class="review-area">
-                      <div class="review-area">
-                        <div class="rating">
-                          <span class="empty">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
-                          <span class="fill">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
-                        </div>
-                      <span class="review-count">3231</span>
-                    </div>
+                        <div class="review-area">
+                          <div class="rating">
+                            <span class="empty">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                            <span class="fill" style="width:${92*(foodPlace.averageRating*20)/100}px;">
+                            &#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                          </div>
+                        <span class="review-count">${foodPlace.reviewCount}</span>
+                      </div>
 
                     <div class="search-result-item-dist">
                       <span><a href="#">${foodPlace.dist}</a></span>
@@ -223,13 +228,14 @@
                     </div>
 
                     <div class="review-area">
-                      <div class="review-area">
-                        <div class="rating">
-                          <span class="empty">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
-                          <span class="fill">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
-                        </div>
-                      <span class="review-count">3231</span>
-                    </div>
+                        <div class="review-area">
+                          <div class="rating">
+                            <span class="empty">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                            <span class="fill" style="width:${92*(leisurePlace.averageRating*20)/100}px;">
+                            &#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                          </div>
+                        <span class="review-count">${leisurePlace.reviewCount}</span>
+                      </div>
 
                     <div class="search-result-item-dist">
                       <span><a href="#">${leisurePlace.dist}</a></span>
