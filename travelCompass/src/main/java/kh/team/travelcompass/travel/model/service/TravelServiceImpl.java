@@ -30,8 +30,7 @@ public class TravelServiceImpl implements TravelService{
 	// 여행 조회
 	@Override
 	public Travel selectTravel(int travelNo) {
-		
-		return null;
+		return dao.selectTravel(travelNo);
 	}
 
 	@Override
