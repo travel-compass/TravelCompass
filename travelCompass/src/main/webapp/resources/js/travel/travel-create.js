@@ -125,16 +125,27 @@ const createTravelList = travelItemList => {
 
             const reviewArea = document.createElement("div");
             reviewArea.classList.add("review-area");
-            const avgReview = document.createElement("span");
-            avgReview.innerText = "평균 리뷰";
+
+            const rating = document.createElement("div");
+            rating.classList.add("rating");
+
+            const empty = document.createElement("span");
+            empty.classList.add("empty");
+            empty.innerHTML = "&#9679;&#9679;&#9679;&#9679;&#9679;";
+            
+            const fill = document.createElement("span");
+            fill.classList.add("fill");
+            fill.innerHTML = "&#9679;&#9679;&#9679;&#9679;&#9679;";
+            
             const reviewCount = document.createElement("span");
-            reviewCount.innerText = "모든 리뷰 수";
+            reviewCount.innerText = "258";
 
             const placeAddr = document.createElement("span");
             placeAddr.classList.add("place-addr");
 
+            rating.append(empty, fill);
             /* 조립 */
-            reviewArea.append(avgReview, reviewCount);
+            reviewArea.append(rating, reviewCount);
             placeTitleArea.append(placeTitleA, placeTitleIcon);
             placeInfo.append(placeTitleArea, reviewArea);
 
@@ -198,10 +209,19 @@ const createScrapPlaceList = scrapPlacerResult =>{
             const reviewArea = document.createElement("div");
             reviewArea.classList.add("review-area");
             /*********************************** 리뷰 추가 예정 ************************************/
-            const span1 =document.createElement("span");
-            span1.innerText = "평균 리뷰";
+            const rating = document.createElement("div");
+            rating.classList.add("rating");
+
+            const empty = document.createElement("span");
+            empty.classList.add("empty");
+            empty.innerHTML = "&#9679;&#9679;&#9679;&#9679;&#9679;";
+            
+            const fill = document.createElement("span");
+            fill.classList.add("fill");
+            fill.innerHTML = "&#9679;&#9679;&#9679;&#9679;&#9679";
+
             const span2 =document.createElement("span");
-            span2.innerText = "모든 리뷰 수";
+            span2.innerText = "1263";
 
             const placeAddr = document.createElement("span");
             placeAddr.classList.add("place-addr");
@@ -212,7 +232,8 @@ const createScrapPlaceList = scrapPlacerResult =>{
 
             placeTitleArea.append(placeTitleAreaA, dropDown);
 
-            reviewArea.append(span1, span2);
+            rating.append(empty, fill);
+            reviewArea.append(rating, span2);
 
             scrapPlaceInfo.append(placeTitleArea, reviewArea, placeAddr, scrapDate);
 

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import kh.team.travelcompass.member.model.vo.Member;
+import kh.team.travelcompass.place.model.vo.Place;
 import kh.team.travelcompass.travel.model.service.TravelService;
 import kh.team.travelcompass.travel.model.vo.Travel;
 
@@ -37,12 +38,27 @@ public class TravelController {
 		return "/travel/travelMain";
 	}
 	
-	@GetMapping("/create/page")
-	public String createTravel() {
+	
+	@GetMapping("/create/{travelNo}")
+	public String createTravel(@PathVariable("travelNo") int travelNo, Model model,
+			@SessionAttribute("loginMember") Member loginMember) {
+		
+		// 여행 번호에 맞는 여행 조회
+//		Travel travel = service.selectTravel(travelNo);
+		
+		
+		// 로그인한 회원이 스크랩한 모든 장소 조회
+		List<Place> scrapPlaceList = service.selectScrapPlaceList(loginMember.getMemberNo());
+		model.addAttribute("scrapPlaceList", scrapPlaceList);
 		return "/travel/travelCreate";
 	}
 	
 	
+	/** 비동기 여행 생성
+	 * @param travel
+	 * @param loginMember
+	 * @return result
+	 */
 	@ResponseBody
 	@GetMapping("/create")
 	public int createTravel(Travel travel, @SessionAttribute("loginMember") Member loginMember) {
@@ -51,6 +67,11 @@ public class TravelController {
 		return service.createTravel(travel);
 	}
 	
+	
+	/** 비동기 여행 목록 조회
+	 * @param memberNo
+	 * @return travelList
+	 */
 	@ResponseBody
 	@GetMapping("/select")
 	public List<Travel> selectTravelList(int memberNo) {
