@@ -126,7 +126,7 @@
                                 </div>
                             </c:when>
                         </c:choose>
-                        <div class="search-result-list">
+                        <div>
                     
                             <ul class="search-result-list">
                                 <!-- <c:choose>
@@ -150,7 +150,7 @@
                                                             </c:choose>
                                                         </a>
                                                     </div>
-                                                        
+                                                    
                                                     <div class="search-result-item-content">
 
                                                         <div class="search-result-item-title">
@@ -158,13 +158,10 @@
                                                         </div>
 
                                                         <div class="search-result-item-grade">
-                                                            <span><a href="#<!--상세페이지-리뷰-->">
-                                                                <i class="fa-solid fa-circle" style = "color: #00AA6C"></i>
-                                                                <i class="fa-solid fa-circle" style = "color: #00AA6C"></i>
-                                                                <i class="fa-solid fa-circle" style = "color: #00AA6C"></i>
-                                                                <i class="fa-solid fa-circle" style = "color: #00AA6C"></i>
-                                                                <i class="fa-solid fa-circle-half-stroke" style = "color: #00AA6C"></i>
-                                                                </a></span>
+                                                            <div class="rating">
+                                                                <span class="empty">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                                                                <span class="fill">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                                                            </div>
                                                             <span><a href="#<!--상세페이지-리뷰-->">267건의 리뷰</a></span>
                                                         </div>
                                                             
@@ -197,6 +194,7 @@
                                 <li><a href="/search?keyword=${param.keyword}&contentTypeId=${param.contentTypeId}&areaCode=${param.areaCode}&pageNo=${pagination.prevPage}"
                                     class="arrow prev">&lt;</a></li>
                     
+                                
                                 <c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}" step="1">
                                     <c:choose>
                                         <c:when test="${i==pagination.pageNo}">
@@ -210,7 +208,8 @@
                                         </c:otherwise>
                                     </c:choose>
                                 </c:forEach>
-                    
+                                
+
                                 <!-- 다음 목록 시작 번호로 이동 -->
                                 <li><a href="/search?keyword=${param.keyword}&contentTypeId=${param.contentTypeId}&areaCode=${param.areaCode}&pageNo=${pagination.nextPage}"
                                     class="arrow next">&gt;</a></li>
