@@ -3,7 +3,7 @@
 
 <mapper namespace="questionMapper">
 	<resultMap type="Question" id="question_rm">
-		<id property="questionNo"/>
+		<id property="questionNo" column="QUESTION_NO"/>
 		<result property="questionTitle" column="QUESTION_TITLE"/>
 		<result property="questionContent" column="QUESTION_CONTENT"/>
 		<result property="questionDate" column="QUESTION_DATE"/>
