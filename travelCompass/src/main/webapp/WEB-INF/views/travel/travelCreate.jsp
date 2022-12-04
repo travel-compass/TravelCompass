@@ -98,7 +98,7 @@
         <section class="travel-create-content">
             <form class="scrap-place-search" id="scrapSearch">
                 <input type="text" placeholder="검색" class="scrap-place-search-input" id="scrapSearchInput">
-                <button type="button" class="fa-solid fa-sort" id="sortBtn"></button>
+                <button type="button" class="fa-solid fa-sort" id="sortBtn" value="1"></button>
                 <button hidden></button>
             </form>
             <ul id="scrapPlaceList">

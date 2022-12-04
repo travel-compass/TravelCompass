@@ -81,6 +81,22 @@ const updateContent = {
         searchScrapPlaceList(scrapSearchInput.value.trim());
     });
 
+    // 검색 정렬 이벤트 달기
+    document.getElementById("sortBtn").addEventListener("click", e=>{
+        // keyword 져오기
+        const keyword = document.getElementById("scrapSearchInput").value.trim();
+        // keyword랑 현재 sortBtn의 value로 $.ajax 요청
+        console.log(e.currentTarget.value);
+        searchScrapPlaceList(keyword, e.currentTarget.value);
+        // value 바꾸기
+        if(e.currentTarget.value % 2 == 0) {    // 짝수면
+            e.currentTarget.value = Number(e.currentTarget.value) - 1;
+        } else {                                // 홀수 
+            e.currentTarget.value = Number(e.currentTarget.value) + 1;
+        }
+    });
+
+
     // 변경사항 저장 버튼 이벤트 달기
     document.getElementById("updateTravel").addEventListener("click", ()=>{updateTravel();});
 
