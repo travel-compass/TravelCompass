@@ -35,25 +35,46 @@ public class ProfileController {
 		model.addAttribute("member", member);
 		model.addAttribute("reviewList", reviewList);
 		
-		System.out.println(reviewList);
-		
 		return "profile/MemberPage";
 	}
 	
+	// fed ajax 비동기(리뷰 사진 유무 같이 출력)
+	@GetMapping("/profile/{memberNo}/Fed")
+	@ResponseBody
+	public List<Review> profileFedSelectList(Model model,
+			@PathVariable("memberNo") int memberNo){
+		
+		List<Review> fedList = service.ReviewSelectList(memberNo);
+		
+		model.addAttribute("reviewList", fedList);
+		
+		return fedList;
+	}
 	
+	// review ajax 비동기(리뷰 사진 없는 게시물만 출력)
 	@GetMapping("/profile/{memberNo}/Review")
 	@ResponseBody
 	public List<Review> profileReviewSelectList(Model model,
 			@PathVariable("memberNo") int memberNo){
 		
-		
 		List<Review> reviewList = service.ReviewSelectList(memberNo);
 		
 		model.addAttribute("reviewList", reviewList);
 		
-		System.out.println(reviewList);
-		
 		return reviewList;
+	}
+	
+	// imageReview ajax 비동기(리뷰 사진 있는 게시물만 출력)
+	@GetMapping("/profile/{memberNo}/ImageReview")
+	@ResponseBody
+	public List<Review> profileImageReviewSelectList(Model model,
+			@PathVariable("memberNo") int memberNo){
+		
+		List<Review> imageReviewList = service.ReviewSelectList(memberNo);
+		
+		model.addAttribute("reviewList", imageReviewList);
+		
+		return imageReviewList;
 	}
 	
 	

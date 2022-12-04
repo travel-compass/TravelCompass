@@ -109,7 +109,7 @@
                         <li>
                             <input type="radio" id="checkFed" name="profileCategory" checked>
                             <label for="checkFed">
-                                <span id="Fed" OnClick="location.href='/profile/${loginMember.memberNo}'"> 활동피드 </span>
+                                <span id="Fed"> 활동피드 </span>
                             </label>
                         </li>
                         <li>
@@ -181,13 +181,13 @@
                                                     </a>
                                                 </div>
                                             </div>
-                                            <div class="user-page-review-dot-style"><i class="fa-solid fa-ellipsis"></i></div>
-                                            <button class="user-page-review-dot-down-menu">
+                                            <button class="user-page-review-dot-style"><i class="fa-solid fa-ellipsis"></i></button>
+                                            <div class="user-page-review-dot-down-menu">
                                                 <ul class="down-menu">
                                                     <li><a href="#">수정</a></li>
                                                     <li><a href="#">삭제</a></li>
                                                 </ul>
-                                            </button>
+                                            </div>
                                         </div>
                                         <div class="review-data-table-style">
                                             <div class="review-point">
@@ -260,13 +260,13 @@
                                                     </a>
                                                 </div>
                                             </div>
-                                            <div class="user-page-review-dot-style"><i class="fa-solid fa-ellipsis"></i></div>
-                                            <button class="user-page-review-dot-down-menu">
+                                            <button class="user-page-review-dot-style"><i class="fa-solid fa-ellipsis"></i></button>
+                                            <div class="user-page-review-dot-down-menu">
                                                 <ul class="down-menu">
                                                     <li><a href="#">수정</a></li>
                                                     <li><a href="#">삭제</a></li>
                                                 </ul>
-                                            </button>
+                                            </div>
                                         </div>
                                         <!-- 사진 슬라이드 div태그 시작 -->
                                         <div class="slide-container-style">

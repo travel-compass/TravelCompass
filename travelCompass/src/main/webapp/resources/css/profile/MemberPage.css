@@ -254,6 +254,8 @@ main {
 }
 
 .user-page-review-dot-style{
+    background-color: white;
+    border: none;
     padding-left: 24px;
     width: 10%;
     font-weight: bold;
@@ -525,7 +527,7 @@ animation-duration: 1.5s;
 /* 리뷰 닷 다운 메뉴 */
 
 .user-page-review-dot-down-menu{
-    /* display: inline-block; */
+    display: none;
     /* border: 1px solid black; */
     width: 100px;
     position: relative;
@@ -537,7 +539,7 @@ animation-duration: 1.5s;
     border-radius: 10%;
     padding: 5px;
     text-align: center;
-    display: none;
+    /* display: none; */
     z-index: 1;
 }
 
