@@ -4,6 +4,12 @@
   box-sizing: border-box;
 }
 
+hr{
+  margin: 15px 0;
+  height: 5px;
+  background-color: #2DC48D;
+}
+
 /* ------------------------ 이미지 섹션 ------------------------ */
 
 body {
@@ -16,7 +22,7 @@ main {
 
 .gallery {
   width: 100%;
-  max-width: 1000px;
+  max-width: 1200px;
   margin: 40px auto;
   overflow: hidden;
 }
@@ -28,8 +34,8 @@ main {
 }
 
 .gallery-slider .swiper-slide {
-  width: auto;
-  height: 400px;
+  width: 1200px;
+  height: 500px;
 }
 
 .gallery-slider .swiper-slide img {
@@ -66,14 +72,14 @@ main {
 /* title/overview */
 .info-header {
   display: flex;
-  font-size: 2em;
+  font-size: 1.5em;
   justify-content: space-between;
   font-weight: bold;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .info-content {
-  margin: 20px 0;
+  margin: 10px 0;
 }
 
 .info-detail-content {
@@ -89,11 +95,11 @@ main {
 }
 
 .info-detail-content+span {
-  font-size: 20px;
+  font-size: 16px;
 }
 
 .info-overview {
-  background-color: #eee;
+  border: 1px solid #ccc;
   padding: 20px;
   border-radius: 20px;
   height: auto;
@@ -102,12 +108,16 @@ main {
 
 .info-overview>p {
   line-height: 200%;
+  font-size: 16px;
 }
 
 #placeScrap {
   cursor: pointer;
 }
 
+.review-container{
+  display: inline;
+}
 
 
 /* ------------------------ 지도 섹션 ------------------------ */
@@ -122,12 +132,13 @@ main {
   align-items: center;
   width: 800px;
   height: 800px;
-  border: 1px solid blue;
-  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+
+  margin-right: 10px;
 }
 
 .around-list>div {
-  border: 1px solid black;
   /* margin: 0px; */
   display: flex;
   flex-direction: column;
@@ -140,10 +151,17 @@ main {
 
 
 /* 주변 장소 아이템 */
+
+.around-item{
+  border-bottom: 2px solid #ccc;
+}
+
+
 .search-result-item {
   display: inline-flex;
   width: 335px;
   height: 87px;
+  margin: 10px 0;
 }
 
 .search-result-item-title {
@@ -166,10 +184,20 @@ main {
 
 
 .search-result-item-title a {
-  font-weight: bolder;
-  font-size: 15px;
-
+  /* font-weight: bolder; */
+  font-size: 13px;
 }
+
+.search-result-item-address a{
+  font-size: 13px;
+}
+
+.search-result-item-review a{
+  font-size: 13px;
+}
+
+
+
 
 .search-result-item span {
   display: inline-block;
@@ -223,7 +251,8 @@ main {
 
 /* 카카오 지도 api */
 .map {
-  border: 1px solid red;
+  border: 1px solid #ccc;
+  border-radius: 20px;
   width: 400px;
   height: 800px;
   float: right;
@@ -233,22 +262,25 @@ main {
 
 .map>span {
   font-size: 25px;
-  margin: 10px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  margin-left: 15px;
 }
 
 #map {
-  width: 400px;
-  height: 700px;
+  width: 360px;
+  height: 730px;
   justify-content: center;
   align-items: center;
+  margin-left: 10px;
+  border-radius: 20px;
 }
 
 
 /* --------------------------- 보드 내비게이션 --------------------------- */
 .boardNav {
   /* height: 100%; */
-  padding: 12px 12px 0;
-  margin-top: 20px;
+  /* padding: 12px 12px 0; */
   background-color: white;
 }
 

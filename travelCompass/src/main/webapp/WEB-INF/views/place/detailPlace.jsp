@@ -82,14 +82,16 @@
       </div>
 
       <div class="review-area">
-        <div class="review-area">
+        <div class="review-container">
           <div class="rating">
             <span class="empty">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
             <span class="fill" style="width:${92*(place.averageRating*20)/100}px;">
             &#9679;&#9679;&#9679;&#9679;&#9679;</span>
           </div>
-        <span class="review-count">${place.reviewCount} 건의 리뷰</span>
+            <span class="review-count">${place.reviewCount} 건의 리뷰</span>
       </div>
+
+      <hr>
 
       <div class="info-content">
         <span class="info-detail-content"><i class="fa-solid fa-location-dot"></i></span>
@@ -112,6 +114,8 @@
         </c:if>
       </div>
 
+      <hr>
+
       <div class="info-overview">
         <p>
           ${place.overview}
@@ -119,14 +123,16 @@
       </div>
     </section>
 
+    <hr>
+
     <!-- 지도 섹션 -->
     <section class="map-section">
       <div 주변장소>
         <div class="around-container">
           <div class="around-list">
-            <div>관광지
+            <div >관광지
               <c:forEach var="tourPlace" items="${aroundPlaceList.tourPlace}">
-                <li>
+                <li class="around-item">
                   <div class="search-result-item">
 
                       <div class="search-result-item-img">
@@ -136,7 +142,7 @@
                                       <img src="${tourPlace.firstimage}" alt="" width="89px" height="70px">
                                   </c:when>
                                   <c:when test="${empty tourPlace.firstimage}">
-                                      <img src="/resources/images/common/${tourPlace.contenttypeid}.png" alt="" width="177px" height="140px">
+                                      <img src="/resources/images/common/${tourPlace.contenttypeid}.png" alt="" width="89px" height="70px">
                                   </c:when>
                               </c:choose>
                           </a>
@@ -173,7 +179,7 @@
             <!--  -->
             <div>문화
               <c:forEach var="culturePlace" items="${aroundPlaceList.culturePlace}">
-                 <li>
+                 <li class="around-item">
                   <div class="search-result-item">
 
                       <div class="search-result-item-img">
@@ -221,7 +227,7 @@
           <div class="around-list">
             <div>음식점
               <c:forEach var="foodPlace" items="${aroundPlaceList.foodPlace}">
-                <li>
+                <li class="around-item">
                   <div class="search-result-item">
 
                       <div class="search-result-item-img">
@@ -265,7 +271,7 @@
             </div>
             <div>레포츠
               <c:forEach var="leisurePlace" items="${aroundPlaceList.leisurePlace}">
-                <li>
+                <li class="around-item">
                   <div class="search-result-item">
 
                       <div class="search-result-item-img">
@@ -312,10 +318,12 @@
       </div>
 
       <div class="map">
-        <span><i class="fa-solid fa-map-location-dot">지도</i></span>
-        <div id="map" style="border: 1px solid black"></div>
+        <span><i class="fa-solid fa-map-location-dot"></i></span>
+        <div id="map"></div>
       </div>
     </section>
+
+    <hr>
 
     <nav class="boardNav">
       <ul>

@@ -363,6 +363,3 @@ const reviewListContainer = document.getElementById("reviewContainer");
                                     // A-4 (A 리뷰 시작의 4번 인덱스 위치에 있는 태그 )의 append
                                     reviewTextBottomMenu.append(reviewTextSuportButton, reviewTextSaveButton,
                                         reviewTextShareButton);
-
-                                    // A-4 번 완성
-                                    
