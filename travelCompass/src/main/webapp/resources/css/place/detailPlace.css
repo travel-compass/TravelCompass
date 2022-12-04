@@ -7,7 +7,7 @@
 hr{
   margin: 15px 0;
   height: 5px;
-  background-color: #2DC48D;
+  background-color: #34E0A1;
 }
 
 /* ------------------------ 이미지 섹션 ------------------------ */
@@ -258,7 +258,7 @@ main {
 .fill {
   z-index: 2;
   overflow: hidden;
-  color: #2DC48D;
+  color: #34E0A1;
   width: 40px;
 }
 
@@ -332,6 +332,6 @@ main {
 }
 
 .boardNav input:checked+label {
-  border-bottom: #00AA6C solid 4px;
+  border-bottom: #34E0A1 solid 4px;
   transition-delay: 50ms;
 }

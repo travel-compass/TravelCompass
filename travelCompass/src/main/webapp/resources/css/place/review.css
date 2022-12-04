@@ -79,7 +79,7 @@
 }
 
 .star-rating :checked~label {
-    color: #2dcd8f;
+    color: #34E0A1;
 }
 
 .star-rating label:hover,
@@ -458,5 +458,5 @@
 }
 
 .page-select a:hover {
-    color: #2DC48D;
+    color: #34E0A1;
 }
