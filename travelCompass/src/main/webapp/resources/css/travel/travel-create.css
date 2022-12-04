@@ -10,7 +10,6 @@ main {
 .travel-create-side {
     width: 25%;
     overflow: auto;
-    background-color: #f2f2f2;
     box-shadow: 5px 0px 10px -4px rgba(0, 0, 0, 0.1);
 }
 .travel-create-side::-webkit-scrollbar {
@@ -122,6 +121,9 @@ button.cancel-btn {
 .drop-down_box li {
     padding: 10px 10px;
 }
+.drop-down_box li:hover {
+    background-color: #ddd;
+}
 /* .arrow_box:after, .arrow_box:before {
 	bottom: 100%;
 	left: 50%;
@@ -159,10 +161,15 @@ button.cancel-btn {
     justify-content: space-around;
     align-items: center;
 }
-
+.travel-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .travel-list > li {
     background-color: white;
     margin-bottom: 10px;
+    box-shadow: 0px 5px 10px -4px rgba(0, 0, 0, 0.1);
 }
 /* 아이템이 없을때 출력하는 항목 */
 .empty-item {
@@ -322,4 +329,31 @@ button.cancel-btn {
 
 .review-area {
     display: flex;
+}
+
+/* 거리 */
+.distance-area {
+    width: 70%;
+    height: 150px;
+    display: flex;
+    align-items: center;
+}
+.distance-area .path{
+    width: 90px;
+    height: 90px;
+    transform: rotate(-45deg);
+    color: #2DC48D;
+    margin-right: 20px;
+}
+.distance{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 17px;
+    font-weight: bold;
+}
+.distance img {
+    width: 45px;
+    height: 45px;
+    margin-bottom: 10px;
 }

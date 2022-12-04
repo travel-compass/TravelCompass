@@ -24,19 +24,20 @@
                 
                     <button class="fa-solid fa-ellipsis drop-down">
                         <ul class="drop-down_box">
-                            <li>변경사항 저장</li>
-                            <li>여행 삭제</li>
+                            <li id="updateTravel">변경사항 저장</li>
+                            <li id="reloadTravel">변경사항 초기화</li>
+                            <li><a href="">여행 삭제</a></li>
                         </ul>
                     </button>
                 </div>
                 <div class="input-row">
-                    <input type="text" class="travel-title read-only" maxlength="10" id="travelTitle" name="travelTitle" readonly value="${travel.travelTitle}">
+                    <input type="text" class="travel-title read-only travel-input" maxlength="10" id="travelTitle" name="travelTitle" readonly value="${travel.travelTitle}">
                     <button class="fa-solid fa-pen-to-square update-btn" type="button"><!-- 수정버튼 --></button>
                     <button class="fa-solid fa-xmark cancel-btn"><!-- 취소 --></button>
                 </div>
                 <span class="travel-writer">작성자: <a href="/profile/${travel.memberNo}">${travel.memberNickname}</a></span>
                 <div class="input-row">
-                    <textarea name="travelContent" id="travelContent" maxlength="33" placeholder="여행 설명을 입력하세요." class="travel-content read-only" readonly>${travel.travelContent}</textarea>
+                    <textarea name="travelContent" id="travelContent" maxlength="33" placeholder="여행 설명을 입력하세요." class="travel-content read-only travel-input" readonly>${travel.travelContent}</textarea>
                     <button class="fa-solid fa-pen-to-square update-btn" type="button"><!-- 수
                     정버튼 --></button>
                     <button class="fa-solid fa-xmark cancel-btn" type="button"><!-- 취소 --></button>
@@ -66,7 +67,7 @@
                                         <a href="/place/detail/${travelPlace.contenttypeid}/${travelPlace.contentid}" target="_blank">${travelPlace.title}</a>
                                         <button class="fa-solid fa-ellipsis drop-down">
                                             <ul class="drop-down_box">
-                                                <li onclick="deleteTravelPlace(${vs.index})">여행에서 제외</li>
+                                                <li onclick="deleteTravelPlace(${vs.index})" class="deleteTravelPlaceBtn">여행에서 제외</li>
                                             </ul>
                                         </button>
                                     </div>
@@ -80,15 +81,25 @@
                                     <span class="place-addr">${travelPlace.addr1}</span>
                                 </div>
                             </li>
+                            <c:if test="${!vs.last}">
+                                <div class="distance-area">
+                                    <img src="/resources/images/common/distance.png" alt="" class="path">
+                                    <div class="distance">
+                                        <img src="/resources/images/common/person-walking.png" alt="">
+                                        <span class="distance-km">2.1km</span>
+                                    </div>
+                                </div>
+                            </c:if>
                         </c:forEach>
                     </c:otherwise>
                 </c:choose>
             </ul>
         </section>
         <section class="travel-create-content">
-            <form action="" class="scrap-place-search">
-                <input type="text" placeholder="검색" class="scrap-place-search-input">
+            <form class="scrap-place-search" id="scrapSearch">
+                <input type="text" placeholder="검색" class="scrap-place-search-input" id="scrapSearchInput">
                 <button type="button" class="fa-solid fa-sort" id="sortBtn"></button>
+                <button hidden></button>
             </form>
             <ul id="scrapPlaceList">
                 <c:choose>
@@ -100,13 +111,13 @@
                     <c:otherwise>
                         <c:forEach var="scrapPlace" items="${scrapPlaceList}" varStatus="vs">
                             <li class="scrap-place-item">
-                                <a class="place-first-image">
+                                <a href="/place/detail/${scrapPlace.contenttypeid}/${scrapPlace.contentid}" class="place-first-image" target="_blank">
                                 <%-- 기본이미지 조건문 처리 필요 --%>
                                     <img src="${scrapPlace.firstimage}" alt="장소 썸네일">
                                 </a>
                                 <div class="scrap-place-info">
                                     <div class="place-title-area">
-                                        <a href="해당 장소 상세페이지">${scrapPlace.title}</a>
+                                        <a href="/place/detail/${scrapPlace.contenttypeid}/${scrapPlace.contentid}" target="_blank">${scrapPlace.title}</a>
                                         <button class="fa-solid fa-ellipsis drop-down">
                                             <ul class="drop-down_box">
                                                 <li onclick="addToPlaceTravel(${vs.index})">여행에 추가</li>
@@ -130,12 +141,17 @@
                         </c:forEach>
                     </c:otherwise>
                 </c:choose>
-                
             </ul>
         </section>
     </main>
-
+    <script>
+        let scrapList = '${jsonScrapPlaceList}';
+        let travel = '${jsonTravel}';
+        const memberNo = ${loginMember.memberNo};
+        
+    </script>
     <jsp:include page="/WEB-INF/views/inc/footer.jsp"></jsp:include>
+    <script src="/resources/js/common/jQuery-core.js"></script>
     <script src="/resources/js/travel/travel-create.js"></script>
 </body>
 </html>

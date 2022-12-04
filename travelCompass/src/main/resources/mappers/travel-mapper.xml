@@ -14,15 +14,16 @@
 		<result property="privateFlag" column="PRIVATE_FL"/>
 		<result property="travelFirstImage" column="TRAVEL_FIRST_IMAGE"/>
 	</resultMap>
-
+	
+	<!-- 특정회원 여행목록 조회 -->
 	<select id="selectTravelList" parameterType="_int" resultMap="travel_rm">
-		SELECT T.TRAVEL_NO, T.TRAVEL_TITLE, T.PRIVATE_FL,
+		SELECT T.TRAVEL_NO, T.TRAVEL_TITLE, T.PRIVATE_FL, T.MEMBER_NO,
 			TO_CHAR(T.TRAVEL_DATE, 'YYYY"년" MM"월" DD"일"') TRAVEL_DATE,
 			(SELECT PS.FIRST_IMAGE FROM "PLACE_SCRAP" PS
 				WHERE PS.PLACE_SCRAP_NO = 
 					(SELECT TL.PLACE_SCRAP_NO  
 					FROM "TRAVEL_LIST" TL
-					WHERE TRAVEL_LIST_ORDER = (SELECT MAX(TRAVEL_LIST_ORDER) FROM "TRAVEL_LIST" WHERE TL.TRAVEL_NO = T.TRAVEL_NO))
+					WHERE TRAVEL_LIST_ORDER = (SELECT MIN(TRAVEL_LIST_ORDER) FROM "TRAVEL_LIST" WHERE TL.TRAVEL_NO = T.TRAVEL_NO))
 					) TRAVEL_FIRST_IMAGE,
 			(SELECT COUNT(*) FROM "TRAVEL_LIST" TL WHERE TL.TRAVEL_NO = T.TRAVEL_NO) TRAVEL_PLACE_COUNT,
 			(SELECT MEMBER_NICKNAME FROM "MEMBER" M WHERE M.MEMBER_NO = T.MEMBER_NO) MEMBER_NICKNAME,
@@ -32,10 +33,48 @@
 		AND T.TRAVEL_DEL_FL = 'N'
 	</select>
 	
+	<!-- 여행 생성 -->
 	<insert id="createTravel">
 		INSERT INTO TRAVEL (TRAVEL_NO, TRAVEL_TITLE, MEMBER_NO, TRAVEL_DATE, PRIVATE_FL) VALUES(SEQ_TRAVEL_NO.NEXTVAL,
 			#{travelTitle}, #{memberNo}, DEFAULT, #{privateFlag})
 	</insert>
+	
+	<!-- 테이블 정보 수정 (제목, 설명, 마지막수정날짜) -->
+	<update id="updateTravel">
+		UPDATE "TRAVEL" SET
+		TRAVEL_TITLE = #{travelTitle},
+		TRAVEL_CONTENT = #{travelContent},
+		TRAVEL_DATE = SYSDATE
+		WHERE TRAVEL_NO = #{travelNo}
+	</update>
+	
+	
+	<!-- travel_list 테이블 정보 수정 (여행에 등록된 장소 목록 업데이트) -->
+	<update id="updateTravelList" parameterType="list">
+		MERGE INTO "TRAVEL_LIST" TL
+		USING (SELECT * FROM
+			<foreach collection="list" item="place" open="(" close=")" separator="UNION ALL" index="index">
+				SELECT #{place.travelNo} TRAVEL_NO,
+						#{index} TRAVEL_LIST_ORDER,
+						#{place.placeScrapNo} PLACE_SCRAP_NO
+				FROM DUAL
+			</foreach> 
+		) A
+		ON (TL.TRAVEL_NO = A.TRAVEL_NO AND TL.TRAVEL_LIST_ORDER = A.TRAVEL_LIST_ORDER)
+		WHEN MATCHED THEN
+			UPDATE SET TL.PLACE_SCRAP_NO = A.PLACE_SCRAP_NO
+		WHEN NOT MATCHED THEN
+			INSERT VALUES (SEQ_TRAVEL_LIST_NO.NEXTVAL, A.TRAVEL_NO, DEFAULT, A.TRAVEL_LIST_ORDER, A.PLACE_SCRAP_NO)
+	</update>
+	
+	<!-- 수정된 장소 리스트의 최대 order보다 높은 order를 가진 장소 삭제 -->
+	<delete id="deleteTravelList">
+		DELETE FROM "TRAVEL_LIST"
+		WHERE TRAVEL_NO = #{travelNo}
+		<![CDATA[
+			AND TRAVEL_LIST_ORDER >= #{maxOrder}
+		]]>
+	</delete>
 </mapper>
 
 
