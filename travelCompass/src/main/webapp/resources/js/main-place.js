@@ -53,6 +53,8 @@
         navigator.geolocation.getCurrentPosition(position => {
             latitude = position.coords.latitude;
             longitude = position.coords.longitude;
+            console.log(latitude);
+            console.log(longitude);
             const aURL = `latitude=${latitude}&longitude=${longitude}&contentTypeId=12`;
             document.getElementById("aroundSearch").href += aURL;
 

@@ -77,5 +77,34 @@
 		FROM TRAVEL_LIST TL
 		JOIN PLACE_SCRAP PS USING (PLACE_SCRAP_NO) 
 		WHERE TRAVEL_NO = #{travelNo}
+		ORDER BY TRAVEL_LIST_ORDER
 	</select>
+	
+	<!-- 스크랩 장소 검색 -->
+	<select id="searchScrap" resultMap="place_rm" parameterType="map">
+		SELECT PLACE_SCRAP_NO, PLACE_TITLE, FIRST_IMAGE, MAPX, MAPY, CONTENT_ID, PLACE_ADDR, CONTENT_TYPE_ID,
+			TO_CHAR(SCRAP_DATE, 'YYYY"년" MM"월" DD"일"') SCRAP_DATE,
+			(SELECT COUNT(*) FROM REVIEW R WHERE R.CONTENT_ID = PS.CONTENT_ID) REVIEW_COUNT,
+			(SELECT NVL(AVG(RATING), 0)  FROM REVIEW R WHERE R.CONTENT_ID = PS.CONTENT_ID) AVERAGE_RATING
+		FROM PLACE_SCRAP PS
+		WHERE MEMBER_NO = #{memberNo}
+		<if test='keyword != null and keyword != ""'></if>
+		AND (PLACE_TITLE LIKE '%${keyword}%' OR PLACE_ADDR LIKE '%${keyword}%')
+		<if test="sort != 0">
+			<choose>
+				<when test="sort == 1">	<!-- 스크랩 날짜 오름차순(옛날 순) -->
+					ORDER BY PLACE_SCRAP_NO
+				</when>
+				<when test="sort == 2">	<!-- 스크랩 날짜 내림차순(최신 순) -->
+					ORDER BY PLACE_SCRAP_NO DESC
+				</when>
+			</choose>
+		</if>
+	</select>
+	
+	<!-- 스크랩 장소 삭제 -->
+	<delete id="deleteScrap">
+		DELETE FROM PLACE_SCRAP
+		WHERE PLACE_SCRAP_NO = #{placeScrapNo}
+	</delete>
 </mapper>

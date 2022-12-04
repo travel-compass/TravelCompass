@@ -1,6 +1,7 @@
 package kh.team.travelcompass.travel.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import kh.team.travelcompass.place.model.vo.Place;
 import kh.team.travelcompass.travel.model.vo.Travel;
@@ -33,4 +34,25 @@ public interface TravelService {
 	 * @return placeList
 	 */
 	public List<Place> selectScrapPlaceList(int memberNo);
+
+
+	/** 스크랩 장소 검색
+	 * @param paramMap
+	 * @return placeList
+	 */
+	public List<Place> searchScrap(Map<String, Object> paramMap);
+
+
+	/** 스크랩 삭제
+	 * @param paramMap
+	 * @return result
+	 */
+	public int deleteScrap(int placeScrapNo);
+
+
+	/** 비동기 여행 변경사항 저장
+	 * @param travel
+	 * @return result
+	 */
+	public int updateTravel(Travel travel) throws Exception;
 }
