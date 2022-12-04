@@ -93,7 +93,7 @@ for(let category of categoryList) {
                     const searchResultItemImgDivAImg = document.createElement("img");
                     searchResultItemImgDivA.appendChild(searchResultItemImgDivAImg);
                     //src 추가-이미지가 없을 경우 기본 이미지로 대체
-                    if(result.placeList.firstimage != ''){
+                    if(place.firstimage != ''){
                         searchResultItemImgDivAImg.setAttribute("src", place.firstimage);
                         searchResultItemImgDivAImg.setAttribute("width", "177px");
                         searchResultItemImgDivAImg.setAttribute("height", "140px" );
@@ -189,7 +189,9 @@ for(let category of categoryList) {
                     searchResultItemReviewDivA.href = "place/detail/"+place.contenttypeid+"/"+place.contentid;
                     searchResultItemReviewDivA.innerText = "서울사당에서 지하철타면 15분이면 도착하는 과천에 자리잡은 서울대공원은 놀이공원,동물원,식물원등이 있고 호수를 가로지르는 리프트를 타거나 셔틀이 있어서 편하게 이용할수 있고 입장료또한 인터넷으로 예매하면 아주 저렴하게 이용할수 있어서 데이트를 하거나 휴식을 하러가기 아주 좋은곳이고 남녀노소 가족 누구나가 이용하기 좋은 곳이네요.";
                 }
-                    //-------------------------------------------------------------------
+
+
+                    //pagination-------------------------------------------------------------------
 
                     const pagination = document.querySelector(".pagination");
                     pagination.innerHTML = "";

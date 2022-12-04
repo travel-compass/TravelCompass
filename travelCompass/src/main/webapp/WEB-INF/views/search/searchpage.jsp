@@ -160,8 +160,8 @@
                                                         <div class="search-result-item-grade">
                                                             <div class="rating">
                                                                 <span class="empty">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
-                                                                <span class="fill">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
-                                                            </div>
+                                                                <span class="fill" >&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                                                            </div><!--fill style="width:${69*(scrapPlace.averageRating*20)/100}px;"-->
                                                             <span><a href="#<!--상세페이지-리뷰-->">267건의 리뷰</a></span>
                                                         </div>
                                                             
