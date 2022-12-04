@@ -16,6 +16,7 @@
 		<result property="scrapDate" column="SCRAP_DATE"/>
 		<result property="reviewCount" column="REVIEW_COUNT"/>
 		<result property="averageRating" column="AVERAGE_RATING"/>
+		
 	</resultMap>
 
 	<resultMap type="Travel" id="travelDetail_rm">

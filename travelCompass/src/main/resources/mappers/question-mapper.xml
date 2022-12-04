@@ -24,7 +24,7 @@
 	</select>
 	
 	<!-- QnA 조회 -->
-	<select id="selectQuestionList">
+	<select id="selectQuestionList" resultType="Question">
 		SELECT QUESTION_NO, QUESTION_TITLE, QUESTION_CONTENT,
 		 <![CDATA[
 			CASE

@@ -90,7 +90,7 @@ main {
 }
 
 .info-detail-content>i {
-  color: black;
+  color: rgb(60, 60, 60);
   width: 20px;
 }
 
@@ -156,6 +156,17 @@ main {
   border-bottom: 2px solid #ccc;
 }
 
+.aCategory{
+  background-color: rgb(60, 60, 60);
+  color: white;
+  border-radius: 20px;
+  font-size: 16px;
+  font-weight: bold;
+  width: 335px;
+  padding: 10px;
+  text-align: center;
+  position: relative;
+}
 
 .search-result-item {
   display: inline-flex;
@@ -208,6 +219,10 @@ main {
   width: 108px;
   height: 90px;
   padding: 8px 8px 8px 12px;
+}
+
+.search-result-item-img img{
+  border-radius: 5px;
 }
 
 
@@ -265,6 +280,7 @@ main {
   margin-top: 10px;
   margin-bottom: 5px;
   margin-left: 15px;
+  color: rgb(60, 60, 60);
 }
 
 #map {

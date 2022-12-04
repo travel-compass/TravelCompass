@@ -35,6 +35,7 @@
     const addr1="${place.addr1}";
     const contenttypeid="${place.contenttypeid}";
     const title="${place.title}"
+    
   </script>
   <!-- header:include -->
 	<jsp:include page="/WEB-INF/views/inc/header.jsp"></jsp:include>
@@ -108,9 +109,21 @@
           <span class="info-detail-content"><i class="fa-solid fa-clock"></i></span>
           <span>${place.usetime}</span><br>
         </c:if>
+        <c:if test="${!empty place.usefee}">
+          <span class="info-detail-content"><i class="fa-solid fa-money-check-dollar"></i></span>
+          <span>${place.usefee}</span><br>
+        </c:if>
         <c:if test="${!empty place.restdate}">
           <span class="info-detail-content"><i class="fa-solid fa-calendar-days"></i></span>
-          <span>${place.restdate}</span>
+          <span>${place.restdate}</span><br>
+        </c:if>
+        <c:if test="${!empty place.infocenter}">
+          <span class="info-detail-content"><i class="fa-solid fa-phone"></i></span>
+          <span>${place.infocenter}</span><br>
+        </c:if>
+        <c:if test="${!empty place.homepage}">
+          <span class="info-detail-content"><i class="fa-solid fa-link"></i></span>
+          <span>${place.homepage}</span>
         </c:if>
       </div>
 
@@ -130,7 +143,8 @@
       <div 주변장소>
         <div class="around-container">
           <div class="around-list">
-            <div >관광지
+            <div >
+              <span class="aCategory">관광지</span>
               <c:forEach var="tourPlace" items="${aroundPlaceList.tourPlace}">
                 <li class="around-item">
                   <div class="search-result-item">
@@ -139,10 +153,10 @@
                           <a href="/place/detail/${tourPlace.contenttypeid}/${tourPlace.contentid}">
                               <c:choose>
                                   <c:when test="${!empty tourPlace.firstimage}">
-                                      <img src="${tourPlace.firstimage}" alt="" width="89px" height="70px">
+                                      <img src="${tourPlace.firstimage}" alt="" width="90px" height="80px">
                                   </c:when>
                                   <c:when test="${empty tourPlace.firstimage}">
-                                      <img src="/resources/images/common/${tourPlace.contenttypeid}.png" alt="" width="89px" height="70px">
+                                      <img src="/resources/images/common/${tourPlace.contenttypeid}.png" alt="" width="90px" height="80px">
                                   </c:when>
                               </c:choose>
                           </a>
@@ -177,7 +191,8 @@
             </div>
 
             <!--  -->
-            <div>문화
+            <div>
+              <span class="aCategory">문화</span>
               <c:forEach var="culturePlace" items="${aroundPlaceList.culturePlace}">
                  <li class="around-item">
                   <div class="search-result-item">
@@ -186,10 +201,10 @@
                           <a href="/place/detail/${culturePlace.contenttypeid}/${culturePlace.contentid}">
                               <c:choose>
                                   <c:when test="${!empty culturePlace.firstimage}">
-                                      <img src="${culturePlace.firstimage}" alt="" width="89px" height="70px">
+                                      <img src="${culturePlace.firstimage}" alt="" width="90px" height="80px">
                                   </c:when>
                                   <c:when test="${empty culturePlace.firstimage}">
-                                      <img src="/resources/images/common/${culturePlace.contenttypeid}.png" alt="" width="89px" height="70px">
+                                      <img src="/resources/images/common/${culturePlace.contenttypeid}.png" alt="" width="90px" height="80px">
                                   </c:when>
                               </c:choose>
                           </a>
@@ -225,7 +240,8 @@
 
           </div>
           <div class="around-list">
-            <div>음식점
+            <div>
+              <span class="aCategory">음식점</span>
               <c:forEach var="foodPlace" items="${aroundPlaceList.foodPlace}">
                 <li class="around-item">
                   <div class="search-result-item">
@@ -234,10 +250,10 @@
                           <a href="/place/detail/${foodPlace.contenttypeid}/${foodPlace.contentid}">
                               <c:choose>
                                   <c:when test="${!empty foodPlace.firstimage}">
-                                      <img src="${foodPlace.firstimage}" alt="" width="89px" height="70px">
+                                      <img src="${foodPlace.firstimage}" alt="" width="90px" height="80px">
                                   </c:when>
                                   <c:when test="${empty foodPlace.firstimage}">
-                                      <img src="/resources/images/common/${foodPlace.contenttypeid}.png" alt="" width="89px" height="70px">
+                                      <img src="/resources/images/common/${foodPlace.contenttypeid}.png" alt="" width="90px" height="80px">
                                   </c:when>
                               </c:choose>
                           </a>
@@ -269,7 +285,8 @@
                 </li> 
               </c:forEach>
             </div>
-            <div>레포츠
+            <div>
+              <span class="aCategory">레포츠</span>
               <c:forEach var="leisurePlace" items="${aroundPlaceList.leisurePlace}">
                 <li class="around-item">
                   <div class="search-result-item">
@@ -278,10 +295,10 @@
                           <a href="/place/detail/${leisurePlace.contenttypeid}/${leisurePlace.contentid}">
                               <c:choose>
                                   <c:when test="${!empty leisurePlace.firstimage}">
-                                      <img src="${leisurePlace.firstimage}" alt="" width="89px" height="70px">
+                                      <img src="${leisurePlace.firstimage}" alt="" width="90px" height="80px">
                                   </c:when>
                                   <c:when test="${empty leisurePlace.firstimage}">
-                                      <img src="/resources/images/common/${leisurePlace.contenttypeid}.png" alt="" width="89px" height="70px">
+                                      <img src="/resources/images/common/${leisurePlace.contenttypeid}.png" alt="" width="90px" height="80px">
                                   </c:when>
                               </c:choose>
                           </a>
@@ -339,8 +356,9 @@
     </nav>
 
     <%-- 리뷰 섹션 --%>
-    <jsp:include page="/WEB-INF/views/place/review.jsp"></jsp:include>
-
+    <%-- <div id=reviewBoard>
+      <jsp:include page="/WEB-INF/views/place/review.jsp"></jsp:include>
+    </div> --%>
     <%-- QnA 섹션 --%>
     <%-- <jsp:include page="/WEB-INF/views/place/QnA.jsp"></jsp:include> --%>
   
@@ -355,7 +373,7 @@
   <script src="/resources/js/common/jQuery-core.js"></script>
   <script src="/resources/js/place/detailPlace.js"></script>
   <script src="/resources/js/place/review.js"></script>
-  <script src="/resources/js/place/QnA.js"></script>
+  <%-- <script src="/resources/js/place/QnA.js"></script> --%>
 	<script src="/resources/js/place/swiper.js"></script>
 </body>
 

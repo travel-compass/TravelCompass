@@ -49,7 +49,8 @@ public class ReviewController {
 //	}
 	
 	@GetMapping("/reviewList")
-	public Map<String, Object> selectReviewList(String contentid, int cp) {
+	public Map<String, Object> selectReviewList(String contentid,
+			@RequestParam(value="cp",required=false, defaultValue="1") int cp) {
 		Map<String, Object> reviewMap=service.selectReviewList(contentid, cp);
 		
 		return reviewMap;

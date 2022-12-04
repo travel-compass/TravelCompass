@@ -8,7 +8,7 @@
         
         <ul id="comment-list">
 
-            <c:forEach var="comment" items="${place.questionList}">
+            <c:forEach var="question" items="${questionMap.questionList}">
                 <li class="comment-row  <c:if test="${question.parentNo != 0 }"> child-comment </c:if>">
                     <p class="comment-writer">
 
