@@ -147,19 +147,49 @@ function createPlaceList(resultList) {
         const placeTitle = document.createElement("span");
         placeTitle.classList.add("place-title");
         placeTitle.innerText = place.title;
+
+        const reviewArea = document.createElement("div");
+        reviewArea.classList.add("review-area");
+
         const rating = document.createElement("div");
-        rating.classList.add("grade");
-        const span1 = document.createElement("span");
-        span1.innerText = "평점";
-        const span2 = document.createElement("span");
-        span2.innerText = "리뷰 갯수";
-        rating.append(span1, span2);
+        rating.classList.add("rating");
+
+        const empty = document.createElement("span");
+        empty.classList.add("empty");
+        empty.innerHTML = "&#9679;&#9679;&#9679;&#9679;&#9679;";
+        
+        const fill = document.createElement("span");
+        fill.classList.add("fill");
+        fill.innerHTML = "&#9679;&#9679;&#9679;&#9679;&#9679;";
+        fill.style.width = 92 * (place.averageRating * 20) / 100;
+        const reviewCount = document.createElement("span");
+        reviewCount.innerText = place.reviewCount;
+
+        // const rating = document.createElement("div");
+        // rating.classList.add("grade");
+        // const span1 = document.createElement("span");
+        // span1.innerText = "평점";
+        // const span2 = document.createElement("span");
+        // span2.innerText = "리뷰 갯수";
+        rating.append(empty, fill);
+        reviewArea.append(rating, reviewCount);
+
+        // 주소
+        const addr = document.createElement("span");
+        addr.classList.add("place-addr");
+        addr.innerText = place.addr1;
+
+        // 거리
+        const distArea = document.createElement("span");
+        distArea.classList.add("dist-area");
 
         const distIcon = document.createElement("i");
         distIcon.className = "fa-solid fa-location-dot dist-icon";
 
         const dist = parseInt(place.dist / 100) * 100 / 1000 + "km 떨어짐"
-        a.append(img, placeTitle, rating, distIcon, dist);
+
+        distArea.append(distIcon, dist);
+        a.append(img, placeTitle, reviewArea, addr, distArea);
         placeItem.append(a);
         placeList.append(placeItem);
     }

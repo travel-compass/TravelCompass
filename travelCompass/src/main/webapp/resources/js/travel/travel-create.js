@@ -21,6 +21,10 @@ const updateContent = {
     const updateBtnList = document.getElementsByClassName("update-btn");
     for(let btn of updateBtnList) {
         btn.addEventListener("click", e=>{
+            if(e.target.previousElementSibling.getAttribute("id") == "travelContent") {
+                travelContent.style.height = '1px';
+                travelContent.style.height = (12 + travelContent.scrollHeight) + 'px';
+            }
             const input = e.currentTarget.previousElementSibling;
             tempValue[input.getAttribute("id")] = input.value;
             prevValue = input.value;
@@ -67,6 +71,9 @@ const updateContent = {
     // travel 초기화
     if(travel != ''){
         travel = JSON.parse(travel);
+        if(travel.travelContent != null) {
+            travel.travelContent = travel.travelContent.replaceAll("<br>", "\n");
+        }
     }
 
 
@@ -123,6 +130,50 @@ const updateContent = {
                 travel[tInput.getAttribute("id")] = tInput.value;
             }
         });
+    }
+
+    // 여행 삭제 버튼 이벤트 달기
+    document.getElementById("deleteTravel").addEventListener("click", ()=>{
+        if(confirm("정말 삭제하시겠습니까?")) {
+            const form = document.createElement("form");
+            form.setAttribute("action", `/travel/deleteTravel/${travel.travelNo}`);
+            form.setAttribute("method", "POST");
+            document.body.append(form);
+            form.submit();
+        }
+    });
+
+    // 변경사항 초기화 버튼 이벤트 달기
+    document.getElementById("reloadTravel").addEventListener("click", ()=>{
+        location.reload();
+    });
+
+    // 공유 버튼 이벤트 달기
+    document.getElementById("share").addEventListener("click", ()=>{
+        let url = "";
+        const temp = document.createElement("textarea");
+        document.body.appendChild(temp);
+        url = location.href;
+        temp.value = url;
+        temp.select();
+        document.execCommand("copy");
+        document.body.removeChild(temp);
+        alert("클립보드에 저장되었습니다.");
+    });
+
+    // 화면 로드 시
+    // travel.placeList 간의 거리 출력
+    const distanceList = document.getElementsByClassName("distance-km");
+    for(let i=0; i<distanceList.length; i++) {
+        console.log(`${i}번째 초기화`);
+        // 여행 장소 리스트의 i + 1번째가 null이 아니면
+        if(travel.placeList[i+1] != null) {
+            let distance = computeDistance(
+                new Location(travel.placeList[i].mapy, travel.placeList[i].mapx),
+                new Location(travel.placeList[i+1].mapy, travel.placeList[i+1].mapx)
+            )
+            distanceList[i].innerText = `${Math.round(distance * 10) / 10}km`;
+        }
     }
 })();
 

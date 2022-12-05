@@ -11,16 +11,19 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import kh.team.travelcompass.common.Util;
 import kh.team.travelcompass.member.model.vo.Member;
 import kh.team.travelcompass.place.model.vo.Place;
 import kh.team.travelcompass.travel.model.service.TravelService;
@@ -75,8 +78,11 @@ public class TravelController {
 		}
 		// 여행 번호에 맞는 여행 조회
 		Travel travel = service.selectTravel(travelNo);
-		model.addAttribute("travel", travel);
 		model.addAttribute("jsonTravel", new ObjectMapper().writeValueAsString(travel));
+		if(travel.getTravelContent() != null) {
+			travel.setTravelContent(Util.newLineClear(travel.getTravelContent()));
+		}
+		model.addAttribute("travel", travel);
 		return path;
 	}
 	
@@ -160,5 +166,40 @@ public class TravelController {
 		}
 		
 		return result;
+	}
+	
+	
+	
+	/** 여행 삭제
+	 * @param loginMember
+	 * @param travelNo
+	 * @param referer
+	 * @param ra
+	 * @return path로 리다이렉트
+	 */
+	@PostMapping("/deleteTravel/{travelNo}")
+	public String deleteTravel(@SessionAttribute("loginMember") Member loginMember,
+			@PathVariable int travelNo,
+			RedirectAttributes ra ) {
+		String path = "";
+		String message = "";
+		
+		
+		// 삭제 서비스 수행 후 result 반환
+		int result = service.deleteTravel(travelNo);
+		
+		// result가 0보다 크면
+		// 로그인 되어있는 회원의 여행 목록 페이지로 메세지와 함께 이동
+		if(result > 0) {
+			path = "/travel/list/" + loginMember.getMemberNo();
+			message = "여행을 삭제했습니다.";
+		} else {
+			path = "/travel/detail/" + travelNo;
+			message = "여행 삭제에 실패했습니다.";
+			// result가 0보다 크지 않으면
+			// 메세지와 함께 현재 페이지 리다이렉트
+		}
+		ra.addFlashAttribute("message", message);
+		return "redirect:"+path;
 	}
 }

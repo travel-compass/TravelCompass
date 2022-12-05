@@ -75,6 +75,13 @@
 			AND TRAVEL_LIST_ORDER >= #{maxOrder}
 		]]>
 	</delete>
+	
+	<!-- 여행 삭제 -->
+	<update id="deleteTravel">
+		UPDATE "TRAVEL" SET
+		TRAVEL_DEL_FL = 'Y'
+		WHERE TRAVEL_NO = #{travelNo}
+	</update>
 </mapper>
 
 

@@ -93,4 +93,13 @@ public class TravelDAO {
 	public int deleteTravelList(Map<String, Integer> paramMap) {
 		return sqlSession.delete("travelMapper.deleteTravelList", paramMap);
 	}
+
+
+	/** 여행 삭제
+	 * @param travelNo
+	 * @return result
+	 */
+	public int deleteTravelList(int travelNo) {
+		return sqlSession.update("travelMapper.deleteTravel", travelNo);
+	}
 }
