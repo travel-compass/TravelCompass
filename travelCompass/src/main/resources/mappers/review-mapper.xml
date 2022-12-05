@@ -100,7 +100,7 @@
 		LEFT JOIN "MEMBER" USING(MEMBER_NO)
 		WHERE REVIEW_FL = 'N'
 		AND CONTENT_ID = #{contentid}
-		ORDER BY REVIEW_DATE
+		ORDER BY REVIEW_NO DESC
 	</select>
 	
 	<select id="orderReviewList" resultMap="review_rm">

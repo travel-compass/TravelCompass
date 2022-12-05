@@ -9,6 +9,7 @@
     padding: 20px;
     box-sizing: border-box;
     border-radius: 20px;
+
 }
 
 /* .wrap>h4 {
@@ -90,6 +91,7 @@
 
 .review-container {
     display: flex;
+    padding: 0 24px;
 }
 
 .review-left {
@@ -115,16 +117,13 @@
 
 
 
-
-
 /* 리뷰 목록 */
 .review-list {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 20px;
-    border: 3px solid #ddd;
+    margin-top: 20px;
 }
 
 /*  */
@@ -222,14 +221,16 @@
 }
 
 .review-title {
-    font-size: 18px;
+    font-size: 15px;
     font-weight: bold;
+    margin-left: 24px;
 }
 
 .review-content {
-    font-size: 20px;
+    font-size: 13px;
     line-height: 24px;
     margin-bottom: 8px;
+    margin-left: 24px;
 }
 
 .review-navi {
@@ -466,4 +467,30 @@
 
 .page-select a:hover {
     color: #34E0A1;
+}
+
+/*  */
+.rating {
+    position: relative;
+    height: 15px;
+    margin-bottom: 5px;
+    width: 80px;
+}
+
+.empty,
+.fill {
+    position: absolute;
+    font-size: 15px;
+}
+
+.empty {
+    z-index: 1;
+    color: #ddd;
+}
+
+.fill {
+    z-index: 2;
+    overflow: hidden;
+    color: #34E0A1;
+    width: 80px;
 }

@@ -115,6 +115,9 @@
                     &#9679;&#9679;&#9679;&#9679;&#9679;</span>
                   </div>
               </div>
+
+                <div class="review-title">${review.reviewTitle}</div>
+                <div class="review-content">${review.reviewContent}</div>
               
               <div class="review-support"></div>
               <div class="review-bottom-menu-style">
