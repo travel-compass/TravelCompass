@@ -60,21 +60,21 @@
                             <div class="user-nickname">
                                 ${member.memberNickname}
                             </div>
-                            <div class="user-container-PFF">
-                                <div>
+                            <div id="PFFColor" class="user-container-PFF">
+                                <div class="posting PFFCount">
                                     포스팅
                                     <br>
-                                    <a href="#">${member.totalPosting}</a>
+                                    <button>${member.totalPosting}</button>
                                 </div>
-                                <div>
+                                <div class="follower PFFCount">
                                     팔로워
                                     <br>
-                                    <a href="#">${member.totalFollower}</a>
+                                    <button id="follow-button-list">${member.totalFollower}</button>
                                 </div>
-                                <div>
+                                <div class="following PFFCount">
                                     팔로잉
                                     <br>
-                                    <a href="#">${member.totalFollowing}</a>
+                                    <button>${member.totalFollowing}</button>
                                 </div>
                             </div>
                         </div>
@@ -89,17 +89,39 @@
                         <c:if test="${loginMember.memberNo != member.memberNo}">
                         <!-- 다른 회원 프로필 메뉴 -->
                             <div class="user-info-right-part">
-                                <button class="follow-button">
-                                    <i class="fa-regular fa-user"></i> 팔로우
-                                </button>
-                                <button class="comment-button">
-                                    <i class="fa-regular fa-comments"></i>
-                                </button>
-                                <button class="vesides-button">
-                                    <i class="fa-solid fa-ellipsis"></i>
-                                </button>
+                                <c:if test="${empty followCheck}">
+                                    <button id="clickFollow" class="follow-button followOff">
+                                        <i class="fa-solid fa-user-plus"></i>팔로우
+                                    </button>
+                                </c:if>
+                                <c:if test="${!empty followCheck}">
+                                    <button id="clickFollow" class="follow-button followOn">
+                                        <i class="fa-solid fa-user-plus"></i>팔로우
+                                    </button>
+                                </c:if>
                             </div>
                         </c:if>
+                    </div>
+                </div>
+
+                <div id="follow-modal" class="modal-layout">
+                    <div class="modal-bc"></div>
+                    <div class="modal-content" id="modalContent">
+                        <div class="modal-content-title">팔로워 ${member.totalFollower}명</div>
+                        <ul class="follow-user-table" id="follow-table">
+                            <li>
+                                <a href="">
+                                    <div class="follow-user-image"><img src="${member.profileImage}"></div>
+                                    <div class="follow-user-info">
+                                        <div class="follow-user-nickname">${member.memberNickname}</div>
+                                        <div class="follow-user-email">${member.memberEmail}</div>
+                                        <div class="follow-user-address">${member.memberAddress}</div>
+                                        <div class="follow-user-ea">${member.totalPosting}포스팅 ${member.totalFollower}팔로워</div>
+                                    </div>
+                                </a>
+                                <button class="follow-user-button"><i class="fa-solid fa-user-plus"></i></button>
+                            </li>
+                        </ul>
                     </div>
                 </div>
         
@@ -109,7 +131,7 @@
                         <li>
                             <input type="radio" id="checkFed" name="profileCategory" checked>
                             <label for="checkFed">
-                                <span id="Fed" OnClick="location.href='/profile/${loginMember.memberNo}'"> 활동피드 </span>
+                                <span id="Fed"> 활동피드 </span>
                             </label>
                         </li>
                         <li>
@@ -127,7 +149,7 @@
                         <li>
                             <input type="radio" id="checkScrap" name="profileCategory">
                             <label for="checkScrap">
-                                <span id="Scrap">스크랩</span>
+                                <span id="Scrap" OnClick="location.href='/travel/list/${memberNo}'">여행</span>
                             </label>
                         </li>
                     </ul>
@@ -181,7 +203,7 @@
                                                     </a>
                                                 </div>
                                             </div>
-                                            <div class="user-page-review-dot-style"><i class="fa-solid fa-ellipsis"></i></div>
+                                            <button class="user-page-review-dot-style"><i class="fa-solid fa-ellipsis"></i></button>
                                             <div class="user-page-review-dot-down-menu">
                                                 <ul class="down-menu">
                                                     <li><a href="#">수정</a></li>
@@ -260,7 +282,7 @@
                                                     </a>
                                                 </div>
                                             </div>
-                                            <div class="user-page-review-dot-style"><i class="fa-solid fa-ellipsis" ></i></div>
+                                            <button class="user-page-review-dot-style"><i class="fa-solid fa-ellipsis"></i></button>
                                             <div class="user-page-review-dot-down-menu">
                                                 <ul class="down-menu">
                                                     <li><a href="#">수정</a></li>
@@ -352,7 +374,12 @@
     <jsp:include page="/WEB-INF/views/inc/footer.jsp"></jsp:include>
 
     <script>
-        const memberNo = "${memberNo}";
+        // ajax 페이지를 위한 변수
+        const memberNo = "${member.memberNo}";
+
+        // @ReqeustParam
+        const reviewPageMemberNo = "${member.memberNo}";
+        const loginMemberNo = "${loginMember.memberNo}"
     </script>
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" 
     integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" 
