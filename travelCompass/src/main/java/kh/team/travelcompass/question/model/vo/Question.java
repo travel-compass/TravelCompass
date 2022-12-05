@@ -18,9 +18,16 @@ public class Question {
 	private String questionContent; // QnA 내용
 	private String questionDate; // QnA 작성일
 	private String questionDelFlag; // QnA 삭제여부(삭제 Y)
-	private String contentId; // QnA가 작성된 장소 번호
+	private String contentid; // QnA가 작성된 장소 번호
 	private String memberNo; // QnA 작성한 회원 번호
 	
 	private int parentNo; // 부모글 식별번호
+	
+	// 필드 추가
+	private String memberNickName;
+	private String profileImage;
+	
+	private String blindFlag;
+	
 	
 }

@@ -78,6 +78,8 @@ public class PlaceController {
 		mainPlace.setRestdate(infoPlace.getRestdate());
 		mainPlace.setUsetime(infoPlace.getUsetime());
 		mainPlace.setTreatmenu(infoPlace.getTreatmenu());
+		mainPlace.setInfocenter(infoPlace.getInfocenter());
+		mainPlace.setUsefee(infoPlace.getUsefee());
 
 		
 		model.addAttribute("place", mainPlace);

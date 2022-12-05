@@ -1,125 +1,26 @@
-/* ------------------------------ 스크랩 --------------------------------- */
-const placeScrap = document.getElementById("placeScrap");
-placeScrap.addEventListener("click", (e) => {
-  if (memberNo == "") {
-    alert("로그인 후 이용해주세요");
-    return;
-  }
-  // 로그인 상태이면서 스크랩 상태가 아닌 경우
-  if (e.target.classList.contains("fa-regular")) {
-    // 빈 모양일때
-    $.ajax({
-      url: "/place/scrap",
-      data: {
-        contentid: contentid,
-        contenttypeid: contenttypeid,
-        memberNo: memberNo,
-        firstimage: firstimage,
-        addr1: addr1,
-        mapx: mapx,
-        mapy: mapy,
-        title: title,
-      },
-      type: "GET",
-      success: (result) => {
-        if (result > 0) {
-          // 성공
-          e.target.classList.remove("fa-regular"); // 빈 스크랩 클래스 삭제
-          e.target.classList.add("fa-solid"); // 꽉 찬 스크랩 클래스 추가
-        } else {
-          // 실패
-          console.log("스크랩 실패");
-        }
-      },
-      error: () => {
-        console.log("스크랩 에러");
-      },
-    });
-  } else {
-    // 로그인 상태이면서 스크랩 상태인 경우
-    if (confirm("정말 스크랩을 취소할까요?")) {
-      $.ajax({
-        url: "/place/scrapCancel",
-        data: { contentid: contentid, memberNo: memberNo },
-        type: "GET",
-        success: (result) => {
-          if (result > 0) {
-            // 성공
-            e.target.classList.remove("fa-solid");
-            e.target.classList.add("fa-regular");
-          } else {
-            // 실패
-            console.log("스크랩 취소 실패");
-          }
-        },
-        error: () => {
-          console.log("스크랩 취소 에러");
-        },
-      });
-    }
-  }
-});
-
-/* ------------------------------- 지도 -----------------------------------*/
-// 카카오 지도 api js
-var container = document.getElementById("map"); //지도를 담을 영역의 DOM 레퍼런스
-var options = {
-  //지도를 생성할 때 필요한 기본 옵션
-  center: new kakao.maps.LatLng(mapy, mapx), //지도의 중심좌표.
-  level: 3, //지도의 레벨(확대, 축소 정도)
-};
-
-var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
-
-// 마커가 표시될 위치입니다
-var markerPosition = new kakao.maps.LatLng(mapy, mapx);
-
-// 마커를 생성합니다
-var marker = new kakao.maps.Marker({
-  position: markerPosition,
-});
-
-// 마커가 지도 위에 표시되도록 설정합니다
-marker.setMap(map);
-
-// 지도에 교통정보를 표시하도록 지도타입을 추가합니다
-// map.addOverlayMapTypeId(kakao.maps.MapTypeId.TRAFFIC);
-
-
-/* ----------------------------------------------------------------- */
-const qnaBoard = document.querySelector('label[for="qnaBoard"]');
-const reviewBoard=document.getElementById("reviewBoard");
-
-qnaBoard.addEventListener("click",()=>{
+// 댓글 목록 조회(AJAX)
+function selectCommentList() {
+  // boardNo, memberNo 전역 변수 사용
   $.ajax({
-    url: "/question/selectQnaList",
+    url: "/question/selectQuestionList",
     data: { contentid: contentid },
     type: "GET",
     success: function (questionMap) {
       // rList : 반환 받은 댓글 목록
       console.log(questionMap);
 
-      /* reviewBoard.innerHTML=" "; */
-
-      const commentListArea=document.createElement("div");
-      commentListArea.classList.add("comment-list-area");
-
-      const commentulList=document.createElement("ul");
-      commentulList.id="comment-list";
-      commentListArea.append(commentulList);
-
       // 화면에 출력되어 있는 댓글 목록 삭제
       const commentList = document.getElementById("comment-list"); // ul태그
-      /* commentList.innerHTML = ""; */
+      commentList.innerHTML = "";
 
       // rList에 저장된 요소를 하나씩 접근
-      for (let question of questionMap.questionList) {
+      for (let comment of rList) {
         // 행
         const commentRow = document.createElement("li");
         commentRow.classList.add("comment-row");
 
         // 답글일 경우 child-comment 클래스 추가
-        if (quesiton.parentNo != 0) commentRow.classList.add("child-comment");
+        if (comment.parentNo != 0) commentRow.classList.add("child-comment");
 
         // 작성자
         const commentWriter = document.createElement("p");
@@ -128,9 +29,9 @@ qnaBoard.addEventListener("click",()=>{
         // 프로필 이미지
         const profileImage = document.createElement("img");
 
-        if (question.profileImage != null) {
+        if (comment.profileImage != null) {
           // 프로필 이미지가 있을 경우
-          profileImage.setAttribute("src", question.profileImage);
+          profileImage.setAttribute("src", comment.profileImage);
         } else {
           // 없을 경우 == 기본이미지
           profileImage.setAttribute("src", "/resources/images/user.png");
@@ -138,12 +39,12 @@ qnaBoard.addEventListener("click",()=>{
 
         // 작성자 닉네임
         const memberNickname = document.createElement("span");
-        memberNickname.innerText = question.memberNickname;
+        memberNickname.innerText = comment.memberNickname;
 
         // 작성일
         const commentDate = document.createElement("span");
         commentDate.classList.add("comment-date");
-        commentDate.innerText = "(" + quesiton.questionDate + ")";
+        commentDate.innerText = "(" + comment.commentCreateDate + ")";
 
         // 작성자 영역(p)에 프로필,닉네임,작성일 마지막 자식으로(append) 추가
         commentWriter.append(profileImage, memberNickname, commentDate);
@@ -153,7 +54,7 @@ qnaBoard.addEventListener("click",()=>{
         commentContent.classList.add("comment-content");
 
         // 왜 innerHTML?  <br> 태그 인식을 위해서
-        commentContent.innerHTML = question.questionContent;
+        commentContent.innerHTML = comment.commentContent;
 
         // 행에 작성자, 내용 추가
         commentRow.append(commentWriter, commentContent);
@@ -168,7 +69,7 @@ qnaBoard.addEventListener("click",()=>{
           const childCommentBtn = document.createElement("button");
           childCommentBtn.setAttribute(
             "onclick",
-            "showInsertComment(" + question.questionNo + ", this)"
+            "showInsertComment(" + comment.commentNo + ", this)"
           );
           childCommentBtn.innerText = "답글";
 
@@ -176,7 +77,7 @@ qnaBoard.addEventListener("click",()=>{
           commentBtnArea.append(childCommentBtn);
 
           // 로그인한 회원번호와 댓글 작성자의 회원번호가 같을 때만 버튼 추가
-          if (memberNo == question.memberNo) {
+          if (memberNo == comment.memberNo) {
             // 수정 버튼
             const updateBtn = document.createElement("button");
             updateBtn.innerText = "수정";
@@ -184,7 +85,7 @@ qnaBoard.addEventListener("click",()=>{
             // 수정 버튼에 onclick 이벤트 속성 추가
             updateBtn.setAttribute(
               "onclick",
-              "showUpdateComment(" + question.questionNo + ", this)"
+              "showUpdateComment(" + comment.commentNo + ", this)"
             );
 
             // 삭제 버튼
@@ -193,7 +94,7 @@ qnaBoard.addEventListener("click",()=>{
             // 삭제 버튼에 onclick 이벤트 속성 추가
             deleteBtn.setAttribute(
               "onclick",
-              "deleteComment(" + question.questionNo + ")"
+              "deleteComment(" + comment.commentNo + ")"
             );
 
             // 버튼 영역 마지막 자식으로 수정/삭제 버튼 추가
@@ -207,26 +108,19 @@ qnaBoard.addEventListener("click",()=>{
         // 댓글 목록(ul)에 행(li)추가
         commentList.append(commentRow);
       }
-
-      // 답변 작성 부분
-      const commentWriteArea=document.createElement("div");
-      commentWriteArea.classList.add("comment-write-area");
-
-      const commentContent=document.createElement("textarea");
-      commentContent.id="commentContent"
-      
-      const addComment=document.createElement("button");
-      addComment.id="addComment";
-
-      commentWriteArea.append(commentContent,addComment);
     },
     error: function (req, status, error) {
       console.log("에러 발생");
       console.log(req.responseText);
     },
   });
+}
 
-});
+//-------------------------------------------------------------------------------------------------
+
+// 댓글 등록
+const addComment = document.getElementById("addComment");
+const commentContent = document.getElementById("commentContent");
 
 function addComment(questionNo){
   // 1) 로그인이 되어있나? -> 전역변수 memberNo 이용
@@ -248,7 +142,7 @@ function addComment(questionNo){
 
   // 3) AJAX를 이용해서 댓글 내용 DB에 저장(INSERT)
   $.ajax({
-    url: "/question/insert",
+    url: "/comment/insert",
     data: {
       questionTitle: questionTitle.value,
       questionContent: questionContent.value,
@@ -278,6 +172,8 @@ function addComment(questionNo){
   });
 }
 
+
+// -----------------------------------------------------------------------------------
 // 댓글 삭제
 function deleteComment(commentNo) {
   if (confirm("정말로 삭제 하시겠습니까?")) {
@@ -314,6 +210,7 @@ function deleteComment(commentNo) {
   }
 }
 
+// ------------------------------------------------------------------------------------------
 // 댓글 수정 화면 전환
 
 let beforeCommentRow; // 수정 전 원래 행의 상태를 저장할 변수
@@ -400,6 +297,7 @@ function showUpdateComment(commentNo, btn) {
   commentRow.append(commentBtnArea);
 }
 
+// -----------------------------------------------------------------------------------
 // 댓글 수정 취소
 function updateCancel(btn) {
   // 매개변수 btn : 클릭된 취소 버튼
@@ -410,13 +308,14 @@ function updateCancel(btn) {
   }
 }
 
+// -----------------------------------------------------------------------------------
 // 댓글 수정(AJAX)
 function updateComment(commentNo, btn) {
   // 새로 작성된 댓글 내용 얻어오기
   const commentContent = btn.parentElement.previousElementSibling.value;
 
   $.ajax({
-    url: "/question/update",
+    url: "/comment/update",
     data: { commentNo: commentNo, commentContent: commentContent },
     type: "POST",
     success: function (result) {
@@ -433,6 +332,9 @@ function updateComment(commentNo, btn) {
     },
   });
 }
+
+// -------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------
 
 // 답글 작성 화면 추가
 // -> 답글 작성 화면은 전체 화면에 1개만 존재 해야한다!
@@ -518,13 +420,13 @@ function insertChildComment(parentNo, btn) {
   // "{K:V, K:V, K:V}" -> JSON
 
   $.ajax({
-    url: "/question/insert",
+    url: "/comment/insert",
 
     data: {
       memberNo: memberNo,
-      contentid: contentid,
+      boardNo: boardNo,
       parentNo: parentNo,
-      questionContent: questionContent,
+      commentContent: commentContent,
     },
 
     type: "POST",
@@ -542,4 +444,3 @@ function insertChildComment(parentNo, btn) {
     },
   });
 }
-

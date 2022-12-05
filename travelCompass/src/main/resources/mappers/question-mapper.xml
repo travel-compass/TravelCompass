@@ -2,5 +2,81 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 <mapper namespace="questionMapper">
-
+	<resultMap type="Question" id="question_rm">
+		<id property="questionNo" column="QUESTION_NO"/>
+		<result property="questionTitle" column="QUESTION_TITLE"/>
+		<result property="questionContent" column="QUESTION_CONTENT"/>
+		<result property="questionDate" column="QUESTION_DATE"/>
+		<result property="questionDelFlag" column="QUESTION_DEL_FL"/>
+		<result property="contentid" column="CONTENT_ID"/>
+		<result property="memberNo" column="MEMBER_NO"/>
+		<result property="parentNo" column="PARENT_NO"/>
+		<result property="memberNickName" column="MEMBER_NICKNAME"/>
+		<result property="profileImage" column="PROFILE_IMAGE"/>
+		<result property="blindFlag" column="BLIND_FL"/>
+	</resultMap>
+	
+	<!-- 작성된 QnA 개수 조회 -->
+	<select id="getListCount" resultType="_int">
+		SELECT COUNT(*) FROM QUESTION
+		WHERE CONTENT_ID=#{contentid}
+		AND QUESTION_DEL_FL='N'
+	</select>
+	
+	<!-- QnA 조회 -->
+	<select id="selectQuestionList" resultType="Question">
+		SELECT QUESTION_NO, QUESTION_TITLE, QUESTION_CONTENT,
+		 <![CDATA[
+			CASE
+				WHEN SYSDATE - QUESTION_DATE < 1/24/60
+				THEN FLOOR( (SYSDATE - QUESTION_DATE) * 24 * 60 * 60 ) || '초 전'
+				WHEN SYSDATE - QUESTION_DATE < 1/24
+				THEN FLOOR( (SYSDATE - QUESTION_DATE) * 24 * 60) || '분 전'
+				WHEN SYSDATE - QUESTION_DATE < 1
+				THEN FLOOR( (SYSDATE - QUESTION_DATE) * 24) || '시간 전'
+				ELSE TO_CHAR(QUESTION_DATE, 'YYYY-MM-DD')
+			END QUESTION_DATE,
+			]]> 
+			PROFILE_IMAGE, MEMBER_NICKNAME
+			FROM QUESTION
+			LEFT JOIN "MEMBER" USING (MEMBER_NO)
+			WHERE QUESTION_DEL_FL='N'
+			AND CONTENT_ID=#{contentid}
+			ORDER BY QUESTION_DATE
+	</select>
+	
+	<!-- QnA 등록 -->
+	<insert id="insertQuestion">
+		INSERT INTO "QUESTION" VALUES(
+		SEQ_COMMENT_NO.NEXTVAL, #{questionTitle}, #{questionContent}, 
+		DEFAULT, DEFAULT, #{contentid}, #{memberNo}, DEFAULT,
+		
+		<!-- 일반 댓글 -->
+		<if test='parentNo==0'>
+			NULL
+		</if>
+		
+		<!-- 답글 -->
+		<if test='parentNo!=0'>
+			${parentNo}
+		</if>
+		)
+	</insert>
+	
+	<!-- QnA 삭제 -->
+	<update id="deleteQuestion">
+		UDDATE "QUESTION" SET
+		QUESTION_DEL_FL='Y'
+		OR PAPRENT_NO=#{questionNo}
+	</update>
+	
+	<!-- QnA 수정 -->
+	<update id="updateQuestion">
+		UPDATE "QUESTION" SET
+		QUESTION_TITLE=#{questionTitle}
+		AND QUESTION_CONTENT=#{questionContent}
+	</update>
+	
+	
+	
 </mapper>
