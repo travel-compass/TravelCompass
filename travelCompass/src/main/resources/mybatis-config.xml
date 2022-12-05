@@ -31,6 +31,7 @@
 		<mapper resource="/mappers/review-mapper.xml"/>
 		<mapper resource="/mappers/profile-mapper.xml"/>
 		<mapper resource="/mappers/travel-mapper.xml"/>
+		<mapper resource="/mappers/management-mapper.xml"/>
 		<!-- resource : src/main/resources -->
 	</mappers>
 </configuration>

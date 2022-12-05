@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="managementMapper">
+	<!-- Review resultMap -->
+	<resultMap type="Review" id="review_rm">
+		<id property="reviewNo" column="REVIEW_NO"/>
+		<result property="rating" column="RATING"/>
+		<result property="reviewTitle" column="REVIEW_TITLE"/>
+		<result property="reviewContent" column="REVIEW_CONTENT"/>
+		<result property="reviewDate" column="REVIEW_DATE"/>
+		<result property="memberNo" column="MEMBER_NO"/>
+		<result property="contentId" column="CONTENT_ID"/>
+		<result property="firstImage" column="FIRST_IMAGE"/>
+		<result property="reviewImagePath" column="REVIEW_IMAGE_PATH"/>
+		<result property="profileImage" column="PROFILE_IMAGE"/>
+		<result property="memberNickname" column="MEMBER_NICKNAME"/>
+		
+		 
+		<collection property="reviewImgList" javaType="java.util.ArrayList"
+		ofType="ReviewImage" select="selectReviewImageList" column="REVIEW_NO"/>
+	</resultMap>
+	
+	<!--reviewImage resultMap-->
+	<resultMap type="ReviewImage" id="reviewImage_rm">
+		<id property="reviewImageNo" column="REVIEW_IMAGE_NO"/>
+		<result property="reivewNo" column="REVIEW_NO"/>
+		<result property="reviewImagePath" column="REVIEW_IMAGE_PATH"/>
+		<result property="reviewImageOrder" column="REVIEW_IMAGE_ORDER"/>
+		<result property="reviewImageReName" column="REVIEW_IMAGE_RENAME"/>
+		<result property="reviewImageOriginal" column="REVIEW_IMAGE_ORIGINAL"/>
+	</resultMap>
+	
+	<!-- member resultMap -->
+	<resultMap type="Member" id="member_rm">
+		<id property="memberNo" column="MEMBER_NO"/>
+		<result property="memberEmail" column="MEMBER_EMAIL"/>
+		<result property="memberPw" column="MEMBER_PW"/>
+		<result property="memberNickname" column="MEMBER_NICKNAME"/>
+		<result property="memberName" column="MEMBER_NAME"/>
+		<result property="memberRRN" column="MEMBER_RRN"/>
+		<result property="memberTel" column="MEMBER_TEL"/>
+		<result property="memberAddress" column="MEMBER_ADDRESS"/>
+		<result property="enrollDate" column="ENROLL_DATE"/>
+		<result property="profileImage" column="PROFILE_IMAGE"/>
+		<result property="authority" column="AUTHORITY"/>
+		<result property="totalPosting" column="TOTAL_POSTING"/>
+		<result property="totalFollower" column="TOTAL_FOLLOWER"/>
+		<result property="totalFollowing" column="TOTAL_FOLLOWING"/>
+	</resultMap>
+	
+	<select id="selectAllReview" resultType="map">
+		SELECT * FROM REVIEW
+	</select>
+	
+	<select id="selectAllMember" resultType="map">
+		SELECT * FROM MEMBER
+	</select>
+	
+	
+	
+	
+	
+</mapper>
