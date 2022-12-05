@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 
-hr{
+hr {
   margin: 15px 0;
   height: 5px;
   background-color: #34E0A1;
@@ -115,7 +115,7 @@ main {
   cursor: pointer;
 }
 
-.review-container{
+.review-container {
   display: inline;
 }
 
@@ -152,11 +152,11 @@ main {
 
 /* 주변 장소 아이템 */
 
-.around-item{
+.around-item {
   border-bottom: 2px solid #ccc;
 }
 
-.aCategory{
+.aCategory {
   background-color: rgb(60, 60, 60);
   color: white;
   border-radius: 20px;
@@ -199,11 +199,11 @@ main {
   font-size: 13px;
 }
 
-.search-result-item-address a{
+.search-result-item-address a {
   font-size: 13px;
 }
 
-.search-result-item-review a{
+.search-result-item-review a {
   font-size: 13px;
 }
 
@@ -221,7 +221,7 @@ main {
   padding: 8px 8px 8px 12px;
 }
 
-.search-result-item-img img{
+.search-result-item-img img {
   border-radius: 5px;
 }
 
@@ -259,7 +259,7 @@ main {
   z-index: 2;
   overflow: hidden;
   color: #34E0A1;
-  width: 40px;
+  width: 80px;
 }
 
 

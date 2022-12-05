@@ -44,6 +44,10 @@ public class PlaceController {
 			@SessionAttribute(value="loginMember",required=false) Member loginMember,
 			Model model) throws Exception {
 		
+		paramMap.put("contentid", contentId);
+		paramMap.put("contenttypeid", contentTypeId);
+		
+		
 		// title,overview
 		Place mainPlace=service.detailPlace(contentId,contentTypeId);
 		
@@ -57,8 +61,14 @@ public class PlaceController {
 		Map<String, List<Place>> aroundPlaceList=lservice.detailAroundSearch(mainPlace.getMapy(), mainPlace.getMapx(), contentTypeId);
 		
 		// reviewList
-		Map<String, Object> reviewMap=rservice.selectReviewList(contentId, cp);
-
+		Map<String, Object> reviewMap=rservice.selectReviewList(contentId, paramMap, cp);
+		
+		// 평균 평점 가져오기
+		double avgRating=rservice.selectAvgRating(contentId);
+		// 작성된 리뷰 개수 가져오기
+		int reviewCount=rservice.selectReviewCount(contentId);
+		
+		
 		if(mainPlace!=null) {
 			// PLACE_SCRAP 테이블 확인
 			if(loginMember!=null) {
@@ -80,16 +90,17 @@ public class PlaceController {
 		mainPlace.setTreatmenu(infoPlace.getTreatmenu());
 		mainPlace.setInfocenter(infoPlace.getInfocenter());
 		mainPlace.setUsefee(infoPlace.getUsefee());
-
+		mainPlace.setAverageRating(avgRating);
+		mainPlace.setReviewCount(reviewCount);
 		
 		model.addAttribute("place", mainPlace);
 		model.addAttribute("aroundPlaceList",aroundPlaceList);
 		model.addAttribute("reviewMap", reviewMap);
 		
 		
-		System.out.println(reviewMap);
 		System.out.println(mainPlace);
-		System.out.println(aroundPlaceList);
+		System.out.println("주변장소리스트"+aroundPlaceList);
+		System.out.println("리뷰맵"+reviewMap);
 		
 		return "place/detailPlace"; 
 	}

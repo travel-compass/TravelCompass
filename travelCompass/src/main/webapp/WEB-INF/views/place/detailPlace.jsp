@@ -35,6 +35,7 @@
     const addr1="${place.addr1}";
     const contenttypeid="${place.contenttypeid}";
     const title="${place.title}"
+    const avgRating="${place.averageRating}"
     
   </script>
   <!-- header:include -->
@@ -86,7 +87,7 @@
         <div class="review-container">
           <div class="rating">
             <span class="empty">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
-            <span class="fill" style="width:${92*(place.averageRating*20)/100}px;">
+            <span class="fill" style="width:${80*(place.averageRating*20)/100}px;">
             &#9679;&#9679;&#9679;&#9679;&#9679;</span>
           </div>
             <span class="review-count">${place.reviewCount} 건의 리뷰</span>
@@ -356,9 +357,9 @@
     </nav>
 
     <%-- 리뷰 섹션 --%>
-    <%-- <div id=reviewBoard>
+    
       <jsp:include page="/WEB-INF/views/place/review.jsp"></jsp:include>
-    </div> --%>
+
     <%-- QnA 섹션 --%>
     <%-- <jsp:include page="/WEB-INF/views/place/QnA.jsp"></jsp:include> --%>
   
@@ -373,7 +374,6 @@
   <script src="/resources/js/common/jQuery-core.js"></script>
   <script src="/resources/js/place/detailPlace.js"></script>
   <script src="/resources/js/place/review.js"></script>
-  <%-- <script src="/resources/js/place/QnA.js"></script> --%>
 	<script src="/resources/js/place/swiper.js"></script>
 </body>
 

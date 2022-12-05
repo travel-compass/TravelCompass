@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -50,56 +51,57 @@ public class ReviewController {
 	
 	@GetMapping("/reviewList")
 	public Map<String, Object> selectReviewList(String contentid,
+			Map<String, Object> paramMap,
 			@RequestParam(value="cp",required=false, defaultValue="1") int cp) {
-		Map<String, Object> reviewMap=service.selectReviewList(contentid, cp);
+		
+		Map<String, Object> reviewMap=service.selectReviewList(contentid,paramMap, cp);
 		
 		return reviewMap;
 	}
 	
-	@PostMapping("/insertReview")
-	public int insertReview(Review review,
-			HttpServletRequest req, HttpServletResponse resp) throws Exception {
+	@PostMapping("/review/insert")
+	public int insertReview(Review review) {
 		
-		String contentid=req.getParameter("contentid");
-		
-		Cookie[] cookies=req.getCookies();
-		Cookie cookie=null;
-		
-		// reviewContentid 쿠키가 있는지 확인 후 세팅
-		for(Cookie c:cookies) {
-			if(c.getName().equals("reviewContentid")) {
-				cookie=c;
-				break;
-			}
-		}
-		
-		// contentid기 쿠키value에 있는지 확인
-		if(cookie!=null) {
-			if(cookie.getValue().indexOf("|"+contentid+"|")==-1) {
-				cookie.setValue(cookie.getValue()+"|"+contentid+"|");
-			}
-		} else { // 없으면 새로운 쿠키 생성하여 contentid 저장
-			cookie=new Cookie("reviewContentid", "|"+contentid+"|");
-		}
-		
-		cookie.setPath("/");
-		
-		// 오늘 23시 59분 59초 까지 남은 시간을 초단위로 구하기
-		
-		Date a = new Date();
-		Calendar cal = Calendar.getInstance();
-		
-		cal.add(cal.DATE, 1);
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Date temp = new Date(cal.getTimeInMillis());
-		
-		Date b = sdf.parse(sdf.format(temp));
-		
-		long diff = b.getTime() - a.getTime();
-		
-		cookie.setMaxAge((int)diff/1000);
-		
-		resp.addCookie(cookie);
+//		String contentid=req.getParameter("contentid");
+//		
+//		Cookie[] cookies=req.getCookies();
+//		Cookie cookie=null;
+//		
+//		// reviewContentid 쿠키가 있는지 확인 후 세팅
+//		for(Cookie c:cookies) {
+//			if(c.getName().equals("reviewContentid")) {
+//				cookie=c;
+//				break;
+//			}
+//		}
+//		
+//		// contentid기 쿠키value에 있는지 확인
+//		if(cookie!=null) {
+//			if(cookie.getValue().indexOf("|"+contentid+"|")==-1) {
+//				cookie.setValue(cookie.getValue()+"|"+contentid+"|");
+//			}
+//		} else { // 없으면 새로운 쿠키 생성하여 contentid 저장
+//			cookie=new Cookie("reviewContentid", "|"+contentid+"|");
+//		}
+//		
+//		cookie.setPath("/");
+//		
+//		// 오늘 23시 59분 59초 까지 남은 시간을 초단위로 구하기
+//		
+//		Date a = new Date();
+//		Calendar cal = Calendar.getInstance();
+//		
+//		cal.add(cal.DATE, 1);
+//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//		Date temp = new Date(cal.getTimeInMillis());
+//		
+//		Date b = sdf.parse(sdf.format(temp));
+//		
+//		long diff = b.getTime() - a.getTime();
+//		
+//		cookie.setMaxAge((int)diff/1000);
+//		
+//		resp.addCookie(cookie);
 		
 		return service.insertReview(review);
 	}

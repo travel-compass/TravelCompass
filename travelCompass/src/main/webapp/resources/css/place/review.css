@@ -150,6 +150,7 @@
     padding-top: 16px;
     display: flex;
     width: 90%;
+    align-items: center;
 }
 
 .user-page-review-dot-style {
@@ -165,7 +166,7 @@
 .review-bottom-menu-style div,
 .review-navi-left div,
 .review-navi-right i {
-    cursor: pointer;
+    /* cursor: pointer; */
 }
 
 .user-page-review-header-layout img {
@@ -198,10 +199,10 @@
 .review-user-nickname a:hover,
 .review-user-dday:hover,
 .user-container-PFF a:hover,
-.review-data-table-style:hover .review-title,
+.review-data-table-style:hover,
 .review-support:hover,
 .review-bottom-menu-style div:hover {
-    text-decoration: underline;
+    /* text-decoration: underline; */
 }
 
 .review-user-dday {
@@ -210,7 +211,7 @@
 
 .review-data-table-style {
     padding: 0 24px;
-    cursor: pointer;
+    /* cursor: pointer; */
 }
 
 .review-point {
@@ -425,6 +426,12 @@
     padding: 10px 20px;
     display: flex;
     justify-content: space-between;
+}
+
+.pageNumber {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 
 .page-select button {

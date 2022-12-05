@@ -12,14 +12,14 @@ public interface ReviewService {
 	 * @param cp
 	 * @return
 	 */
-	Map<String, Object> orderReviewList(Map<String, Object> paramMap, int cp);
+	Map<String, Object> orderReviewList(String contentid, Map<String, Object> paramMap, int cp);
 
 	/** 처음 리뷰목록 조회
 	 * @param contentId
 	 * @param cp
 	 * @return
 	 */
-	Map<String, Object> selectReviewList(String contentId, int cp);
+	Map<String, Object> selectReviewList(String contentid, Map<String, Object> paramMap, int cp);
 
 	int insertReview(Review review);
 
@@ -28,5 +28,17 @@ public interface ReviewService {
 	 * @return
 	 */
 	int deleteReview(int reviewNo);
+
+	/** 평균 리뷰평점 조회
+	 * @param contentId
+	 * @return avgRating
+	 */
+	double selectAvgRating(String contentId);
+
+	/** 작성된 리뷰 개수 조회
+	 * @param contentId
+	 * @return reviewCount
+	 */
+	int selectReviewCount(String contentId);
 	
 }

@@ -34,8 +34,8 @@ public class ReviewDAO {
 	 * @param paramMap
 	 * @return
 	 */
-	public int getListCount(Map<String, Object> paramMap) {
-		return sqlSession.selectOne("reviewMapper.getListCount_order", paramMap);
+	public int getListCount2(String contentid) {
+		return sqlSession.selectOne("reviewMapper.getListCount_order", contentid);
 	}
 
 	/**
@@ -65,13 +65,13 @@ public class ReviewDAO {
 	 * @param contentId
 	 * @return reviewList
 	 */
-	public List<Review> selectReviewList(Pagination pagination, String contentId) {
+	public List<Review> selectReviewList(Pagination pagination, Map<String, Object> paramMap) {
 		
 		int offset = (pagination.getPageNo() - 1) * pagination.getNumOfRows();
 
 		RowBounds rowBounds = new RowBounds(offset, pagination.getNumOfRows());
 
-		return sqlSession.selectList("reviewMapper.selectReviewList", contentId, rowBounds);
+		return sqlSession.selectList("reviewMapper.selectReviewList", paramMap, rowBounds);
 
 	}
 
@@ -86,6 +86,22 @@ public class ReviewDAO {
 	 */
 	public int deleteReview(int reviewNo) {
 		return sqlSession.delete("reviewMapper.deleteReview", reviewNo);
+	}
+
+	/** 평균 리뷰 평점 조회
+	 * @param contentId
+	 * @return avgRating
+	 */
+	public double selectAvgRating(String contentId) {
+		return sqlSession.selectOne("reviewMapper.selectAvgRating", contentId);
+	}
+
+	/** 작성된 리뷰 개수 조회
+	 * @param contentId
+	 * @return reviewCount
+	 */
+	public int selectReviewCount(String contentId) {
+		return sqlSession.selectOne("reviewMapper.selectReviewCount", contentId);
 	}
 
 }

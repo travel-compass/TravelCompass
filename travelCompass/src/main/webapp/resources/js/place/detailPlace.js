@@ -85,12 +85,11 @@ marker.setMap(map);
 // 지도에 교통정보를 표시하도록 지도타입을 추가합니다
 // map.addOverlayMapTypeId(kakao.maps.MapTypeId.TRAFFIC);
 
-
 /* ----------------------------------------------------------------- */
 const qnaBoard = document.querySelector('label[for="qnaBoard"]');
-const reviewBoard=document.getElementById("reviewBoard");
+const reviewBoard = document.getElementById("reviewBoard");
 
-qnaBoard.addEventListener("click",()=>{
+qnaBoard.addEventListener("click", () => {
   $.ajax({
     url: "/question/selectQnaList",
     data: { contentid: contentid },
@@ -101,11 +100,11 @@ qnaBoard.addEventListener("click",()=>{
 
       /* reviewBoard.innerHTML=" "; */
 
-      const commentListArea=document.createElement("div");
+      const commentListArea = document.createElement("div");
       commentListArea.classList.add("comment-list-area");
 
-      const commentulList=document.createElement("ul");
-      commentulList.id="comment-list";
+      const commentulList = document.createElement("ul");
+      commentulList.id = "comment-list";
       commentListArea.append(commentulList);
 
       // 화면에 출력되어 있는 댓글 목록 삭제
@@ -209,26 +208,25 @@ qnaBoard.addEventListener("click",()=>{
       }
 
       // 답변 작성 부분
-      const commentWriteArea=document.createElement("div");
+      const commentWriteArea = document.createElement("div");
       commentWriteArea.classList.add("comment-write-area");
 
-      const commentContent=document.createElement("textarea");
-      commentContent.id="commentContent"
-      
-      const addComment=document.createElement("button");
-      addComment.id="addComment";
+      const commentContent = document.createElement("textarea");
+      commentContent.id = "commentContent";
 
-      commentWriteArea.append(commentContent,addComment);
+      const addComment = document.createElement("button");
+      addComment.id = "addComment";
+
+      commentWriteArea.append(commentContent, addComment);
     },
     error: function (req, status, error) {
       console.log("에러 발생");
       console.log(req.responseText);
     },
   });
-
 });
 
-function addComment(questionNo){
+function addComment(questionNo) {
   // 1) 로그인이 되어있나? -> 전역변수 memberNo 이용
   if (memberNo == "") {
     // 로그인 X
@@ -542,4 +540,3 @@ function insertChildComment(parentNo, btn) {
     },
   });
 }
-

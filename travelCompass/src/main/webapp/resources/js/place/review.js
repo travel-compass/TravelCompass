@@ -1,21 +1,12 @@
-/* ----------------------------- 리뷰 ----------------------------------- */
-
-// 리뷰 목록 조회(AJAX)
-function selectReview() {
-  $.ajax({
-    url: "selectReview",
-    data: {
-      contentid: contentid,
-    },
-  });
-}
-
 /* 리뷰 작성 등록 */
 const addReview = document.getElementById("addReview");
 const reviewTitle = document.getElementById("reviewTitle");
 const reviewContent = document.getElementById("reviewContent");
 
+const submitReview = document.getElementById("reviewform");
+
 addReview.addEventListener("click", () => {
+  console.log("비동기 리뷰 작성");
   // 로그인 확인
   if (memberNo == "") {
     // 로그인X
@@ -41,16 +32,17 @@ addReview.addEventListener("click", () => {
     return;
   }
 
+  console.log("비동기 리뷰 작성");
   // 비동기화 리뷰 작성(등록)
   $.ajax({
-    url: "/insertReview",
+    url: "/review/insert",
     data: {
-      rating: document.querySelector('input[name="gender"]:checked').value,
+      rating: document.querySelector('input[name="rating"]:checked').value,
       reviewTitle: reviewTitle.value,
       reviewContent: reviewContent.value,
       memberNo: memberNo,
       contentid: contentid,
-      firstimage: firstimage,
+      contenttypeid: contenttypeid,
     },
     type: "post",
     success: (result) => {
@@ -73,293 +65,125 @@ addReview.addEventListener("click", () => {
   });
 });
 
-/* ====================================================================================== */
+// 프로필 페이지의 피드 버튼 눌렀을 때 사진 유무의 리뷰들 불러오는 비동기
 
-const reviewListContainer = document.getElementById("reviewContainer");
-            reviewListContainer.innerHTML = "";
+function selectReviewList(e) {
+  $.ajax({
+    url: "/profile/" + memberNo + "/Fed",
+    type: "GET",
+    dataType: "JSON",
+    success: (reviewList) => {
+      const ulreviewList = document.getElementById("review-list");
+      ulreviewList.innerHTML = "";
 
-            if (reviewList.length == 0){
+      for (let list of reviewList) {
+        const reviewTextColum = document.createElement("li");
+        reviewTextColum.classList.add("user-page-review-colums2");
 
-                const reviewNoneContainner = document.createElement("div");
-                reviewNoneContainner.classList.add("user-page-review-none-content");
-    
-                const reviewNoneContentTitle = document.createElement("div");
-                reviewNoneContentTitle.classList.add("none-content-title");
-                reviewNoneContentTitle.innerText = "프로필 작성";
-    
-                const reviewNoneContent = document.createElement("div");
-                reviewNoneContent.classList.add("none-content");
-                reviewNoneContent.innerText = "사람들이 회원님을 쉽게 찾고 더 알아갈 수 있도록 하려면 사진과 정보를 프로필에 추가하세요!";
-    
-                const reviewCreateButton = document.createElement("div");
-                reviewCreateButton.classList.add("none-content-review-create");
-                reviewCreateButton.innerHTML = "<a href='리뷰작성페이지'><i class='fa-solid fa-pen-to-square'></i>리뷰 작성하러 가기</a>";
-                
-                reviewListContainer.append(reviewTextColum);
+        const reviewTextHeaderStyle = document.createElement("div");
+        reviewTextHeaderStyle.classList.add("user-page-review-header-style");
 
-                reviewTextColum.append(reviewNoneContainner);
+        const reviewTextHeaderLayout = document.createElement("div");
+        reviewTextHeaderLayout.classList.add("user-page-review-header-layout");
 
-                reviewNoneContainner.append(reviewNoneContentTitle, reviewNoneContent, reviewCreateButton);
-                
-            } else {
+        const reviewTextUserImage = document.createElement("a");
+        reviewTextUserImage.classList.add("review-user-image");
 
-                for(let list of reviewList){
+        reviewTextUserImage.innerHTML = '<img src="' + list.profileImage + '">';
 
-                    // 슬라이드 번호 초기화 작업
-                    for(let i = 0; i < prev.length; i++) {
-                        showSlides(0, prev[i]);
-                    }
+        const reviewTextInfoLayout = document.createElement("div");
+        reviewTextInfoLayout.classList.add("review-user-info-layout");
 
-    
-    
-                    const reviewTextColum = document.createElement("div");
-                    reviewTextColum.classList.add("user-page-review-colums2");
+        const reviewInfoNickname = document.createElement("span");
+        reviewInfoNickname.classList.add("review-user-nickname");
 
-                        const reviewTextHeaderStyle = document.createElement("div");
-                        reviewTextHeaderStyle.classList.add("user-page-review-header-style");
-                    
-                            const reviewTextHeaderLayout = document.createElement("div");
-                            reviewTextHeaderLayout.classList.add("user-page-review-header-layout");
-                    
-                                const reviewTextUserImage = document.createElement("a");
-                                reviewTextUserImage.classList.add("review-user-image");
-                    
-                                reviewTextUserImage.innerHTML = "<img src=\""+ list.profileImage +"\">";
-                    
-                                const reviewTextInfoLayout = document.createElement("div");
-                                reviewTextInfoLayout.classList.add("review-user-info-layout");
-                    
-                                    const reviewInfoNickname = document.createElement("span");
-                                    reviewInfoNickname.classList.add("review-user-nickname");
-                    
-                                    reviewInfoNickname.innerHTML = "<a href='#'>"+ list.memberNickname +"</a>님이 리뷰를 작성했습니다."
-                    
-                                        const reviewInfoDateLink = document.createElement("a");
-                                        reviewInfoDateLink.classList.add("review-user-dday");
-                    
-                                        reviewInfoDateLink.innerText = list.reviewDate;
-                                        
-                            const reviewTextDotStyle = document.createElement("div");
-                            reviewTextDotStyle.classList.add("user-page-review-dot-style");
-                            reviewTextDotStyle.innerHTML= "<i class='fa-solid fa-ellipsis' ></i>";
-                    
-                            const reivewTextDotDownMenu = document.createElement("div");
-                            reivewTextDotDownMenu.classList.add("user-page-review-dot-down-menu");
-                    
-                                const reivewTextDownMenu = document.createElement("ul");
-                                reivewTextDownMenu.classList.add("down-menu");
-                    
-                                    const reivewTextDownMenu_li1 = document.createElement("li");
-                                    reivewTextDownMenu_li1.innerHTML = "<li><a href='아직 미정'>수정</a></li>";
-                                    
-                                    const reivewTextDownMenu_li2 = document.createElement("li");
-                                    reivewTextDownMenu_li2.innerHTML = "<li><a href='아직 미정'>삭제</a></li>";
-                                        
-                        const reviewTextDataTableStyle = document.createElement("div");
-                        reviewTextDataTableStyle.classList.add("review-data-table-style");
-                    
-                                const reviewTextPoint = document.createElement("div");
-                                reviewTextPoint.classList.add("review-point");
-                    
-                                    const reviewText_span1 = document.createElement("span");
-                                    reviewText_span1.innerHTML = "<i class='fa-solid fa-circle'></i>";
-                    
-                                    const reviewText_span2 = document.createElement("span");
-                                    reviewText_span2.innerHTML = "<i class='fa-solid fa-circle'></i>";
-                                    
-                                    const reviewText_span3 = document.createElement("span");
-                                    reviewText_span3.innerHTML = "<i class='fa-solid fa-circle'></i>";
-                                    
-                                    const reviewText_span4 = document.createElement("span");
-                                    reviewText_span4.innerHTML = "<i class='fa-solid fa-circle'></i>";
-                                    
-                                    const reviewText_span5 = document.createElement("span");
-                                    reviewText_span5.innerHTML = "<i class='fa-solid fa-circle'></i>";
+        reviewInfoNickname.innerHTML =
+          "<a href='#'>" + list.memberNickname + "</a>";
 
-                                const reviewTextTitle = document.createElement("div");
-                                reviewTextTitle.classList.add("review-title");
-                    
-                                reviewTextTitle.innerText = list.reviewTitle;
-                    
-                                const reviewTextContent = document.createElement("div");
-                                reviewTextContent.classList.add("review-content");
-                    
-                                reviewTextContent.innerText = '\"' + list.reviewContent + '\"';
-                    
-                                const reviewTextDate = document.createElement("div");
-                                reviewTextDate.classList.add("review-date");
-                                reviewTextDate.innerHTML = "<span class='rdt'>방문 날짜 :</span>" + list.reviewDate;
-                    
-                        const reviewTextNaviStyle = document.createElement("div");
-                        reviewTextNaviStyle.classList.add("review-navi-style");
-                    
-                                const reviewTextNaviLayout = document.createElement("div");
-                                reviewTextNaviLayout.classList.add("review-navi-layout");
-                    
-                                    const reviewTextNaviImage = document.createElement("a");
-                                    reviewTextNaviImage.classList.add("review-navi-left");
-                                    reviewTextNaviImage.innerHTML = "<div><img src='/resources/images/profile/venis.webp'></div>";
-                                    
-                                        const reviewTextNaviTitle = document.createElement("div");
-                                        reviewTextNaviTitle.classList.add("review-navi-title");
-                                        reviewTextNaviTitle.innerHTML = "<div>위치정보 제목</div>";
-                    
-                                            const reviewTextNaviDeep = document.createElement("div");
-                                            reviewTextNaviDeep.classList.add("review-navi-deep");
-                    
-                                                const reviewTextNaviDeepPoint = document.createElement("div");
-                                                reviewTextNaviDeepPoint.classList.add("review-navi-deep-point");
-                    
-                                                    const reviewTextNavi_span1 = document.createElement("span");
-                                                    reviewTextNavi_span1.innerHTML = "<i class='fa-solid fa-circle'></i>";
-                                    
-                                                    const reviewTextNavi_span2 = document.createElement("span");
-                                                    reviewTextNavi_span2.innerHTML = "<i class='fa-solid fa-circle'></i>";
-                                                    
-                                                    const reviewTextNavi_span3 = document.createElement("span");
-                                                    reviewTextNavi_span3.innerHTML = "<i class='fa-solid fa-circle'></i>";
-                                                    
-                                                    const reviewTextNavi_span4 = document.createElement("span");
-                                                    reviewTextNavi_span4.innerHTML = "<i class='fa-solid fa-circle'></i>";
-                                                    
-                                                    const reviewTextNavi_span5 = document.createElement("span");
-                                                    reviewTextNavi_span5.innerHTML = "<i class='fa-solid fa-circle'></i>";
-                    
-                                                const reviewTextNaviCount = document.createElement("div");
-                                                reviewTextNaviCount.innerText = "00건의 리뷰";
-                                            
-                                            const reviewTextNavi = document.createElement("div");
-                                            reviewTextNavi.innerText = "배니스, 이탈리아";
-                    
-                                    const reviewTextNaviLike = document.createElement("div");
-                                    reviewTextNaviLike.classList.add("review-navi-right");
-                                    reviewTextNaviLike.innerHTML = "<i class='fa-solid fa-heart'></i>";
-                    
-                        const reviewTextSupport = document.createElement("div");
-                        reviewTextSupport.classList.add("review-support");
-                
-                        const reviewTextBottomMenu = document.createElement("div");
-                        reviewTextBottomMenu.classList.add("review-bottom-menu-style");
-                    
-                                const reviewTextSuportButton = document.createElement("div");
-                                reviewTextSuportButton.classList.add("suport-button");
-                                reviewTextSuportButton.innerHTML = "<i class='fa-regular fa-thumbs-up'></i>도움이 됨";
-                    
-                                const  reviewTextSaveButton = document.createElement("div");
-                                reviewTextSaveButton.classList.add("save-button");
-                                reviewTextSaveButton.innerHTML= "<i class='fa-solid fa-heart'></i>저장";
-                    
-                                const reviewTextShareButton = document.createElement("div");
-                                reviewTextShareButton.classList.add("share-button");
-                                reviewTextShareButton.innerHTML = "<i class='fa-solid fa-arrow-up-from-bracket'></i>공유";
+        const reviewInfoDateLink = document.createElement("a");
+        reviewInfoDateLink.classList.add("review-user-dday");
 
-                                // 최종 부모인 <ul class="review-list" id="reviewContainer"></ul> 에 append
-                                reviewListContainer.append(reviewTextColum);
+        reviewInfoDateLink.innerText = list.reviewDate;
 
-                                // 슬라이드 if문 위치 여기 예상합니다.
+        const reviewTextDotStyle = document.createElement("button");
+        reviewTextDotStyle.classList.add("user-page-review-dot-style");
+        reviewTextDotStyle.innerHTML = "<i class='fa-solid fa-ellipsis' ></i>";
 
-                                // 슬라이드 검사해서 추가
+        const reviewTextDotDownMenu = document.createElement("div");
+        reviewTextDotDownMenu.classList.add("user-page-review-dot-down-menu");
 
-                                // 슬라이드 조립 시작
-                                if (list.reviewImgList.length != 0){
+        const reviewTextDownMenu = document.createElement("ul");
+        reviewTextDownMenu.classList.add("down-menu");
 
-                                    const reviewImageSlideContainer = document.createElement("div");
-                                    reviewImageSlideContainer.classList.add("slide-container-style");
-                                    
-                                    for(let i = 0 ; i <  list.reviewImgList.length; i++){
+        const reviewTextDownMenu_li1 = document.createElement("li");
+        reviewTextDownMenu_li1.innerHTML = "<li><a href='#'>수정</a></li>";
 
-                                            const reviewImageSlide = document.createElement("div");
-                                            reviewImageSlide.classList.add("slide", "fade");
+        const reviewTextDownMenu_li2 = document.createElement("li");
+        reviewTextDownMenu_li2.innerHTML = "<li><a href='#'>삭제</a></li>";
 
-                                            const reviewImageSlideNumber = document.createElement("div");
-                                            reviewImageSlideNumber.classList.add("numbertext");
-                                            reviewImageSlideNumber.innerHTML = (i + 1) + "/" + list.reviewImgList.length;
-                                        
-                                            const reviewImageSlidePath = document.createElement("img");
-                                            reviewImageSlidePath.setAttribute("src", list.reviewImgList[i].reviewImgPath + list.reviewImgList[i].reviewImgOriginal);
-                                        
-                                            
-                                            reviewImageSlideContainer.append(reviewImageSlide);
-                                            
-                                            reviewImageSlide.append(reviewImageSlideNumber, reviewImageSlidePath);
-                                        }
-                                        
-                                            
-                                    const reviewImageSlidePrevButton = document.createElement("a");
-                                    reviewImageSlidePrevButton.classList.add("prev");
-                                    reviewImageSlidePrevButton.setAttribute("onclick", "plusSlides(-1, this)");
-                                    reviewImageSlidePrevButton.innerHTML = "&#10094;";
-                                    
-                                    const reviewImageSlideNextButton = document.createElement("a");
-                                    reviewImageSlideNextButton.classList.add("next");
-                                    reviewImageSlideNextButton.setAttribute("onclick", "plusSlides(1, this)");
-                                    reviewImageSlideNextButton.innerHTML = "&#10095;";
+        // 드랍 다운 메뉴 이벤트 삽입
+        reviewTextDotStyle.addEventListener("click", () => {
+          reviewTextDotStyle.nextElementSibling.style.display = "block";
+        });
+        reviewTextDotStyle.addEventListener("blur", () => {
+          reviewTextDotStyle.nextElementSibling.style.display = "none";
+        });
 
-                                    reviewImageSlideContainer.append(reviewImageSlidePrevButton, reviewImageSlideNextButton);
-                                    // 슬라이드 조립 끝
+        const reviewTextDataTableStyle = document.createElement("div");
+        reviewTextDataTableStyle.classList.add("review-data-table-style");
 
-                                    // 사진이 있을 땐 사이에 슬라이드 디브 테이블 append
-                                    reviewTextColum.append(reviewTextHeaderStyle, reviewImageSlideContainer, reviewTextDataTableStyle, reviewTextNaviStyle,
-                                        reviewTextSupport, reviewTextBottomMenu);
+        const reviewTextPoint = document.createElement("div");
+        reviewTextPoint.classList.add("review-point");
 
-                                } else {
-                                    // 사진이 없을 땐 밑에께 바로 실행
-                                    // A 리뷰 시작 태그인 reviewTextColum append
-                                    reviewTextColum.append(reviewTextHeaderStyle, reviewTextDataTableStyle, reviewTextNaviStyle,
-                                        reviewTextSupport, reviewTextBottomMenu);
+        const reviewText_span1 = document.createElement("span");
+        reviewText_span1.innerHTML = "<i class='fa-solid fa-circle'></i>";
 
-                                }
-                                    // A-0 (A 리뷰 시작의 0번 인덱스 위치에 있는 태그 )의 append
-                                    reviewTextHeaderStyle.append(reviewTextHeaderLayout, reviewTextDotStyle,
-                                        reivewTextDotDownMenu);
-                                        
-                                        // A-0-0 (A 리뷰 0번 위치의 0번 위치에 있는 태그)
-                                        reviewTextHeaderLayout.append(reviewTextUserImage, reviewTextInfoLayout);
+        const reviewText_span2 = document.createElement("span");
+        reviewText_span2.innerHTML = "<i class='fa-solid fa-circle'></i>";
 
-                                            // A-0-0-1 (A 리뷰 0번 위치의 0번 위치의 1번 위치에 있는 태그)
-                                            reviewTextInfoLayout.append(reviewInfoNickname, reviewInfoDateLink);
-                                            
-                                        // A-0-2 (A 리뷰 0번 위치의 2번 위치에 있는 태그)
-                                        reivewTextDotDownMenu.append(reivewTextDownMenu);
+        const reviewText_span3 = document.createElement("span");
+        reviewText_span3.innerHTML = "<i class='fa-solid fa-circle'></i>";
 
-                                            // A-0-2-0
-                                            reivewTextDownMenu.append(reivewTextDownMenu_li1, reivewTextDownMenu_li2);
-                                        
-                                        // A-0 번 완성
-                                        
-                                    // A-1 (A 리뷰 시작의 1번 인덱스 위치에 있는 태그 )의 append
-                                    reviewTextDataTableStyle.append(reviewTextPoint, reviewTextTitle, reviewTextContent,
-                                        reviewTextDate);
+        const reviewText_span4 = document.createElement("span");
+        reviewText_span4.innerHTML = "<i class='fa-solid fa-circle'></i>";
 
-                                        // A-1-0 (A 리뷰 1번 위치의 0번 위치에 있는 태그)
-                                        reviewTextPoint.append(reviewText_span1, reviewText_span2, reviewText_span3,
-                                            reviewText_span4, reviewText_span5);
+        const reviewText_span5 = document.createElement("span");
+        reviewText_span5.innerHTML = "<i class='fa-solid fa-circle'></i>";
 
-                                        // A-1 번 완성
+        const reviewTextTitle = document.createElement("div");
+        reviewTextTitle.classList.add("review-title");
 
-                                    // A-2 (A 리뷰 시작의 2번 인덱스 위치에 있는 태그 )의 append
-                                    reviewTextNaviStyle.append(reviewTextNaviLayout);
+        reviewTextTitle.innerText = list.reviewTitle;
 
-                                        // A-2-0 
-                                        reviewTextNaviLayout.append(reviewTextNaviImage, reviewTextNaviLike);
+        const reviewTextContent = document.createElement("div");
+        reviewTextContent.classList.add("review-content");
 
-                                            // A-2-0-0
-                                            reviewTextNaviImage.append(reviewTextNaviTitle);
+        reviewTextContent.innerText = '"' + list.reviewContent + '"';
 
-                                                // A-2-0-0-0
-                                                reviewTextNaviTitle.append(reviewTextNaviDeep, reviewTextNavi);
-                                                
-                                                    // A-2-0-0-0-0
-                                                    reviewTextNaviDeep.append(reviewTextNaviDeepPoint, reviewTextNaviCount);
+        const reviewTextSupport = document.createElement("div");
+        reviewTextSupport.classList.add("review-support");
 
-                                                    // A-2-0-0-0-0-0
-                                                    reviewTextNaviDeepPoint.append(reviewTextNavi_span1, reviewTextNavi_span2,
-                                                        reviewTextNavi_span3, reviewTextNavi_span4, reviewTextNavi_span5)
+        const reviewTextBottomMenu = document.createElement("div");
+        reviewTextBottomMenu.classList.add("review-bottom-menu-style");
 
-                                                    // A-2 번 완성
+        const reviewTextSuportButton = document.createElement("div");
+        reviewTextSuportButton.classList.add("suport-button");
+        reviewTextSuportButton.innerHTML =
+          "<i class='fa-regular fa-thumbs-up'></i>도움이 됨";
 
-                                    // A-3 (A 리뷰 시작의 3번 인덱스 위치에 있는 태그 ) append 없음 이벤트 있음
-                                    
-                                    // A-4 (A 리뷰 시작의 4번 인덱스 위치에 있는 태그 )의 append
-                                    reviewTextBottomMenu.append(reviewTextSuportButton, reviewTextSaveButton,
-                                        reviewTextShareButton);
+        const reviewTextSaveButton = document.createElement("div");
+        reviewTextSaveButton.classList.add("save-button");
+        reviewTextSaveButton.innerHTML =
+          "<i class='fa-solid fa-heart'></i>저장";
+
+        const reviewTextShareButton = document.createElement("div");
+        reviewTextShareButton.classList.add("share-button");
+        reviewTextShareButton.innerHTML =
+          "<i class='fa-solid fa-arrow-up-from-bracket'></i>공유";
+      }
+    },
+    error: () => {
+      console.log("리뷰 리스트 불러오기 실패");
+    },
+  });
+}
