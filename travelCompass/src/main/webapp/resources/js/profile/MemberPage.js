@@ -1049,170 +1049,328 @@ ImageReview.addEventListener("click", (e) => {
 
 });
 
-// 모달 팝업창 열닫
-// 모달 버튼
+// 모달 팝업창 열닫 기능
+
+// 팔로워 숫자 모달 버튼
 const followButton = document.getElementById("follow-button-list");
 
 // 모달 레이아웃
-const followContent = document.getElementById("modalContent");
 const followModal = document.getElementById("follow-modal");
 
 const followModalCancel = document.querySelector(".modal-bc");
 
-// 팔로워 수가 0 이상일 때 작동
-if (followButton.innerText > 0) {
 
-    // 클릭 시 팝업 창 오픈
-    followButton.addEventListener("click", () => {
+// 팔로워 숫자 클릭 시 팝업 창 오픈
+followButton.addEventListener("click", () => {
+    
+        // 팔로워 수가 0 이상일 때 작동
+    if (followButton.innerText > 0) {
+        
         followModal.style.display = "block";
 
-        $.ajax({
-            url : "/profile/" + memberNo + "/follow", 
-            type : "GET",
-            dataType : "JSON",
-            success : (followMemberList) => {
+    } else {
+        return;
+    }
 
-                // 팔로우 테이블 비우기
-                const followTable = document.getElementById("follow-table");
-                followTable.innerHTML = "";
+    $.ajax({
+        url : "/profile/" + memberNo + "/follow", 
+        type : "GET",
+        dataType : "JSON",
+        success : (followMemberList) => {
 
-                console.log(followMemberList);
-                
-                if (followMemberList.length == 0){
-                    return;
-                }
+            // 팔로우 테이블 비우기
+            const followTable = document.getElementById("follow-table");
+            followTable.innerHTML = "";
 
-                for(let list of followMemberList) {
-                    
-                    const followTableLi = document.createElement("li");
-
-                    const followMemberLink = document.createElement("a");
-                    followMemberLink.setAttribute("href", "/profile/" + list.memberNo);
-
-
-                    const followTableImage = document.createElement("div");
-                    followTableImage.classList.add("follow-user-image");
-                    followTableImage.innerHTML = "<img src=" + list.profileImage + ">";
-
-                    const followTableUserInfo = document.createElement("div");
-                    followTableUserInfo.classList.add("follow-user-info");
-
-                    const followUserButton = document.createElement("button");
-                    followUserButton.classList.add("follow-user-button", "followOff");
-                    followUserButton.innerHTML = "<i class='fa-solid fa-user-plus'></i>";
-    
-                    // 팔로우 하기 버튼
-                    followUserButton.addEventListener("click", function () {
-
-                        if (loginMemberNo == list.memberNo) {
-                            alert("본인한테는 팔로우 할 수 없습니다.");
-                            return;
-                            
-                        }
-
-                        if(loginMemberNo == ""){
-                            alert("로그인 후 이용해주세요.");
-                            return;
-                        }
-                    
-                        const followCount = document.getElementsByClassName("PFFCount")[1].lastElementChild;
-
-                    
-                        if(followUserButton.classList.contains("followOff")){
-                    
-                            $.ajax({
-                                url : "/follow",
-                                data : {"loginMemberNo" : loginMemberNo, "reviewPageMemberNo" : list.memberNo},
-                                type : "GET",
-                                success : (result) => {
-                    
-                                    // 팔로우 insert 성공 시
-                                    if (result > 0){
-                                        followUserButton.classList.remove("followOff");
-                                        
-                                        followUserButton.classList.add("followOn");
-                    
-                                        followCount.innerText = Number(followCount.innerText) + 1;
-                    
-                                        followCountArray();
-                    
-                                    } else{
-                                        console.log("증가 실패");
-                                    }
-                                },
-                                error : () => {
-                                    console.log("증가 에러");
-                                }
-                            })
-                        } else {
-                    
-                            $.ajax({
-                                url : "/unFollow",
-                                data : {"loginMemberNo" :loginMemberNo, "reviewPageMemberNo" : list.memberNo},
-                                type : "GET",
-                                success : (result) => {
-                    
-                                    if (result > 0) {
-                    
-                                        followUserButton.classList.remove("followOn");
-                                        
-                                        followUserButton.classList.add("followOff");
-                    
-                                        followCount.innerText = Number(followCount.innerText) - 1;
-                    
-                                        followCountArray();
-                    
-                                    } else{
-                                        console.log("감소 실패");
-                                    }
-                                },
-                                error : () =>{
-                                    console.log("감소 에러");
-                                }
-                            });
-                        }
-                        
-
-                    })
-
-                    followMemberLink.append(followTableImage, followTableUserInfo);
-
-                    followTableLi.append(followMemberLink, followUserButton);
-
-                    const followUserNickname = document.createElement("div");
-                    followUserNickname.classList.add("follow-user-nickname");
-                    followUserNickname.innerText = list.memberNickname;
-
-                    const followUserEmail = document.createElement("div");
-                    followUserEmail.classList.add("follow-user-email");
-                    followUserEmail.innerText = list.memberEmail;
-
-                    const followUserAddress = document.createElement("div");
-                    followUserAddress.classList.add("follow-user-address");
-                    followUserAddress.innerText = list.memberAddress;
-
-                    const followUserEA = document.createElement("div");
-                    followUserEA.classList.add("follow-user-ea");
-                    followUserEA.innerText = list.totalPosting + "포스팅 " + list.totalFollower + "팔로워";
-
-                    followTableUserInfo.append(followUserNickname, followUserEmail, followUserAddress, followUserEA);
-
-                    // 리스트 테이블에 리스트 하나씩 추가
-                    followTable.append(followTableLi);
-                }
-
-            },
-            error : () => {
-                alert("팔로워 리스트 출력 에러")
+            console.log(followMemberList);
+            
+            if (followMemberList.length == 0){
+                return;
             }
+
+            for(let list of followMemberList) {
+                
+                const followTableLi = document.createElement("li");
+
+                const followMemberLink = document.createElement("a");
+                followMemberLink.setAttribute("href", "/profile/" + list.memberNo);
+
+
+                const followTableImage = document.createElement("div");
+                followTableImage.classList.add("follow-user-image");
+                followTableImage.innerHTML = "<img src=" + list.profileImage + ">";
+
+                const followTableUserInfo = document.createElement("div");
+                followTableUserInfo.classList.add("follow-user-info");
+
+                const followUserButton = document.createElement("button");
+                followUserButton.classList.add("follow-user-button", "followOff");
+                followUserButton.innerHTML = "<i class='fa-solid fa-user-plus'></i>";
+
+                // 팔로우 하기 버튼
+                followUserButton.addEventListener("click", function () {
+
+                    if (loginMemberNo == list.memberNo) {
+                        alert("본인한테는 팔로우 할 수 없습니다.");
+                        return;
+                        
+                    }
+
+                    if(loginMemberNo == ""){
+                        alert("로그인 후 이용해주세요.");
+                        return;
+                    }
+                
+                    if(followUserButton.classList.contains("followOff")){
+                
+                        $.ajax({
+                            url : "/follow",
+                            data : {"loginMemberNo" : loginMemberNo, "reviewPageMemberNo" : list.memberNo},
+                            type : "GET",
+                            success : (result) => {
+                
+                                // 팔로우 insert 성공 시
+                                if (result > 0){
+                                    followUserButton.classList.remove("followOff");
+                                    
+                                    followUserButton.classList.add("followOn");
+                
+                                    followCountArray();
+                
+                                } else{
+                                    console.log("증가 실패");
+                                }
+                            },
+                            error : () => {
+                                console.log("증가 에러");
+                            }
+                        })
+                    } else {
+                
+                        $.ajax({
+                            url : "/unFollow",
+                            data : {"loginMemberNo" :loginMemberNo, "reviewPageMemberNo" : list.memberNo},
+                            type : "GET",
+                            success : (result) => {
+                
+                                if (result > 0) {
+                
+                                    followUserButton.classList.remove("followOn");
+                                    
+                                    followUserButton.classList.add("followOff");
+                
+                                    followCountArray();
+                
+                                } else{
+                                    console.log("감소 실패");
+                                }
+                            },
+                            error : () =>{
+                                console.log("감소 에러");
+                            }
+                        });
+                    }
+                    
+                })
+
+                followMemberLink.append(followTableImage, followTableUserInfo);
+
+                followTableLi.append(followMemberLink, followUserButton);
+
+                const followUserNickname = document.createElement("div");
+                followUserNickname.classList.add("follow-user-nickname");
+                followUserNickname.innerText = list.memberNickname;
+
+                const followUserEmail = document.createElement("div");
+                followUserEmail.classList.add("follow-user-email");
+                followUserEmail.innerText = list.memberEmail;
+
+                const followUserAddress = document.createElement("div");
+                followUserAddress.classList.add("follow-user-address");
+                followUserAddress.innerText = list.memberAddress;
+
+                const followUserEA = document.createElement("div");
+                followUserEA.classList.add("follow-user-ea");
+                followUserEA.innerText = list.totalPosting + "포스팅 " + list.totalFollower + "팔로워";
+
+                followTableUserInfo.append(followUserNickname, followUserEmail, followUserAddress, followUserEA);
+
+                // 리스트 테이블에 리스트 하나씩 추가
+                followTable.append(followTableLi);
+            }
+
+        },
+        error : () => {
+            alert("팔로워 리스트 출력 에러")
+        }
     });
+});
+
+const followingButton = document.getElementById("following-button-list");
+
+// 팔로잉 숫자 클릭 시 팝업 창 오픈
+followingButton.addEventListener("click", () => {
     
-    // 팝업 밖 선택 시 팝업 창 닫기
-    window.addEventListener('click', (e) => {
-        e.target === followModalCancel ? followModal.style.display = 'none' : false;
+        // 팔로워 수가 0 이상일 때 작동
+    if (followingButton.innerText > 0) {
+        
+        followModal.style.display = "block";
+
+    } else {
+        return;
+    }
+
+    
+    $.ajax({
+        url : "/profile/" + memberNo + "/following", 
+        type : "GET",
+        dataType : "JSON",
+        success : (followingMemberList) => {
+
+            // 팔로우 테이블 비우기
+            const followTable = document.getElementById("follow-table");
+            followTable.innerHTML = "";
+
+            console.log(followingMemberList);
+            
+            if (followingMemberList.length == 0){
+                return;
+            }
+
+            const modalTitle = document.getElementById("modal-title");
+            modalTitle.innerText = "팔로잉 " + followingMemberList.length + "명";
+
+
+            for(let list of followingMemberList) {
+                
+                const followTableLi = document.createElement("li");
+
+                const followMemberLink = document.createElement("a");
+                followMemberLink.setAttribute("href", "/profile/" + list.memberNo);
+
+
+                const followTableImage = document.createElement("div");
+                followTableImage.classList.add("follow-user-image");
+                followTableImage.innerHTML = "<img src=" + list.profileImage + ">";
+
+                const followTableUserInfo = document.createElement("div");
+                followTableUserInfo.classList.add("follow-user-info");
+
+                const followUserButton = document.createElement("button");
+                followUserButton.classList.add("follow-user-button", "followOn");
+                followUserButton.innerHTML = "<i class='fa-solid fa-user-plus'></i>";
+
+                // 팔로우 하기 버튼
+                followUserButton.addEventListener("click", function () {
+
+                    const followingCount = document.getElementsByClassName("PFFCount")[2].lastElementChild;
+
+                    if (loginMemberNo == list.memberNo) {
+                        alert("본인한테는 팔로우 할 수 없습니다.");
+                        return;
+                        
+                    }
+
+                    if(loginMemberNo == ""){
+                        alert("로그인 후 이용해주세요.");
+                        return;
+                    }
+                
+                    if(followUserButton.classList.contains("followOff")){
+                
+                        $.ajax({
+                            url : "/follow",
+                            data : {"loginMemberNo" : loginMemberNo, "reviewPageMemberNo" : list.memberNo},
+                            type : "GET",
+                            success : (result) => {
+                
+                                // 팔로우 insert 성공 시
+                                if (result > 0){
+                                    followUserButton.classList.remove("followOff");
+                                    
+                                    followUserButton.classList.add("followOn");
+                
+                                    followCountArray();
+                
+                                } else{
+                                    console.log("증가 실패");
+                                }
+                            },
+                            error : () => {
+                                console.log("증가 에러");
+                            }
+                        })
+                    } else {
+                
+                        $.ajax({
+                            url : "/unFollow",
+                            data : {"loginMemberNo" :loginMemberNo, "reviewPageMemberNo" : list.memberNo},
+                            type : "GET",
+                            success : (result) => {
+                
+                                if (result > 0) {
+                
+                                    followUserButton.classList.remove("followOn");
+                                    
+                                    followUserButton.classList.add("followOff");
+                
+                                    followUserButton.parentElement.remove();
+
+                                    followingCount.innerText = Number(followingCount.innerText) - 1;
+
+                                    modalTitle.innerText = "팔로잉 " + (followingMemberList.length - 1) + "명";
+                                    
+                                    followCountArray();
+                
+                                } else{
+                                    console.log("감소 실패");
+                                }
+                            },
+                            error : () =>{
+                                console.log("감소 에러");
+                            }
+                        });
+                    }
+                    
+                })
+
+                followMemberLink.append(followTableImage, followTableUserInfo);
+
+                followTableLi.append(followMemberLink, followUserButton);
+
+                const followUserNickname = document.createElement("div");
+                followUserNickname.classList.add("follow-user-nickname");
+                followUserNickname.innerText = list.memberNickname;
+
+                const followUserEmail = document.createElement("div");
+                followUserEmail.classList.add("follow-user-email");
+                followUserEmail.innerText = list.memberEmail;
+
+                const followUserAddress = document.createElement("div");
+                followUserAddress.classList.add("follow-user-address");
+                followUserAddress.innerText = list.memberAddress;
+
+                const followUserEA = document.createElement("div");
+                followUserEA.classList.add("follow-user-ea");
+                followUserEA.innerText = list.totalPosting + "포스팅 " + list.totalFollower + "팔로워";
+
+                followTableUserInfo.append(followUserNickname, followUserEmail, followUserAddress, followUserEA);
+
+                // 리스트 테이블에 리스트 하나씩 추가
+                followTable.append(followTableLi);
+            }
+
+        },
+        error : () => {
+            alert("팔로워 리스트 출력 에러")
+        }
     });
-    });
-}
+});
+
+// 팝업 밖 선택 시 팝업 창 닫기
+window.addEventListener('click', (e) => {
+    e.target === followModalCancel ? followModal.style.display = 'none' : false;
+});
 
 // 포스팅, 팔로워, 팔로잉 수가 0일 때 비활성화 하는 작업
 const PFF = document.getElementById("PFFColor");
@@ -1236,43 +1394,19 @@ const followCountArray = function (){
         if(items.lastElementChild.innerText == 0){
     
             items.lastElementChild.style.color = "#757575";
+            items.classList.remove("PFFMouseEvent");
             
         } else{
             
             items.lastElementChild.style.color = "black";
+            items.classList.add("PFFMouseEvent");
             
         }
     }
 }
 
+// 팔로우 하기 전 버튼 속성 검색하여 할당하기
 followCountArray();
-
-/* 
-for(let items of PFF.children){
-
-    if(items.classList.contains("PFFCount")){
-
-        // 배열에 해당 자식 요소를 추가
-        PFFArray.push(items);
-    }
-
-}
-
-for(let items of PFFArray){
-
-    if(items.lastElementChild.innerText == 0){
-
-        items.lastElementChild.style.color = "#757575";
-
-    } else{
-
-        items.lastElementChild.style.color = "black";
-
-    }
-}
- */
-// document.getElementsByClassName("PFFCount")[1].lastElementChild.innerText
-
 
 // 팔로우 하기
 const clickFollow = document.getElementById("clickFollow");

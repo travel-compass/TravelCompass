@@ -110,6 +110,7 @@ public class ProfileController {
 		return service.unFollow(paramMap);
 	}
 	
+	// 팔로워 리스트 조회하기
 	@GetMapping("/profile/{memberNo}/follow")
 	@ResponseBody
 	public List<Member> selectFollowMemberList(Model model,
@@ -120,6 +121,19 @@ public class ProfileController {
 		model.addAttribute("followMemberList", followMemberList);
 		
 		return followMemberList;
+	}
+	
+	// 팔로잉 리스트 조회하기
+	@GetMapping("/profile/{memberNo}/following")
+	@ResponseBody
+	public List<Member> selectFollowingMemberList(Model model,
+			@PathVariable("memberNo") int memberNo) {
+		
+		List<Member> followingMemberList = service.selectFollowingMemberList(memberNo);
+		
+		model.addAttribute("followingMemberList", followingMemberList);
+		
+		return followingMemberList;
 	}
 	
 }

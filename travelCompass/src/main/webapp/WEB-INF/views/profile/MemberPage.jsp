@@ -74,7 +74,7 @@
                                 <div class="following PFFCount">
                                     팔로잉
                                     <br>
-                                    <button>${member.totalFollowing}</button>
+                                    <button id="following-button-list">${member.totalFollowing}</button>
                                 </div>
                             </div>
                         </div>
@@ -107,7 +107,7 @@
                 <div id="follow-modal" class="modal-layout">
                     <div class="modal-bc"></div>
                     <div class="modal-content" id="modalContent">
-                        <div class="modal-content-title">팔로워 ${member.totalFollower}명</div>
+                        <div class="modal-content-title" id="modal-title">팔로워 ${member.totalFollower}명</div>
                         <ul class="follow-user-table" id="follow-table">
                             <li>
                                 <a href="">
