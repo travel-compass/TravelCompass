@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="reportMapper">
+	<!-- Review resultMap + Report 추가 -->
+	<resultMap type="Review" id="review_rm">
+		<id property="reviewNo" column="REVIEW_NO"/>
+		<result property="rating" column="RATING"/>
+		<result property="reviewTitle" column="REVIEW_TITLE"/>
+		<result property="reviewContent" column="REVIEW_CONTENT"/>
+		<result property="reviewDate" column="REVIEW_DATE"/>
+		<result property="memberNo" column="MEMBER_NO"/>
+		<result property="contentId" column="CONTENT_ID"/>
+		<result property="firstImage" column="FIRST_IMAGE"/>
+		<result property="reviewImagePath" column="REVIEW_IMAGE_PATH"/>
+		<result property="profileImage" column="PROFILE_IMAGE"/>
+		<result property="memberNickname" column="MEMBER_NICKNAME"/>
+		
+		<result property="reportNo" column="REPORT_NO"/>
+		<result property="reasonCode" column="REASON_CODE"/>
+
+	</resultMap>
+	
+
+	
+	<select id="selectAllReport" resultMap="review_rm">
+		SELECT REPORT_NO, REASON_CODE, REVIEW_NO, REVIEW_CONTENT,  
+					(COUNT(*)) REPORT_COUNT, MEMBER_NO
+		FROM REPORT
+		JOIN "REVIEW" USING(REVIEW_NO)
+	</select>
+	
+	
+	
+	
+	
+	
+</mapper>

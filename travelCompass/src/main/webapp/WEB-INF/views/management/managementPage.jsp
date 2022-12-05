@@ -24,11 +24,11 @@
                 <ul class="management-list">
                     <li>
                         <input type="radio" name="managementType" value="1" id="managementType1" checked >
-                        <label for="managementType1"><a class="managementType1">신고 리뷰 조회</a></label>
+                        <label for="managementType1"><a class="managementType1">신고 조회</a></label>
                     </li>
                     <li>
                         <input type="radio" name="managementType" value="2" id="managementType2" >
-                        <label for="managementType2"><a class="managementType2">블라인드 리뷰 리스트</a></label>
+                        <label for="managementType2"><a class="managementType2">블라인드 리스트</a></label>
                     </li>
                     <li>
                         <input type="radio" name="managementType" value="3" id="managementType3" >
@@ -38,25 +38,23 @@
             </div>
 
             <div class="right-side">
-                <ul>
-                    <li >
-                        <div class="management-detail">
-
-                            <div class="member-no">
-                                회원번호
-                            </div>
-                            
-                            <div class="review-content">
-                                대충 광고내용이 작성된 리뷰
-                            </div>
-                        </div>
-                    </li>  
-                </ul>
+                <div class="report-list">
+                    <c:forEach items="${report}" var="report">
+                    <div class="management-detail">
+                        <ul>
+                            <li>회원 번호 : ${report.memberNo}</li>
+                            <li>리뷰 내용 : </li>
+                            <li class="review-content">${report.reviewContent}</li>
+                        </ul>
+                    </div>
+                    </c:forEach>
+                </div>
             </div>
         </div>
 
     <jsp:include page="/WEB-INF/views/inc/footer.jsp" />
     </main>
     <script src="/resources/js/management/management.js"></script>
+    
 </body>
 </html>

@@ -1,6 +1,7 @@
 package kh.team.travelcompass.management.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,9 +18,13 @@ public class ManagementServiceImpl implements ManagementService {
 	ManagementDAO dao;
 
 	@Override
-	public Map<String, Object> selectAll() {
+	public List<Map<String, Object>> selectAll() {
 		
-		return dao.selectAll();
+		List<Map<String, Object>>reportList=dao.selectAll();
+		
+
+		
+		return reportList;
 	}
 	
 
