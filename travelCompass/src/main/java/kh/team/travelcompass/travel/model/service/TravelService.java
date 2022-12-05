@@ -55,4 +55,11 @@ public interface TravelService {
 	 * @return result
 	 */
 	public int updateTravel(Travel travel) throws Exception;
+
+
+	/** 여행 삭제
+	 * @param travelNo
+	 * @return result
+	 */
+	public int deleteTravel(int travelNo);
 }

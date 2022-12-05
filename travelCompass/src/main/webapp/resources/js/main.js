@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
 
     // 공통 
-    let offset = document.querySelector(".slide-container").clientWidth + 20;
+    let offset = 1220;
     // let placeListWidth = document.querySelector(".place-list").clientWidth;
     let placeItemWidth = 305;
 

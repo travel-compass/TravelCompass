@@ -88,9 +88,13 @@ button.cancel-btn {
     border: none;
     border-bottom: 2px solid #2DC48D;
     font-size: 20px;
+    height: auto;
 }
 .travel-content::placeholder {
     font-size: 17px;
+}
+.travel-content::-webkit-scrollbar {
+    display: none;
 }
 
 /* 드롭 다운 버튼*/
@@ -119,7 +123,7 @@ button.cancel-btn {
     display: none;
 }
 .drop-down_box li {
-    padding: 10px 10px;
+    padding : 10px;
 }
 .drop-down_box li:hover {
     background-color: #ddd;
@@ -151,6 +155,7 @@ button.cancel-btn {
 
 /* 공유 버튼 */
 #share {
+    cursor: pointer;
     margin: 30px 5px;
     width: 70px;
     height: 40px;
@@ -160,6 +165,12 @@ button.cancel-btn {
     font-size: 16px;
     justify-content: space-around;
     align-items: center;
+    border-radius: 15px;
+    transition: 0.1s;
+}
+#share:hover {
+    color: white;
+    background-color: #2DC48D;
 }
 .travel-list {
     display: flex;

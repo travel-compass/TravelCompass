@@ -87,4 +87,10 @@ public class TravelServiceImpl implements TravelService{
 		
 		return result;
 	}
+
+	// 여행 삭제
+	@Override
+	public int deleteTravel(int travelNo) {
+		return dao.deleteTravelList(travelNo);
+	}
 }

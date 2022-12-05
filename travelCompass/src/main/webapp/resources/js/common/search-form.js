@@ -159,25 +159,32 @@ document.addEventListener("DOMContentLoaded", ()=>{
     });
 });
 
-function RecentPlace(title, url, contentId, contentTypeId) {
+function RecentPlace(title, firstimage, contentid, contenttypeid, averageRating, reviewCount, addr1) {
     this.title = title;
-    this.url = url;
-    this.contentId = contentId;
-    this.contentTypeId = contentTypeId;
+    this.firstimage = firstimage;
+    this.contentid = contentid;
+    this.contenttypeid = contenttypeid;
+    this.averageRating = averageRating;
+    this.reviewCount = reviewCount;
+    this.addr1 = addr1;
 }
 
-function addRecentViewPlace(title, url, contentId, contentTypeId) {
+function addRecentViewPlace(title, firstimage, contentid, contenttypeid, averageRating, reviewCount, addr1) {
     let recentPlace = localStorage.getItem("recentPlace");
     let recentPlaceArr;
     if (recentPlace == null) {          // 최근 본 장소가 한개도 없다면
         recentPlaceArr = [];
     } else {                            // 있다면
         recentPlaceArr = JSON.parse(recentPlace);
-        if(recentPlaceArr.length >= 10) {
+        // contentId가 이미 있는지 확인
+        if(recentPlaceArr.find((p)=>p.contentid == contentid) != null) { // 없으면
+            return true; 
+        }
+        if(recentPlaceArr.length >= 10) { // 10개 이상이면
             recentPlaceArr.shift();
         }
     }
-    recentPlaceArr.push(new RecentPlace(title, url, contentId, contentTypeId));
+    recentPlaceArr.push(new RecentPlace(title, firstimage, contentid, contenttypeid, averageRating, reviewCount, addr1));
     localStorage.setItem("recentPlace", JSON.stringify(recentPlaceArr));
 
     return true;

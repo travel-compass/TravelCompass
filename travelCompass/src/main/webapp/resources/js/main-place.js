@@ -68,7 +68,7 @@
                 type: "GET",
                 success: result => {
                     console.log(result);
-                    createPlaceList(result);
+                    createPlaceList(result, "주변 관광지");
                 },
                 error: () =>{
                     console.log("error");
@@ -84,7 +84,7 @@
                 type: "GET",
                 success: result => {
                     console.log(result);
-                    createPlaceList(result);
+                    createPlaceList(result, "주변 음식점");
                 },
                 error: () =>{
                     console.log("error");
@@ -103,15 +103,22 @@
     }
 })();
 
-function createPlaceList(resultList) {
+// 최근에 본 장소 보여주기
+(()=>{ 
+    let recentPlaceArr;
+    recentPlaceArr = localStorage.getItem("recentPlace");
+
+    if(recentPlaceArr != null) {  // 최근에 본 장소가 있을때만
+        recentPlaceArr = JSON.parse(recentPlaceArr);
+        createPlaceList(recentPlaceArr, "최근에 본 장소");
+    }
+})();
+
+function createPlaceList(resultList, title) {
 
     const placeAreaTitle = document.createElement("span");
     placeAreaTitle.classList.add("place-area-title");
-    if(resultList[0].contenttypeid == '12') {
-        placeAreaTitle.innerText = "주변 관광지";
-    } else {
-        placeAreaTitle.innerText = "주변 음식점";
-    }
+    placeAreaTitle.innerText = title;
 
     const slideContainer = document.createElement("div");
     slideContainer.classList.add("slide-container");
@@ -133,13 +140,12 @@ function createPlaceList(resultList) {
     for(let place of resultList) {
         const placeItem = document.createElement("li");
         placeItem.classList.add("place-item");
-
         const a = document.createElement("a");
         a.setAttribute("href", `/place/detail/${place.contenttypeid}/${place.contentid}`);
-        a.setAttribute("onclick", `return addRecentViewPlace("${place.title}", "${place.firstimage}", "${place.contentid}", "${place.contenttypeid}")`)
+        a.setAttribute("onclick", `return addRecentViewPlace("${place.title}", "${place.firstimage}", "${place.contentid}", "${place.contenttypeid}", "${place.averageRating}", "${place.reviewCount}", "${place.addr1}")`);
 
         const img = document.createElement("img");
-        if(place.firstimage == '') {
+        if(place.firstimage == '' || place.firstimage == null) {
             img.src = `/resources/images/common/${place.contenttypeid}.png`;
         } else {
             img.src = place.firstimage;  // 해당 장소의 썸네일 이미지 경로
@@ -147,27 +153,60 @@ function createPlaceList(resultList) {
         const placeTitle = document.createElement("span");
         placeTitle.classList.add("place-title");
         placeTitle.innerText = place.title;
+
+        const reviewArea = document.createElement("div");
+        reviewArea.classList.add("review-area");
+
         const rating = document.createElement("div");
-        rating.classList.add("grade");
-        const span1 = document.createElement("span");
-        span1.innerText = "평점";
-        const span2 = document.createElement("span");
-        span2.innerText = "리뷰 갯수";
-        rating.append(span1, span2);
+        rating.classList.add("rating");
 
-        const distIcon = document.createElement("i");
-        distIcon.className = "fa-solid fa-location-dot dist-icon";
+        const empty = document.createElement("span");
+        empty.classList.add("empty");
+        empty.innerHTML = "&#9679;&#9679;&#9679;&#9679;&#9679;";
+        
+        const fill = document.createElement("span");
+        fill.classList.add("fill");
+        fill.innerHTML = "&#9679;&#9679;&#9679;&#9679;&#9679;";
+        fill.style.width = 92 * (place.averageRating * 20) / 100;
+        const reviewCount = document.createElement("span");
+        reviewCount.innerText = place.reviewCount;
 
-        const dist = parseInt(place.dist / 100) * 100 / 1000 + "km 떨어짐"
-        a.append(img, placeTitle, rating, distIcon, dist);
+        // const rating = document.createElement("div");
+        // rating.classList.add("grade");
+        // const span1 = document.createElement("span");
+        // span1.innerText = "평점";
+        // const span2 = document.createElement("span");
+        // span2.innerText = "리뷰 갯수";
+        rating.append(empty, fill);
+        reviewArea.append(rating, reviewCount);
+
+        // 주소
+        const addr = document.createElement("span");
+        addr.classList.add("place-addr");
+        addr.innerText = place.addr1;
+
+        // 거리
+        
+        if(place.dist != null) {
+            const distArea = document.createElement("span");
+            distArea.classList.add("dist-area");
+            
+            const distIcon = document.createElement("i");
+            distIcon.className = "fa-solid fa-location-dot dist-icon";
+            
+            const dist = parseInt(place.dist / 100) * 100 / 1000 + "km 떨어짐"
+            distArea.append(distIcon, dist);    
+        }
+        a.append(img, placeTitle, reviewArea, addr);
         placeItem.append(a);
         placeList.append(placeItem);
     }
 
     prevArrow.append(prevArrowIcon);
     nextArrow.append(nextArrowIcon);
-
-    slideContainer.append(prevArrow, nextArrow, placeList);
-
-    document.querySelector(".place-area").append(placeAreaTitle, slideContainer);
+    if(resultList.length > 4) {
+        slideContainer.append(prevArrow, nextArrow)
+    }
+    slideContainer.append(placeList);
+    document.getElementById("placeArea").append(placeAreaTitle, slideContainer);
 }

@@ -26,7 +26,7 @@
                         <ul class="drop-down_box">
                             <li id="updateTravel">변경사항 저장</li>
                             <li id="reloadTravel">변경사항 초기화</li>
-                            <li><a href="">여행 삭제</a></li>
+                            <li id="deleteTravel">여행 삭제</li>
                         </ul>
                     </button>
                 </div>
