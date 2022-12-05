@@ -69,7 +69,7 @@ addReview.addEventListener("click", () => {
 
 function selectReviewList(e) {
   $.ajax({
-    url: "/profile/" + memberNo + "/Fed",
+    url: "/review/insert",
     type: "GET",
     dataType: "JSON",
     success: (reviewList) => {

@@ -64,7 +64,8 @@ public class PlaceController {
 		Map<String, Object> reviewMap=rservice.selectReviewList(contentId, paramMap, cp);
 		
 		// 평균 평점 가져오기
-		double avgRating=rservice.selectAvgRating(contentId);
+//		double avgRating=rs ervice.selectAvgRating(contentId);
+		
 		// 작성된 리뷰 개수 가져오기
 		int reviewCount=rservice.selectReviewCount(contentId);
 		
@@ -90,7 +91,7 @@ public class PlaceController {
 		mainPlace.setTreatmenu(infoPlace.getTreatmenu());
 		mainPlace.setInfocenter(infoPlace.getInfocenter());
 		mainPlace.setUsefee(infoPlace.getUsefee());
-		mainPlace.setAverageRating(avgRating);
+//		mainPlace.setAverageRating(avgRating);
 		mainPlace.setReviewCount(reviewCount);
 		
 		model.addAttribute("place", mainPlace);

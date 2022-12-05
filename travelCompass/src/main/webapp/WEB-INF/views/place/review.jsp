@@ -104,17 +104,16 @@
                     <li><a href="#">삭제</a></li>
                   </ul>
                 </div>
+
               </div>
-              <div class="review-data-table-style">
-                <div class="review-point">
-                  <span><i class="fa-solid fa-circle"></i></span>
-                  <span><i class="fa-solid fa-circle"></i></span>
-                  <span><i class="fa-solid fa-circle"></i></span>
-                  <span><i class="fa-solid fa-circle"></i></span>
-                  <span><i class="fa-solid fa-circle"></i></span>
-                </div>
-                <div class="review-title">${review.reviewTitle}</div>
-                <div class="review-content">${review.reviewContent}</div>
+
+              <div class="review-area">
+                <div class="review-container">
+                  <div class="rating">
+                    <span class="empty">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                    <span class="fill" style="width:${80*(place.averageRating*20)/100}px;">
+                    &#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                  </div>
               </div>
               
               <div class="review-support"></div>
