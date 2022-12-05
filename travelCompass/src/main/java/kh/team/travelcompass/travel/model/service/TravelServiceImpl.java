@@ -68,20 +68,26 @@ public class TravelServiceImpl implements TravelService{
 			travel.setTravelContent(Util.newLineHandling(travel.getTravelContent()));			
 		}
 		int result = dao.updateTravel(travel);
-		
+		Map<String, Integer> paramMap = new HashMap<>();
 		
 		if(result > 0) {		// travel테이블 정보수정 성공 시
 			// 여행의 장소 리스트 업데이트
-			result = dao.updateTravelList(travel.getPlaceList());
-			
-			if(result > 0) {	// 이미지 수정 성공 시
-				// 수정된 장소 리스트의 최대 order보다 높은 order를 가진 장소 삭제
-				Map<String, Integer> paramMap = new HashMap<>();
+			if(travel.getPlaceList().isEmpty()) {
 				paramMap.put("travelNo", travel.getTravelNo());
-				paramMap.put("maxOrder", travel.getPlaceList().size());
+				paramMap.put("maxOrder", 0);
 				int delResult = dao.deleteTravelList(paramMap);
-			} else {			// 이미지 수정 실패 시 
-				throw new Exception();
+			} else {
+				result = dao.updateTravelList(travel.getPlaceList());
+				
+				if(result > 0) {	// 이미지 수정 성공 시
+					// 수정된 장소 리스트의 최대 order보다 높은 order를 가진 장소 삭제
+				
+					paramMap.put("travelNo", travel.getTravelNo());
+					paramMap.put("maxOrder", travel.getPlaceList().size());
+					int delResult = dao.deleteTravelList(paramMap);
+				} else {			// 이미지 수정 실패 시 
+					throw new Exception();
+				}				
 			}
 		}
 		
