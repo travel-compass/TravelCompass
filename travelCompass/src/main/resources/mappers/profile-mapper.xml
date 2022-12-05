@@ -62,4 +62,21 @@
 		ORDER BY REVIEW_IMAGE_ORDER
 	</select>
 	
+	<select id="followCheck" resultType="_int">
+		SELECT COUNT(*)
+		FROM FOLLOW
+		WHERE FOLLOW_MEMBER_NO = #{loginMemberNo}
+		AND MEMBER_NO = #{reviewPageMemberNo}
+	</select>
+	
+	<update id="Follow">
+		INSERT INTO FOLLOW
+		VALUES(#{loginMemberNo}, #{reviewPageMemberNo}, DEFAULT)
+	</update>
+	
+	<delete id="unFollow">
+		DELETE FROM FOLLOW
+		WHERE FOLLOW_MEMBER_NO = #{loginMemberNo}
+		AND MEMBER_NO = #{reviewPageMemberNo}
+	</delete>
 </mapper>

@@ -101,10 +101,19 @@ main {
     margin-right: 48px;
 }
 
-.user-container-PFF a{
+.user-container-PFF button{
     font-size: 22px;
+    border: none;
+    background: white;
+    font-weight: bold;
+    color: #757575;
 }
-
+/* 
+.user-container-PFF button:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+ */
 
 /* 다른 유저 프로필 버튼 */
 .user-info-right-part{
@@ -114,7 +123,21 @@ main {
 }
 
 .follow-button{
-    width: 60%;
+    width: 100%;
+}
+
+.follow-button i{
+    margin-right: 10px;
+}
+
+.followOff{
+    background-color: white;
+    color: black;
+}
+
+.followOn{
+    background-color: #009f5e;
+    color: #eee;
 }
 
 .comment-button, .vesides-button{
@@ -125,7 +148,6 @@ main {
     font-size: 14px;
     font-weight: bold;
     border: 1px solid #e2e2e2;
-    background-color: white;
     border-radius: 5px;
     cursor: pointer;
 }
@@ -441,6 +463,98 @@ main {
     padding: 0 20%;
 }
 
+/* 모달 팝업 */
+.modal-bc{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 1200;
+}
+
+.modal-content{
+    position: absolute;
+    top: 20%;
+    left: 32%;
+    /* transform: translate(-50%, 50%); */
+    width: 720px;
+    height: 560px;
+    background: white;
+    z-index: 1300;
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 35%);
+
+    overflow: auto;
+}
+.modal-content::-webkit-scrollbar {
+    display: none;
+}
+
+.modal-content-title{
+    background-color: #e2e2e2;
+    height: 50px;
+    padding-top: 13px;
+    padding-left: 20px;
+}
+
+.follow-user-table{
+    padding-top: 20px;
+    padding-left: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+.follow-user-table li{
+    display: flex;
+    margin-right: 5px;
+    margin-bottom: 20px;
+    width: 230px;
+}
+
+.follow-user-table a{
+    display: flex;
+}
+
+.follow-user-image img{
+    width: 60px;
+    margin-right: 5px;
+}
+
+.follow-user-info{
+    margin-right: 10px;
+    width: 100%;
+}
+
+.follow-user-nickname{
+    font-weight: bold;
+}
+
+.follow-user-email, .follow-user-address, .follow-user-ea{
+    font-size: 8px;
+}
+
+.follow-user-button{
+    /* background-color: white; */
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid black;
+    cursor: pointer;
+    /* color: #009f5e; */
+}
+
+.follow-user-button:hover{
+    background-color: #009f5e;
+    color: #eee;
+}
+
+.modal-layout{
+    display: none;
+}
+
+
 /* 미디어쿼리 화면 반응형 */
 @media (max-width: 1070px){
 
@@ -455,6 +569,12 @@ main {
     .user-page-review-dot-style{
         position: absolute;
         right: 10px;
+    }
+    
+    /* 모달 팝업창 화면 위치 */
+    .modal-content{
+        top: 18%;
+        left: 8%;
     }
 }
 
