@@ -87,6 +87,8 @@ for(let category of categoryList) {
                     //a를 만들고 img-div하위요소로 넣기
                     const searchResultItemImgDivA = document.createElement("a");
                     searchResultItemImgDivA.href = "/place/detail/"+ place.contenttypeid + "/" + place.contentid;
+                    // 최근에 본 장소 onclick 이벤트 세팅
+                    searchResultItemImgDivA.setAttribute("onclick", `return addRecentViewPlace("${place.title}", "${place.firstimage}", "${place.contentid}", "${place.contenttypeid}", "${place.averageRating}", "${place.reviewCount}", "${place.addr1}")`);
                     searchResultItemImgDiv.appendChild(searchResultItemImgDivA);
         
                     //img를 만들고 a하위요소로 넣기
@@ -125,6 +127,10 @@ for(let category of categoryList) {
                     //a만들고 span하위요소로 넣기
                     const searchResultItemTitleDivSpanA = document.createElement("a");
                     searchResultItemTitleDivSpanA.setAttribute("href","/place/detail/"+place.contenttypeid+"/"+place.contentid);
+
+                    // 최근에 본 장소 onclick 세팅
+                    searchResultItemTitleDivSpanA.setAttribute("onclick", `return addRecentViewPlace("${place.title}", "${place.firstimage}", "${place.contentid}", "${place.contenttypeid}", "${place.averageRating}", "${place.reviewCount}", "${place.addr1}")`);
+
                     searchResultItemTitleDivSpanA.innerText = place.title;
                     searchResultItemTitleDivSpan.appendChild(searchResultItemTitleDivSpanA);
         
@@ -160,6 +166,10 @@ for(let category of categoryList) {
                     const searchResultItemGradeDivSpanA = document.createElement("a");
                     searchResultItemGradeDivSpan.appendChild(searchResultItemGradeDivSpanA);
                     searchResultItemGradeDivSpanA.setAttribute("href","/place/detail/"+place.contenttypeid+"/"+place.contentid);
+
+                    // 최근에 본 장소 onclick 세팅
+                    searchResultItemGradeDivSpanA.setAttribute("onclick", `return addRecentViewPlace("${place.title}", "${place.firstimage}", "${place.contentid}", "${place.contenttypeid}", "${place.averageRating}", "${place.reviewCount}", "${place.addr1}")`);
+
                     searchResultItemGradeDivSpanA.innerText = "267건의 리뷰";
         
                     //div class="search-result-item-address"
@@ -175,6 +185,10 @@ for(let category of categoryList) {
                     //a만들고 span하위요소로 넣기
                     const searchResultItemAddressDivSpanA = document.createElement("a");
                     searchResultItemAddressDivSpanA.href = "/place/detail/"+place.contenttypeid+"/"+place.contentid;
+
+                    // 최근에 본 장소 onclick 세팅
+                    searchResultItemAddressDivSpanA.setAttribute("onclick", `return addRecentViewPlace("${place.title}", "${place.firstimage}", "${place.contentid}", "${place.contenttypeid}", "${place.averageRating}", "${place.reviewCount}", "${place.addr1}")`);
+
                     searchResultItemAddressDivSpanA.innerText = place.addr1;
                     searchResultItemAddressDivSpan.appendChild(searchResultItemAddressDivSpanA);
                 
@@ -187,6 +201,10 @@ for(let category of categoryList) {
                     const searchResultItemReviewDivA = document.createElement("a");
                     searchResultItemReviewDiv.appendChild(searchResultItemReviewDivA);
                     searchResultItemReviewDivA.href = "place/detail/"+place.contenttypeid+"/"+place.contentid;
+
+                    // 최근에 본 장소 onclick 세팅
+                    searchResultItemReviewDivA.setAttribute("onclick", `return addRecentViewPlace("${place.title}", "${place.firstimage}", "${place.contentid}", "${place.contenttypeid}", "${place.averageRating}", "${place.reviewCount}", "${place.addr1}")`);
+
                     searchResultItemReviewDivA.innerText = "서울사당에서 지하철타면 15분이면 도착하는 과천에 자리잡은 서울대공원은 놀이공원,동물원,식물원등이 있고 호수를 가로지르는 리프트를 타거나 셔틀이 있어서 편하게 이용할수 있고 입장료또한 인터넷으로 예매하면 아주 저렴하게 이용할수 있어서 데이트를 하거나 휴식을 하러가기 아주 좋은곳이고 남녀노소 가족 누구나가 이용하기 좋은 곳이네요.";
                 }
 

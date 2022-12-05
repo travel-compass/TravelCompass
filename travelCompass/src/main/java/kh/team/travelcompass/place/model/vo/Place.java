@@ -46,6 +46,10 @@ public class Place {
 	private int travelNo;
 	private int travelListOrder;
 	
+	private String homepage; // 홈페이지
+	private String infocenter; // 인포센터
+	private String usefee;
+	
 //	private int pageNo;        // 현재 페이지 번호 
 //	private int totalCount;    // 전체 게시글 수
 //	private int numOfRows;     // 한 페이지 목록에 보여지는 게시글 수

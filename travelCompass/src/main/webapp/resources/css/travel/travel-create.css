@@ -10,7 +10,6 @@ main {
 .travel-create-side {
     width: 25%;
     overflow: auto;
-    background-color: #f2f2f2;
     box-shadow: 5px 0px 10px -4px rgba(0, 0, 0, 0.1);
 }
 .travel-create-side::-webkit-scrollbar {
@@ -89,9 +88,13 @@ button.cancel-btn {
     border: none;
     border-bottom: 2px solid #2DC48D;
     font-size: 20px;
+    height: auto;
 }
 .travel-content::placeholder {
     font-size: 17px;
+}
+.travel-content::-webkit-scrollbar {
+    display: none;
 }
 
 /* 드롭 다운 버튼*/
@@ -119,8 +122,22 @@ button.cancel-btn {
     font-size: 15px;
     display: none;
 }
+#mapToggle {
+    cursor: pointer;
+    display: flex;
+    background-color: transparent;
+    font-size: 15px;
+    width: 40px;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    border: none;
+}
 .drop-down_box li {
-    padding: 10px 10px;
+    padding : 10px;
+}
+.drop-down_box li:hover {
+    background-color: #ddd;
 }
 /* .arrow_box:after, .arrow_box:before {
 	bottom: 100%;
@@ -149,6 +166,7 @@ button.cancel-btn {
 
 /* 공유 버튼 */
 #share {
+    cursor: pointer;
     margin: 30px 5px;
     width: 70px;
     height: 40px;
@@ -158,11 +176,22 @@ button.cancel-btn {
     font-size: 16px;
     justify-content: space-around;
     align-items: center;
+    border-radius: 15px;
+    transition: 0.1s;
 }
-
+#share:hover {
+    color: white;
+    background-color: #2DC48D;
+}
+.travel-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .travel-list > li {
     background-color: white;
     margin-bottom: 10px;
+    box-shadow: 0px 5px 10px -4px rgba(0, 0, 0, 0.1);
 }
 /* 아이템이 없을때 출력하는 항목 */
 .empty-item {
@@ -321,5 +350,84 @@ button.cancel-btn {
 }
 
 .review-area {
+    display: flex;
+}
+
+/* 거리 */
+.distance-area {
+    width: 70%;
+    height: 150px;
+    display: flex;
+    align-items: center;
+}
+.distance-area .path{
+    width: 90px;
+    height: 90px;
+    transform: rotate(-45deg);
+    color: #2DC48D;
+    margin-right: 20px;
+}
+.distance{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 17px;
+    font-weight: bold;
+}
+.distance img {
+    width: 45px;
+    height: 45px;
+    margin-bottom: 10px;
+}
+
+
+
+
+/* 맵 */
+#travelMap {
+    width: 100%;
+    height: 100%;
+}
+
+.marker-content {
+    cursor: pointer;
+    min-width: 120px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 50px;
+    border: 2px solid #2DC48D;
+    border-radius: 20px;
+    background-color: white;
+    transition: 0.1s;
+}
+.marker-content:hover {
+    color: white;
+    background-color: #2DC48D;
+}
+.marker-title {
+    padding: 25px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* 로드뷰 */
+#roadViewModal {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 9000;
+}
+#roadView {
+    width: 70%;
+    height: 70%;
+}
+
+#roadViewModal.show {
     display: flex;
 }

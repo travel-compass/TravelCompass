@@ -22,7 +22,6 @@
 	<jsp:include page="/WEB-INF/views/inc/header.jsp"></jsp:include>
     <main>
         <div class="search-area" id="searchArea">
-        <script src="/resources/js/main-place.js"></script>
             <%-- <form action="/search" class="search-form" id="searchForm">
                 <div class="search-input-box">
                     <button id="search-btn" class="fa-solid fa-magnifying-glass"></button>
@@ -120,8 +119,9 @@
             </ul>
         </div> --%>
         <section class="place-list-area">
-            <div class="place-area">
-                <span class="place-area-title">최근에 본 장소</span>
+            <div class="place-area" id="placeArea">
+                <script src="/resources/js/main-place.js"></script>
+                <%-- <span class="place-area-title">최근에 본 장소</span>
                 <div class="slide-container">
                     <span class="prev-arrow"><i class="fa-solid fa-arrow-left"></i></span>
                     <span class="next-arrow"><i class="fa-solid fa-arrow-right"></i></span>
@@ -228,120 +228,9 @@
                         </li>
                     </ul>
 
-                </div>
-            </div>
-            <!--
-            <div class="place-area">
-                <span class="place-area-title">주변을 둘러보세요</span>
-                <div class="slide-container">
-                    <span class="prev-arrow"><i class="fa-solid fa-arrow-left"></i></span>
-                    <span class="next-arrow"><i class="fa-solid fa-arrow-right"></i></span>
-                    <ul class="place-list">
-                        <li class="place-item">
-                            <a href="해당 장소에 대한 상세페이지(자바스크립트로 queryString 생성)">
-                                <img src="/resources/images/main-sample.jpg">
-                                <span class="place-title">주변 장소1</span>
-                                <div class="grade">
-                                    <span>평점</span>
-                                    <span>리뷰 갯수</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="place-item">
-                            <a href="해당 장소에 대한 상세페이지(자바스크립트로 queryString 생성)">
-                                <img src="/resources/images/main-sample.jpg">
-                                <span class="place-title">주변 장소2</span>
-                                <div class="grade">
-                                    <span>평점</span>
-                                    <span>리뷰 갯수</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="place-item">
-                            <a href="해당 장소에 대한 상세페이지(자바스크립트로 queryString 생성)">
-                                <img src="/resources/images/main-sample.jpg">
-                                <span class="place-title">주변 장소3</span>
-                                <div class="grade">
-                                    <span>평점</span>
-                                    <span>리뷰 갯수</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="place-item">
-                            <a href="해당 장소에 대한 상세페이지(자바스크립트로 queryString 생성)">
-                                <img src="/resources/images/main-sample.jpg">
-                                <span class="place-title">주변 장소4</span>
-                                <div class="grade">
-                                    <span>평점</span>
-                                    <span>리뷰 갯수</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="place-item">
-                            <a href="해당 장소에 대한 상세페이지(자바스크립트로 queryString 생성)">
-                                <img src="/resources/images/main-sample.jpg">
-                                <span class="place-title">주변 장소5</span>
-                                <div class="grade">
-                                    <span>평점</span>
-                                    <span>리뷰 갯수</span>
-                                </div>
-                            </a>
-                        </li>
-                        <%-- <li class="place-item">
-                            <a href="해당 장소에 대한 상세페이지(자바스크립트로 queryString 생성)">
-                                <img src="/resources/images/main-sample.jpg">
-                                <span class="place-title">주변 장소6</span>
-                                <div class="grade">
-                                    <span>평점</span>
-                                    <span>리뷰 갯수</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="place-item">
-                            <a href="해당 장소에 대한 상세페이지(자바스크립트로 queryString 생성)">
-                                <img src="/resources/images/main-sample.jpg">
-                                <span class="place-title">주변 장소7</span>
-                                <div class="grade">
-                                    <span>평점</span>
-                                    <span>리뷰 갯수</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="place-item">
-                            <a href="해당 장소에 대한 상세페이지(자바스크립트로 queryString 생성)">
-                                <img src="/resources/images/main-sample.jpg">
-                                <span class="place-title">주변 장소8</span>
-                                <div class="grade">
-                                    <span>평점</span>
-                                    <span>리뷰 갯수</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="place-item">
-                            <a href="해당 장소에 대한 상세페이지(자바스크립트로 queryString 생성)">
-                                <img src="/resources/images/main-sample.jpg">
-                                <span class="place-title">주변 장소9</span>
-                                <div class="grade">
-                                    <span>평점</span>
-                                    <span>리뷰 갯수</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="place-item">
-                            <a href="해당 장소에 대한 상세페이지(자바스크립트로 queryString 생성)">
-                                <img src="/resources/images/main-sample.jpg">
-                                <span class="place-title">주변 장소10</span>
-                                <div class="grade">
-                                    <span>평점</span>
-                                    <span>리뷰 갯수</span>
-                                </div>
-                            </a>
-                        </li> --%>
-                    </ul>
-                </div>
+                </div> --%>
             </div>
         </section>
-        -->
     </main>
     <!-- footer:include -->
     <jsp:include page="/WEB-INF/views/inc/footer.jsp"></jsp:include>

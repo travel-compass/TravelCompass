@@ -57,7 +57,7 @@
                 <c:forEach var="travel" items="${travelList}">
                 <li class="travel-item">
                     <div>
-                        <a href="/travel/detail/${travel.travelNo}">
+                        <a href="/travel/detail/${travel.memberNo}/${travel.travelNo}">
                             <!-- position absolute 화면 전체 덮기 -->
                         </a>
                         <!-- 썸네일 이미지 -->

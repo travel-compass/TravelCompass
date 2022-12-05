@@ -21,6 +21,7 @@
 		<typeAlias type="kh.team.travelcompass.review.model.vo.Review" alias="Review"/>
 		<typeAlias type="kh.team.travelcompass.travel.model.vo.Travel" alias="Travel"/>
 		<typeAlias type="kh.team.travelcompass.review.model.vo.ReviewImage" alias="ReviewImage"/>
+		<typeAlias type="kh.team.travelcompass.question.model.vo.Question" alias="Question"/>
 	</typeAliases>
 	
 	<!-- mapper 파일(SQL 작성되는파일) 위치 등록 부분 -->
@@ -32,6 +33,7 @@
 		<mapper resource="/mappers/profile-mapper.xml"/>
 		<mapper resource="/mappers/travel-mapper.xml"/>
 		<mapper resource="/mappers/report-mapper.xml"/>
+		<mapper resource="/mappers/question-mapper.xml"/>
 		<!-- resource : src/main/resources -->
 	</mappers>
 </configuration>

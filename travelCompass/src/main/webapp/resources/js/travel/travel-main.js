@@ -103,7 +103,7 @@ function createTravelList() {
         
                 /* 여행 상세페이지 a태그 */
                 const aDetail = document.createElement("a");
-                aDetail.href = `/travel/detail/${travel.travelNo}`;
+                aDetail.href = `/travel/detail/${travel.memberNo}/${travel.travelNo}`;
 
                 /* 여행 썸네일 이미지 영역 */
                 const travelFirstImage = document.createElement("div");
@@ -194,5 +194,3 @@ function createTravelList() {
         }
     })
 }
-
-
