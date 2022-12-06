@@ -12,7 +12,7 @@
       <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
       <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
       <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
-      <span>훌륭함 100</span>
+      <span>훌륭함 / ${place.countRating[4]}</span>
     </ul>
     <ul>
       <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
@@ -20,7 +20,7 @@
       <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
       <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
       <i class="fa-regular fa-circle" style="color: #00AA6C"></i>
-      <span>매우좋음 70</span>
+      <span>매우좋음 / ${place.countRating[3]}</span>
     </ul>
     <ul>
       <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
@@ -28,7 +28,7 @@
       <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
       <i class="fa-regular fa-circle" style="color: #00AA6C"></i>
       <i class="fa-regular fa-circle" style="color: #00AA6C"></i>
-      <span>보통 50</span>
+      <span>보통 / ${place.countRating[2]}</span>
     </ul>
     <ul>
       <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
@@ -36,7 +36,7 @@
       <i class="fa-regular fa-circle" style="color: #00AA6C"></i>
       <i class="fa-regular fa-circle" style="color: #00AA6C"></i>
       <i class="fa-regular fa-circle" style="color: #00AA6C"></i>
-      <span>형편없음 20</span>
+      <span>형편없음 / ${place.countRating[1]}</span>
     </ul>
     <ul>
       <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
@@ -44,7 +44,7 @@
       <i class="fa-regular fa-circle" style="color: #00AA6C"></i>
       <i class="fa-regular fa-circle" style="color: #00AA6C"></i>
       <i class="fa-regular fa-circle" style="color: #00AA6C"></i>
-      <span>최악 10</span>
+      <span>최악 / ${place.countRating[0]} </span>
     </ul>
 
   </div>

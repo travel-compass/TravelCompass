@@ -122,7 +122,7 @@ public class ReviewDAO {
 	 * @param contentid
 	 * @return
 	 */
-	public List<Map<String, Integer>> countRating(String contentid) {
+	public List<String> countRating(String contentid) {
 		return sqlSession.selectList("reviewMapper.countRating", contentid);
 	}
 

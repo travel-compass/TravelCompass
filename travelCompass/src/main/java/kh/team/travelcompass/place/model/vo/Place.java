@@ -51,7 +51,7 @@ public class Place {
 	private String infocenter; // 인포센터
 	private String usefee;
 	
-	private List<Map<String, Integer>> countRating;
+	private List<String> countRating;
 	
 //	private int pageNo;        // 현재 페이지 번호 
 //	private int totalCount;    // 전체 게시글 수

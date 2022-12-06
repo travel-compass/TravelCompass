@@ -201,11 +201,16 @@
 	</update> -->
 	
 	<!-- 평점 개수 조회 -->
-	<select id="countRating" resultType="map">
-		SELECT RATING, COUNT(*) COUNTING
-		FROM REVIEW
-		WHERE CONTENT_ID = #{contentid}
-		GROUP BY RATING
+	<select id="countRating" resultType="string">
+		SELECT COUNT(*) COUNT_RATING FROM REVIEW WHERE CONTENT_ID = #{contentid} AND RATING = 1
+		UNION ALL
+		SELECT COUNT(*) FROM REVIEW WHERE CONTENT_ID = #{contentid} AND RATING = 2
+		UNION ALL
+		SELECT COUNT(*) FROM REVIEW WHERE CONTENT_ID = #{contentid} AND RATING = 3
+		UNION ALL
+		SELECT COUNT(*) FROM REVIEW WHERE CONTENT_ID = #{contentid} AND RATING = 4
+		UNION ALL
+		SELECT COUNT(*) FROM REVIEW WHERE CONTENT_ID = #{contentid} AND RATING = 5
 	</select>
 	
 	

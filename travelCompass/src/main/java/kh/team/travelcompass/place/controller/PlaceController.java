@@ -70,7 +70,7 @@ public class PlaceController {
 		int reviewCount=rservice.selectReviewCount(contentId);
 		
 		// 평점 개수 가져오기
-		List<Map<String, Integer>> countRating=rservice.countRating(contentId);
+		List<String> countRating=rservice.countRating(contentId);
 		
 		
 		if(mainPlace!=null) {

@@ -125,7 +125,7 @@ public class ReviewController {
 	
 	// 평점별 개수 조회
 	@GetMapping("/countRating")
-	public List<Map<String, Integer>> countRating(String contentid){
+	public List<String> countRating(String contentid){
 		return service.countRating(contentid);
 	}
 	

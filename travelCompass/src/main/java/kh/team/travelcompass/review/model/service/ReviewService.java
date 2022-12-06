@@ -57,7 +57,7 @@ public interface ReviewService {
 	 * @param contentid
 	 * @return
 	 */
-	List<Map<String, Integer>> countRating(String contentid);
+	List<String> countRating(String contentid);
 	
 	
 	/** 리뷰 연결(평균평점, 리뷰갯수)

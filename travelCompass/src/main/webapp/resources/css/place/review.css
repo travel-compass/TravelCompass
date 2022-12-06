@@ -60,7 +60,7 @@
 /* component */
 
 .star-rating {
-    border: solid 1px #ccc;
+    border: none;
     display: flex;
     flex-direction: row-reverse;
     font-size: 1.5em;
