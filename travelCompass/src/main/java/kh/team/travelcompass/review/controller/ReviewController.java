@@ -29,6 +29,7 @@ import kh.team.travelcompass.review.model.service.ReviewService;
 import kh.team.travelcompass.review.model.vo.Review;
 
 @RestController
+@RequestMapping("/review")
 public class ReviewController {
 
 	@Autowired
@@ -49,17 +50,19 @@ public class ReviewController {
 //		return reviewMap;
 //	}
 	
-	@GetMapping("/reviewList")
+	@GetMapping("/list")
 	public Map<String, Object> selectReviewList(String contentid,
 			Map<String, Object> paramMap,
 			@RequestParam(value="cp",required=false, defaultValue="1") int cp) {
+		
+		paramMap.put("contentid", contentid);
 		
 		Map<String, Object> reviewMap=service.selectReviewList(contentid,paramMap, cp);
 		
 		return reviewMap;
 	}
 	
-	@PostMapping("/review/insert")
+	@PostMapping("/insert")
 	public int insertReview(Review review) {
 		
 //		String contentid=req.getParameter("contentid");
@@ -114,11 +117,17 @@ public class ReviewController {
 		return service.deleteReview(reviewNo);
 	}
 
-//	// 리뷰 수정
-//	@PostMapping("/update")
-//	public int updateComment(Comment comment) {
-//		return service.updateComment(comment);
-//	}
+	// 리뷰 수정
+	@PostMapping("/update")
+	public int updateReview(Review review) {
+		return service.updateReview(review);
+	}
+	
+	// 평점별 개수 조회
+	@GetMapping("/countRating")
+	public List<Map<String, Integer>> countRating(String contentid){
+		return service.countRating(contentid);
+	}
 	
 
 }

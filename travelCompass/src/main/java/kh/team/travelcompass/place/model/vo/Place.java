@@ -1,6 +1,7 @@
 package kh.team.travelcompass.place.model.vo;
 
 import java.util.List;
+import java.util.Map;
 
 import kh.team.travelcompass.question.model.vo.Question;
 import kh.team.travelcompass.review.model.vo.Review;
@@ -48,6 +49,8 @@ public class Place {
 	private String homepage; // 홈페이지
 	private String infocenter; // 인포센터
 	private String usefee;
+	
+	private List<Map<String, Integer>> countRating;
 	
 //	private int pageNo;        // 현재 페이지 번호 
 //	private int totalCount;    // 전체 게시글 수

@@ -45,5 +45,17 @@ public interface ReviewService {
 	 * @return reviewCount
 	 */
 	int selectReviewCount(String contentId);
+
+	/** 리뷰 수정
+	 * @param review
+	 * @return
+	 */
+	int updateReview(Review review);
+
+	/** 평점별 개수 조회
+	 * @param contentid
+	 * @return
+	 */
+	List<Map<String, Integer>> countRating(String contentid);
 	
 }

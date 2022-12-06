@@ -69,6 +69,9 @@ public class PlaceController {
 		// 작성된 리뷰 개수 가져오기
 		int reviewCount=rservice.selectReviewCount(contentId);
 		
+		// 평점 개수 가져오기
+		List<Map<String, Integer>> countRating=rservice.countRating(contentId);
+		
 		
 		if(mainPlace!=null) {
 			// PLACE_SCRAP 테이블 확인
@@ -94,6 +97,8 @@ public class PlaceController {
 		mainPlace.setAverageRating(avgRating);
 		mainPlace.setReviewCount(reviewCount);
 		
+		mainPlace.setCountRating(countRating);
+		
 		model.addAttribute("place", mainPlace);
 		model.addAttribute("aroundPlaceList",aroundPlaceList);
 		model.addAttribute("reviewMap", reviewMap);
@@ -102,6 +107,8 @@ public class PlaceController {
 		System.out.println(mainPlace);
 		System.out.println("주변장소리스트"+aroundPlaceList);
 		System.out.println("리뷰맵"+reviewMap);
+		
+		System.out.println(countRating);
 		
 		return "place/detailPlace"; 
 	}

@@ -46,12 +46,13 @@ addReview.addEventListener("click", () => {
     },
     type: "post",
     success: (result) => {
+      console.log("작성 성공");
       if (result > 0) {
         //댓글 등록 성공
         reviewTitle.value = "";
         reviewContent.value = "";
 
-        selectReview(); // 비동기 리뷰 목록 조회 함수 호출
+        selectReviewList(); // 비동기 리뷰 목록 조회 함수 호출
         // -> 새로운 리뷰 추가
       } else {
         // 실패
@@ -69,14 +70,18 @@ addReview.addEventListener("click", () => {
 
 function selectReviewList(e) {
   $.ajax({
-    url: "/review/insert",
-    type: "GET",
+    url: "/review/list",
+    type: "get",
+    data: {
+      contentid: contentid,
+    },
     dataType: "JSON",
-    success: (reviewList) => {
+    success: (reviewMap) => {
+      console.log(reviewMap);
       const ulreviewList = document.getElementById("review-list");
       ulreviewList.innerHTML = "";
 
-      for (let list of reviewList) {
+      for (let review of reviewMap.reviewList) {
         const reviewTextColum = document.createElement("li");
         reviewTextColum.classList.add("user-page-review-colums2");
 
@@ -86,10 +91,13 @@ function selectReviewList(e) {
         const reviewTextHeaderLayout = document.createElement("div");
         reviewTextHeaderLayout.classList.add("user-page-review-header-layout");
 
+        reviewTextHeaderStyle.append(reviewTextHeaderLayout);
+
         const reviewTextUserImage = document.createElement("a");
         reviewTextUserImage.classList.add("review-user-image");
 
-        reviewTextUserImage.innerHTML = '<img src="' + list.profileImage + '">';
+        reviewTextUserImage.innerHTML =
+          '<img src="' + review.profileImage + '">';
 
         const reviewTextInfoLayout = document.createElement("div");
         reviewTextInfoLayout.classList.add("review-user-info-layout");
@@ -98,12 +106,12 @@ function selectReviewList(e) {
         reviewInfoNickname.classList.add("review-user-nickname");
 
         reviewInfoNickname.innerHTML =
-          "<a href='#'>" + list.memberNickname + "</a>";
+          "<a href='#'>" + review.memberNickname + "</a>";
 
         const reviewInfoDateLink = document.createElement("a");
         reviewInfoDateLink.classList.add("review-user-dday");
 
-        reviewInfoDateLink.innerText = list.reviewDate;
+        reviewInfoDateLink.innerText = review.reviewDate;
 
         const reviewTextDotStyle = document.createElement("button");
         reviewTextDotStyle.classList.add("user-page-review-dot-style");
@@ -129,36 +137,32 @@ function selectReviewList(e) {
           reviewTextDotStyle.nextElementSibling.style.display = "none";
         });
 
-        const reviewTextDataTableStyle = document.createElement("div");
-        reviewTextDataTableStyle.classList.add("review-data-table-style");
+        const reviewArea = document.createElement("div");
+        reviewArea.classList.add("review-container");
 
-        const reviewTextPoint = document.createElement("div");
-        reviewTextPoint.classList.add("review-point");
+        const reviewContainer = document.createElement("div");
+        reviewContainer.classList.add("review-container");
 
-        const reviewText_span1 = document.createElement("span");
-        reviewText_span1.innerHTML = "<i class='fa-solid fa-circle'></i>";
+        const rating = document.createElement("div");
+        rating.classList.add("rating");
 
-        const reviewText_span2 = document.createElement("span");
-        reviewText_span2.innerHTML = "<i class='fa-solid fa-circle'></i>";
+        const empty = document.createElement("span");
+        empty.classList.add("empty");
+        empty.innerHTML = "&#9679;&#9679;&#9679;&#9679;&#9679;";
 
-        const reviewText_span3 = document.createElement("span");
-        reviewText_span3.innerHTML = "<i class='fa-solid fa-circle'></i>";
-
-        const reviewText_span4 = document.createElement("span");
-        reviewText_span4.innerHTML = "<i class='fa-solid fa-circle'></i>";
-
-        const reviewText_span5 = document.createElement("span");
-        reviewText_span5.innerHTML = "<i class='fa-solid fa-circle'></i>";
+        const fill = document.createElement("fill");
+        fill.classList.add("fill");
+        fill.innerHTML = "&#9679;&#9679;&#9679;&#9679;&#9679;";
 
         const reviewTextTitle = document.createElement("div");
         reviewTextTitle.classList.add("review-title");
 
-        reviewTextTitle.innerText = list.reviewTitle;
+        reviewTextTitle.innerText = review.reviewTitle;
 
         const reviewTextContent = document.createElement("div");
         reviewTextContent.classList.add("review-content");
 
-        reviewTextContent.innerText = '"' + list.reviewContent + '"';
+        reviewTextContent.innerText = '"' + review.reviewContent + '"';
 
         const reviewTextSupport = document.createElement("div");
         reviewTextSupport.classList.add("review-support");
@@ -180,6 +184,51 @@ function selectReviewList(e) {
         reviewTextShareButton.classList.add("share-button");
         reviewTextShareButton.innerHTML =
           "<i class='fa-solid fa-arrow-up-from-bracket'></i>공유";
+
+        ulreviewList.append(reviewTextColum);
+
+        reviewTextInfoLayout.append(reviewInfoNickname, reviewInfoDateLink);
+
+        reviewTextHeaderLayout.append(
+          reviewTextUserImage,
+          reviewTextInfoLayout
+        );
+
+        reviewTextDotDownMenu.append(reviewTextDownMenu);
+
+        reviewTextDownMenu.append(
+          reviewTextDownMenu_li1,
+          reviewTextDownMenu_li2
+        );
+
+        reviewArea.append(reviewContainer);
+
+        reviewContainer.append(rating);
+
+        rating.append(empty, fill);
+
+        reviewTextHeaderStyle.append(
+          reviewTextHeaderLayout,
+          reviewTextDotStyle,
+          reviewTextDotDownMenu
+        );
+
+        reviewTextBottomMenu.append(
+          reviewTextSuportButton,
+          reviewTextSaveButton,
+          reviewTextShareButton
+        );
+
+        reviewTextColum.append(
+          reviewTextHeaderStyle,
+          reviewArea,
+          reviewTextTitle,
+          reviewTextContent,
+          reviewTextSupport,
+          reviewTextBottomMenu
+        );
+
+        // reviewRight.append(reviewTextColum);
       }
     },
     error: () => {
@@ -191,18 +240,61 @@ function selectReviewList(e) {
 /* 리뷰 수정 삭제 버튼 */
 // 클릭 이벤트로 실행 하기
 
-const dotmenu = document.getElementsByClassName("user-page-review-dot-style");
+// 드랍 다운 메뉴 이벤트
+const dropDownMenu = document.getElementsByClassName(
+  "user-page-review-dot-style"
+);
 
-for (let item of dotmenu) {
-  item.addEventListener("click", function () {
-    item.nextElementSibling.style.display = "inline-block";
-  });
-  item.nextElementSibling.addEventListener("click", function () {
-    item.nextElementSibling.style.display = "none";
-    if ((memberNo = "")) {
-      alert("로그인 후 이용해주세요");
+for (let BTNList of dropDownMenu) {
+  BTNList.addEventListener("click", () => {
+    if (memberNo == "") {
+      // 로그인X
+      if (confirm("로그인하시겠습니까?")) {
+        location.href = "/member/login";
+      }
       return;
+    } else {
+      BTNList.nextElementSibling.style.display = "block";
     }
+    BTNList.nextElementSibling.style.display = "none";
+  });
+}
+
+let beforeTitle;
+let beforeContent;
+
+for (let BTNList of dropDownMenu) {
+  BTNList.firstElementChild.addEventListener("click", () => {
+    beforeTitle = reviewTitle.innerHTML;
+    beforeContent = reviewContent.innerHTML;
+
+    reviewTitle.innerHTML = "";
+    reviewContent.innerHTML = "";
+
+    const reviewTitleUpdate = document.createElement("textarea");
+    reviewTitleUpdate.classList.add("updateReview");
+    const reviewContentUpdate = document.createElement("textarea");
+    reviewContentUpdate.classList.add("updateReview");
+
+    beforeTitle = beforeTitle.replaceAll("&amp;", "&");
+    beforeTitle = beforeTitle.replaceAll("&lt;", "<");
+    beforeTitle = beforeTitle.replaceAll("&gt;", ">");
+    beforeTitle = beforeTitle.replaceAll("&quot;", '"');
+
+    beforeContent = beforeContent.replaceAll("&amp;", "&");
+    beforeContent = beforeContent.replaceAll("&lt;", "<");
+    beforeContent = beforeContent.replaceAll("&gt;", ">");
+    beforeContent = beforeContent.replaceAll("&quot;", '"');
+
+    beforeContent = beforeContent
+      .replaceAll("<br>", "\n")
+      .replaceAll("&nbsp;", " ");
+
+    reviewTitleUpdate.value = beforeTitle;
+    reviewContentUpdate.value = beforeContent;
+
+    reviewTitle.append(reviewTitleUpdate);
+    reviewContent.append(reviewContentUpdate);
   });
 }
 

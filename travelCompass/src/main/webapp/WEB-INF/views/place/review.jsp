@@ -48,7 +48,7 @@
     </ul>
 
   </div>
-  <div class="review-right">
+  <div class="review-right" id="review-right">
 
     <div>
       <div class="wrap">
@@ -114,10 +114,13 @@
                     <span class="fill" style="width:${80*(place.averageRating*20)/100}px;">
                     &#9679;&#9679;&#9679;&#9679;&#9679;</span>
                   </div>
+                </div>  
               </div>
 
-                <div class="review-title">${review.reviewTitle}</div>
-                <div class="review-content">${review.reviewContent}</div>
+              <div class="review-title">${review.reviewTitle}</div>
+              <div class="review-content">${review.reviewContent}</div>
+              <%-- <div class="review-title"><textarea name="updateReivewTitle" id="updateReivewTitle" class=updateReview rows="1"></textarea></div>
+              <div class="review-content"><textarea name="updateReviewContent" id="updateReviewContent" class=updateReview rows="10"></textarea></div> --%>
               
               <div class="review-support"></div>
               <div class="review-bottom-menu-style">
@@ -132,8 +135,8 @@
                 </div>
               </div>
             </li>
-        </ul>
       </c:forEach>
+        </ul>
 
 
             <div class="page-select">

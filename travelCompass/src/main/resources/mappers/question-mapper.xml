@@ -48,7 +48,7 @@
 	<!-- QnA 등록 -->
 	<insert id="insertQuestion">
 		INSERT INTO "QUESTION" VALUES(
-		SEQ_COMMENT_NO.NEXTVAL, #{questionTitle}, #{questionContent}, 
+		SEQ_QUESTION_NO.NEXTVAL, '제목', #{questionContent}, 
 		DEFAULT, DEFAULT, #{contentid}, #{memberNo}, DEFAULT,
 		
 		<!-- 일반 댓글 -->

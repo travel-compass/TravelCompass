@@ -357,11 +357,10 @@
     </nav>
 
     <%-- 리뷰 섹션 --%>
-    
-      <jsp:include page="/WEB-INF/views/place/review.jsp"></jsp:include>
 
-    <%-- QnA 섹션 --%>
-    <%-- <jsp:include page="/WEB-INF/views/place/QnA.jsp"></jsp:include> --%>
+    <jsp:include page="/WEB-INF/views/place/review.jsp"></jsp:include>
+
+    <jsp:include page="/WEB-INF/views/place/QnA.jsp"></jsp:include>
   
 
   </main>
@@ -374,6 +373,7 @@
   <script src="/resources/js/common/jQuery-core.js"></script>
   <script src="/resources/js/place/detailPlace.js"></script>
   <script src="/resources/js/place/review.js"></script>
+  <script src="/resources/js/place/QnA.js"></script>
 	<script src="/resources/js/place/swiper.js"></script>
 </body>
 

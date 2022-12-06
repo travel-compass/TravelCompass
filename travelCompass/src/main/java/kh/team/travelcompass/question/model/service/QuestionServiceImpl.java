@@ -44,7 +44,7 @@ public class QuestionServiceImpl implements QuestionService {
 	public int insertQuestion(Question question) {
 
 		// XSS 방지, 개행문자 처리
-		question.setQuestionContent(Util.XSSHandling(question.getQuestionTitle()));
+//		question.setQuestionContent(Util.XSSHandling(question.getQuestionTitle()));
 		question.setQuestionContent(Util.newLineHandling(question.getQuestionContent()));
 
 		return dao.insertQuestion(question);

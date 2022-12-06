@@ -181,7 +181,7 @@
 	
 	<!-- 평균 평점 조회 -->
 	<select id="selectAvgRating" resultType="_double">
-		SELECT ROUND(AVG(RATING),1)
+		SELECT NVL(ROUND(AVG(RATING),1),0)
 		FROM REVIEW
 		WHERE CONTENT_ID = #{contentid}
 	</select>
@@ -192,5 +192,21 @@
 		FROM REVIEW
 		WHERE CONTENT_ID = #{contentid}
 	</select>
+	
+	<!-- 리뷰 수정 -->
+	<!-- <update id="updateReview">
+		UPDATE "REVIEW" SET
+		WHERE REVIEW_TITLE=
+		AND REVIEW_CONTENT=
+	</update> -->
+	
+	<!-- 평점 개수 조회 -->
+	<select id="countRating" resultType="map">
+		SELECT RATING, COUNT(*) COUNTING
+		FROM REVIEW
+		WHERE CONTENT_ID = #{contentid}
+		GROUP BY RATING
+	</select>
+	
 	
 </mapper>

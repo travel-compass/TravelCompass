@@ -104,4 +104,16 @@ public class ReviewDAO {
 		return sqlSession.selectOne("reviewMapper.selectReviewCount", contentId);
 	}
 
+	public int updateReview(Review review) {
+		return sqlSession.update("reviewMapper.updateReview", review);
+	}
+
+	/** 평점별 개수 조회
+	 * @param contentid
+	 * @return
+	 */
+	public List<Map<String, Integer>> countRating(String contentid) {
+		return sqlSession.selectList("reviewMapper.countRating", contentid);
+	}
+
 }
