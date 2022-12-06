@@ -103,6 +103,7 @@
 		ORDER BY REVIEW_NO DESC
 	</select>
 	
+	<!-- 리뷰 목록 정렬 -->
 	<select id="orderReviewList" resultMap="review_rm">
 		SELECT REVIEW_TITLE, REVIEW_CONTENT,
 		 <![CDATA[

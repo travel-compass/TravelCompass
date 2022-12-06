@@ -17,6 +17,29 @@ public class ReviewServiceImpl implements ReviewService {
 
 	@Autowired
 	private ReviewDAO dao;
+	
+	
+	// 처음 리뷰 목록 조회 + 페이징 처리
+	@Override
+	public Map<String, Object> selectReviewList(String contentid, Map<String, Object> paramMap, int cp) {
+		
+		// 1. 특정 게시판의 전체 게시글 수 조회(단, 삭제 제외)
+		int listCount = dao.getListCount(contentid);
+		
+		// 2. 전체 게시글 수 + cp(현제 페이지)이용해서
+		// 페이징 처리 객체 생성
+		Pagination pagination = new Pagination(listCount, cp);
+		
+		// 3. 페이징 처리객체를 이용해서 게시글 목록 조회
+		List<Review> reviewList = dao.selectReviewList(pagination, paramMap);
+		
+		
+		Map<String, Object> reviewMap = new HashMap<String, Object>();
+		reviewMap.put("pagination", pagination);
+		reviewMap.put("reviewList", reviewList);
+		
+		return reviewMap;
+	}
 
 	// 리뷰 정렬 조회 (추천, 평점, 날짜 순)
 	@Override
@@ -39,27 +62,6 @@ public class ReviewServiceImpl implements ReviewService {
 		return reviewMap;
 	}
 
-	// 처음 리뷰 목록 조회
-	@Override
-	public Map<String, Object> selectReviewList(String contentid, Map<String, Object> paramMap, int cp) {
-
-		// 1. 특정 게시판의 전체 게시글 수 조회(단, 삭제 제외)
-		int listCount = dao.getListCount(contentid);
-
-		// 2. 전체 게시글 수 + cp(현제 페이지)이용해서
-		// 페이징 처리 객체 생성
-		Pagination pagination = new Pagination(listCount, cp);
-
-		// 3. 페이징 처리객체를 이용해서 게시글 목록 조회
-		List<Review> reviewList = dao.selectReviewList(pagination, paramMap);
-		
-
-		Map<String, Object> reviewMap = new HashMap<String, Object>();
-		reviewMap.put("pagination", pagination);
-		reviewMap.put("reviewList", reviewList);
-
-		return reviewMap;
-	}
 
 	// 리뷰 삽입(작성)
 	@Override
@@ -86,7 +88,7 @@ public class ReviewServiceImpl implements ReviewService {
 		return dao.selectAvgRating(contentId);
 	}
 	
-	// 작성된 리뷰 조회
+	// 작성된 리뷰 개수 조회
 	@Override
 	public int selectReviewCount(String contentId) {
 		return dao.selectReviewCount(contentId);
