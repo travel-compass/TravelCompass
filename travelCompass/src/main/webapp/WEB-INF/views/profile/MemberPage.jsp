@@ -93,7 +93,7 @@
                 <div id="follow-modal" class="modal-layout">
                     <div class="modal-bc"></div>
                     <div class="modal-content" id="modalContent">
-                        <div class="modal-content-title" id="modal-title">팔로워 ${member.totalFollower}명</div>
+                        <div class="modal-content-title" id="modal-title"></div>
                         <ul class="follow-user-table" id="follow-table">
                             <li>
                                 <a href="">
@@ -204,8 +204,9 @@
                                                     <span class="fill" style="width:${92 * (FedList.rating * 20) / 100}px;">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
                                                 </div>
                                             </div>
-                                            <div class="review-title">${FedList.reviewTitle}</div>
-                                            <div class="review-content">"${FedList.reviewContent}"</div>
+                                            <div class="review-title"><a href="">${FedList.reviewTitle}</a></div>
+                                            <div class="review-content"><a href="">"${FedList.reviewContent}"</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </c:if>
@@ -283,6 +284,12 @@
         // @ReqeustParam
         const reviewPageMemberNo = "${member.memberNo}";
         const loginMemberNo = "${loginMember.memberNo}"
+
+        // 팔로워 넘버
+        const followerNo = "${followMemberList}"
+
+        // 팔로잉 넘버
+        const followingNo = "${followingMemberList}"
     </script>
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" 
     integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" 

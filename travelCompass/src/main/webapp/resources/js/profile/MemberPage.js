@@ -1,3 +1,5 @@
+
+
 // 더보기 버튼 눌렀을 때 review offset 전역 변수로 설정
 let reviewRowBoundCount = 10;
 
@@ -44,7 +46,6 @@ function showSlides(n, element) {
         }
     }
 
-// console.log(slides);
     let idx = 0;
     for(let i=0 ; i<slides.length ; i++){
         if( slides[i].style.display == "block" ){
@@ -95,6 +96,7 @@ for (let BTNList of dropDownMenu){
 const Fed = document.getElementById("Fed");
 
 Fed.addEventListener("click", (e) => {
+
 
     window.scrollTo({ top: 0, behavior: "smooth" });
 
@@ -202,7 +204,7 @@ Fed.addEventListener("click", (e) => {
                     const rating = document.createElement("div");
                     rating.classList.add("rating");
                     rating.innerHTML = "<span class='empty'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>"
-                    +"<span class='fill' style='width:${100 * (" + list.rating + " * 20) / 100}px;'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>";
+                    +"<span class='fill' style='width:100 * (" + list.rating + " * 20) / 100px;'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>";
 
                     const reviewTextTitle = document.createElement("div");
                     reviewTextTitle.classList.add("review-title");
@@ -409,7 +411,7 @@ const fedMoreReviewList = function() {
                 const rating = document.createElement("div");
                 rating.classList.add("rating");
                 rating.innerHTML = "<span class='empty'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>"
-                +"<span class='fill' style='width:${100 * (" + list.rating + " * 20) / 100}px;'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>";
+                +"<span class='fill' style='width:100 * (" + list.rating + " * 20) / 100px;'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>";
 
                 const reviewTextTitle = document.createElement("div");
                 reviewTextTitle.classList.add("review-title");
@@ -643,7 +645,7 @@ Review.addEventListener("click", (e) => {
 
                     rating.classList.add("rating");
                     rating.innerHTML = "<span class='empty'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>"
-                    +"<span class='fill' style='width:${100 * (" + list.rating + " * 20) / 100}px;'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>";
+                    +"<span class='fill' style='width:100 * (" + list.rating + " * 20) / 100px;'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>";
 
                     const reviewTextTitle = document.createElement("div");
                     reviewTextTitle.classList.add("review-title");
@@ -802,7 +804,7 @@ function reviewMoreReviewList () {
                 const rating = document.createElement("div");
                 rating.classList.add("rating");
                 rating.innerHTML = "<span class='empty'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>"
-                +"<span class='fill' style='width:${100 * (" + list.rating + " * 20) / 100}px;'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>";
+                +"<span class='fill' style='width:100 * (" + list.rating + " * 20) / 100px;'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>";
 
                 const reviewTextTitle = document.createElement("div");
                 reviewTextTitle.classList.add("review-title");
@@ -992,7 +994,7 @@ ImageReview.addEventListener("click", (e) => {
                     const rating = document.createElement("div");
                     rating.classList.add("rating");
                     rating.innerHTML = "<span class='empty'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>"
-                    +"<span class='fill' style='width:${100 * (" + list.rating + " * 20) / 100}px;'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>";
+                    +"<span class='fill' style='width:100 * (" + list.rating + " * 20) / 100px;'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>";
 
                     const reviewTextTitle = document.createElement("div");
                     reviewTextTitle.classList.add("review-title");
@@ -1194,7 +1196,7 @@ function imageMoreReviewList() {
                 const rating = document.createElement("div");
                 rating.classList.add("rating");
                 rating.innerHTML = "<span class='empty'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>"
-                +"<span class='fill' style='width:${100 * (" + list.rating + " * 20) / 100}px;'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>";
+                +"<span class='fill' style='width:100 * (" + list.rating + " * 20) / 100px;'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>";
 
                 const reviewTextTitle = document.createElement("div");
                 reviewTextTitle.classList.add("review-title");
@@ -1342,6 +1344,9 @@ followButton.addEventListener("click", () => {
                 return;
             }
 
+            const modalTitle = document.getElementById("modal-title");
+            modalTitle.innerText = "팔로워 " + followMemberList.length + "명";
+
             for(let list of followMemberList) {
                 
                 const followTableLi = document.createElement("li");
@@ -1485,7 +1490,6 @@ followingButton.addEventListener("click", () => {
             const followTable = document.getElementById("follow-table");
             followTable.innerHTML = "";
 
-            console.log(followingMemberList);
             
             if (followingMemberList.length == 0){
                 return;
@@ -1731,7 +1735,7 @@ if (clickFollow != null){
         }
     });
 }
-
+/* 
 // 더보기 버튼 눌렀을 때 10개씩 리뷰 추가하기
 const reviewMoreButton = document.getElementById("moreButton");
 
@@ -1739,7 +1743,7 @@ reviewMoreButton.addEventListener("click", () => {
 
     reviewMoreList();
 })
-
+ */
 const reviewMoreList = function(){
 
     $.ajax({
@@ -1822,7 +1826,7 @@ const reviewMoreList = function(){
                 const rating = document.createElement("div");
                 rating.classList.add("rating");
                 rating.innerHTML = "<span class='empty'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>"
-                +"<span class='fill' style='width:${100 * (" + list.rating + " * 20) / 100}px;'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>";
+                +"<span class='fill' style='width:100 * (" + list.rating + " * 20) / 100px;'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>";
     
                 const reviewTextTitle = document.createElement("div");
                 reviewTextTitle.classList.add("review-title");
