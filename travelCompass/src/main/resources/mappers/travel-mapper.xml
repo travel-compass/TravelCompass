@@ -88,6 +88,20 @@
 		TRAVEL_DEL_FL = 'Y'
 		WHERE TRAVEL_NO = #{travelNo}
 	</update>
+	
+	
+	<!-- 여행 스크랩 -->
+	<insert id="insertTravelScrap">
+		INSERT INTO TRAVEL_SCRAP (MEMBER_NO, TRAVEL_NO, SCRAP_DATE)
+		VALUES(#{memberNo}, #{travelNo}, SYSDATE)
+	</insert>
+	
+	<!-- 여행 스크랩 취소 -->
+	<delete id="deleteTravelScrap">
+		DELETE FROM TRAVEL_SCRAP
+		WHERE MEMBER_NO = #{memberNo}
+		AND TRAVEL_NO = #{travelNo}
+	</delete>
 </mapper>
 
 

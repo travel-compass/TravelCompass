@@ -62,4 +62,18 @@ public interface TravelService {
 	 * @return result
 	 */
 	public int deleteTravel(int travelNo);
+
+
+	/** 여행 스크랩
+	 * @param paramMap
+	 * @return result
+	 */
+	public int insertTravelScrap(Map<String, Integer> paramMap);
+
+
+	/** 여행 스크랩 취소
+	 * @param paramMap
+	 * @return result
+	 */
+	public int deleteTravelScrap(Map<String, Integer> paramMap);
 }
