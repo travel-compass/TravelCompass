@@ -2,6 +2,7 @@ package kh.team.travelcompass.place.model.vo;
 
 import java.util.List;
 
+
 import kh.team.travelcompass.question.model.vo.Question;
 import kh.team.travelcompass.review.model.vo.Review;
 

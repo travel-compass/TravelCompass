@@ -103,6 +103,10 @@ body {
     color: #2DC48D;
 }
 
+.server-error {
+    color:#999999;
+}
+
 .inner-detail {
     line-height: 1.4em;
 

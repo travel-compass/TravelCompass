@@ -2,6 +2,7 @@ package kh.team.travelcompass.review.model.vo;
 
 import java.util.List;
 
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -29,6 +30,12 @@ public class Review {
 	private String profileImage; // 리뷰 작성한 회원 프로필 사진
 
 	private List<ReviewImage> reviewImgList;
+	
+	// Report 관련 column추가
+	private int reportNo;          //신고 번호
+	private int reasonCode;        //사유 코드
+	private int reviewReportCount; //리뷰당 신고횟수
+	private int blindReviewCount;  //멤버당 블라인드 리뷰 개수
 	
 
 }
