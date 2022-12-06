@@ -108,12 +108,12 @@ main {
     font-weight: bold;
     color: #757575;
 }
-/* 
-.user-container-PFF button:hover{
+
+.PFFMouseEvent button:hover{
     text-decoration: underline;
     cursor: pointer;
 }
- */
+
 
 /* 다른 유저 프로필 버튼 */
 .user-info-right-part{
@@ -516,6 +516,7 @@ main {
 
 .follow-user-table a{
     display: flex;
+    width: 100%;
 }
 
 .follow-user-image img{
@@ -540,7 +541,7 @@ main {
     /* background-color: white; */
     padding: 5px;
     border-radius: 5px;
-    border: 1px solid black;
+    border: 1px solid #eee;
     cursor: pointer;
     /* color: #009f5e; */
 }

@@ -23,8 +23,11 @@ public interface ProfileService {
 	// 팔로우 취소 하기
 	int unFollow(Map<String, Integer> paramMap);
 
-	// 팔로우 한 인원 리스트 출력
+	// 팔로우 한 인원 리스트 조회하기
 	List<Member> selectFollowMemberList(int memberNo);
+
+	// 팔로잉 한 인원 리스트 조회하기
+	List<Member> selectFollowingMemberList(int memberNo);
 
 
 }

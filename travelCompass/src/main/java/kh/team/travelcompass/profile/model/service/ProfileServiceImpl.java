@@ -57,13 +57,22 @@ public class ProfileServiceImpl implements ProfileService {
 		return dao.unFollow(paramMap);
 	}
 
-	// 팔로우한 인원 리스트 출력
+	// 팔로우한 인원 리스트 조회하기
 	@Override
 	public List<Member> selectFollowMemberList(int memberNo) {
 		
 		List<Member> followMemberList = dao.selectFollowMemberList(memberNo);
 		
 		return followMemberList;
+	}
+
+	// 팔로잉 한 인원 리스트 조회하기
+	@Override
+	public List<Member> selectFollowingMemberList(int memberNo) {
+		
+		List<Member> followingMemberList = dao.selectFollowingMemberList(memberNo);
+		
+		return followingMemberList;
 	}
 	
 }

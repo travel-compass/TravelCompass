@@ -69,4 +69,12 @@ public class ProfileDAO {
 	public List<Member> selectFollowMemberList(int memberNo) {
 		return sqlSession.selectList("memberMapper.selectFollowMemberList", memberNo);
 	}
+
+	/** 팔로잉 한 인원 리스트 조회하기
+	 * @param memberNo
+	 * @return followingMemberList
+	 */
+	public List<Member> selectFollowingMemberList(int memberNo) {
+		return sqlSession.selectList("memberMapper.selectFollowingMemberList", memberNo);
+	}
 }
