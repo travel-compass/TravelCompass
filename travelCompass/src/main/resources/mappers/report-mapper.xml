@@ -15,24 +15,67 @@
 		<result property="reviewImagePath" column="REVIEW_IMAGE_PATH"/>
 		<result property="profileImage" column="PROFILE_IMAGE"/>
 		<result property="memberNickname" column="MEMBER_NICKNAME"/>
-		
+
 		<result property="reportNo" column="REPORT_NO"/>
 		<result property="reasonCode" column="REASON_CODE"/>
-
+		<result property="reviewReportCount" column="REVIEW_REPORT_COUNT" />
+		<result property="blindReviewCount" column="BLIND_REVIEW_COUNT"/>
 	</resultMap>
 	
 
-	
+	<!-- 모든 신고 조회 -->
 	<select id="selectAllReport" resultMap="review_rm">
-		SELECT REPORT_NO, REASON_CODE, REVIEW_NO, REVIEW_CONTENT,  
-					(COUNT(*)) REPORT_COUNT, MEMBER_NO
-		FROM REPORT
-		JOIN "REVIEW" USING(REVIEW_NO)
+		SELECT RP.REVIEW_NO, RV.REVIEW_CONTENT, 
+					 RV.MEMBER_NO, (COUNT(*))REVIEW_REPORT_COUNT
+		FROM REPORT RP
+		JOIN REVIEW RV ON (RP.REVIEW_NO = RV.REVIEW_NO)
+		WHERE RV.REVIEW_FL = 'N'
+		GROUP BY RP.REVIEW_NO, RV.REVIEW_CONTENT, RV.MEMBER_NO
+		ORDER BY REVIEW_REPORT_COUNT DESC
 	</select>
 	
+  <!-- 회원 블라인드 리뷰 수 조회 -->
+	<select id="selectBlind" resultMap="review_rm">
+		SELECT R.MEMBER_NO, (COUNT(*))BLIND_REVIEW_COUNT
+		FROM REVIEW R
+		JOIN MEMBER M ON (R.MEMBER_NO = M.MEMBER_NO)
+		WHERE R.REVIEW_FL = 'B'
+		AND M.SECESSION_FL ='N' 
+		GROUP BY R.MEMBER_NO
+		ORDER BY BLIND_REVIEW_COUNT
+	</select>
 	
+	<!-- 정지 회원 조회 -->
+	<select id="selectBanMember" resultMap="review_rm">
+		SELECT R.MEMBER_NO, (COUNT(*))BLIND_REVIEW_COUNT
+		FROM REVIEW R
+		JOIN MEMBER M ON (R.MEMBER_NO = M.MEMBER_NO)
+		WHERE R.REVIEW_FL = 'B'
+		AND M.SECESSION_FL ='B' 
+		GROUP BY R.MEMBER_NO
+		ORDER BY BLIND_REVIEW_COUNT
+	</select>
 	
+	<!-- 블라인드 처리 -->
+	<update id="reviewBlind" >
+		UPDATE REVIEW 
+		SET REVIEW_FL='B'
+		WHERE REVIEW_NO=#{reviewNo}
+	</update>
 	
+	<!-- 회원 기능 정지 -->
+	<update id="memberBan" >
+		UPDATE MEMBER 
+		SET SECESSION_FL='B'
+		WHERE MEMBER_NO=#{memberNo}
+	</update>
+	
+	<!-- 회원 정지 취소-->
+	<update id="memberBanCancel" >
+		UPDATE MEMBER 
+		SET SECESSION_FL='N'
+		WHERE MEMBER_NO=#{memberNo}
+	</update>
 	
 	
 </mapper>

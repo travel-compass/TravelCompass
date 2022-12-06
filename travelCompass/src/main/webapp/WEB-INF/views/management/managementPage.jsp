@@ -32,19 +32,22 @@
                     </li>
                     <li>
                         <input type="radio" name="managementType" value="3" id="managementType3" >
-                        <label for="managementType3"><a class="managementType3">강퇴 회원 조회</a></label>
+                        <label for="managementType3"><a class="managementType3">정지 회원 조회</a></label>
                     </li>
                 </ul>
             </div>
 
             <div class="right-side">
                 <div class="report-list">
-                    <c:forEach items="${report}" var="report">
+                    
+                    <c:forEach items="${reportList}" var="report">
                     <div class="management-detail">
                         <ul>
-                            <li>회원 번호 : ${report.memberNo}</li>
-                            <li>리뷰 내용 : </li>
-                            <li class="review-content">${report.reviewContent}</li>
+                            <li>불량 회원 : ${report.memberNo}</li>
+                            <li>리뷰 번호 : ${report.reviewNo} </li>
+                            <li>신고 횟수 : ${report.reviewReportCount} </li>
+                            <li>신고된 리뷰 내용 : ${report.reviewContent} </li>
+                            <button class="report-list-btn">블라인드</button>
                         </ul>
                     </div>
                     </c:forEach>

@@ -16,16 +16,53 @@ import kh.team.travelcompass.review.model.vo.Review;
 public class ManagementServiceImpl implements ManagementService {
 	@Autowired
 	ManagementDAO dao;
-
+	
+	//모든 신고 조회
 	@Override
-	public List<Map<String, Object>> selectAll() {
+	public List<Review> selectAll() {
 		
-		List<Map<String, Object>>reportList=dao.selectAll();
-		
-
+		List<Review>reportList=dao.selectAll();
 		
 		return reportList;
 	}
 	
+	//회원 블라인드 리뷰 수 조회
+	@Override
+	public List<Review> selectBlind() {
+		
+		return dao.selectBlind();
+	}
+	
+	//정지 회원 조회
+	@Override
+	public List<Review> selectBanMember() {
+	
+		return dao.selectBanMember();
+	}
+	
+	
+	//블라인드 처리
+	@Override
+	public int reviewBlind(int reviewNo) {
+		
+		return dao.reviewBlind(reviewNo);
+	}
+	
+	//회원 기능 정지
+	@Override
+	public int memberBan(int memberNo) {
+		
+		return dao.memberBan(memberNo);
+	}
+
+	//회원 정지 취소
+	@Override
+	public int memberBanCancel(int memberNo) {
+			
+		return dao.memberBanCancel(memberNo);
+	}
+
+	
+
 
 }
