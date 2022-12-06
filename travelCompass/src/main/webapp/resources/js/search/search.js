@@ -156,6 +156,7 @@ for(let category of categoryList) {
                     const searchResultItemGradeDivRatingSpan2 = document.createElement("span");
                     searchResultItemGradeDivRatingSpan2.classList.add("fill");
                     searchResultItemGradeDivRatingSpan2.innerHTML="&#9679;&#9679;&#9679;&#9679;&#9679;";
+                    searchResultItemGradeDivRatingSpan2.style.width = 69 * (place.averageRating * 20) / 100 + "px";
                     searchResultItemGradeDivRating.appendChild(searchResultItemGradeDivRatingSpan2);
         
                     //span만들고 grade-div하위요소로 넣기
@@ -170,7 +171,7 @@ for(let category of categoryList) {
                     // 최근에 본 장소 onclick 세팅
                     searchResultItemGradeDivSpanA.setAttribute("onclick", `return addRecentViewPlace("${place.title}", "${place.firstimage}", "${place.contentid}", "${place.contenttypeid}", "${place.averageRating}", "${place.reviewCount}", "${place.addr1}")`);
 
-                    searchResultItemGradeDivSpanA.innerText = "267건의 리뷰";
+                    searchResultItemGradeDivSpanA.innerText = place.reviewCount;
         
                     //div class="search-result-item-address"
                     //address-div 만들고 content-div하위요소로 넣기
@@ -196,16 +197,16 @@ for(let category of categoryList) {
                     const searchResultItemReviewDiv = document.createElement("div");
                     searchResultItemReviewDiv.classList.add("search-result-item-review");
                     searchResultItemContentDiv.appendChild(searchResultItemReviewDiv);
-        
+                    
                     //a만들고 review-div하위요소로 넣기
-                    const searchResultItemReviewDivA = document.createElement("a");
-                    searchResultItemReviewDiv.appendChild(searchResultItemReviewDivA);
-                    searchResultItemReviewDivA.href = "place/detail/"+place.contenttypeid+"/"+place.contentid;
+                    // const searchResultItemReviewDivA = document.createElement("a");
+                    // searchResultItemReviewDiv.appendChild(searchResultItemReviewDivA);
+                    // searchResultItemReviewDivA.href = "place/detail/"+place.contenttypeid+"/"+place.contentid;
 
-                    // 최근에 본 장소 onclick 세팅
-                    searchResultItemReviewDivA.setAttribute("onclick", `return addRecentViewPlace("${place.title}", "${place.firstimage}", "${place.contentid}", "${place.contenttypeid}", "${place.averageRating}", "${place.reviewCount}", "${place.addr1}")`);
+                    // // 최근에 본 장소 onclick 세팅
+                    // searchResultItemReviewDivA.setAttribute("onclick", `return addRecentViewPlace("${place.title}", "${place.firstimage}", "${place.contentid}", "${place.contenttypeid}", "${place.averageRating}", "${place.reviewCount}", "${place.addr1}")`);
 
-                    searchResultItemReviewDivA.innerText = "서울사당에서 지하철타면 15분이면 도착하는 과천에 자리잡은 서울대공원은 놀이공원,동물원,식물원등이 있고 호수를 가로지르는 리프트를 타거나 셔틀이 있어서 편하게 이용할수 있고 입장료또한 인터넷으로 예매하면 아주 저렴하게 이용할수 있어서 데이트를 하거나 휴식을 하러가기 아주 좋은곳이고 남녀노소 가족 누구나가 이용하기 좋은 곳이네요.";
+                    // searchResultItemReviewDivA.innerText = "서울사당에서 지하철타면 15분이면 도착하는 과천에 자리잡은 서울대공원은 놀이공원,동물원,식물원등이 있고 호수를 가로지르는 리프트를 타거나 셔틀이 있어서 편하게 이용할수 있고 입장료또한 인터넷으로 예매하면 아주 저렴하게 이용할수 있어서 데이트를 하거나 휴식을 하러가기 아주 좋은곳이고 남녀노소 가족 누구나가 이용하기 좋은 곳이네요.";
                 }
 
 

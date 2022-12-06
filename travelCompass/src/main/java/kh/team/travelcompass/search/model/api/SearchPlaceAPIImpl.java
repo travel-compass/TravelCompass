@@ -2,8 +2,6 @@ package kh.team.travelcompass.search.model.api;
 
 
 import java.io.BufferedReader;
-
-
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -15,14 +13,15 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import kh.team.travelcompass.common.Util;
 import kh.team.travelcompass.place.model.vo.Place;
+import kh.team.travelcompass.review.model.service.ReviewService;
 
 
 @Component
@@ -30,6 +29,9 @@ public class SearchPlaceAPIImpl implements SearchPlaceAPI{
 	private String key = "e+nonJ082FY6zfX+tup0hvcGTRAqHZV2OGGnVkjpa+zYdVpUYTHuuqfHYuIEzFwYXjbQXAhQa9tTuyiYdd0Eyw=="; //영현 인증키
 	private final String HOST = "http://apis.data.go.kr/B551011/KorService";
 	private final String essentialParam = "MobileOS=ETC&MobileApp=AppTest&_type=json&numOfRows=10&serviceKey=";
+	@Autowired
+	private ReviewService rService;
+	
 	public SearchPlaceAPIImpl() throws Exception{
 		this.key = URLEncoder.encode(key, "UTF-8");
 	}
@@ -140,8 +142,8 @@ public class SearchPlaceAPIImpl implements SearchPlaceAPI{
 			placeList = om.readValue(item, new TypeReference<List<Place>>() {});			
 		
 		}
-	
 		
+		rService.connectReview(placeList);
 		placeMap.put("placeList",  placeList);
 //		placeMap.put("items",      items);
 		placeMap.put("numOfRows",  numOfRows);

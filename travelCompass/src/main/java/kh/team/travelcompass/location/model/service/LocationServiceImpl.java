@@ -33,8 +33,6 @@ public class LocationServiceImpl implements LocationService {
 		paramMap.put("contentTypeId", contentTypeId);
 		
 		List<Place> placeList = api.serachPlace(paramMap);
-		
-		rService.connectReview(placeList);
 		// placeList 정렬 (contentId 오름차순)
 		
 		// placeList에서 contentId 가져와 리스트 생성
@@ -59,15 +57,12 @@ public class LocationServiceImpl implements LocationService {
 		// 관광지		
 		paramMap.put("contentTypeId", "12");
 		List<Place> tourPlace = api.serachPlace(paramMap);
-		
 		// 문화
 		paramMap.put("contentTypeId", "14");
 		List<Place> culturePlace = api.serachPlace(paramMap);
-		
 		// 레포츠
 		paramMap.put("contentTypeId", "28");
 		List<Place> leisurePlace = api.serachPlace(paramMap);
-		
 		// 음식점
 		paramMap.put("contentTypeId", "39");
 		List<Place> foodPlace = api.serachPlace(paramMap);

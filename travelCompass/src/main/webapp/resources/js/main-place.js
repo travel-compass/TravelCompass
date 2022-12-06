@@ -167,7 +167,7 @@ function createPlaceList(resultList, title) {
         const fill = document.createElement("span");
         fill.classList.add("fill");
         fill.innerHTML = "&#9679;&#9679;&#9679;&#9679;&#9679;";
-        fill.style.width = 92 * (place.averageRating * 20) / 100;
+        fill.style.width = 92 * (place.averageRating * 20) / 100 + "px";
         const reviewCount = document.createElement("span");
         reviewCount.innerText = place.reviewCount;
 
