@@ -47,7 +47,14 @@
                         <c:forEach var="travelPlace" items="${travel.placeList}" varStatus="vs">
                             <li class="travel-item">
                                 <a href="/place/detail/${travelPlace.contenttypeid}/${travelPlace.contentid}" target="_blank" class="travel-first-image">
-                                    <img src="${travelPlace.firstimage}" alt="썸네일">
+                                <c:choose>
+                                    <c:when test="${empty travelPlace.firstimage}">
+                                        <img src="/resources/images/common/12.png" alt="장소 썸네일">
+                                    </c:when>
+                                    <c:otherwise>
+                                        <img src="${travelPlace.firstimage}" alt="썸네일">
+                                    </c:otherwise>
+                                </c:choose>
                                 </a>
                                 <div class="place-info">
                                     <div class="place-title-area">
