@@ -161,9 +161,9 @@
                                                         <div class="search-result-item-grade">
                                                             <div class="rating">
                                                                 <span class="empty">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
-                                                                <span class="fill" style="width:${69*(place.averageRating*20)/100}px;">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                                                                <span class="fill" style="width:${83*(place.averageRating*20)/100}px;">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
                                                             </div><!--fill style="width:${69*(scrapPlace.averageRating*20)/100}px;"-->
-                                                            <span>${place.reviewCount}</span>
+                                                            <span>'${place.reviewCount}건'의 리뷰 </span>
                                                         </div>
                                                             
                                                         <div class="search-result-item-address">
