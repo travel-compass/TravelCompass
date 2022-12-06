@@ -19,8 +19,8 @@ public class TravelDAO {
 	 * @param memberNo
 	 * @return travelList
 	 */
-	public List<Travel> selectTravelList(int memberNo) {
-		return sqlSession.selectList("travelMapper.selectTravelList", memberNo);
+	public List<Travel> selectTravelList(Map<String, Integer> paramMap) {
+		return sqlSession.selectList("travelMapper.selectTravelList", paramMap);
 	}
 
 	

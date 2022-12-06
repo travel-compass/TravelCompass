@@ -12,7 +12,7 @@ public interface TravelService {
 	 * @param boardNo
 	 * @return travelList
 	 */
-	public List<Travel> selectTravelList(int memberNo);
+	public List<Travel> selectTravelList(Map<String, Integer> paramMap);
 
 	
 	/** 여행 추가 서비스
