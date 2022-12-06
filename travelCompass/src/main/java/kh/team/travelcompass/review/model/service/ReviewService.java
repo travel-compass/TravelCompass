@@ -35,4 +35,6 @@ public interface ReviewService {
 	 * 
 	 */
 	public void connectReview(List<Place> placeList);
+
+
 }

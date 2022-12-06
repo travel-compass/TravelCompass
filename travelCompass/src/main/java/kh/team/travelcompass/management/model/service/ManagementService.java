@@ -16,6 +16,12 @@ public interface ManagementService {
 	//정지 회원 조회
 	List<Review> selectBanMember();
 	
+
+	//신고 등록
+	int insertReport(Map<String, Object> paramMap);
+
+	
+	
 	//블라인드 처리
 	int reviewBlind(int reviewNo);
 
@@ -25,6 +31,8 @@ public interface ManagementService {
 
 	//회원 정지 취소
 	int memberBanCancel(int memberNo);
+
+	
 
 	
 
