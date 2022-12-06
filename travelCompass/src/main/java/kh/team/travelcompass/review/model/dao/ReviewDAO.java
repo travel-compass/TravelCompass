@@ -89,7 +89,7 @@ public class ReviewDAO {
 	 * @return result
 	 */
 	public int deleteReview(int reviewNo) {
-		return sqlSession.delete("reviewMapper.deleteReview", reviewNo);
+		return sqlSession.update("reviewMapper.deleteReview", reviewNo);
 	}
 
 	/**

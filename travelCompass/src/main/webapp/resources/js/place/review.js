@@ -112,7 +112,7 @@ function selectReviewList(e) {
         reviewInfoDateLink.classList.add("review-user-dday");
 
         reviewInfoDateLink.innerText = review.reviewDate;
-
+        //
         const reviewTextDotStyle = document.createElement("button");
         reviewTextDotStyle.classList.add("user-page-review-dot-style");
         reviewTextDotStyle.innerHTML = "<i class='fa-solid fa-ellipsis' ></i>";
@@ -124,11 +124,15 @@ function selectReviewList(e) {
         reviewTextDownMenu.classList.add("down-menu");
 
         const reviewTextDownMenu_li1 = document.createElement("li");
-        reviewTextDownMenu_li1.innerHTML = "<li><a href='#'>수정</a></li>";
+        reviewTextDownMenu_li1.innerText = "수정";
 
         const reviewTextDownMenu_li2 = document.createElement("li");
-        reviewTextDownMenu_li2.innerHTML = "<li><a href='#'>삭제</a></li>";
-
+        reviewTextDownMenu_li2.innerText = "삭제";
+        reviewTextDownMenu_li2.setAttribute(
+          "onclick",
+          `deleteReview(${review.reviewNo})`
+        );
+        //
         // 드랍 다운 메뉴 이벤트 삽입
         reviewTextDotStyle.addEventListener("click", () => {
           reviewTextDotStyle.nextElementSibling.style.display = "block";
@@ -203,11 +207,15 @@ function selectReviewList(e) {
 
         rating.append(empty, fill);
 
-        reviewTextHeaderStyle.append(
-          reviewTextHeaderLayout,
-          reviewTextDotStyle,
-          reviewTextDotDownMenu
-        );
+        if (memberNo == review.memberNo) {
+          reviewTextHeaderStyle.append(
+            reviewTextHeaderLayout,
+            reviewTextDotStyle,
+            reviewTextDotDownMenu
+          );
+        } else {
+          reviewTextHeaderStyle.append(reviewTextHeaderLayout);
+        }
 
         reviewTextBottomMenu.append(
           reviewTextSaveButton,
@@ -256,10 +264,13 @@ for (let BTNList of dropDownMenu) {
 
 for (let BTNList of dropDownMenu) {
   BTNList.addEventListener("blur", () => {
-    BTNList.nextElementSibling.style.display = "none";
+    setTimeout(() => {
+      BTNList.nextElementSibling.style.display = "none";
+    }, 1);
   });
 }
 
+/* 리뷰 수정 */
 let beforeTitle;
 let beforeContent;
 
@@ -297,6 +308,33 @@ for (let BTNList of dropDownMenu) {
     reviewContent.append(reviewContentUpdate);
   });
 }
+
+/* 리뷰 삭제 */
+function deleteReview(reviewNo) {
+  console.log(reviewNo);
+  if (confirm("정말 삭제하시겠습니까?")) {
+    $.ajax({
+      url: "/review/delete",
+      date: {
+        reviewNo: reviewNo,
+      },
+      type: "GET",
+      success: (result) => {
+        if (result > 0) {
+          alert("삭제되었습니다");
+          selectReviewList();
+        } else {
+          console.log("삭제 실패");
+        }
+      },
+      error: () => {
+        console.log("삭제 에러");
+      },
+    });
+  }
+}
+
+/* 버튼 이벤트 */
 
 const suportButton = document.getElementsByClassName("suport-button");
 

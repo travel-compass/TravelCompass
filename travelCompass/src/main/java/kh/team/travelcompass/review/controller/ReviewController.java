@@ -112,8 +112,15 @@ public class ReviewController {
 
 
 	// 리뷰 삭제
-	@GetMapping("/deleteReview")
+	@GetMapping("/delete")
 	public int deleteReview(int reviewNo) {
+		
+		
+		
+		
+		System.out.println();
+		
+		
 		return service.deleteReview(reviewNo);
 	}
 

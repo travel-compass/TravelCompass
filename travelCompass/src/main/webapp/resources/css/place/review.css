@@ -56,6 +56,11 @@
     cursor: pointer;
 }
 
+#memberFeat {
+    display: flex;
+    justify-content: flex-end;
+}
+
 
 /* component */
 

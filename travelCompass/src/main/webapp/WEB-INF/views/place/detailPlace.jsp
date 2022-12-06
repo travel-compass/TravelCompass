@@ -26,8 +26,8 @@
 
 <body>
   <script>
-    const mapx=${place.mapx};
-    const mapy=${place.mapy};
+    const mapx="${place.mapx}";
+    const mapy="${place.mapy}";
     const memberNo="${loginMember.memberNo}";
     const memberNickname="${loginMember.memberNickname}"
     const contentid="${place.contentid}";

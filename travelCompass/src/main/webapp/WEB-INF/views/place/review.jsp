@@ -74,9 +74,17 @@
             <textarea name="reviewTitle" rows="1" class="review_titlearea" id="reviewTitle"></textarea>
             <textarea name="reviewContent" rows="10" class="review_textarea" id="reviewContent"></textarea>
           </div>
-          <div class="cmd" id="addReview">
-            <button type="button">등록</button>
-          </div>
+            
+            <form method="POST" enctype="multipart/form-data" id="form">
+              <input type="file" name="profile"/>
+              <button type="button" onclick="uploadFunction();"class="form-control btn btn-primary">파일업로드</button>
+              
+              <div class="cmd" id="addReview">
+                <button type="button">등록</button>
+              </div>
+            </form>
+          
+          
         </form>
       </div>
 
@@ -97,16 +105,15 @@
                   </div>
                 </div>
 
-                <div class="user-page-review-dot-style"><i class="fa-solid fa-ellipsis"></i>
-                
-                </div>
-                <button class="user-page-review-dot-style"><i class="fa-solid fa-ellipsis"></i></button>
-                <div class="user-page-review-dot-down-menu">
-                    <ul class="down-menu">
-                        <li><a href="#">수정</a></li>
-                        <li><a href="#">삭제</a></li>
-                    </ul>
-                </div>
+                <c:if test="${loginMember.memberNo eq review.memberNo}">
+                  <button class="user-page-review-dot-style"><i class="fa-solid fa-ellipsis"></i></button>
+                  <div class="user-page-review-dot-down-menu">
+                      <ul class="down-menu">
+                          <li>수정</li>
+                          <li onclick="deleteReview(${review.reviewNo})">삭제</li>
+                      </ul>
+                  </div>
+                </c:if>
 
               </div>
 
@@ -155,5 +162,6 @@
     </div>
     </ul>
   </div>
+
 </div>
 
