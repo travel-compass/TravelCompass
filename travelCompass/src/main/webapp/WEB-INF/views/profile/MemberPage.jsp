@@ -40,7 +40,7 @@
                         <div class="user-info-left-part">
                             <div class="user-container-image">
                                 <span class="user-info-image">
-                                    <img src="${member.profileImage}" alt="프로필 이미지">
+                                    <img id="profile-image" src="${member.profileImage}" alt="프로필 이미지">
                                 </span>
                             </div>
                             <div class="user-nickname">
@@ -66,10 +66,11 @@
                         </div>
                         <c:if test="${loginMember.memberNo == member.memberNo}">
                             <!-- 본인 회원 프로필 메뉴 -->
-                            <div class="my-info-right-part">
-                                    <label for="image-input">프로필 사진 변경</label>
-                                    <input type="file" id="image-input" accept="image/*">
-                            </div>
+                            <form action="/profile/${member.memberNo}" method="POST" class="my-info-right-part"
+                            id="profileForm" enctype="multipart/form-data" onsubmit="return true">
+                                <label for="image-input">프로필 사진 변경</label>
+                                <input type="file" id="image-input" name="profileImage" accept="image/*">
+                            </form>
                         </c:if>
 
                         <c:if test="${loginMember.memberNo != member.memberNo}">

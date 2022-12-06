@@ -1942,3 +1942,51 @@ const reviewMoreList = function(){
     
     });
 }
+
+// 프로필 이미지 수정
+
+const profileImage = document.getElementById("profile-image");
+const imageInput = document.getElementById("image-input");
+const profileForm = document.getElementById("profileForm");
+
+let initCheck;
+
+// (0 : 초기값(취소) / 1 : 새 이미지 업로드)
+let deleteCheck = 0;
+
+const originalImage = profileImage.getAttribute("src");
+
+if(imageInput != null){
+
+    if(profileImage.getAttribute("src") == "/resources/images/common/profile.png"){
+        // 기본 이미지인 경우
+        initCheck = false;
+    } else {
+        initCheck = true;
+    }
+
+    imageInput.addEventListener("change", e => {
+
+        if(e.target.files[0] != undefined){
+
+            const reader = new FileReader();
+
+            reader.readAsDataURL(e.target.files[0]);
+
+            reader.onload = event => {
+
+                profileImage.setAttribute("src", event.target.result);
+
+                deleteCheck = 1;
+            }
+        } else {
+
+            profileImage.setAttribute("src", originalImage);
+
+            deleteCheck = 0;
+        }
+
+        profileForm.submit();
+        
+    });
+}

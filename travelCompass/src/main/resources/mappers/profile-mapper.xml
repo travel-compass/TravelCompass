@@ -16,7 +16,7 @@
 		<result property="reviewImagePath" column="REVIEW_IMAGE_PATH"/>
 		<result property="profileImage" column="PROFILE_IMAGE"/>
 		<result property="memberNickname" column="MEMBER_NICKNAME"/>
-		
+		<result property="contenttypeid" column="CONTENT_TYPE_ID"/>
 		 
 		<collection property="reviewImgList" javaType="java.util.ArrayList"
 		ofType="ReviewImage" select="selectReviewImageList" column="REVIEW_NO"/>

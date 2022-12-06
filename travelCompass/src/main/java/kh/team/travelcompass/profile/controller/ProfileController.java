@@ -5,14 +5,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kh.team.travelcompass.member.model.vo.Member;
 import kh.team.travelcompass.profile.model.service.ProfileService;
@@ -184,5 +189,28 @@ public class ProfileController {
 		
 		return ajaxImageMoreList;
 		
+	}
+	
+	// 프로필 이미지 변경
+	@PostMapping("/profile/{memberNo}")
+	public String updateProfile(
+			@SessionAttribute("loginMember") Member loginMember,
+			@RequestParam(value = "profileImage") MultipartFile profileImage,
+			HttpServletRequest req, RedirectAttributes ra) throws Exception {
+		
+		String wepPath = "/resources/images/common/";
+		
+		String filePath = req.getSession().getServletContext().getRealPath(wepPath);
+
+		int result = service.updateProfile(wepPath, filePath, profileImage, loginMember);
+		
+		String message = null;
+		
+		if (result > 0) message = "프로필 이미지가 변경되었습니다.";
+		else message = "프로필 이미지 변경 실패";
+				
+		ra.addFlashAttribute("message", message);
+		
+		return "redirect:profile/" + loginMember.getMemberNo();
 	}
 }

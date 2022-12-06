@@ -104,4 +104,12 @@ public class ProfileDAO {
 		
 		return sqlSession.selectList("profileMapper.ReviewSelectList", memberNo, rowBounds);
 	}
+
+	/** 프로핑 이미지 변경
+	 * @param loginMember
+	 * @return result
+	 */
+	public int updateProfile(Member loginMember) {
+		return sqlSession.update("memberMapper.updateProfile", loginMember);
+	}
 }

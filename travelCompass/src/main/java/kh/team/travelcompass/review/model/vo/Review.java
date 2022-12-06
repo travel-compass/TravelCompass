@@ -31,6 +31,7 @@ public class Review {
 
 	private List<ReviewImage> reviewImgList;
 	
+	private String contenttypeid;
 	// Report 관련 column추가
 	private int reportNo;          //신고 번호
 	private int reasonCode;        //사유 코드
