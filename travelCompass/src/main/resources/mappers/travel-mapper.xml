@@ -16,7 +16,7 @@
 	</resultMap>
 	
 	<!-- 특정회원 여행목록 조회 -->
-	<select id="selectTravelList" parameterType="_int" resultMap="travel_rm">
+	<select id="selectTravelList" parameterType="map" resultMap="travel_rm">
 		SELECT T.TRAVEL_NO, T.TRAVEL_TITLE, T.PRIVATE_FL, T.MEMBER_NO,
 			TO_CHAR(T.TRAVEL_DATE, 'YYYY"년" MM"월" DD"일"') TRAVEL_DATE,
 			(SELECT PS.FIRST_IMAGE FROM "PLACE_SCRAP" PS
@@ -30,7 +30,13 @@
 			(SELECT PROFILE_IMAGE FROM "MEMBER" M WHERE M.MEMBER_NO = T.MEMBER_NO) PROFILE_IMAGE
 		FROM TRAVEL T
 		WHERE MEMBER_NO = #{memberNo}
-		AND T.TRAVEL_DEL_FL = 'N'
+		AND T.TRAVEL_DEL_FL = 'N'		
+		<if test="privateFlag == 0">		<!-- 공개만 -->
+			AND T.PRIVATE_FL = 'N'
+		</if>
+		<if test="privateFlag == 1">		<!-- 비공개만 -->
+			AND T.PRIVATE_FL = 'Y'
+		</if>
 	</select>
 	
 	<!-- 여행 생성 -->

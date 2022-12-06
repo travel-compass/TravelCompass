@@ -38,7 +38,6 @@ if(plusTravel != null) {            // 자신의 여행목록 페이지면
             return;
         }
 
-
         $.ajax({
             url: "/travel/create",
             data: {
@@ -47,7 +46,7 @@ if(plusTravel != null) {            // 자신의 여행목록 페이지면
             },
             success: result=> {
                 if(result > 0) {        // 여행 생성에 성공했을 때
-                    createTravelList(); // 여행목록 다시 불러오기
+                    createTravelList(document.querySelector("input[name='travelCategory']:checked").value); // 여행목록 다시 불러오기
                     travelModal.classList.remove("show"); // 여행추가 모달 창 닫기
                 } else {                // 실패했을 때
                     alert("여행 추가에 실패하였습니다.")
@@ -60,11 +59,28 @@ if(plusTravel != null) {            // 자신의 여행목록 페이지면
     });  
 })();
 
-function createTravelList() {
+// travel-category 이벤트 달기
+(()=>{
+    const categoryArr = document.getElementsByClassName("travel-scope");
+    if(categoryArr != null) {
+        for(let category of categoryArr) {
+            category.addEventListener("click", e=>{
+                const privateFlag = e.currentTarget.previousElementSibling.value;
+                createTravelList(privateFlag);
+            });
+        }
+    }
+})();
+
+
+
+function createTravelList(privateFlag) {
+    console.log(document.querySelector("input[name='travelCategory']:checked").value);
     $.ajax({
         url: "/travel/select",
         data: {
-            "memberNo": hostNo
+            "memberNo": hostNo,
+            "privateFlag": privateFlag
         },
         success: result => {
             console.log(result);
