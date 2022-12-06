@@ -23,26 +23,28 @@
     <main>
         <h1 class="main-title">여행</h1>
         <div class="travel-container">
+        <c:if test="${loginMember.memberNo eq memberNo}">
             <ul class="travel-nav">
                 <li>
-                    <input type="radio" id="totalTravel" name="travelCategory" checked>
-                    <label for="totalTravel">
+                    <input type="radio" id="totalTravel" name="travelCategory" checked value="2">
+                    <label for="totalTravel" class="travel-scope">
                         <span>모든 여행</span>
                     </label>
                 </li>
                 <li>
-                    <input type="radio" id="privateTravel" name="travelCategory">
-                    <label for="privateTravel">
+                    <input type="radio" id="privateTravel" name="travelCategory" value="1">
+                    <label for="privateTravel" class="travel-scope">
                         <span>여행(비공개)</span>
                     </label>
                 </li>
                 <li>
-                    <input type="radio" id="publicTravel" name="travelCategory">
-                    <label for="publicTravel">
+                    <input type="radio" id="publicTravel" name="travelCategory" value="0">
+                    <label for="publicTravel" class="travel-scope">
                         <span>여행(공개)</span>
                     </label>
                 </li>
             </ul>
+        </c:if>
             <ul id="travel-list">
                 <!-- 첫번째 요소 무조건 고정 -->
                 <c:if test="${loginMember.memberNo eq memberNo }">

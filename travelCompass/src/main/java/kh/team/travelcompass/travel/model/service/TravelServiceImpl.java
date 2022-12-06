@@ -21,8 +21,8 @@ public class TravelServiceImpl implements TravelService{
 
 	// 회원별 모든 여행 조회 서비스
 	@Override
-	public List<Travel> selectTravelList(int memberNo) {
-		return dao.selectTravelList(memberNo);
+	public List<Travel> selectTravelList(Map<String, Integer> paramMap) {
+		return dao.selectTravelList(paramMap);
 	}
 
 	// 여행 추가 서비스
