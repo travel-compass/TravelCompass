@@ -2,6 +2,7 @@ package kh.team.travelcompass.search.controller;
 
 import java.util.List;
 
+
 import java.util.Map;
 
 import org.apache.catalina.mapper.Mapper;
@@ -43,9 +44,9 @@ public class SearchController {
 	// @ResponseBody
 	@GetMapping("/search")
 	public String searchPlaceKeyword(String keyword,
-			@RequestParam(value = "areaCode", required = false, defaultValue = "null") String areaCode,
-			@RequestParam(value = "contentTypeId", required = false, defaultValue = "null") String contentTypeId,
-			Model model, @RequestParam(value = "pageNo", required = false, defaultValue = "1") String pageNo) {
+			/*@RequestParam(value = "areaCode", required = false, defaultValue = "null")*/ String areaCode,
+			/*@RequestParam(value = "contentTypeId", required = false, defaultValue = "null")*/ String contentTypeId,
+			Model model, /*@RequestParam(value = "pageNo", required = false, defaultValue = "1")*/ String pageNo) {
 
 		try {
 			Map<String, Object> placeMap = service.searchPlaceKeyword(keyword, areaCode, contentTypeId, pageNo);
@@ -63,9 +64,9 @@ public class SearchController {
 	@ResponseBody
 	@GetMapping("/categorySearch")
 	public Map<String,Object> categorySearch(String keyword,
-			@RequestParam(value = "areaCode", required = false, defaultValue = "null") String areaCode,
-			@RequestParam(value = "contentTypeId", required = false, defaultValue = "null") String contentTypeId,
-			@RequestParam(value = "pageNo", required = false, defaultValue = "1") String pageNo) {
+			/*@RequestParam(value = "areaCode", required = false, defaultValue = "null")*/ String areaCode,
+			/*@RequestParam(value = "contentTypeId", required = false, defaultValue = "null")*/ String contentTypeId,
+			/*@RequestParam(value = "pageNo", required = false, defaultValue = "1")*/ String pageNo) {
 
 		Map<String, Object> placeMap = null;
 		try {

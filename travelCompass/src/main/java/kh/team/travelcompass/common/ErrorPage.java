@@ -14,5 +14,9 @@ public class ErrorPage {
 		return "error/404";
 	}
 	
-	
+	@GetMapping("/error/500")
+	public String error500(){
+		
+		return "error/500";
+	}
 }

@@ -3,6 +3,7 @@ package kh.team.travelcompass.review.model.service;
 import java.util.List;
 import java.util.Map;
 
+import kh.team.travelcompass.place.model.vo.Place;
 import kh.team.travelcompass.review.model.vo.Review;
 
 public interface ReviewService {
@@ -58,4 +59,9 @@ public interface ReviewService {
 	 */
 	List<Map<String, Integer>> countRating(String contentid);
 	
+	
+	/** 리뷰 연결(평균평점, 리뷰갯수)
+	 * 
+	 */
+	public void connectReview(List<Place> placeList);
 }

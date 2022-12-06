@@ -21,15 +21,14 @@
                         <div class="inner-circle">
                             <a href="/">
                                 <i class="fa fa-home"></i>
-                                <span>404</span>
+                                <span>500</span>
                             </a>
                         </div>
-                        <span class="inner-status">You entered incorrectly</span>
+                        <span class="inner-status server-error">500 server error has occurred &nbsp;</span>
                         <span class="inner-detail">
-                            We can not find the page you're looking for.
                             <a href="/" class="btn btn-info mtl" id="return-home">
                                 <i class="fa fa-home"></i>&nbsp;
-                                Return home
+                                 Return home
                             </a> 
                         </span>
                     </div>

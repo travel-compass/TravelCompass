@@ -114,6 +114,12 @@ public class ReviewDAO {
 	 */
 	public List<Map<String, Integer>> countRating(String contentid) {
 		return sqlSession.selectList("reviewMapper.countRating", contentid);
+	/** 리뷰 연결
+	 * @param condition
+	 * @return result
+	 */
+	public List<Map<String, Object>>selectConnectReview(List<String> contentidList) {
+		return sqlSession.selectList("reviewMapper.selectConnectReview", contentidList);
 	}
 
 }

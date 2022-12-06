@@ -139,7 +139,7 @@
                                                 <div class="search-result-item">
 
                                                     <div class="search-result-item-img">
-                                                        <a href="/place/detail/${place.contenttypeid}/${place.contentid}">
+                                                        <a href="/place/detail/${place.contenttypeid}/${place.contentid}" onclick="return addRecentViewPlace('${place.title}', '${place.firstimage}', '${place.contentid}', '${place.contenttypeid}', '${place.averageRating}', '${place.reviewCount}', '${place.addr1}')">
                                                             <c:choose>
                                                                 <c:when test="${!empty place.firstimage}">
                                                                     <img src="${place.firstimage}" alt="" width="177px" height="140px">
@@ -154,26 +154,27 @@
                                                     <div class="search-result-item-content">
 
                                                         <div class="search-result-item-title">
-                                                            <span><a href="/place/detail/${place.contenttypeid}/${place.contentid}">${place.title}</a></span>
+                                                            <span><a href="/place/detail/${place.contenttypeid}/${place.contentid}"
+                                                            onclick="return addRecentViewPlace('${place.title}', '${place.firstimage}', '${place.contentid}', '${place.contenttypeid}', '${place.averageRating}', '${place.reviewCount}', '${place.addr1}')">${place.title}</a></span>
                                                         </div>
 
                                                         <div class="search-result-item-grade">
                                                             <div class="rating">
                                                                 <span class="empty">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
-                                                                <span class="fill" >&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                                                                <span class="fill" style="width:${69*(place.averageRating*20)/100}px;">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
                                                             </div><!--fill style="width:${69*(scrapPlace.averageRating*20)/100}px;"-->
-                                                            <span><a href="#<!--상세페이지-리뷰-->">267건의 리뷰</a></span>
+                                                            <span>${place.reviewCount}</span>
                                                         </div>
                                                             
                                                         <div class="search-result-item-address">
-                                                            <span><a href="/place/detail/${place.contenttypeid}/${place.contentid}">${place.addr1}</a></span>
+                                                            <span><a href="/place/detail/${place.contenttypeid}/${place.contentid}" onclick="return addRecentViewPlace('${place.title}', '${place.firstimage}', '${place.contentid}', '${place.contenttypeid}', '${place.averageRating}', '${place.reviewCount}', '${place.addr1}')">${place.addr1}</a></span>
                                                         </div>
                                                             
-                                                        <div class="search-result-item-review">
+                                                        <%-- <div class="search-result-item-review">
                                                             <a href="#<!--상세페이지-리뷰-->">"서울사당에서 지하철타면 15분이면 도착하는 과천에 자리잡은 서울대공원은 놀이공원,동물원,식물원등이 있고 호수를 가로지르는 리프트를 타거나 셔틀이 있어서 편하게 이용할수 있고 입장료또한 인터넷으로 예매하면 아주 저렴하게 이용할수 있어서 데이트를 하거나 휴식을 하러가기 아주 좋은곳이고 남녀노소 가족 누구나가 이용하기 좋은 곳이네요
                                                                 "</a>
                                                             
-                                                        </div>
+                                                        </div> --%>
                                                     
                                                     </div>
                                                 </div>

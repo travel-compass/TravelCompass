@@ -209,4 +209,17 @@
 	</select>
 	
 	
+	
+	<!-- 장소와 연결할 리뷰 평균 평점, 리뷰 갯수 조회 -->
+	<select id="selectConnectReview" parameterType="list" resultType="map">
+		SELECT COUNT(REVIEW_NO) REVIEW_COUNT, NVL(ROUND(AVG(RATING), 1), 0) AVERAGE_RATING FROM REVIEW
+		RIGHT JOIN (SELECT * FROM
+			<foreach collection="list" item="contentid" open="(" close=")" separator="UNION ALL">
+				SELECT #{contentid} CONTENT_ID FROM DUAL
+			</foreach>
+		) A
+		USING(CONTENT_ID)
+		GROUP BY CONTENT_ID
+		ORDER BY CONTENT_ID
+	</select>
 </mapper>
