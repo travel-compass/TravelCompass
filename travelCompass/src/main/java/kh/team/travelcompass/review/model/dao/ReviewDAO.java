@@ -88,4 +88,12 @@ public class ReviewDAO {
 		return sqlSession.delete("reviewMapper.deleteReview", reviewNo);
 	}
 
+	/** 리뷰 연결
+	 * @param condition
+	 * @return result
+	 */
+	public List<Map<String, Object>>selectConnectReview(List<String> contentidList) {
+		return sqlSession.selectList("reviewMapper.selectConnectReview", contentidList);
+	}
+
 }

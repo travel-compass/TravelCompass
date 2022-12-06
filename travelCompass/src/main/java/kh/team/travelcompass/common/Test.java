@@ -33,10 +33,9 @@ public class Test {
 //		System.out.println(keywordList);
 //		keywordList = keywordList.subList(0, 3);
 //		System.out.println(keywordList);
-		testDiv();
 	}
 	
-	public static void testDiv() {
-		System.out.println(100 * (4.3*20)/100);
+	public static void sortTest() {
+		
 	}
 }
