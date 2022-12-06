@@ -99,4 +99,17 @@ public class TravelServiceImpl implements TravelService{
 	public int deleteTravel(int travelNo) {
 		return dao.deleteTravelList(travelNo);
 	}
+	
+	
+	// 여행 스크랩
+	@Override
+	public int insertTravelScrap(Map<String, Integer> paramMap) {
+		return dao.insertTravelScrap(paramMap);
+	}
+
+	// 여행 스크랩 취소
+	@Override
+	public int deleteTravelScrap(Map<String, Integer> paramMap) {
+		return dao.deleteTravelScrap(paramMap);
+	}
 }

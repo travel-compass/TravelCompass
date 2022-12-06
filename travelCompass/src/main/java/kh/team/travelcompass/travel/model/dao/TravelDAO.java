@@ -10,6 +10,10 @@ import org.springframework.stereotype.Repository;
 import kh.team.travelcompass.place.model.vo.Place;
 import kh.team.travelcompass.travel.model.vo.Travel;
 
+/**
+ * @author Tonic
+ *
+ */
 @Repository
 public class TravelDAO {
 	@Autowired
@@ -101,5 +105,23 @@ public class TravelDAO {
 	 */
 	public int deleteTravelList(int travelNo) {
 		return sqlSession.update("travelMapper.deleteTravel", travelNo);
+	}
+
+
+	/** 여행 스크랩
+	 * @param paramMap
+	 * @return result
+	 */
+	public int insertTravelScrap(Map<String, Integer> paramMap) {
+		return sqlSession.insert("travelMapper.insertTravelScrap", paramMap);
+	}
+
+
+	/** 여행 스크랩 취소
+	 * @param paramMap
+	 * @return result
+	 */
+	public int deleteTravelScrap(Map<String, Integer> paramMap) {
+		return sqlSession.delete("travelMapper.deleteTravelScrap", paramMap);
 	}
 }

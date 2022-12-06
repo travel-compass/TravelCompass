@@ -86,6 +86,8 @@ public class TravelController {
 				model.addAttribute("scrapPlaceList", scrapPlaceList);
 				model.addAttribute("jsonScrapPlaceList", new ObjectMapper().writeValueAsString(scrapPlaceList));
 				path = "/travel/travelCreate";
+			} else {
+				path = "/travel/travelDetail";
 			}
 		} else {						// 로그인 중이 아니면 무조건 다른사람의 여행 페이지
 			path = "/travel/travelDetail";
@@ -221,5 +223,25 @@ public class TravelController {
 		}
 		ra.addFlashAttribute("message", message);
 		return "redirect:"+path;
+	}
+	
+	/** 여행 스크랩
+	 * @param paramMap
+	 * @return result
+	 */
+	@ResponseBody
+	@GetMapping("insertTravelScrap")
+	public int insertTravelScrap(@RequestParam Map<String, Integer> paramMap) {
+		return service.insertTravelScrap(paramMap);
+	}
+	
+	/** 여행 좋아요
+	 * @param paramMap
+	 * @return result
+	 */
+	@ResponseBody
+	@GetMapping("deleteTravelScrap")
+	public int deleteTravelScrap(@RequestParam Map<String, Integer> paramMap) {
+		return service.deleteTravelScrap(paramMap); 
 	}
 }

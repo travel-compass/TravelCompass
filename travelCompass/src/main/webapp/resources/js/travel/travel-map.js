@@ -40,6 +40,64 @@
     });
 })();
 
+// 스크랩 버튼
+(()=>{
+    // <i class="fa-regular fa-bookmark"></i> 안색칠
+    const travelScrapBtn = document.getElementById("travelScrapBtn");
+    travelScrapBtn.addEventListener("click", ()=>{
+        if(memberNo == "") {     // 로그인 상태가 아닐 때
+            if(confirm("로그인 후 이용 가능합니다.\n로그인 하시겠습니까?")) {
+                location.href = "/member/login";
+            }
+            return;
+        }
+        if(travelScrapBtn.classList.contains("fa-regular")) {   // 스크랩을 안했다면
+            $.ajax({
+                url:"/travel/insertTravelScrap",
+                data: {
+                    "travelNo" : travel.travelNo,
+                    "memberNo" : memberNo
+                },
+                success: (result)=>{
+                    if(result > 0) {
+                        console.log("성공");
+                        travelScrapBtn.classList.remove("fa-regular");
+                        travelScrapBtn.classList.add("fa-solid");
+                    } else {
+                        console.log("실패");
+                    }
+                },
+                error:()=>{
+                    console.log("여행 스크랩 에러");
+                }
+            });
+        } else {                                                 // 스크랩을 했다면
+            $.ajax({
+                url:"/travel/deleteTravelScrap",
+                data:{
+                    "travelNo": travel.travelNo,
+                    "memberNo": memberNo
+                },
+                success: (result)=>{
+                    if(result > 0) {
+                        console.log("성공");
+                        travelScrapBtn.classList.remove("fa-solid");
+                        travelScrapBtn.classList.add("fa-regular");
+                    } else {
+                        console.log("실패");
+                    }
+                },
+                error:()=>{
+                    console.log("여행 스크랩 에러");
+                }
+            })
+        }
+    });
+})();
+
+
+
+
 const mapContainer = document.getElementById("travelMap");
 let mapOption = {
     center: new kakao.maps.LatLng(Number(travel.placeList[0].mapy), Number(travel.placeList[0].mapx)),

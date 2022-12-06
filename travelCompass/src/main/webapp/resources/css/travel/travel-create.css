@@ -384,9 +384,6 @@ button.cancel-btn {
     margin-bottom: 10px;
 }
 
-
-
-
 /* 맵 */
 #travelMap {
     width: 100%;
@@ -435,3 +432,6 @@ button.cancel-btn {
 #roadViewModal.show {
     display: flex;
 }
+
+
+
