@@ -29,5 +29,8 @@ public interface ProfileService {
 	// 팔로잉 한 인원 리스트 조회하기
 	List<Member> selectFollowingMemberList(int memberNo);
 
+	// 더보기 버튼 눌렀을 때 남은 리뷰 테이블 불러오기
+	List<Review> moreReviewList(int memberNo, int rowBoundCount);
+
 
 }

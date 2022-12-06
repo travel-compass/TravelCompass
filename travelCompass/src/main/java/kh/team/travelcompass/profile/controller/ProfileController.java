@@ -97,8 +97,6 @@ public class ProfileController {
 	@ResponseBody
 	public int follow(@RequestParam Map<String, Integer> paramMap) {
 		
-		System.out.println(paramMap);
-		
 		return service.follow(paramMap);
 	}
 	
@@ -136,4 +134,55 @@ public class ProfileController {
 		return followingMemberList;
 	}
 	
+	// 더보기 버튼 눌렀을 때 리뷰 10개씩 보여주기 
+	@GetMapping("/profile/{memberNo}/reviewMoreList")
+	@ResponseBody
+	public List<Review> moreReviewList(
+			@PathVariable("memberNo") int memberNo,
+			@RequestParam int rowBoundCount) {
+		
+		List<Review> moreReviewList = service.moreReviewList(memberNo,rowBoundCount);
+		
+		return moreReviewList;
+		
+	}
+	
+	// ajax 더보기 버튼 눌렀을 때 피드 10개씩 보여주기
+	@GetMapping("/profile/{memberNo}/ajaxfedMoreList")
+	@ResponseBody
+	public List<Review> fedMoreReviewList(
+			@PathVariable("memberNo") int memberNo,
+			@RequestParam int rowBoundCount) {
+		
+		List<Review> ajaxFedMoreList = service.moreReviewList(memberNo,rowBoundCount);
+		
+		return ajaxFedMoreList;
+		
+	}
+	
+	// ajax 더보기 버튼 눌렀을 때 피드 10개씩 보여주기
+	@GetMapping("/profile/{memberNo}/ajaxReviewMoreList")
+	@ResponseBody
+	public List<Review> reviewMoreReviewList(
+			@PathVariable("memberNo") int memberNo,
+			@RequestParam int rowBoundCount) {
+		
+		List<Review> ajaxReviewMoreList = service.moreReviewList(memberNo,rowBoundCount);
+		
+		return ajaxReviewMoreList;
+		
+	}
+	
+	// ajax 더보기 버튼 눌렀을 때 사진리뷰 10개씩 보여주기
+	@GetMapping("/profile/{memberNo}/ajaxImageMoreList")
+	@ResponseBody
+	public List<Review> imageMoreReviewList(
+			@PathVariable("memberNo") int memberNo,
+			@RequestParam int rowBoundCount) {
+		
+		List<Review> ajaxImageMoreList = service.moreReviewList(memberNo,rowBoundCount);
+		
+		return ajaxImageMoreList;
+		
+	}
 }
