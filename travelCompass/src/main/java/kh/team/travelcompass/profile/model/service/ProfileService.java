@@ -38,5 +38,8 @@ public interface ProfileService {
 	int updateProfile(String wepPath, String filePath, 
 			MultipartFile profileImage, Member loginMember) throws Exception;
 
+	// 리뷰 삭제
+	int boardDelete(int reviewNo);
+
 
 }

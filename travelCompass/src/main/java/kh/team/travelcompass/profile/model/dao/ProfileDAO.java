@@ -112,4 +112,12 @@ public class ProfileDAO {
 	public int updateProfile(Member loginMember) {
 		return sqlSession.update("memberMapper.updateProfile", loginMember);
 	}
+
+	/** 리뷰 삭제
+	 * @param reviewNo
+	 * @return result
+	 */
+	public int boardDelete(int reviewNo) {
+		return sqlSession.update("profileMapper.reviewDelete", reviewNo);
+	}
 }

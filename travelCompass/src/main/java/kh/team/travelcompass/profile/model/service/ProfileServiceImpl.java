@@ -122,5 +122,12 @@ public class ProfileServiceImpl implements ProfileService {
 		
 		return result;
 	}
+
+	// 리뷰 삭제
+	@Transactional
+	@Override
+	public int boardDelete(int reviewNo) {
+		return dao.boardDelete(reviewNo);
+	}
 	
 }

@@ -193,8 +193,7 @@
                                             <button class="user-page-review-dot-style"><i class="fa-solid fa-ellipsis"></i></button>
                                             <div class="user-page-review-dot-down-menu">
                                                 <ul class="down-menu">
-                                                    <li><a href="#">수정</a></li>
-                                                    <li><a href="#">삭제</a></li>
+                                                    <li id="reviewDelete" var="${FedList.reviewNo}">삭제</li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -230,8 +229,7 @@
                                             <button class="user-page-review-dot-style"><i class="fa-solid fa-ellipsis"></i></button>
                                             <div class="user-page-review-dot-down-menu">
                                                 <ul class="down-menu">
-                                                    <li><a href="#">수정</a></li>
-                                                    <li><a href="#">삭제</a></li>
+                                                    <li id="reviewDelete" var="${FedList.reviewNo}">삭제</li>
                                                 </ul>
                                             </div>
                                         </div>

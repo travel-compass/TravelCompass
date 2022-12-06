@@ -80,4 +80,10 @@
 		AND MEMBER_NO = #{reviewPageMemberNo}
 	</delete>
 	
+	<update id="reviewDelete">
+		UPDATE REVIEW SET
+		REVIEW_FL = 'Y'
+		WHERE REVIEW_NO = #{reviewNo}
+	</update>
+	
 </mapper>
