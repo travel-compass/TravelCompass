@@ -252,7 +252,12 @@ const createTravelList = () => {
                     travelFirstImage.href=`/place/detail/${result.placeList[i].contenttypeid}/${result.placeList[i].contentid}`;
                     travelFirstImage.classList.add("travel-first-image");
                     const img = document.createElement("img");
-                    img.src = result.placeList[i].firstimage;
+                    if(result.placeList[i].firstimage != null) {
+                        img.src = result.placeList[i].firstimage;
+                    } else {
+                        img.src = "/reousrces/images/common/12.png";
+                    }
+                    
         
                     /* 장소 정보 */
                     const placeInfo = document.createElement("div");
@@ -602,7 +607,11 @@ const createTravelPlace = (travelPlace, distance) => {
     travelFirstImage.href=`/place/detail/${travelPlace.contenttypeid}/${travelPlace.contentid}`;
     travelFirstImage.classList.add("travel-first-image");
     const img = document.createElement("img");
-    img.src = travelPlace.firstimage;
+    if(travelPlace.firstimage != null) {
+        img.src = travelPlace.firstimage;
+    } else {
+        img.src = "/resources/images/common/12.png";
+    }
 
     /* 장소 정보 */
     const placeInfo = document.createElement("div");
