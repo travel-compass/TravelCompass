@@ -33,6 +33,7 @@
 		<mapper resource="/mappers/profile-mapper.xml"/>
 		<mapper resource="/mappers/travel-mapper.xml"/>
 		<mapper resource="/mappers/question-mapper.xml"/>
+		<mapper resource="/mappers/report-mapper.xml"/>
 		<!-- resource : src/main/resources -->
 	</mappers>
 </configuration>

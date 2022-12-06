@@ -72,6 +72,11 @@ const updateContent = {
     if(travel != ''){
         travel = JSON.parse(travel);
         if(travel.travelContent != null) {
+            travel.travelContent = travel.travelContent.replaceAll("&", "&amp;");
+            travel.travelContent = travel.travelContent.replaceAll("<", "&lt;");
+            travel.travelContent = travel.travelContent.replaceAll(">", "&gt;");
+            travel.travelContent = travel.travelContent.replaceAll("\"", "&quot;");
+
             travel.travelContent = travel.travelContent.replaceAll("<br>", "\n");
         }
     }
@@ -175,6 +180,34 @@ const updateContent = {
             distanceList[i].innerText = `${Math.round(distance * 10) / 10}km`;
         }
     }
+
+    // 지도 화면 변경 토글 이벤트 달기
+    const mapToggle = document.getElementById("mapToggle");
+    mapToggle.addEventListener("click", ()=>{
+        if(travel.placeList.length == 0) {
+            alert("여행이 비어있어 지도를 펼칠 수 없습니다.");
+            return;
+        }
+
+        if(mapToggle.value % 2 == 1) {      // 홀수면 맵으로 이동
+            createTravelMap();
+
+            mapToggle.value = Number(mapToggle.value) + 1;
+        } else {
+            createScrapView();
+
+            mapToggle.value = Number(mapToggle.value) - 1;
+        }
+    });
+
+    // 모달 이벤트
+    const roadViewModal = document.getElementById("roadViewModal");
+    roadViewModal.addEventListener("click", e=>{
+        console.log("클릭");
+        if(e.target.getAttribute("id") == "roadViewModal") {
+            roadViewModal.classList.remove("show");
+        }
+    });
 })();
 
 // 여행 장소 목록 생성
@@ -219,7 +252,12 @@ const createTravelList = () => {
                     travelFirstImage.href=`/place/detail/${result.placeList[i].contenttypeid}/${result.placeList[i].contentid}`;
                     travelFirstImage.classList.add("travel-first-image");
                     const img = document.createElement("img");
-                    img.src = result.placeList[i].firstimage;
+                    if(result.placeList[i].firstimage != null) {
+                        img.src = result.placeList[i].firstimage;
+                    } else {
+                        img.src = "/reousrces/images/common/12.png";
+                    }
+                    
         
                     /* 장소 정보 */
                     const placeInfo = document.createElement("div");
@@ -283,7 +321,6 @@ const createTravelList = () => {
                     travelList.append(travelItem);
                 }
             }
-
         }
     });
 }
@@ -420,11 +457,21 @@ const deleteScrap = (index) => {
                         /* 정렬옵션 */
                     );
 
-                    for(let i=0; i<travel.placeList.length; i++) {      
-                        if(travel.placeList[i].placeScrapNo == scrapList[index].placeScrapNo) { // 삭제한 스크랩 장소가 현재 조회중인 여행에 있다면
-                            deleteTravelPlace(i);       // 삭제
+                    // for(let i=0; i<travel.placeList.length; i++) {      
+                    //     if(travel.placeList[i].placeScrapNo == scrapList[index].placeScrapNo) { // 삭제한 스크랩 장소가 현재 조회중인 여행에 있다면
+                    //         deleteTravelPlace(i);       // 삭제
+                    //     }
+                    // }
+
+                    // 삭제할 스크립 번호를 저장
+                    const deleteScrapNo = scrapList[index].placeScrapNo;
+                    // placeList를 돌면서 scrapNo가 맞는 인덱스 확인
+                    for(let i = 0; i<travel.placeList.length; i++) {
+                        if(travel.placeList[i].placeScrapNo == deleteScrapNo) {
+                            deleteTravelPlace(i--);
                         }
                     }
+                    // placeList를 돌면서 scrapNo가 맞는 인덱스 확인
                 }
             }
         });
@@ -475,7 +522,9 @@ const deleteTravelPlace = (index) => {
     // index가 0이면 (맨 첫번째 장소면)
     if(index == 0) {
         // 거리계산 필요x 0번째 li와 distance-area 삭제 후
-        const distanceArea = document.getElementsByClassName("distance-area")[index].remove();
+        if(travel.placeList.length > 1) {
+            const distanceArea = document.getElementsByClassName("distance-area")[index].remove();
+        }
         // travel.placeList[0] shift
         travel.placeList.shift();
     } else if (index == travel.placeList.length - 1) {  // 마지막 요소면
@@ -567,7 +616,11 @@ const createTravelPlace = (travelPlace, distance) => {
     travelFirstImage.href=`/place/detail/${travelPlace.contenttypeid}/${travelPlace.contentid}`;
     travelFirstImage.classList.add("travel-first-image");
     const img = document.createElement("img");
-    img.src = travelPlace.firstimage;
+    if(travelPlace.firstimage != null) {
+        img.src = travelPlace.firstimage;
+    } else {
+        img.src = "/resources/images/common/12.png";
+    }
 
     /* 장소 정보 */
     const placeInfo = document.createElement("div");
@@ -611,7 +664,7 @@ const createTravelPlace = (travelPlace, distance) => {
     const fill = document.createElement("span");
     fill.classList.add("fill");
     fill.innerHTML = "&#9679;&#9679;&#9679;&#9679;&#9679;";
-    fill.style.width = 92 * (travelPlace.averageRating * 20) / 100;
+    fill.style.width = 92 * (travelPlace.averageRating * 20) / 100 + "px";
     const reviewCount = document.createElement("span");
     reviewCount.innerText = travelPlace.reviewCount;
 
@@ -659,6 +712,150 @@ const updateTravel = () => {
         }
     });
 }
+
+
+
+
+let map;
+// 여행 맵 만들기
+const createTravelMap = ()=>{
+    const toggleArea = document.getElementById("toggleArea");
+
+    // 영역 전부 비우기
+    toggleArea.innerHTML = "";
+
+    const travelMap = document.createElement("div");
+    travelMap.setAttribute("id", "travelMap");
+    
+    toggleArea.append(travelMap);
+    showMap();
+};
+
+const showMap = ()=>{
+    const mapContainer = document.getElementById("travelMap");
+    let mapOption = {
+        center: new kakao.maps.LatLng(Number(travel.placeList[0].mapy), Number(travel.placeList[0].mapx)),
+        level: 3
+    }
+    let map = new kakao.maps.Map(mapContainer, mapOption);
+    console.log("맵 생성");
+    // 바운드 생성
+    const bounds = new kakao.maps.LatLngBounds();
+
+    for(let place of travel.placeList) {
+        // 마커찍을 위치 생성
+        let markerPosition = new kakao.maps.LatLng(Number(place.mapy), Number(place.mapx));
+
+        let marker = new kakao.maps.Marker({
+            "position": markerPosition
+        })
+
+        // 인포 윈도우 생성
+        // 커스텀 오버레이 생성
+        let content = `<div class='marker-content' onclick='showRoadView(${place.mapy}, ${place.mapx})'>` +
+            `<span class='marker-title'>${place.title}</span>`
+        "</div>";
+        
+        let customOverlay = new kakao.maps.CustomOverlay({
+            "map":map,
+            "position": markerPosition,
+            "content": content,
+            "yAnchor": 1
+        });
+        
+        // 마커 세팅
+        marker.setMap(map);
+        
+        // 인포윈도우 세팅
+        
+        // 바운드에 마커 세팅
+        bounds.extend(markerPosition);
+    }
+    setBounds(map, bounds);
+}
+
+// 로드뷰 보여주기
+function showRoadView(mapy, mapx) {
+    document.getElementById("roadViewModal").classList.add("show");
+    
+    // 로드뷰 보여줄 컨테이너
+    const roadViewContainer = document.getElementById("roadView");
+    roadViewContainer.innerHTML = "";
+    // 로드뷰 객체
+    const roadView = new kakao.maps.Roadview(roadViewContainer);   
+    const roadviewClient = new kakao.maps.RoadviewClient();
+
+    const position = new kakao.maps.LatLng(Number(mapy), Number(mapx));
+
+    roadviewClient.getNearestPanoId(position, 100, panoId=>{
+        if(panoId == null) {
+            alert("로드뷰를 지원하지 않습니다.");
+        }
+        console.log(panoId);
+        roadView.setPanoId(panoId, position);
+    });
+}
+
+function setBounds(map, bounds) {
+    console.log("초기화");
+    map.setBounds(bounds);
+}
+
+// 스크랩 장소 검색 화면 보여주기
+const createScrapView = ()=>{
+    const toggleArea = document.getElementById("toggleArea");
+    toggleArea.innerHTML = "";
+
+    const form = document.createElement("form");
+    form.classList.add("scrap-place-search");
+    form.setAttribute("id", "scrapSearch");
+    const searchInput = document.createElement("input");
+    searchInput.setAttribute("placeholder", "검색");
+    searchInput.classList.add("scrap-place-search-input");
+    searchInput.setAttribute("id", "scrapSearchInput");
+
+    const sortBtn = document.createElement("button");
+    sortBtn.setAttribute("type", "button");
+    sortBtn.classList.add("fa-solid", "fa-sort");
+    sortBtn.setAttribute("id", "sortBtn");
+    sortBtn.value = "1";
+
+    const submitBtn = document.createElement("button");
+    submitBtn.hidden = true;
+    
+    const scrapPlaceList = document.createElement("ul");
+    scrapPlaceList.setAttribute("id", "scrapPlaceList");
+
+    form.append(searchInput, sortBtn, submitBtn);
+    toggleArea.append(form, scrapPlaceList);
+
+    // 검색 이벤트 달기
+    form.addEventListener("submit", e=>{
+        e.preventDefault();
+        if(searchInput.value.trim().length == 0) {
+            searchInput.focus();
+            return;
+        }
+        searchScrapPlaceList(searchInput.value.trim());
+    });
+
+    // 정렬 이벤트 달기
+    sortBtn.addEventListener("click", e=>{
+        // keyword 져오기
+        const keyword = document.getElementById("scrapSearchInput").value.trim();
+        // keyword랑 현재 sortBtn의 value로 $.ajax 요청
+        console.log(e.currentTarget.value);
+        searchScrapPlaceList(keyword, e.currentTarget.value);
+        // value 바꾸기
+        if(e.currentTarget.value % 2 == 0) {    // 짝수면
+            e.currentTarget.value = Number(e.currentTarget.value) - 1;
+        } else {                                // 홀수 
+            e.currentTarget.value = Number(e.currentTarget.value) + 1;
+        }
+    });
+
+    searchScrapPlaceList();
+};
 
 
 

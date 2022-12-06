@@ -1,5 +1,7 @@
 package kh.team.travelcompass.review.model.service;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import kh.team.travelcompass.common.Util;
 import kh.team.travelcompass.place.model.vo.Pagination;
+import kh.team.travelcompass.place.model.vo.Place;
 import kh.team.travelcompass.review.model.dao.ReviewDAO;
 import kh.team.travelcompass.review.model.vo.Review;
 
@@ -78,5 +81,33 @@ public class ReviewServiceImpl implements ReviewService {
 	public int deleteReview(int reviewNo) {
 		return dao.deleteReview(reviewNo);
 	}
+
 	
+	// 리뷰 연결
+	@Override
+	public List<Place> connectReview(List<Place> placeList) {
+		if(placeList == null || placeList.isEmpty()) {
+			System.out.println("장소리스트가 비어있습니다.");
+			return placeList;
+		}
+		int size = placeList.size();
+		
+		// contentid 배열 생성
+		List<String> contentidList = new ArrayList<>();
+		Collections.sort(placeList, (a, b)->Integer.parseInt(a.getContentid()) - Integer.parseInt(b.getContentid()));
+		for(int i = 0; i<placeList.size(); i++) {
+			contentidList.add(placeList.get(i).getContentid());
+		}
+		
+		List<Map<String, Object>> reviewMapList = dao.selectConnectReview(contentidList);
+		
+		if(!reviewMapList.isEmpty()) {			
+			System.out.println("리뷰 비어있지 않음");
+			for(int i =0; i<placeList.size(); i++) {
+				placeList.get(i).setAverageRating(Double.parseDouble(String.valueOf((reviewMapList.get(i).get("AVERAGE_RATING")))));
+				placeList.get(i).setReviewCount(Integer.parseInt(String.valueOf((reviewMapList.get(i).get("REVIEW_COUNT")))));
+			}
+		}
+		return placeList;
+	}
 }
