@@ -9,12 +9,16 @@ import org.springframework.stereotype.Service;
 
 import kh.team.travelcompass.location.model.api.LocationAPI;
 import kh.team.travelcompass.place.model.vo.Place;
+import kh.team.travelcompass.review.model.service.ReviewService;
 
 @Service
 public class LocationServiceImpl implements LocationService {
 	
 	@Autowired
-	LocationAPI api;
+	private LocationAPI api;
+	
+	@Autowired
+	private ReviewService rService;
 	
 	@Override
 	public List<Place> searchPlace(String latitude, String longitude, String contentTypeId) throws Exception {
@@ -30,6 +34,7 @@ public class LocationServiceImpl implements LocationService {
 		
 		List<Place> placeList = api.serachPlace(paramMap);
 		
+		rService.connectReview(placeList);
 		// placeList 정렬 (contentId 오름차순)
 		
 		// placeList에서 contentId 가져와 리스트 생성

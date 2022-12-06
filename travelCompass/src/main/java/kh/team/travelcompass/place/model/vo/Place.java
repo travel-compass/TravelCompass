@@ -33,7 +33,7 @@ public class Place {
 	
 	private List<Review> reviewList; // 장소에 달린 리뷰리스트
 	private int reviewCount;		 // 장소에 달린 모든 리뷰 갯수
-	private int averageRating;       // 장소의 평균평점
+	private Double averageRating;       // 장소의 평균평점
 	private List<Question> questionList;  // 장소에 달린 리뷰리스트
 	
 	// 스크랩 관련 필드
