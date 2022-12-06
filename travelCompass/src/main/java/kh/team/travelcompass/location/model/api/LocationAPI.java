@@ -8,16 +8,22 @@ import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import kh.team.travelcompass.common.Util;
 import kh.team.travelcompass.place.model.vo.Place;
+import kh.team.travelcompass.review.model.service.ReviewService;
 
 @Component
 public class LocationAPI {
 	private final String HOST = "http://apis.data.go.kr/B551011/KorService/locationBasedList";
 	private final String ESSENTIAL_PARAM = "?MobileOS=ETC&MobileApp=AppTest&_type=json&serviceKey=";
 	private String key = "e+nonJ082FY6zfX+tup0hvcGTRAqHZV2OGGnVkjpa+zYdVpUYTHuuqfHYuIEzFwYXjbQXAhQa9tTuyiYdd0Eyw==";
+	
+	@Autowired
+	private ReviewService rService;
+	
 	
 	public LocationAPI() throws Exception{
 		this.key = URLEncoder.encode(key, "UTF-8");
@@ -60,7 +66,7 @@ public class LocationAPI {
 		
 		
 		placeList = Util.jsonToPlaceList(response.toString());
-		
+		rService.connectReview(placeList);
 		
 		System.out.println(placeList);
 		

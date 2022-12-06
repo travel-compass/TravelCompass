@@ -154,7 +154,7 @@
 	<!-- 특정 리뷰의 이미지 목록 조회 -->
 	<select id="selectReviewImageList" resultMap="reviewImage_rm">
 		SELECT * FROM REVIEW_IMAGE
-		WHERE REVIEW_NO = {reviewNo}
+		WHERE REVIEW_NO = #{reviewNo}
 		ORDER BY REVIEW_IMAGE_NO
 	</select>
 	
