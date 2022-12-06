@@ -152,6 +152,7 @@ function selectReviewList(e) {
 
         const fill = document.createElement("fill");
         fill.classList.add("fill");
+        fill.style.width = (69 * (review.rating * 20)) / 100 + "px";
         fill.innerHTML = "&#9679;&#9679;&#9679;&#9679;&#9679;";
 
         const reviewTextTitle = document.createElement("div");
@@ -170,20 +171,15 @@ function selectReviewList(e) {
         const reviewTextBottomMenu = document.createElement("div");
         reviewTextBottomMenu.classList.add("review-bottom-menu-style");
 
-        const reviewTextSuportButton = document.createElement("div");
-        reviewTextSuportButton.classList.add("suport-button");
-        reviewTextSuportButton.innerHTML =
-          "<i class='fa-regular fa-thumbs-up'></i>도움이 됨";
-
         const reviewTextSaveButton = document.createElement("div");
         reviewTextSaveButton.classList.add("save-button");
         reviewTextSaveButton.innerHTML =
-          "<i class='fa-solid fa-heart'></i>저장";
+          "<i class='fa-solid fa-heart'></i>좋아요";
 
         const reviewTextShareButton = document.createElement("div");
         reviewTextShareButton.classList.add("share-button");
         reviewTextShareButton.innerHTML =
-          "<i class='fa-solid fa-arrow-up-from-bracket'></i>공유";
+          "<i class='fa-solid fa-arrow-up-from-bracket'></i>신고";
 
         ulreviewList.append(reviewTextColum);
 
@@ -214,7 +210,6 @@ function selectReviewList(e) {
         );
 
         reviewTextBottomMenu.append(
-          reviewTextSuportButton,
           reviewTextSaveButton,
           reviewTextShareButton
         );
@@ -256,6 +251,11 @@ for (let BTNList of dropDownMenu) {
     } else {
       BTNList.nextElementSibling.style.display = "block";
     }
+  });
+}
+
+for (let BTNList of dropDownMenu) {
+  BTNList.addEventListener("blur", () => {
     BTNList.nextElementSibling.style.display = "none";
   });
 }

@@ -97,12 +97,15 @@
                   </div>
                 </div>
 
-                <div class="user-page-review-dot-style"><i class="fa-solid fa-ellipsis"></i></div>
+                <div class="user-page-review-dot-style"><i class="fa-solid fa-ellipsis"></i>
+                
+                </div>
+                <button class="user-page-review-dot-style"><i class="fa-solid fa-ellipsis"></i></button>
                 <div class="user-page-review-dot-down-menu">
-                  <ul class="down-menu">
-                    <li><a href="#">수정</a></li>
-                    <li><a href="#">삭제</a></li>
-                  </ul>
+                    <ul class="down-menu">
+                        <li><a href="#">수정</a></li>
+                        <li><a href="#">삭제</a></li>
+                    </ul>
                 </div>
 
               </div>
@@ -111,7 +114,7 @@
                 <div class="review-container">
                   <div class="rating">
                     <span class="empty">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
-                    <span class="fill" style="width:${80*(place.averageRating*20)/100}px;">
+                    <span class="fill" style="width:${69*(review.rating*20)/100}px;">
                     &#9679;&#9679;&#9679;&#9679;&#9679;</span>
                   </div>
                 </div>  
@@ -124,14 +127,11 @@
               
               <div class="review-support"></div>
               <div class="review-bottom-menu-style">
-                <div class="suport-button">
-                  <i class="fa-regular fa-thumbs-up"></i>도움이 됨
-                </div>
                 <div class="save-button">
-                  <i class="fa-solid fa-heart"></i>저장
+                  <i class="fa-solid fa-heart"></i>좋아요
                 </div>
                 <div class="share-button">
-                  <i class="fa-solid fa-arrow-up-from-bracket"></i>공유
+                  <i class="fa-solid fa-arrow-up-from-bracket"></i>신고
                 </div>
               </div>
             </li>
