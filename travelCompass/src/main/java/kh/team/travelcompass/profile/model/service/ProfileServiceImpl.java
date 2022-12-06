@@ -74,5 +74,14 @@ public class ProfileServiceImpl implements ProfileService {
 		
 		return followingMemberList;
 	}
+
+	// 더보기 버튼 눌렀을 때 남은 리뷰 테이블 불러오기
+	@Override
+	public List<Review> moreReviewList(int memberNo, int rowBoundCount) {
+		
+		List<Review> moreReviewList = dao.moreReviewList(memberNo, rowBoundCount);
+		
+		return moreReviewList;
+	}
 	
 }
