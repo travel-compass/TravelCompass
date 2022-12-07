@@ -43,76 +43,123 @@
         document.getElementById("searchArea").after(resentKeywordArea);
     }
 })();
-
+// 최근 본 장소 리뷰 연결
+(()=>{
+    if(localStorage.getItem("recentPlace") != null) {
+        $.ajax({
+            url: "/travel/recentPlace",
+            type:"POST",
+            data :{
+                jsonPlaceList: localStorage.getItem("recentPlace"),
+            },
+            success: placeList => {
+                // console.log(placeList);
+                createPlaceList(placeList, "최근에 본 장소");
+            }
+        })
+    }
+})();
 
 // 현재 접속위치 좌표 얻기
 (() => {
-    let latitude;   // 위도
-    let longitude;  // 경도
-    if(navigator.geolocation) {     // GPS 사용가능하면
-        navigator.geolocation.getCurrentPosition(position => {
-            latitude = position.coords.latitude;
-            longitude = position.coords.longitude;
-            console.log(latitude);
-            console.log(longitude);
-            const aURL = `latitude=${latitude}&longitude=${longitude}&contentTypeId=12`;
-            // document.getElementById("aroundSearch").href += aURL;
+    let latitude = 37.563398;  // 위도
+    let longitude = 126.9863309;  // 경도
+    // if(navigator.geolocation) {     // GPS 사용가능하면
+    //     navigator.geolocation.getCurrentPosition(position => {
+    //         latitude = position.coords.latitude;
+    //         longitude = position.coords.longitude;
+    //         console.log(latitude);
+    //         console.log(longitude);
+    //         const aURL = `latitude=${latitude}&longitude=${longitude}&contentTypeId=12`;
+    //         // document.getElementById("aroundSearch").href += aURL;
 
-            $.ajax({
-                url: "/location/searchPlace",
-                data: {
-                    "latitude": latitude,
-                    "longitude": longitude,
-                    "contentTypeId" : "12"
-                },
-                type: "GET",
-                success: result => {
-                    console.log(result);
-                    createPlaceList(result, "주변 관광지");
-                },
-                error: () =>{
-                    console.log("error");
-                }
-            });
-            $.ajax({
-                url: "/location/searchPlace",
-                data: {
-                    "latitude": latitude,
-                    "longitude": longitude,
-                    "contentTypeId" : "39"
-                },
-                type: "GET",
-                success: result => {
-                    console.log(result);
-                    createPlaceList(result, "주변 음식점");
-                },
-                error: () =>{
-                    console.log("error");
-                }
-            });
-        }, error => {
-            console.log(error);
-            return;
-        }, {
-            enableHighAccuracy: false,
-            maximumAge: 0,
-            timeout: Infinity
-        });
-    } else {
-        alert("GPS를 지원하지 않습니다.");
-    }
+    //         $.ajax({
+    //             url: "/location/searchPlace",
+    //             data: {
+    //                 "latitude": latitude,
+    //                 "longitude": longitude,
+    //                 "contentTypeId" : "12"
+    //             },
+    //             type: "GET",
+    //             success: result => {
+    //                 console.log(result);
+    //                 createPlaceList(result, "주변 관광지");
+    //             },
+    //             error: () =>{
+    //                 console.log("error");
+    //             }
+    //         });
+    //         $.ajax({
+    //             url: "/location/searchPlace",
+    //             data: {
+    //                 "latitude": latitude,
+    //                 "longitude": longitude,
+    //                 "contentTypeId" : "39"
+    //             },
+    //             type: "GET",
+    //             success: result => {
+    //                 console.log(result);
+    //                 createPlaceList(result, "주변 음식점");
+    //             },
+    //             error: () =>{
+    //                 console.log("error");
+    //             }
+    //         });
+    //     }, error => {
+    //         console.log(error);
+    //         return;
+    //     }, {
+    //         enableHighAccuracy: false,
+    //         maximumAge: 0,
+    //         timeout: Infinity
+    //     });
+    // } else {
+    //     alert("GPS를 지원하지 않습니다.");
+    // }
+    $.ajax({
+        url: "/location/searchPlace",
+        data: {
+            "latitude": latitude,
+            "longitude": longitude,
+            "contentTypeId" : "12"
+        },
+        type: "GET",
+        success: result => {
+            console.log(result);
+            createPlaceList(result, "주변 관광지");
+        },
+        error: () =>{
+            console.log("error");
+        }
+    });
+    $.ajax({
+        url: "/location/searchPlace",
+        data: {
+            "latitude": latitude,
+            "longitude": longitude,
+            "contentTypeId" : "39"
+        },
+        type: "GET",
+        success: result => {
+            console.log(result);
+            createPlaceList(result, "주변 음식점");
+        },
+        error: () =>{
+            console.log("error");
+        }
+    });
 })();
 
 // 최근에 본 장소 보여주기
-(()=>{ 
-    let recentPlaceArr;
-    recentPlaceArr = localStorage.getItem("recentPlace");
+// (()=>{ 
+//     let recentPlaceArr;
+//     recentPlaceArr = localStorage.getItem("recentPlace");
 
-    if(recentPlaceArr != null) {  // 최근에 본 장소가 있을때만
-        recentPlaceArr = JSON.parse(recentPlaceArr);
-        createPlaceList(recentPlaceArr, "최근에 본 장소");
-    }
-})();
+//     if(recentPlaceArr != null) {  // 최근에 본 장소가 있을때만
+//         recentPlaceArr = JSON.parse(recentPlaceArr);
+//         createPlaceList(recentPlaceArr, "최근에 본 장소");
+//     }
+// })();
 
 function createPlaceList(resultList, title) {
 

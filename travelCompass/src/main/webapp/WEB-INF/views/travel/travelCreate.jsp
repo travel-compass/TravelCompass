@@ -61,7 +61,7 @@
                     </c:when>
                     <c:otherwise>
                         <c:forEach var="travelPlace" items="${travel.placeList}" varStatus="vs">
-                            <li class="travel-item">
+                            <li class="travel-item" tabindex="0">
                                 <a href="/place/detail/${travelPlace.contenttypeid}/${travelPlace.contentid}" target="_blank" class="travel-first-image">
                                 <c:choose>
                                     <c:when test="${empty travelPlace.firstimage}">
