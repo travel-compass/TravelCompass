@@ -205,12 +205,13 @@
                                                     </a>
                                                 </div>
                                             </div>
-                                            <button class="user-page-review-dot-style"><i class="fa-solid fa-ellipsis"></i></button>
-                                            <div class="user-page-review-dot-down-menu">
-                                                <ul class="down-menu">
-                                                    <li id="reviewDelete" var="${FedList.reviewNo}">삭제</li>
-                                                </ul>
-                                            </div>
+                                            <button class="user-page-review-dot-style"><i class="fa-solid fa-ellipsis"></i>
+                                                <div class="user-page-review-dot-down-menu">
+                                                    <ul class="down-menu">
+                                                        <li id="reviewDelete" var="${FedList.reviewNo}">삭제</li>
+                                                    </ul>
+                                                </div>
+                                            </button>
                                         </div>
 
                                         <a href="/place/detail/${FedList.contenttypeid}/${FedList.contentid}">
@@ -218,7 +219,7 @@
                                                 <div class="review-point">
                                                     <div class="rating">
                                                         <span class="empty">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
-                                                        <span class="fill" style="width:${92 * (FedList.rating * 20) / 100}px;">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                                                        <span class="fill" style="width:${84.5 * (FedList.rating * 20) / 100}px;">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
                                                     </div>
                                                 </div>
                                                 <div class="review-title">${FedList.reviewTitle}</div>
@@ -243,12 +244,20 @@
                                                     </a>
                                                 </div>
                                             </div>
-                                            <button class="user-page-review-dot-style"><i class="fa-solid fa-ellipsis"></i></button>
+                                            <%-- <button class="user-page-review-dot-style"><i class="fa-solid fa-ellipsis"></i></button>
                                             <div class="user-page-review-dot-down-menu">
                                                 <ul class="down-menu">
                                                     <li id="reviewDelete" var="${FedList.reviewNo}">삭제</li>
                                                 </ul>
-                                            </div>
+                                            </div> --%>
+                                            <button class="user-page-review-dot-style"><i class="fa-solid fa-ellipsis"></i>
+                                                <div class="user-page-review-dot-down-menu">
+                                                    <ul class="down-menu">
+                                                        <li id="reviewDelete" var="${FedList.reviewNo}">삭제</li>
+                                                    </ul>
+                                                </div>
+                                            </button>
+                                            
                                         </div>
                                         <!-- 사진 슬라이드 div태그 시작 -->
                                         <div class="slide-container-style">
@@ -268,7 +277,7 @@
                                                 <div class="review-point">
                                                     <div class="rating">
                                                         <span class="empty">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
-                                                        <span class="fill" style="width:${92 * (FedList.rating * 20) / 100}px;">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                                                        <span class="fill" style="width:${84.5 * (FedList.rating * 20) / 100}px;">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
                                                     </div>
                                                 </div>
                                                 <div class="review-title">${FedList.reviewTitle}</div>
@@ -300,7 +309,7 @@
         const memberNo = "${member.memberNo}";
 
         // @ReqeustParam
-        const reviewPageMemberNo = "${member.memberNo}";
+        const reviewMemberNo = "${member.memberNo}";
         const loginMemberNo = "${loginMember.memberNo}"
 
         // 팔로워 넘버

@@ -282,8 +282,7 @@ main {
     width: 10%;
     font-weight: bold;
     font-size: 24px;
-    position: absolute;
-    right: 10px;
+    position: relative;
 }
 
 .user-page-review-dot-style:hover{
@@ -559,9 +558,7 @@ animation-duration: 1.5s;
     display: none;
     /* border: 1px solid black; */
     width: 100px;
-    position: relative;
-    top: 40px;
-    right: 30px;
+    position: absolute;
     border: none;
     box-shadow: rgba(0, 0, 0, 0.2) 0 1px 10px 1px;
     background: white;
@@ -570,6 +567,9 @@ animation-duration: 1.5s;
     text-align: center;
     /* display: none; */
     z-index: 1;
+    right: 10px;
+    font-size: 15px;
+    top: 25px;
 }
 
 .user-page-review-dot-down-menu li:hover{
@@ -653,6 +653,7 @@ footer{
     height: 15px;
     margin-bottom: 10px;
     width: 100px;
+    z-index: 950;
 }
 .empty, .fill{
     position: absolute;
