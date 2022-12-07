@@ -163,11 +163,27 @@ function selectReviewList(e) {
         reviewTextTitle.classList.add("review-title");
 
         reviewTextTitle.innerText = review.reviewTitle;
+        // XSS 방지 처리 해제
+        reviewTextTitle.innerText =  review.reviewTitle.replaceAll("&amp;", "&");
+        reviewTextTitle.innerText =  review.reviewTitle.replaceAll("&lt;", "<");
+        reviewTextTitle.innerText =  review.reviewTitle.replaceAll("&gt;", ">");
+        reviewTextTitle.innerText =  review.reviewTitle.replaceAll("&quot;", "\"");
+        
+        // 개행문자 처리 해제
+        reviewTextTitle.innerText =  review.reviewTitle.replaceAll("<br>", "\n").replaceAll("&nbsp;"," ");
 
         const reviewTextContent = document.createElement("div");
         reviewTextContent.classList.add("review-content");
 
         reviewTextContent.innerText = '"' + review.reviewContent + '"';
+
+        reviewTextContent.innerText = review.reviewContent.replaceAll("&amp;", "&");
+        reviewTextContent.innerText = review.reviewContent.replaceAll("&lt;", "<");
+        reviewTextContent.innerText = review.reviewContent.replaceAll("&gt;", ">");
+        reviewTextContent.innerText = review.reviewContent.replaceAll("&quot;", "\"");
+        
+        // 개행문자 처리 해제
+        reviewTextContent.innerText =  review.reviewContent.replaceAll("<br>", "\n").replaceAll("&nbsp;"," ");
 
         const reviewTextSupport = document.createElement("div");
         reviewTextSupport.classList.add("review-support");
@@ -519,10 +535,27 @@ moreBtn.addEventListener("click", () => {
 
         reviewTextTitle.innerText = review.reviewTitle;
 
+        // XSS 방지 처리 해제
+        reviewTextTitle.innerText =  review.reviewTitle.replaceAll("&amp;", "&");
+        reviewTextTitle.innerText =  review.reviewTitle.replaceAll("&lt;", "<");
+        reviewTextTitle.innerText =  review.reviewTitle.replaceAll("&gt;", ">");
+        reviewTextTitle.innerText =  review.reviewTitle.replaceAll("&quot;", "\"");
+        
+        // 개행문자 처리 해제
+        reviewTextTitle.innerText =  review.reviewTitle.replaceAll("<br>", "\n").replaceAll("&nbsp;"," ");
+
         const reviewTextContent = document.createElement("div");
         reviewTextContent.classList.add("review-content");
 
         reviewTextContent.innerText = '"' + review.reviewContent + '"';
+
+        reviewTextContent.innerText = review.reviewContent.replaceAll("&amp;", "&");
+        reviewTextContent.innerText = review.reviewContent.replaceAll("&lt;", "<");
+        reviewTextContent.innerText = review.reviewContent.replaceAll("&gt;", ">");
+        reviewTextContent.innerText = review.reviewContent.replaceAll("&quot;", "\"");
+        
+        // 개행문자 처리 해제
+        reviewTextContent.innerText =  review.reviewContent.replaceAll("<br>", "\n").replaceAll("&nbsp;"," ");
 
         const reviewTextSupport = document.createElement("div");
         reviewTextSupport.classList.add("review-support");
@@ -735,10 +768,27 @@ const createReviewList = function () {
 
         reviewTextTitle.innerText = review.reviewTitle;
 
+        // XSS 방지 처리 해제
+        reviewTextTitle.innerText =  review.reviewTitle.replaceAll("&amp;", "&");
+        reviewTextTitle.innerText =  review.reviewTitle.replaceAll("&lt;", "<");
+        reviewTextTitle.innerText =  review.reviewTitle.replaceAll("&gt;", ">");
+        reviewTextTitle.innerText =  review.reviewTitle.replaceAll("&quot;", "\"");
+        
+        // 개행문자 처리 해제
+        reviewTextTitle.innerText =  review.reviewTitle.replaceAll("<br>", "\n").replaceAll("&nbsp;"," ");
+
         const reviewTextContent = document.createElement("div");
         reviewTextContent.classList.add("review-content");
 
         reviewTextContent.innerText = '"' + review.reviewContent + '"';
+
+        reviewTextContent.innerText = review.reviewContent.replaceAll("&amp;", "&");
+        reviewTextContent.innerText = review.reviewContent.replaceAll("&lt;", "<");
+        reviewTextContent.innerText = review.reviewContent.replaceAll("&gt;", ">");
+        reviewTextContent.innerText = review.reviewContent.replaceAll("&quot;", "\"");
+        
+        // 개행문자 처리 해제
+        reviewTextContent.innerText =  review.reviewContent.replaceAll("<br>", "\n").replaceAll("&nbsp;"," ");
 
         const reviewTextSupport = document.createElement("div");
         reviewTextSupport.classList.add("review-support");
