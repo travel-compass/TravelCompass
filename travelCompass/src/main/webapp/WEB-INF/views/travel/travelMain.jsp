@@ -43,6 +43,12 @@
                         <span>여행(공개)</span>
                     </label>
                 </li>
+                <li>
+                    <input type="radio" id="scrapTravel" name="travelCategory" value="-1">
+                    <label for="scrapTravel" class="travel-scope">
+                        <span>스크랩한 여행</span>
+                    </label>
+                </li>
             </ul>
         </c:if>
             <ul id="travel-list">

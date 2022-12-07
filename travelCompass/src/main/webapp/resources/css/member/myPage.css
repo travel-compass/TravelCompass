@@ -116,8 +116,8 @@ main, section, div {
 }
 
 .input-row .input-read-only {
-    border: none;
-    border-bottom: 2px solid #ddd;
+    border: 2px solid transparent;
+    border-bottom-color: #ddd;
     color: grey;
 }
 

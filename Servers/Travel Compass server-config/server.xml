@@ -153,6 +153,9 @@
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 
       <Context docBase="travelCompass" path="/" reloadable="true" source="org.eclipse.jst.jee.server:travelCompass"/></Host>
+      <!-- fileupload -->
+			<beans:bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver">
+			</beans:bean>
     </Engine>
   </Service>
 </Server>

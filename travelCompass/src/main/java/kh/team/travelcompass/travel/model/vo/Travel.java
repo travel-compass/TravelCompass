@@ -20,4 +20,5 @@ public class Travel {
 	private String travelFirstImage;	// 여행 썸네일 이미지
 	private List<Place> placeList;		// 여행 장소 목록
 	private int travelPlaceCount;		// 여행에 등록된 장소 갯수
+	private int travelLikeCount;		// 여행 좋아요 갯수
 }

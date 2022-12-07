@@ -3,11 +3,11 @@ const managementType = document.getElementsByName("managementType");
 
 for(let management of managementType){
     management.addEventListener("click", function(){
-        console.log(management.value);
+
         //전체 신고 조회
         if(management.value == 1){
             $.ajax({
-                url : "/selectAll",
+                url : "/management/selectAll",
                 type : "GET",
                 dataType : "json",
                 success : reportAll => {
@@ -58,7 +58,7 @@ for(let management of managementType){
         //블라인드 리스트 조회
         if(management.value == 2){
             $.ajax({
-                url : "/selectBlind",
+                url : "/management/selectBlind",
                 type : "GET",
                 dataType : "json",
                 success : reportAll => {
@@ -101,7 +101,7 @@ for(let management of managementType){
         //강퇴 회원 조회
         if(management.value == 3){
             $.ajax({
-                url : "/selectBanMember",
+                url : "/management/selectBanMember",
                 type : "GET",
                 dataType : "json",
                 success : reportAll => {
@@ -154,7 +154,7 @@ $(document).on("click", ".report-list-btn", function(){
     const reviewNo = $(this).parent().find("li").eq(1).text().split(" : ")[1];
     console.log(reviewNo);
     $.ajax({
-        url : "/reviewBlind",
+        url : "/management/reviewBlind",
         type : "get",
         data : {
             reviewNo : reviewNo
@@ -176,7 +176,7 @@ $(document).on("click", ".secession-btn", function(){
     const memberNo = $(this).parent().find("li").eq(0).text().split(" : ")[1];
     console.log(memberNo);
     $.ajax({
-        url : "/memberBan",
+        url : "/management/memberBan",
         type : "get",
         data : {
             memberNo : memberNo
@@ -198,7 +198,7 @@ $(document).on("click", ".secession-cancel-btn", function(){
     const memberNo = $(this).parent().find("li").eq(0).text().split(" : ")[1];
     console.log(memberNo);
     $.ajax({
-        url : "/memberBanCancel",
+        url : "/management/memberBanCancel",
         type : "get",
         data : {
             memberNo : memberNo
@@ -213,3 +213,33 @@ $(document).on("click", ".secession-cancel-btn", function(){
         }
     })
 });
+
+
+
+//<div class="share-button">
+//<i class="fa-solid fa-arrow-up-from-bracket"></i>신고
+
+// function insertReport(){
+
+//     const reviewNo = ;
+//     const memberNo = ;
+
+//     $.ajax({
+//         url : "/management/insertReport",
+//         type : "get",
+//         data : {
+//             reviewNo : reviewNo
+//             memberNo : memberNo
+//         },
+//         success : result => {
+//             console.log(result);
+//             alert("신고 되었습니다.");
+//             location.reload();
+//         },
+//         error : error => {
+//             console.log(error);
+//         }
+//     })
+// });
+
+

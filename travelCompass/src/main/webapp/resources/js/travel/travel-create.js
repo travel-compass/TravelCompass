@@ -516,9 +516,6 @@ const deleteTravelPlace = (index) => {
         btnList[i].setAttribute("onclick", `deleteTravelPlace(${i})`);
     }
 
-    
-
-
     // index가 0이면 (맨 첫번째 장소면)
     if(index == 0) {
         // 거리계산 필요x 0번째 li와 distance-area 삭제 후
@@ -748,7 +745,7 @@ const showMap = ()=>{
 
         let marker = new kakao.maps.Marker({
             "position": markerPosition
-        })
+        });
 
         // 인포 윈도우 생성
         // 커스텀 오버레이 생성

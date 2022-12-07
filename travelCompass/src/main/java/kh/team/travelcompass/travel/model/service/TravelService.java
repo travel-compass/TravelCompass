@@ -6,6 +6,14 @@ import java.util.Map;
 import kh.team.travelcompass.place.model.vo.Place;
 import kh.team.travelcompass.travel.model.vo.Travel;
 
+/**
+ * @author Tonic
+ *
+ */
+/**
+ * @author Tonic
+ *
+ */
 public interface TravelService {
 	
 	/** 회원별 모든 여행 조회 서비스
@@ -62,4 +70,53 @@ public interface TravelService {
 	 * @return result
 	 */
 	public int deleteTravel(int travelNo);
+
+
+	/** 여행 스크랩
+	 * @param paramMap
+	 * @return result
+	 */
+	public int insertTravelScrap(Map<String, Integer> paramMap);
+
+
+	/** 여행 스크랩 취소
+	 * @param paramMap
+	 * @return result
+	 */
+	public int deleteTravelScrap(Map<String, Integer> paramMap);
+
+
+	/** 여행 좋아요
+	 * @param paramMap
+	 * @return result
+	 */
+	public int insertTravelLike(Map<String, Integer> paramMap);
+
+
+	/** 여행 좋아요 취소
+	 * @param paramMap
+	 * @return result 
+	 */
+	public int deleteTravelLike(Map<String, Integer> paramMap);
+
+
+	/** 여행 스크랩 여부 확인
+	 * @param paramMap
+	 * @return result
+	 */
+	public int checkTravelScrap(Map<String, Integer> paramMap);
+
+
+	/** 여행 좋아요 여부 확인
+	 * @param paramMap
+	 * @return result
+	 */
+	public int checkTravelLike(Map<String, Integer> paramMap);
+
+
+	/** 스크랩한 여행 목록 조회
+	 * @param memberNo
+	 * @return travelList
+	 */
+	public List<Travel> selectTravelScrapList(int memberNo);
 }

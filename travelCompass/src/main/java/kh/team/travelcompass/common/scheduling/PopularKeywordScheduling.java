@@ -53,4 +53,20 @@ public class PopularKeywordScheduling {
 			}
 		}
 	}
+	
+	@Scheduled(cron="0 0/1 * * * *")
+	public void initPoPopularKeyword() {
+		// 맵 가져오기
+		LinkedHashMap<String, Integer> keywordMap = (LinkedHashMap<String, Integer>) application.getAttribute("keywordMap");
+		System.out.println("초기화 전");
+		System.out.println(keywordMap);
+		// 맵 초기화
+		keywordMap = new LinkedHashMap<String, Integer>();
+		application.setAttribute("keywordMap", keywordMap);
+		
+		// 인기 검색어 초기화
+		keywordMap = (LinkedHashMap<String, Integer>) application.getAttribute("keywordMap");
+		System.out.println("초기화 후");
+		System.out.println(keywordMap);
+	}
 }

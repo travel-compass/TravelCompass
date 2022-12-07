@@ -56,6 +56,12 @@
 		ORDER BY BLIND_REVIEW_COUNT
 	</select>
 	
+	<!-- 신고하기 -->
+	<insert id="insertReport">
+		INSERT INTO REPORT VALUES(SEQ_REPORT_NO.NEXTVAL, DEFAULT, #{memberNo}, DEFAULT, #{reviewNo})
+	</insert>
+	
+	
 	<!-- 블라인드 처리 -->
 	<update id="reviewBlind" >
 		UPDATE REVIEW 

@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -15,13 +17,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import kh.team.travelcompass.management.model.service.ManagementService;
 import kh.team.travelcompass.review.model.vo.Review;
 
-
+@RequestMapping("/management")
 @Controller
 public class ManagementController {
 	@Autowired
 	ManagementService service;
 	
-	@GetMapping("/management")
+	@GetMapping("/info")
 	public String management(Model model) {
 		List<Review>reportList = null;	
 		
@@ -101,6 +103,14 @@ public class ManagementController {
 		return jsonReportList;
 	}
 	
+	//리뷰 신고
+	@GetMapping("/insertReport")
+	@ResponseBody
+	public int insertReport(@RequestParam Map<String, Object>paramMap) {
+		return service.insertReport(paramMap);
+	}
+	
+	
 	//블라인드 처리
 	@ResponseBody
 	@GetMapping("/reviewBlind")
@@ -127,6 +137,9 @@ public class ManagementController {
 		return service.memberBanCancel(memberNo);
 			
 	}
+	
+
+	
 	
 	
 }

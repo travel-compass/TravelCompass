@@ -156,13 +156,15 @@ for(let category of categoryList) {
                     const searchResultItemGradeDivRatingSpan2 = document.createElement("span");
                     searchResultItemGradeDivRatingSpan2.classList.add("fill");
                     searchResultItemGradeDivRatingSpan2.innerHTML="&#9679;&#9679;&#9679;&#9679;&#9679;";
-                    searchResultItemGradeDivRatingSpan2.style.width = 69 * (place.averageRating * 20) / 100 + "px";
+                    searchResultItemGradeDivRatingSpan2.style.width = 83 * (place.averageRating * 20) / 100 + "px";
                     searchResultItemGradeDivRating.appendChild(searchResultItemGradeDivRatingSpan2);
-        
+                    
+
                     //span만들고 grade-div하위요소로 넣기
                     const searchResultItemGradeDivSpan = document.createElement("span");
                     searchResultItemGradeDiv.appendChild(searchResultItemGradeDivSpan);
-                    
+                    searchResultItemGradeDivSpan.innerHTML = "'" + place.reviewCount + "'건의 리뷰";
+
                     //a만들고 span하위요소로 넣기
                     const searchResultItemGradeDivSpanA = document.createElement("a");
                     searchResultItemGradeDivSpan.appendChild(searchResultItemGradeDivSpanA);
@@ -171,7 +173,7 @@ for(let category of categoryList) {
                     // 최근에 본 장소 onclick 세팅
                     searchResultItemGradeDivSpanA.setAttribute("onclick", `return addRecentViewPlace("${place.title}", "${place.firstimage}", "${place.contentid}", "${place.contenttypeid}", "${place.averageRating}", "${place.reviewCount}", "${place.addr1}")`);
 
-                    searchResultItemGradeDivSpanA.innerText = place.reviewCount;
+                    
         
                     //div class="search-result-item-address"
                     //address-div 만들고 content-div하위요소로 넣기
