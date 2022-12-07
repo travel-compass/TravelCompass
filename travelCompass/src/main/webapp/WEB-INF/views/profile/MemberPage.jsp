@@ -167,7 +167,7 @@
                                                 사람들이 회원님을 쉽게 찾고 더 알아갈 수 있도록 하려면 사진과 정보를 프로필에 추가하세요!
                                             </div>
                                             <div class="none-content-review-create">
-                                                <a href="#"><i class="fa-solid fa-pen-to-square"></i>리뷰 작성하러 가기</a>
+                                                <a><i class="fa-solid fa-pen-to-square"></i>리뷰 작성하러 가기</a>
                                                 
                                             </div>
                                         </div>
@@ -182,10 +182,10 @@
                                     <div class="user-page-review-colums2">
                                         <div class="user-page-review-header-style">
                                             <div class="user-page-review-header-layout">
-                                                <a href="#" class="review-user-image"><img src="${member.profileImage}" alt="프로필 이미지"></a>
+                                                <a class="review-user-image"><img src="${member.profileImage}" alt="프로필 이미지"></a>
                                                 <div class="review-user-info-layout">
-                                                    <span class="review-user-nickname"><a href="#">${member.memberNickname}</a>님이 리뷰를 작성했습니다.</span>
-                                                    <a href="#" class="review-user-dday">
+                                                    <span class="review-user-nickname"><>${member.memberNickname}</>님이 리뷰를 작성했습니다.</span>
+                                                    <a class="review-user-dday">
                                                         ${FedList.reviewDate}
                                                     </a>
                                                 </div>
@@ -193,21 +193,23 @@
                                             <button class="user-page-review-dot-style"><i class="fa-solid fa-ellipsis"></i></button>
                                             <div class="user-page-review-dot-down-menu">
                                                 <ul class="down-menu">
-                                                    <li id="reviewDelete" var="${FedList.reviewNo}">삭제</li>
+                                                    <li id="reviewDelete" var="${FedList.reviewNo}">삭제</li>0
                                                 </ul>
                                             </div>
                                         </div>
-                                        <div class="review-data-table-style">
-                                            <div class="review-point">
-                                                <div class="rating">
-                                                    <span class="empty">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
-                                                    <span class="fill" style="width:${92 * (FedList.rating * 20) / 100}px;">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                                        <a href="/place/detail/${FedList.contenttypeid}/${FedList.contentId}">
+                                            <div class="review-data-table-style">
+                                                <div class="review-point">
+                                                    <div class="rating">
+                                                        <span class="empty">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                                                        <span class="fill" style="width:${92 * (FedList.rating * 20) / 100}px;">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                                                    </div>
+                                                </div>
+                                                <div class="review-title"><a href="">${FedList.reviewTitle}</a></div>
+                                                <div class="review-content"><a href="">"${FedList.reviewContent}"</a>
                                                 </div>
                                             </div>
-                                            <div class="review-title"><a href="">${FedList.reviewTitle}</a></div>
-                                            <div class="review-content"><a href="">"${FedList.reviewContent}"</a>
-                                            </div>
-                                        </div>
+                                        </a>
                                     </div>
                                 </c:if>
 
@@ -218,10 +220,10 @@
                                     <div class="user-page-review-colums2">
                                         <div class="user-page-review-header-style">
                                             <div class="user-page-review-header-layout">
-                                                <a href="#" class="review-user-image"><img src="${member.profileImage}" alt="프로필 이미지"></a>
+                                                <a class="review-user-image"><img src="${member.profileImage}" alt="프로필 이미지"></a>
                                                 <div class="review-user-info-layout">
-                                                    <span class="review-user-nickname"><a href="#">${member.memberNickname}</a>님이 리뷰를 작성했습니다.</span>
-                                                    <a href="#" class="review-user-dday">
+                                                    <span class="review-user-nickname"><a >${member.memberNickname}</a>님이 리뷰를 작성했습니다.</span>
+                                                    <a class="review-user-dday">
                                                         ${FedList.reviewDate}
                                                     </a>
                                                 </div>
@@ -246,16 +248,18 @@
                                         </div>
                                         <br>
 
-                                        <div class="review-data-table-style">
-                                            <div class="review-point">
-                                                <div class="rating">
-                                                    <span class="empty">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
-                                                    <span class="fill" style="width:${92 * (FedList.rating * 20) / 100}px;">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                                        <a href="/place/detail/${FedList.contenttypeid}/${FedList.contentid}">
+                                            <div class="review-data-table-style">
+                                                <div class="review-point">
+                                                    <div class="rating">
+                                                        <span class="empty">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                                                        <span class="fill" style="width:${92 * (FedList.rating * 20) / 100}px;">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                                                    </div>
                                                 </div>
+                                                <div class="review-title">${FedList.reviewTitle}</div>
+                                                <div class="review-content">"${FedList.reviewContent}"</div>
                                             </div>
-                                            <div class="review-title">${FedList.reviewTitle}</div>
-                                            <div class="review-content">"${FedList.reviewContent}"</div>
-                                        </div>
+                                        </a>
                                     </div>
                                 </c:if>
                             </c:forEach>

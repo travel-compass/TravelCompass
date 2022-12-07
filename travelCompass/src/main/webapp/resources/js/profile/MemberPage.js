@@ -191,13 +191,17 @@ Fed.addEventListener("click", (e) => {
                     // 드랍 다운 메뉴 삭제 버튼에 이벤트 삽입
                     reivewTextDownMenu_li1.addEventListener("click", () => {
                         
-                        console.log("클릭이 안대나요?")
-                
-                        if (confirm("정말 삭제 하시겠습니까?")){
-                
-                            location.href = location.pathname + "/" + list.reviewNo + "/delete";
+                        if(loginMemberNo == list.memberNO) {
+
+                            if (confirm("정말 삭제 하시겠습니까?")){
                     
+                                location.href = location.pathname + "/" + reviewNo + "/delete";
+                        
+                            }
+                        } else{
+                            alert("본인만 이용할 수 있습니다.");
                         }
+
                     });
 
                     // 드랍 다운 메뉴 이벤트 삽입
@@ -411,10 +415,15 @@ const fedMoreReviewList = function() {
                 // 드랍 다운 메뉴 삭제 버튼에 이벤트 삽입
                 reivewTextDownMenu_li1.addEventListener("click", () => {
             
-                    if (confirm("정말 삭제 하시겠습니까?")){
-            
-                        location.href = location.pathname + "/" + list.reviewNo + "/delete";
+                    if(loginMemberNo == list.memberNO) {
+
+                        if (confirm("정말 삭제 하시겠습니까?")){
                 
+                            location.href = location.pathname + "/" + reviewNo + "/delete";
+                    
+                        }
+                    } else{
+                        alert("본인만 이용할 수 있습니다.");
                     }
                 });
 
@@ -654,10 +663,15 @@ Review.addEventListener("click", (e) => {
                     // 드랍 다운 메뉴 삭제 버튼에 이벤트 삽입
                     reivewTextDownMenu_li1.addEventListener("click", () => {
                 
-                        if (confirm("정말 삭제 하시겠습니까?")){
-                
-                            location.href = location.pathname + "/" + list.reviewNo + "/delete";
+                        if(loginMemberNo == list.memberNO) {
+
+                            if (confirm("정말 삭제 하시겠습니까?")){
                     
+                                location.href = location.pathname + "/" + reviewNo + "/delete";
+                        
+                            }
+                        } else{
+                            alert("본인만 이용할 수 있습니다.");
                         }
                     });
                     // 드랍 다운 메뉴 이벤트 삽입
@@ -823,10 +837,15 @@ function reviewMoreReviewList () {
                 // 드랍 다운 메뉴 삭제 버튼에 이벤트 삽입
                 reivewTextDownMenu_li1.addEventListener("click", () => {
             
-                    if (confirm("정말 삭제 하시겠습니까?")){
-            
-                        location.href = location.pathname + "/" + list.reviewNo + "/delete";
+                    if(loginMemberNo == list.memberNO) {
+
+                        if (confirm("정말 삭제 하시겠습니까?")){
                 
+                            location.href = location.pathname + "/" + reviewNo + "/delete";
+                    
+                        }
+                    } else{
+                        alert("본인만 이용할 수 있습니다.");
                     }
                 });
 
@@ -1022,10 +1041,15 @@ ImageReview.addEventListener("click", (e) => {
                     // 드랍 다운 메뉴 삭제 버튼에 이벤트 삽입
                     reivewTextDownMenu_li1.addEventListener("click", () => {
                 
-                        if (confirm("정말 삭제 하시겠습니까?")){
-                
-                            location.href = location.pathname + "/" + list.reviewNo + "/delete";
+                        if(loginMemberNo == list.memberNO) {
+
+                            if (confirm("정말 삭제 하시겠습니까?")){
                     
+                                location.href = location.pathname + "/" + reviewNo + "/delete";
+                        
+                            }
+                        } else{
+                            alert("본인만 이용할 수 있습니다.");
                         }
                     });
 
@@ -1235,10 +1259,15 @@ function imageMoreReviewList() {
                 // 드랍 다운 메뉴 삭제 버튼에 이벤트 삽입
                 reivewTextDownMenu_li1.addEventListener("click", () => {
                 
-                    if (confirm("정말 삭제 하시겠습니까?")){
-            
-                        location.href = location.pathname + "/" + list.reviewNo + "/delete";
+                    if(loginMemberNo == list.memberNO) {
+
+                        if (confirm("정말 삭제 하시겠습니까?")){
                 
+                            location.href = location.pathname + "/" + reviewNo + "/delete";
+                    
+                        }
+                    } else{
+                        alert("본인만 이용할 수 있습니다.");
                     }
                 });
                 
@@ -1803,10 +1832,14 @@ if (clickFollow != null){
 // 더보기 버튼 눌렀을 때 10개씩 리뷰 추가하기
 const reviewMoreButton = document.getElementById("moreButton");
 
-reviewMoreButton.addEventListener("click", () => {
+if (reviewMoreButton != null){
 
-    reviewMoreList();
-})
+    reviewMoreButton.addEventListener("click", () => {
+    
+        reviewMoreList();
+    })
+}
+
 
 const reviewMoreList = function(){
 
@@ -1874,10 +1907,15 @@ const reviewMoreList = function(){
                 // 드랍 다운 메뉴 삭제 버튼에 이벤트 삽입
                 reivewTextDownMenu_li1.addEventListener("click", () => {
             
-                    if (confirm("정말 삭제 하시겠습니까?")){
-            
-                        location.href = location.pathname + "/" + list.reviewNo + "/delete";
+                    if(loginMemberNo == list.memberNO) {
+
+                        if (confirm("정말 삭제 하시겠습니까?")){
                 
+                            location.href = location.pathname + "/" + reviewNo + "/delete";
+                    
+                        }
+                    } else{
+                        alert("본인만 이용할 수 있습니다.");
                     }
                 });
 
@@ -2077,12 +2115,16 @@ for (let Btn of reviewDelteBtn){
     
         const reviewNo = Btn.childNodes[1].getAttribute("var");
 
-        console.log(reviewNo)
-    
-        if (confirm("정말 삭제 하시겠습니까?")){
+        if(loginMemberNo == reviewPageMemberNo) {
 
-            location.href = location.pathname + "/" + reviewNo + "/delete";
+            if (confirm("정말 삭제 하시겠습니까?")){
     
+                location.href = location.pathname + "/" + reviewNo + "/delete";
+        
+            }
+        } else{
+            alert("본인만 이용할 수 있습니다.");
         }
+
     });
 }

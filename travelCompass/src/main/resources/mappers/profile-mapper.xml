@@ -11,8 +11,8 @@
 		<result property="reviewContent" column="REVIEW_CONTENT"/>
 		<result property="reviewDate" column="REVIEW_DATE"/>
 		<result property="memberNo" column="MEMBER_NO"/>
-		<result property="contentId" column="CONTENT_ID"/>
-		<result property="firstImage" column="FIRST_IMAGE"/>
+		<result property="contentid" column="CONTENT_ID"/>
+		<result property="firstimage" column="FIRST_IMAGE"/>
 		<result property="reviewImagePath" column="REVIEW_IMAGE_PATH"/>
 		<result property="profileImage" column="PROFILE_IMAGE"/>
 		<result property="memberNickname" column="MEMBER_NICKNAME"/>
