@@ -62,7 +62,7 @@
 		<interceptor>
 			<!-- beans라는 태그안에서 bean을 만들기 위한 태그 -->
 			<mapping path="/search"/>  <!-- 모든 요청 주소 -->
-			<beans:bean id="searchInterceptor" class="kh.team.travelcompass.common.interceptor.SearchInterceptorTest" />
+			<beans:bean id="searchInterceptor" class="kh.team.travelcompass.common.interceptor.SearchInterceptor" />
 		</interceptor>
 	</interceptors>
 	
