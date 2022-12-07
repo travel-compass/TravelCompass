@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 
-hr{
+hr {
   margin: 15px 0;
   height: 5px;
   background-color: #34E0A1;
@@ -76,6 +76,7 @@ main {
   justify-content: space-between;
   font-weight: bold;
   margin-bottom: 10px;
+  margin-left: 24px;
 }
 
 .info-content {
@@ -115,8 +116,9 @@ main {
   cursor: pointer;
 }
 
-.review-container{
+.review-container {
   display: inline;
+  margin-left: 24px;
 }
 
 
@@ -148,11 +150,11 @@ main {
 
 /* 주변 장소 아이템 */
 
-.around-item{
+.around-item {
   border-bottom: 2px solid #ccc;
 }
 
-.aCategory{
+.aCategory {
   display: inline-block;
   margin-left: 20px;
   width: 100%;
@@ -198,11 +200,11 @@ main {
   font-size: 13px;
 }
 
-.search-result-item-address a{
+.search-result-item-address a {
   font-size: 13px;
 }
 
-.search-result-item-review a{
+.search-result-item-review a {
   font-size: 13px;
 }
 
@@ -220,7 +222,7 @@ main {
   padding: 8px 8px 8px 12px;
 }
 
-.search-result-item-img img{
+.search-result-item-img img {
   border-radius: 5px;
 }
 
@@ -258,7 +260,6 @@ main {
   z-index: 2;
   overflow: hidden;
   color: #34E0A1;
-  width: 40px;
 }
 
 
@@ -335,26 +336,28 @@ main {
   transition-delay: 50ms;
 }
 
+
+/* ddd */
 /*별도 추가 css*/
 
 .around-item a {
   overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 1; 
-    -webkit-box-orient: vertical;
-    word-wrap:break-word; 
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  word-wrap: break-word;
 }
 
 .a-rating {
   width: 80px;
 }
 
-.search-result-item-address{
+.search-result-item-address {
   margin-top: 5px;
 }
 
-.search-result-item-title{
+.search-result-item-title {
   margin-top: 5px;
   height: 18px;
 }

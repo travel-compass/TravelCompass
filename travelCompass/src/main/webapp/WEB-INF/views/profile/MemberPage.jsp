@@ -11,9 +11,7 @@
     <title>회원페이지</title>
 
     <link rel="stylesheet" href="/resources/css/inc/header.css">
-    <%-- <link rel="stylesheet" href="/resources/css/main-style.css"> --%>
     <link rel="stylesheet" href="/resources/css/inc/footer.css">
-    <%-- <link rel="stylesheet" href="/resources/css/swiper.min.css"> --%>
     <link rel="stylesheet" href="/resources/css/profile/MemberPage.css">
 
     
@@ -27,22 +25,10 @@
     <div class="blur-box"></div>
     
     <main>
-        <%-- <div class="user-header-bottom-style">
-            <nav class="user-header-bottom-layout">
-                <a href="#">호텔</a>
-                <a href="#">즐길거리</a>
-                <a href="#">음식점</a>
-                <a href="#">항공권</a>
-                <a href="#">항공+호텔 패키지</a>
-                <a href="#">크루즈</a>
-                <a href="#"><i class="fa-solid fa-ellipsis"></i></a>
-            </nav>
-        </div> --%>
 
         <!-- 회원 정보 페이지 검색창 하단 메뉴 시작 부분 -->
         <div class="temp-web">
             
-        
             <!-- 회원 페이지 세부 내용들 시작 부분 중 스타일 -->
             <div class="user-page-content-style">
                 <!-- 
@@ -74,7 +60,7 @@
                                 <div class="following PFFCount">
                                     팔로잉
                                     <br>
-                                    <button>${member.totalFollowing}</button>
+                                    <button id="following-button-list">${member.totalFollowing}</button>
                                 </div>
                             </div>
                         </div>
@@ -107,7 +93,7 @@
                 <div id="follow-modal" class="modal-layout">
                     <div class="modal-bc"></div>
                     <div class="modal-content" id="modalContent">
-                        <div class="modal-content-title">팔로워 ${member.totalFollower}명</div>
+                        <div class="modal-content-title" id="modal-title">팔로워 ${member.totalFollower}명</div>
                         <ul class="follow-user-table" id="follow-table">
                             <li>
                                 <a href="">
@@ -213,56 +199,13 @@
                                         </div>
                                         <div class="review-data-table-style">
                                             <div class="review-point">
-                                                <span><i class="fa-solid fa-circle"></i></span>
-                                                <span><i class="fa-solid fa-circle"></i></span>
-                                                <span><i class="fa-solid fa-circle"></i></span>
-                                                <span><i class="fa-solid fa-circle"></i></span>
-                                                <span><i class="fa-solid fa-circle"></i></span>
+                                                <div class="rating">
+                                                    <span class="empty">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                                                    <span class="fill" style="width:${92 * (FedList.rating * 20) / 100}px;">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                                                </div>
                                             </div>
                                             <div class="review-title">${FedList.reviewTitle}</div>
                                             <div class="review-content">"${FedList.reviewContent}"</div>
-                                            <div class="review-date">
-                                                <span class="rdt">방문 날짜 :</span>
-                                                2019년 12월
-                                            </div>
-                                        </div>
-                                        <div class="review-navi-style">
-                                            <div class="review-navi-layout">
-                                                <a href="#" class="review-navi-left">
-                                                    <div>
-                                                        <img src="/resources/images/profile/venis.webp">
-                                                    </div>
-                                                    <div class="review-navi-title">
-                                                        <div>배니스</div>
-                                                        <div class="review-navi-deep">
-                                                            <div class="review-navi-deep-point">
-                                                                <span><i class="fa-solid fa-circle"></i></span>
-                                                                <span><i class="fa-solid fa-circle"></i></span>
-                                                                <span><i class="fa-solid fa-circle"></i></span>
-                                                                <span><i class="fa-solid fa-circle"></i></span>
-                                                                <span><i class="fa-solid fa-circle"></i></span>
-                                                            </div>
-                                                            <div>00건의 리뷰</div>
-                                                        </div>
-                                                        <div>배니스, 이탈리아</div>
-                                                    </div>
-                                                </a>
-                                                <div class="review-navi-right">
-                                                    <i class="fa-solid fa-heart"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="review-support"></div>
-                                        <div class="review-bottom-menu-style">
-                                            <div class="suport-button">
-                                                <i class="fa-regular fa-thumbs-up"></i>도움이 됨
-                                            </div>
-                                            <div class="save-button">
-                                                <i class="fa-solid fa-heart"></i>저장
-                                            </div>
-                                            <div class="share-button">
-                                                <i class="fa-solid fa-arrow-up-from-bracket"></i>공유
-                                            </div>
                                         </div>
                                     </div>
                                 </c:if>
@@ -305,60 +248,20 @@
 
                                         <div class="review-data-table-style">
                                             <div class="review-point">
-                                                <span><i class="fa-solid fa-circle"></i></span>
-                                                <span><i class="fa-solid fa-circle"></i></span>
-                                                <span><i class="fa-solid fa-circle"></i></span>
-                                                <span><i class="fa-solid fa-circle"></i></span>
-                                                <span><i class="fa-solid fa-circle"></i></span>
+                                                <div class="rating">
+                                                    <span class="empty">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                                                    <span class="fill" style="width:${92 * (FedList.rating * 20) / 100}px;">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                                                </div>
                                             </div>
                                             <div class="review-title">${FedList.reviewTitle}</div>
                                             <div class="review-content">"${FedList.reviewContent}"</div>
-                                            <div class="review-date">
-                                                <span class="rdt">방문 날짜 :</span>
-                                                2019년 12월
-                                            </div>
-                                        </div>
-                                        <div class="review-navi-style">
-                                            <div class="review-navi-layout">
-                                                <a href="#" class="review-navi-left">
-                                                    <div>
-                                                        <img src="/resources/images/profile/venis.webp">
-                                                    </div>
-                                                    <div class="review-navi-title">
-                                                        <div>배니스</div>
-                                                        <div class="review-navi-deep">
-                                                            <div class="review-navi-deep-point">
-                                                                <span><i class="fa-solid fa-circle"></i></span>
-                                                                <span><i class="fa-solid fa-circle"></i></span>
-                                                                <span><i class="fa-solid fa-circle"></i></span>
-                                                                <span><i class="fa-solid fa-circle"></i></span>
-                                                                <span><i class="fa-solid fa-circle"></i></span>
-                                                            </div>
-                                                            <div>00건의 리뷰</div>
-                                                        </div>
-                                                        <div>배니스, 이탈리아</div>
-                                                    </div>
-                                                </a>
-                                                <div class="review-navi-right">
-                                                    <i class="fa-solid fa-heart"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="review-support">n개의 도움이 되는 리뷰</div>
-                                        <div class="review-bottom-menu-style">
-                                            <div class="suport-button">
-                                                <i class="fa-regular fa-thumbs-up"></i>도움이 됨
-                                            </div>
-                                            <div class="save-button">
-                                                <i class="fa-solid fa-heart"></i>저장
-                                            </div>
-                                            <div class="share-button">
-                                                <i class="fa-solid fa-arrow-up-from-bracket"></i>공유
-                                            </div>
                                         </div>
                                     </div>
                                 </c:if>
                             </c:forEach>
+                            <c:if test="${fn:length(reviewList) == 10}">
+                                <button class="more-button" id="moreButton">더보기<i class="fa-solid fa-chevron-down"></i></button>
+                            </c:if>
                         </ul>
 
                         <div class="user-page-review-colums3">

@@ -97,8 +97,6 @@ public class ProfileController {
 	@ResponseBody
 	public int follow(@RequestParam Map<String, Integer> paramMap) {
 		
-		System.out.println(paramMap);
-		
 		return service.follow(paramMap);
 	}
 	
@@ -110,6 +108,7 @@ public class ProfileController {
 		return service.unFollow(paramMap);
 	}
 	
+	// 팔로워 리스트 조회하기
 	@GetMapping("/profile/{memberNo}/follow")
 	@ResponseBody
 	public List<Member> selectFollowMemberList(Model model,
@@ -122,4 +121,68 @@ public class ProfileController {
 		return followMemberList;
 	}
 	
+	// 팔로잉 리스트 조회하기
+	@GetMapping("/profile/{memberNo}/following")
+	@ResponseBody
+	public List<Member> selectFollowingMemberList(Model model,
+			@PathVariable("memberNo") int memberNo) {
+		
+		List<Member> followingMemberList = service.selectFollowingMemberList(memberNo);
+		
+		model.addAttribute("followingMemberList", followingMemberList);
+		
+		return followingMemberList;
+	}
+	
+	// 더보기 버튼 눌렀을 때 리뷰 10개씩 보여주기 
+	@GetMapping("/profile/{memberNo}/reviewMoreList")
+	@ResponseBody
+	public List<Review> moreReviewList(
+			@PathVariable("memberNo") int memberNo,
+			@RequestParam int rowBoundCount) {
+		
+		List<Review> moreReviewList = service.moreReviewList(memberNo,rowBoundCount);
+		
+		return moreReviewList;
+		
+	}
+	
+	// ajax 더보기 버튼 눌렀을 때 피드 10개씩 보여주기
+	@GetMapping("/profile/{memberNo}/ajaxfedMoreList")
+	@ResponseBody
+	public List<Review> fedMoreReviewList(
+			@PathVariable("memberNo") int memberNo,
+			@RequestParam int rowBoundCount) {
+		
+		List<Review> ajaxFedMoreList = service.moreReviewList(memberNo,rowBoundCount);
+		
+		return ajaxFedMoreList;
+		
+	}
+	
+	// ajax 더보기 버튼 눌렀을 때 피드 10개씩 보여주기
+	@GetMapping("/profile/{memberNo}/ajaxReviewMoreList")
+	@ResponseBody
+	public List<Review> reviewMoreReviewList(
+			@PathVariable("memberNo") int memberNo,
+			@RequestParam int rowBoundCount) {
+		
+		List<Review> ajaxReviewMoreList = service.moreReviewList(memberNo,rowBoundCount);
+		
+		return ajaxReviewMoreList;
+		
+	}
+	
+	// ajax 더보기 버튼 눌렀을 때 사진리뷰 10개씩 보여주기
+	@GetMapping("/profile/{memberNo}/ajaxImageMoreList")
+	@ResponseBody
+	public List<Review> imageMoreReviewList(
+			@PathVariable("memberNo") int memberNo,
+			@RequestParam int rowBoundCount) {
+		
+		List<Review> ajaxImageMoreList = service.moreReviewList(memberNo,rowBoundCount);
+		
+		return ajaxImageMoreList;
+		
+	}
 }

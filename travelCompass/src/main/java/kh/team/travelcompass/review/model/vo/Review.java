@@ -19,8 +19,8 @@ public class Review {
 	private String reviewContent; // 리뷰 내용
 	private String reviewDate; // 리뷰 작성일
 	private int memberNo; // 리뷰 작성한 회번 번호
-	private String contentId; // 리뷰 작성한 장소contentid 번호
-	private String firstImage; // 장소 썸네일 이미지 주소
+	private String contentid; // 리뷰 작성한 장소contentid 번호
+	private String firstimage; // 장소 썸네일 이미지 주소
 	private String reviewflag; // 리뷰 삭제Y / 비공개B
 
 	private int reviewLike; // 리뷰 좋아요 갯수
@@ -31,6 +31,7 @@ public class Review {
 
 	private List<ReviewImage> reviewImgList;
 	
+	private String contenttypeid;
 	// Report 관련 column추가
 	private int reportNo;          //신고 번호
 	private int reasonCode;        //사유 코드
