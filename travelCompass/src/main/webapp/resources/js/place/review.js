@@ -765,6 +765,10 @@ const createReviewList = function () {
 //신고하기
 function insertReport(reviewNo, memberNo, loginMemberNo) {
     console.log(reviewNo, memberNo, loginMemberNo);
+    if(loginMemberNo == '') {
+      alert("로그인 후 이용해주세요.");
+      return;
+    }
 
     if (memberNo != loginMemberNo) {
       $.ajax ({
@@ -772,7 +776,8 @@ function insertReport(reviewNo, memberNo, loginMemberNo) {
         type: "get",
         data: {
           reviewNo: reviewNo,
-          memberNo: memberNo},
+          memberNo: memberNo,
+          reporter: loginMemberNo},
         success : result => {
             console.log(result);
             alert("리뷰를 신고 했습니다.");
@@ -787,57 +792,57 @@ function insertReport(reviewNo, memberNo, loginMemberNo) {
 
 
 //좋아요 버튼
-// //전역 변수 loginMemberNo사용
-// function reviewLike(reviewNo, memberNo, loginMemberNo) {
+//전역 변수 loginMemberNo사용
+function reviewLike(reviewNo, memberNo, loginMemberNo) {
   
-//     // 로그인 상태가 아닌 경우
-//     if(loginMemberNo == ""){
-//         alert("로그인 후 이용해주세요.");
-//         return;
-//     }
+    // 로그인 상태가 아닌 경우
+    if(loginMemberNo == ""){
+        alert("로그인 후 이용해주세요.");
+        return;
+    }
 
-//     if(loginMemberNo == memberNo){
-//         alert("본인의 리뷰는 좋아요를 누를 수 없습니다.");
-//         return;
-//     }
-//     const likeCount = e.target.nextElementSibling;
-//     console.log(likeCount);
+    if(loginMemberNo == memberNo){
+        alert("본인의 리뷰는 좋아요를 누를 수 없습니다.");
+        return;
+    }
+    const likeCount = e.target.nextElementSibling;
+    console.log(likeCount);
 
-//     // 로그인 상태 + 좋아요 상태가 아닌 경우
-//     if(e.target.classList.contains("fa-regular")){ //빈하트인 경우
+    // 로그인 상태 + 좋아요 상태가 아닌 경우
+    if(e.target.classList.contains("fa-regular")){ //빈하트인 경우
 
-//         $.ajax({
-//             url: "/reviewLikeUp",
-//             data: { "reviewNo": reviewNo, "memberNo": loginMemberNo},
-//             type: "get",
-//             success: (result) => {
-//                 if(result>0){
-//                     e.target.classList.remove("fa-regular")    //빈하트 클래스 제거
-//                     e.target.classList.add("fa-solid")         //채워진 하트 클래스 추가
-//                     likeCount.innerText = Number(likeCount.innerText) + 1;
-//                 } else {
-//                     console.log("증가 실패");
-//                 }
-//             },
-//             error: () => { console.log("증가 에러");}
-//         });
-//     }
-//     // 로그인 상태 + 좋아요 상태인 경우
-//     else{ //채워진 하트인 경우
-//         $.ajax({
-//             url: "/reviewLikeDown",
-//             data: { "reviewNo": reviewNo, "memberNo": loginMemberNo},
-//             type: "get",
-//             success: (result) => {
-//                 if(result>0){
-//                 e.target.classList.remove("fa-solid")      //채워진 하트 클래스 제거
-//                 e.target.classList.add("fa-regular")       //빈하트 클래스 추가
-//                 likeCount.innerText = Number(likeCount.innerText) - 1; //좋아요 수 -1
-//                 }else {
-//                     console.log("감소 실패");
-//                 }
-//             },
-//             error: () => { console.log("감소 에러");}
-//         });
-//     }
-// }
+        $.ajax({
+            url: "/reviewLikeUp",
+            data: { "reviewNo": reviewNo, "memberNo": loginMemberNo},
+            type: "get",
+            success: (result) => {
+                if(result>0){
+                    e.target.classList.remove("fa-regular")    //빈하트 클래스 제거
+                    e.target.classList.add("fa-solid")         //채워진 하트 클래스 추가
+                    likeCount.innerText = Number(likeCount.innerText) + 1;
+                } else {
+                    console.log("증가 실패");
+                }
+            },
+            error: () => { console.log("증가 에러");}
+        });
+    }
+    // 로그인 상태 + 좋아요 상태인 경우
+    else{ //채워진 하트인 경우
+        $.ajax({
+            url: "/reviewLikeDown",
+            data: { "reviewNo": reviewNo, "memberNo": loginMemberNo},
+            type: "get",
+            success: (result) => {
+                if(result>0){
+                e.target.classList.remove("fa-solid")      //채워진 하트 클래스 제거
+                e.target.classList.add("fa-regular")       //빈하트 클래스 추가
+                likeCount.innerText = Number(likeCount.innerText) - 1; //좋아요 수 -1
+                }else {
+                    console.log("감소 실패");
+                }
+            },
+            error: () => { console.log("감소 에러");}
+        });
+    }
+}

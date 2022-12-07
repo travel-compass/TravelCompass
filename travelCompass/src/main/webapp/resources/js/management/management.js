@@ -1,6 +1,5 @@
 const managementType = document.getElementsByName("managementType");
 
-console.log(reviewList);
 
 for(let management of managementType){
     management.addEventListener("click", function(){
