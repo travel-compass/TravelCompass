@@ -55,15 +55,15 @@ public class EmailServiceImpl implements EmailService{
 			MimeMessage mail = mailSender.createMimeMessage();
 			
 			// 제목
-			String subject = "[수업용 Project]회원가입 인증번호";
+			String subject = "Travelcompass 회원가입 인증번호";
 			
 			// 문자 인코딩
 			String charset = "UTF-8";
 			
 			// 메일 내용
 			String mailContent 
-			= "<p>수업용 프로젝트 회원 가입 인증번호입니다.</p>"
-					+ "<h3 style='color:blue'>" + authKey + "</h3>";
+			= "<p>당신을 위한 여행 나침반</p>"
+					+ "<h2 style='color:#2DC48D'>" + authKey + "</h3>";
 			
 			
 			
@@ -87,5 +87,4 @@ public class EmailServiceImpl implements EmailService{
 		
 		return authKey;
 	}
-
 }
