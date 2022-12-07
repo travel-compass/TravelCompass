@@ -571,6 +571,7 @@ animation-duration: 1.5s;
 .user-page-review-dot-down-menu li:hover{
     background-color: #ddd;
     border-radius: 15px;
+    cursor: pointer;
 }
 
 /* 리뷰 작성 아무것도 안했을 때 나오는 화면 */

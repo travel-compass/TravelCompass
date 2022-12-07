@@ -606,7 +606,11 @@ const createReviewList = function () {
         reviewInfoNickname.classList.add("review-user-nickname");
 
         reviewInfoNickname.innerHTML =
-          "<a href='#'>" + review.memberNickname + "</a>";
+          "<a href='/profile/" +
+          review.memberNo +
+          ">" +
+          review.memberNickname +
+          "</a>";
 
         const reviewInfoDateLink = document.createElement("a");
         reviewInfoDateLink.classList.add("review-user-dday");

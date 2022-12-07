@@ -94,10 +94,10 @@
               <div class="user-page-review-header-style">
                 
                 <div class="user-page-review-header-layout">
-                  <a href="#" class="review-user-image"><img src="${review.profileImage}" alt="프로필 이미지"></a>
+                  <a href="/profile/${review.memberNo}" class="review-user-image"><img src="${review.profileImage}" alt="프로필 이미지"></a>
                   <div class="review-user-info-layout">
-                    <span class="review-user-nickname"><a href="#">${review.memberNickname}</a></span>
-                    <a href="#" class="review-user-dday">
+                    <span class="review-user-nickname"><a href="/profile/${review.memberNo}">${review.memberNickname}</a></span>
+                    <a href="/profile/${review.memberNo}" class="review-user-dday">
                         ${review.reviewDate}
                     </a>
                   </div>

@@ -336,10 +336,6 @@ main {
   transition-delay: 50ms;
 }
 
-
-/* ddd */
-/*별도 추가 css*/
-
 .around-item a {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -356,6 +352,8 @@ main {
 .search-result-item-address {
   margin-top: 5px;
 }
+
+
 
 .search-result-item-title {
   margin-top: 5px;

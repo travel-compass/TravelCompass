@@ -1,3 +1,5 @@
+
+
 // 더보기 버튼 눌렀을 때 review offset 전역 변수로 설정
 let reviewRowBoundCount = 10;
 
@@ -44,7 +46,6 @@ function showSlides(n, element) {
         }
     }
 
-// console.log(slides);
     let idx = 0;
     for(let i=0 ; i<slides.length ; i++){
         if( slides[i].style.display == "block" ){
@@ -81,20 +82,24 @@ for (let BTNList of dropDownMenu){
 
         BTNList.nextElementSibling.style.display = "block";
     })
-    
+    /* 
     BTNList.addEventListener("blur", () => {
 
         BTNList.nextElementSibling.style.display = "none";
 
     })
-
+ */
 }
+
+
+
 
 
 // 프로필 페이지의 피드 버튼 눌렀을 때 사진 유무의 리뷰들 불러오는 비동기
 const Fed = document.getElementById("Fed");
 
 Fed.addEventListener("click", (e) => {
+
 
     window.scrollTo({ top: 0, behavior: "smooth" });
 
@@ -180,19 +185,34 @@ Fed.addEventListener("click", (e) => {
                     reivewTextDownMenu.classList.add("down-menu");
         
                     const reivewTextDownMenu_li1 = document.createElement("li");
-                    reivewTextDownMenu_li1.innerHTML = "<li><a href='#'>수정</a></li>";
+                    reivewTextDownMenu_li1.innerText = "삭제";
+                    reivewTextDownMenu_li1.setAttribute("id", "reviewDelete");
                     
-                    const reivewTextDownMenu_li2 = document.createElement("li");
-                    reivewTextDownMenu_li2.innerHTML = "<li><a href='#'>삭제</a></li>";
+                    // 드랍 다운 메뉴 삭제 버튼에 이벤트 삽입
+                    reivewTextDownMenu_li1.addEventListener("click", () => {
+                        
+                        if(loginMemberNo == list.memberNO) {
+
+                            if (confirm("정말 삭제 하시겠습니까?")){
+                    
+                                location.href = location.pathname + "/" + reviewNo + "/delete";
+                        
+                            }
+                        } else{
+                            alert("본인만 이용할 수 있습니다.");
+                        }
+
+                    });
 
                     // 드랍 다운 메뉴 이벤트 삽입
                     reviewTextDotStyle.addEventListener("click", () => {
                         reviewTextDotStyle.nextElementSibling.style.display = "block";
                     });
+                    /* 
                     reviewTextDotStyle.addEventListener("blur", () => {
                         reviewTextDotStyle.nextElementSibling.style.display = "none";
                     });
-                    
+                     */
                     const reviewTextDataTableStyle = document.createElement("div");
                     reviewTextDataTableStyle.classList.add("review-data-table-style");
                     
@@ -202,7 +222,7 @@ Fed.addEventListener("click", (e) => {
                     const rating = document.createElement("div");
                     rating.classList.add("rating");
                     rating.innerHTML = "<span class='empty'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>"
-                    +"<span class='fill' style='width:${100 * (" + list.rating + " * 20) / 100}px;'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>";
+                    +"<span class='fill' style='width:100 * (" + list.rating + " * 20) / 100px;'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>";
 
                     const reviewTextTitle = document.createElement("div");
                     reviewTextTitle.classList.add("review-title");
@@ -281,8 +301,8 @@ Fed.addEventListener("click", (e) => {
                     reivewTextDotDownMenu.append(reivewTextDownMenu);
 
                     // A-0-2-0
-                    reivewTextDownMenu.append(reivewTextDownMenu_li1, reivewTextDownMenu_li2);
-                    
+                    reivewTextDownMenu.append(reivewTextDownMenu_li1);
+
                     // A-0 번 완성
                                     
                     // A-1 (A 리뷰 시작의 1번 인덱스 위치에 있는 태그 )의 append
@@ -312,7 +332,9 @@ Fed.addEventListener("click", (e) => {
                     
                     // 피드 리뷰 리스트가 길이가 10개이면 다음 10개를 열기 위한 더보기 버튼 추가
                     // 더보기 버튼 작동
-                }  
+                } else {
+                    reviewRowBoundCount = 0;
+                }
                 
                 
             }
@@ -387,19 +409,33 @@ const fedMoreReviewList = function() {
                 reivewTextDownMenu.classList.add("down-menu");
     
                 const reivewTextDownMenu_li1 = document.createElement("li");
-                reivewTextDownMenu_li1.innerHTML = "<pan1li><a href='#'>수정</a></pan1li>";
+                reivewTextDownMenu_li1.innerText = "삭제";
+                reivewTextDownMenu_li1.setAttribute("id", "reviewDelete");
                 
-                const reivewTextDownMenu_li2 = document.createElement("li");
-                reivewTextDownMenu_li2.innerHTML = "<li><a href='#'>삭제</a></li>";
+                // 드랍 다운 메뉴 삭제 버튼에 이벤트 삽입
+                reivewTextDownMenu_li1.addEventListener("click", () => {
+            
+                    if(loginMemberNo == list.memberNO) {
+
+                        if (confirm("정말 삭제 하시겠습니까?")){
+                
+                            location.href = location.pathname + "/" + reviewNo + "/delete";
+                    
+                        }
+                    } else{
+                        alert("본인만 이용할 수 있습니다.");
+                    }
+                });
 
                 // 드랍 다운 메뉴 이벤트 삽입
                 reviewTextDotStyle.addEventListener("click", () => {
                     reviewTextDotStyle.nextElementSibling.style.display = "block";
                 });
+                /* 
                 reviewTextDotStyle.addEventListener("blur", () => {
                     reviewTextDotStyle.nextElementSibling.style.display = "none";
                 });
-                
+                 */
                 const reviewTextDataTableStyle = document.createElement("div");
                 reviewTextDataTableStyle.classList.add("review-data-table-style");
                 
@@ -409,7 +445,7 @@ const fedMoreReviewList = function() {
                 const rating = document.createElement("div");
                 rating.classList.add("rating");
                 rating.innerHTML = "<span class='empty'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>"
-                +"<span class='fill' style='width:${100 * (" + list.rating + " * 20) / 100}px;'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>";
+                +"<span class='fill' style='width:100 * (" + list.rating + " * 20) / 100px;'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>";
 
                 const reviewTextTitle = document.createElement("div");
                 reviewTextTitle.classList.add("review-title");
@@ -488,8 +524,8 @@ const fedMoreReviewList = function() {
                 reivewTextDotDownMenu.append(reivewTextDownMenu);
 
                 // A-0-2-0
-                reivewTextDownMenu.append(reivewTextDownMenu_li1, reivewTextDownMenu_li2);
-                
+                reivewTextDownMenu.append(reivewTextDownMenu_li1);
+
                 // A-0 번 완성
                                 
                 // A-1 (A 리뷰 시작의 1번 인덱스 위치에 있는 태그 )의 append
@@ -621,19 +657,32 @@ Review.addEventListener("click", (e) => {
                     reivewTextDownMenu.classList.add("down-menu");
         
                     const reivewTextDownMenu_li1 = document.createElement("li");
-                    reivewTextDownMenu_li1.innerHTML = "<li><a href='#'>수정</a></li>";
-                    
-                    const reivewTextDownMenu_li2 = document.createElement("li");
-                    reivewTextDownMenu_li2.innerHTML = "<li><a href='#'>삭제</a></li>";
+                    reivewTextDownMenu_li1.innerText = "삭제";
+                    reivewTextDownMenu_li1.setAttribute("id", "reviewDelete");
+    
+                    // 드랍 다운 메뉴 삭제 버튼에 이벤트 삽입
+                    reivewTextDownMenu_li1.addEventListener("click", () => {
+                
+                        if(loginMemberNo == list.memberNO) {
 
+                            if (confirm("정말 삭제 하시겠습니까?")){
+                    
+                                location.href = location.pathname + "/" + reviewNo + "/delete";
+                        
+                            }
+                        } else{
+                            alert("본인만 이용할 수 있습니다.");
+                        }
+                    });
                     // 드랍 다운 메뉴 이벤트 삽입
                     reviewTextDotStyle.addEventListener("click", () => {
                         reviewTextDotStyle.nextElementSibling.style.display = "block";
                     });
+                    /* 
                     reviewTextDotStyle.addEventListener("blur", () => {
                         reviewTextDotStyle.nextElementSibling.style.display = "none";
                     });
-                    
+ */
                     const reviewTextDataTableStyle = document.createElement("div");
                     reviewTextDataTableStyle.classList.add("review-data-table-style");
                     
@@ -643,7 +692,7 @@ Review.addEventListener("click", (e) => {
 
                     rating.classList.add("rating");
                     rating.innerHTML = "<span class='empty'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>"
-                    +"<span class='fill' style='width:${100 * (" + list.rating + " * 20) / 100}px;'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>";
+                    +"<span class='fill' style='width:100 * (" + list.rating + " * 20) / 100px;'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>";
 
                     const reviewTextTitle = document.createElement("div");
                     reviewTextTitle.classList.add("review-title");
@@ -677,8 +726,8 @@ Review.addEventListener("click", (e) => {
                     reivewTextDotDownMenu.append(reivewTextDownMenu);
 
                     // A-0-2-0
-                    reivewTextDownMenu.append(reivewTextDownMenu_li1, reivewTextDownMenu_li2);
-                    
+                    reivewTextDownMenu.append(reivewTextDownMenu_li1);
+
                     // A-0 번 완성
                                     
                     // A-1 (A 리뷰 시작의 1번 인덱스 위치에 있는 태그 )의 append
@@ -708,6 +757,8 @@ Review.addEventListener("click", (e) => {
                     
                     // 피드 리뷰 리스트가 길이가 10개이면 다음 10개를 열기 위한 더보기 버튼 추가
                     // 더보기 버튼 작동
+                } else {
+                    reviewRowBoundCount = 0;
                 }  
 
             }
@@ -780,19 +831,33 @@ function reviewMoreReviewList () {
                 reivewTextDownMenu.classList.add("down-menu");
     
                 const reivewTextDownMenu_li1 = document.createElement("li");
-                reivewTextDownMenu_li1.innerHTML = "<li><a href='#'>수정</a></li>";
+                reivewTextDownMenu_li1.innerText = "삭제";
+                reivewTextDownMenu_li1.setAttribute("id", "reviewDelete");
                 
-                const reivewTextDownMenu_li2 = document.createElement("li");
-                reivewTextDownMenu_li2.innerHTML = "<li><a href='#'>삭제</a></li>";
+                // 드랍 다운 메뉴 삭제 버튼에 이벤트 삽입
+                reivewTextDownMenu_li1.addEventListener("click", () => {
+            
+                    if(loginMemberNo == list.memberNO) {
+
+                        if (confirm("정말 삭제 하시겠습니까?")){
+                
+                            location.href = location.pathname + "/" + reviewNo + "/delete";
+                    
+                        }
+                    } else{
+                        alert("본인만 이용할 수 있습니다.");
+                    }
+                });
 
                 // 드랍 다운 메뉴 이벤트 삽입
                 reviewTextDotStyle.addEventListener("click", () => {
                     reviewTextDotStyle.nextElementSibling.style.display = "block";
                 });
+                /* 
                 reviewTextDotStyle.addEventListener("blur", () => {
                     reviewTextDotStyle.nextElementSibling.style.display = "none";
                 });
-                
+ */
                 const reviewTextDataTableStyle = document.createElement("div");
                 reviewTextDataTableStyle.classList.add("review-data-table-style");
                 
@@ -802,7 +867,7 @@ function reviewMoreReviewList () {
                 const rating = document.createElement("div");
                 rating.classList.add("rating");
                 rating.innerHTML = "<span class='empty'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>"
-                +"<span class='fill' style='width:${100 * (" + list.rating + " * 20) / 100}px;'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>";
+                +"<span class='fill' style='width:100 * (" + list.rating + " * 20) / 100px;'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>";
 
                 const reviewTextTitle = document.createElement("div");
                 reviewTextTitle.classList.add("review-title");
@@ -836,7 +901,7 @@ function reviewMoreReviewList () {
                 reivewTextDotDownMenu.append(reivewTextDownMenu);
 
                 // A-0-2-0
-                reivewTextDownMenu.append(reivewTextDownMenu_li1, reivewTextDownMenu_li2);
+                reivewTextDownMenu.append(reivewTextDownMenu_li1);
                 
                 // A-0 번 완성
                                 
@@ -970,19 +1035,33 @@ ImageReview.addEventListener("click", (e) => {
                     reivewTextDownMenu.classList.add("down-menu");
         
                     const reivewTextDownMenu_li1 = document.createElement("li");
-                    reivewTextDownMenu_li1.innerHTML = "<li><a href='#'>수정</a></li>";
+                    reivewTextDownMenu_li1.innerText = "삭제";
+                    reivewTextDownMenu_li1.setAttribute("id", "reviewDelete");
+
+                    // 드랍 다운 메뉴 삭제 버튼에 이벤트 삽입
+                    reivewTextDownMenu_li1.addEventListener("click", () => {
+                
+                        if(loginMemberNo == list.memberNO) {
+
+                            if (confirm("정말 삭제 하시겠습니까?")){
                     
-                    const reivewTextDownMenu_li2 = document.createElement("li");
-                    reivewTextDownMenu_li2.innerHTML = "<li><a href='#'>삭제</a></li>";
+                                location.href = location.pathname + "/" + reviewNo + "/delete";
+                        
+                            }
+                        } else{
+                            alert("본인만 이용할 수 있습니다.");
+                        }
+                    });
 
                     // 드랍 다운 메뉴 이벤트 삽입
                     reviewTextDotStyle.addEventListener("click", () => {
                         reviewTextDotStyle.nextElementSibling.style.display = "block";
                     });
+                    /* 
                     reviewTextDotStyle.addEventListener("blur", () => {
                         reviewTextDotStyle.nextElementSibling.style.display = "none";
                     });
-                    
+ */
                     const reviewTextDataTableStyle = document.createElement("div");
                     reviewTextDataTableStyle.classList.add("review-data-table-style");
                     
@@ -992,7 +1071,7 @@ ImageReview.addEventListener("click", (e) => {
                     const rating = document.createElement("div");
                     rating.classList.add("rating");
                     rating.innerHTML = "<span class='empty'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>"
-                    +"<span class='fill' style='width:${100 * (" + list.rating + " * 20) / 100}px;'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>";
+                    +"<span class='fill' style='width:100 * (" + list.rating + " * 20) / 100px;'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>";
 
                     const reviewTextTitle = document.createElement("div");
                     reviewTextTitle.classList.add("review-title");
@@ -1063,7 +1142,7 @@ ImageReview.addEventListener("click", (e) => {
                     reivewTextDotDownMenu.append(reivewTextDownMenu);
 
                     // A-0-2-0
-                    reivewTextDownMenu.append(reivewTextDownMenu_li1, reivewTextDownMenu_li2);
+                    reivewTextDownMenu.append(reivewTextDownMenu_li1);
                     
                     // A-0 번 완성
                                     
@@ -1094,6 +1173,8 @@ ImageReview.addEventListener("click", (e) => {
                     
                     // 피드 리뷰 리스트가 길이가 10개이면 다음 10개를 열기 위한 더보기 버튼 추가
                     // 더보기 버튼 작동
+                } else {
+                    reviewRowBoundCount = 0;
                 }  
 
             }
@@ -1172,19 +1253,33 @@ function imageMoreReviewList() {
                 reivewTextDownMenu.classList.add("down-menu");
     
                 const reivewTextDownMenu_li1 = document.createElement("li");
-                reivewTextDownMenu_li1.innerHTML = "<li><a href='#'>수정</a></li>";
+                reivewTextDownMenu_li1.innerText = "삭제";
+                reivewTextDownMenu_li1.setAttribute("id", "reviewDelete");
                 
-                const reivewTextDownMenu_li2 = document.createElement("li");
-                reivewTextDownMenu_li2.innerHTML = "<li><a href='#'>삭제</a></li>";
+                // 드랍 다운 메뉴 삭제 버튼에 이벤트 삽입
+                reivewTextDownMenu_li1.addEventListener("click", () => {
+                
+                    if(loginMemberNo == list.memberNO) {
 
+                        if (confirm("정말 삭제 하시겠습니까?")){
+                
+                            location.href = location.pathname + "/" + reviewNo + "/delete";
+                    
+                        }
+                    } else{
+                        alert("본인만 이용할 수 있습니다.");
+                    }
+                });
+                
                 // 드랍 다운 메뉴 이벤트 삽입
                 reviewTextDotStyle.addEventListener("click", () => {
                     reviewTextDotStyle.nextElementSibling.style.display = "block";
                 });
+                /* 
                 reviewTextDotStyle.addEventListener("blur", () => {
                     reviewTextDotStyle.nextElementSibling.style.display = "none";
                 });
-                
+ */
                 const reviewTextDataTableStyle = document.createElement("div");
                 reviewTextDataTableStyle.classList.add("review-data-table-style");
                 
@@ -1194,7 +1289,7 @@ function imageMoreReviewList() {
                 const rating = document.createElement("div");
                 rating.classList.add("rating");
                 rating.innerHTML = "<span class='empty'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>"
-                +"<span class='fill' style='width:${100 * (" + list.rating + " * 20) / 100}px;'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>";
+                +"<span class='fill' style='width:100 * (" + list.rating + " * 20) / 100px;'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>";
 
                 const reviewTextTitle = document.createElement("div");
                 reviewTextTitle.classList.add("review-title");
@@ -1265,7 +1360,7 @@ function imageMoreReviewList() {
                 reivewTextDotDownMenu.append(reivewTextDownMenu);
 
                 // A-0-2-0
-                reivewTextDownMenu.append(reivewTextDownMenu_li1, reivewTextDownMenu_li2);
+                reivewTextDownMenu.append(reivewTextDownMenu_li1);
                 
                 // A-0 번 완성
                                 
@@ -1341,6 +1436,9 @@ followButton.addEventListener("click", () => {
             if (followMemberList.length == 0){
                 return;
             }
+
+            const modalTitle = document.getElementById("modal-title");
+            modalTitle.innerText = "팔로워 " + followMemberList.length + "명";
 
             for(let list of followMemberList) {
                 
@@ -1485,7 +1583,6 @@ followingButton.addEventListener("click", () => {
             const followTable = document.getElementById("follow-table");
             followTable.innerHTML = "";
 
-            console.log(followingMemberList);
             
             if (followingMemberList.length == 0){
                 return;
@@ -1735,10 +1832,14 @@ if (clickFollow != null){
 // 더보기 버튼 눌렀을 때 10개씩 리뷰 추가하기
 const reviewMoreButton = document.getElementById("moreButton");
 
-reviewMoreButton.addEventListener("click", () => {
+if (reviewMoreButton != null){
 
-    reviewMoreList();
-})
+    reviewMoreButton.addEventListener("click", () => {
+    
+        reviewMoreList();
+    })
+}
+
 
 const reviewMoreList = function(){
 
@@ -1800,19 +1901,33 @@ const reviewMoreList = function(){
                 reivewTextDownMenu.classList.add("down-menu");
     
                 const reivewTextDownMenu_li1 = document.createElement("li");
-                reivewTextDownMenu_li1.innerHTML = "<li><a href='#'>수정</a></li>";
+                reivewTextDownMenu_li1.innerText = "삭제";
+                reivewTextDownMenu_li1.setAttribute("id", "reviewDelete");
                 
-                const reivewTextDownMenu_li2 = document.createElement("li");
-                reivewTextDownMenu_li2.innerHTML = "<li><a href='#'>삭제</a></li>";
-    
+                // 드랍 다운 메뉴 삭제 버튼에 이벤트 삽입
+                reivewTextDownMenu_li1.addEventListener("click", () => {
+            
+                    if(loginMemberNo == list.memberNO) {
+
+                        if (confirm("정말 삭제 하시겠습니까?")){
+                
+                            location.href = location.pathname + "/" + reviewNo + "/delete";
+                    
+                        }
+                    } else{
+                        alert("본인만 이용할 수 있습니다.");
+                    }
+                });
+
                 // 드랍 다운 메뉴 이벤트 삽입
                 reviewTextDotStyle.addEventListener("click", () => {
                     reviewTextDotStyle.nextElementSibling.style.display = "block";
                 });
+                /* 
                 reviewTextDotStyle.addEventListener("blur", () => {
                     reviewTextDotStyle.nextElementSibling.style.display = "none";
                 });
-                
+ */
                 const reviewTextDataTableStyle = document.createElement("div");
                 reviewTextDataTableStyle.classList.add("review-data-table-style");
                 
@@ -1822,7 +1937,7 @@ const reviewMoreList = function(){
                 const rating = document.createElement("div");
                 rating.classList.add("rating");
                 rating.innerHTML = "<span class='empty'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>"
-                +"<span class='fill' style='width:${100 * (" + list.rating + " * 20) / 100}px;'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>";
+                +"<span class='fill' style='width:100 * (" + list.rating + " * 20) / 100px;'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>";
     
                 const reviewTextTitle = document.createElement("div");
                 reviewTextTitle.classList.add("review-title");
@@ -1901,7 +2016,7 @@ const reviewMoreList = function(){
                 reivewTextDotDownMenu.append(reivewTextDownMenu);
     
                 // A-0-2-0
-                reivewTextDownMenu.append(reivewTextDownMenu_li1, reivewTextDownMenu_li2);
+                reivewTextDownMenu.append(reivewTextDownMenu_li1);
                 
                 // A-0 번 완성
                                 
@@ -1936,5 +2051,80 @@ const reviewMoreList = function(){
             console.log("리뷰 리스트 불러오기 실패");
         }
     
+    });
+}
+
+// 프로필 이미지 수정
+
+const profileImage = document.getElementById("profile-image");
+const imageInput = document.getElementById("image-input");
+const profileForm = document.getElementById("profileForm");
+
+let initCheck;
+
+// (0 : 초기값(취소) / 1 : 새 이미지 업로드)
+let deleteCheck = 0;
+
+const originalImage = profileImage.getAttribute("src");
+
+if(imageInput != null){
+
+    if(profileImage.getAttribute("src") == "/resources/images/common/profile.png"){
+        // 기본 이미지인 경우
+        initCheck = false;
+    } else {
+        initCheck = true;
+    }
+
+    imageInput.addEventListener("change", e => {
+
+        console.log(e.target.files);
+        console.log(e.target.files[0]);
+
+        if(e.target.files[0] != undefined){
+
+            const profileImage = new FileReader();
+
+            profileImage.readAsDataURL(e.target.files[0]);
+
+
+            profileImage.onload = event => {
+
+                profileImage.setAttribute("src", event.target.result);
+
+                deleteCheck = 1;
+            }
+
+        } else {
+            
+            profileImage.setAttribute("src", originalImage);
+            
+            deleteCheck = 0;
+        }
+        
+        profileForm.submit(profileImage);
+        
+    });
+}
+
+const reviewDelteBtn = document.getElementsByClassName("down-menu");
+
+for (let Btn of reviewDelteBtn){
+
+    Btn.childNodes[1].addEventListener("click", () => {
+    
+        const reviewNo = Btn.childNodes[1].getAttribute("var");
+
+        if(loginMemberNo == reviewPageMemberNo) {
+
+            if (confirm("정말 삭제 하시겠습니까?")){
+    
+                location.href = location.pathname + "/" + reviewNo + "/delete";
+        
+            }
+        } else{
+            alert("본인만 이용할 수 있습니다.");
+        }
+
     });
 }

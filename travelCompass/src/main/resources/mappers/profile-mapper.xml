@@ -11,12 +11,12 @@
 		<result property="reviewContent" column="REVIEW_CONTENT"/>
 		<result property="reviewDate" column="REVIEW_DATE"/>
 		<result property="memberNo" column="MEMBER_NO"/>
-		<result property="contentId" column="CONTENT_ID"/>
-		<result property="firstImage" column="FIRST_IMAGE"/>
+		<result property="contentid" column="CONTENT_ID"/>
+		<result property="firstimage" column="FIRST_IMAGE"/>
 		<result property="reviewImagePath" column="REVIEW_IMAGE_PATH"/>
 		<result property="profileImage" column="PROFILE_IMAGE"/>
 		<result property="memberNickname" column="MEMBER_NICKNAME"/>
-		
+		<result property="contenttypeid" column="CONTENT_TYPE_ID"/>
 		 
 		<collection property="reviewImgList" javaType="java.util.ArrayList"
 		ofType="ReviewImage" select="selectReviewImageList" column="REVIEW_NO"/>
@@ -47,7 +47,7 @@
 	
 	<select id="ReviewSelectList" resultMap="review_rm">
 		SELECT REVIEW_NO, RATING, REVIEW_TITLE, REVIEW_CONTENT, TO_CHAR(REVIEW_DATE, 'YYYY"년" MM"월"') REVIEW_DATE, 
-			CONTENT_ID,	FIRST_IMAGE, MEMBER_NO, PROFILE_IMAGE, MEMBER_NICKNAME
+			CONTENT_ID,	FIRST_IMAGE, MEMBER_NO, PROFILE_IMAGE, MEMBER_NICKNAME, CONTENT_TYPE_ID
 		FROM REVIEW
 		LEFT JOIN "MEMBER" USING(MEMBER_NO)
 		WHERE REVIEW_FL = 'N'
@@ -79,5 +79,11 @@
 		WHERE FOLLOW_MEMBER_NO = #{loginMemberNo}
 		AND MEMBER_NO = #{reviewPageMemberNo}
 	</delete>
+	
+	<update id="reviewDelete">
+		UPDATE REVIEW SET
+		REVIEW_FL = 'Y'
+		WHERE REVIEW_NO = #{reviewNo}
+	</update>
 	
 </mapper>
