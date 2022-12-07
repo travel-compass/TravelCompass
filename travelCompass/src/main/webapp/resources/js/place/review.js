@@ -877,11 +877,6 @@ function insertReport(reviewNo, memberNo, loginMemberNo) {
           location.reload();
         }
       },
-      success: (result) => {
-        console.log(result);
-        alert("리뷰를 신고 했습니다.");
-        location.reload();
-      },
       error: (error) => {
         console.log(error);
         alert("이미 신고한 리뷰입니다");
