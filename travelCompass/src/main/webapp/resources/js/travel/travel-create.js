@@ -15,7 +15,7 @@ const updateContent = {
     travelContent.addEventListener("input", ()=> {
         travelContent.style.height = '1px';
         travelContent.style.height = (12 + travelContent.scrollHeight) + 'px';
-    })
+    });
     
     // 수정 아이콘 클릭 시 인풋 사용 가능
     const updateBtnList = document.getElementsByClassName("update-btn");
@@ -184,18 +184,17 @@ const updateContent = {
     // 지도 화면 변경 토글 이벤트 달기
     const mapToggle = document.getElementById("mapToggle");
     mapToggle.addEventListener("click", ()=>{
-        if(travel.placeList.length == 0) {
-            alert("여행이 비어있어 지도를 펼칠 수 없습니다.");
-            return;
-        }
-
         if(mapToggle.value % 2 == 1) {      // 홀수면 맵으로 이동
+            if(travel.placeList.length == 0) {
+                alert("여행이 비어있어 지도를 펼칠 수 없습니다.");
+                return;
+            }
             createTravelMap();
 
             mapToggle.value = Number(mapToggle.value) + 1;
         } else {
             createScrapView();
-
+            
             mapToggle.value = Number(mapToggle.value) - 1;
         }
     });

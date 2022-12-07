@@ -306,6 +306,10 @@ main {
     font-size: 14px;
 }
 
+.review-user-image img{
+    border-radius: 50%;
+}
+
 .review-user-dday{
     font-size: 12px;
 }
@@ -428,7 +432,9 @@ main {
 
 .follow-user-image img{
     width: 60px;
+    height: 60px;
     margin-right: 5px;
+    border-radius: 50%;
 }
 
 .follow-user-info{

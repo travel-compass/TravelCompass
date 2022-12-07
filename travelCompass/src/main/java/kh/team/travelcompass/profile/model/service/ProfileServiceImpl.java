@@ -40,9 +40,9 @@ public class ProfileServiceImpl implements ProfileService {
 		return member;
 	}
 	
-	// 팔로우 체크하기
+	// 회원의 팔로우 수 체크하기
 	@Override
-	public int followCheck(Map<String, Object> map) {
+	public int followCheck(Map<String, Integer> map) {
 		return dao.followCheck(map);
 	}
 
@@ -50,6 +50,7 @@ public class ProfileServiceImpl implements ProfileService {
 	@Transactional
 	@Override
 	public int follow(Map<String, Integer> paramMap) {
+		
 		return dao.follow(paramMap);
 	}
 

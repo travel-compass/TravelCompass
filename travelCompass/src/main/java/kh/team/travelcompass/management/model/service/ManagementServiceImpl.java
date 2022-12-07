@@ -39,24 +39,7 @@ public class ManagementServiceImpl implements ManagementService {
 	
 		return dao.selectBanMember();
 	}
-	
-	//중복 신고 체크 
-	@Override
-	public int reportCheck(Map<String, Object> paramMap) {
-		
-		return dao.reportCheck(paramMap);
-	}
-	
-	//신고 등록
-	@Override
-	public int insertReport(Map<String, Object> paramMap) {
-		
-		return dao.insertReport(paramMap);
-	}
-	
-	
-	
-	
+
 	
 	//블라인드 처리
 	@Override

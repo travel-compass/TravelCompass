@@ -1530,7 +1530,11 @@ followButton.addEventListener("click", () => {
                                     followCountArray();
                 
                                 } else{
-                                    console.log("증가 실패");
+                                    alert("이미 팔로우한 인원입니다.");
+                        
+                                    clickFollow.classList.remove("followOn");
+                                    
+                                    clickFollow.classList.add("followOff");
                                 }
                             },
                             error : () => {
@@ -1554,7 +1558,11 @@ followButton.addEventListener("click", () => {
                                     followCountArray();
                 
                                 } else{
-                                    console.log("감소 실패");
+                                    alert("이미 팔로우한 인원입니다.");
+                                    
+                                    clickFollow.classList.remove("followOn");
+                                    
+                                    clickFollow.classList.add("followOff");
                                 }
                             },
                             error : () =>{
@@ -1684,7 +1692,12 @@ followingButton.addEventListener("click", () => {
                                     followCountArray();
                 
                                 } else{
-                                    console.log("증가 실패");
+                                    alert("이미 팔로우한 인원입니다.");
+                                    
+                                    clickFollow.classList.remove("followOn");
+                                    
+                                    clickFollow.classList.add("followOff");
+
                                 }
                             },
                             error : () => {
@@ -1832,7 +1845,12 @@ if (clickFollow != null){
                         followCountArray();
     
                     } else{
-                        console.log("증가 실패");
+                        alert("이미 팔로우한 인원입니다.");
+                        
+                        clickFollow.classList.remove("followOn");
+
+                        clickFollow.classList.add("followOff");
+                        
                     }
                 },
                 error : () => {

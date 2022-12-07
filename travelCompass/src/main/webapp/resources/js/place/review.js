@@ -861,12 +861,21 @@ function insertReport(reviewNo, memberNo, loginMemberNo) {
 
   if (memberNo != loginMemberNo) {
     $.ajax({
-      url: "/management/insertReport",
+      url: "/insertReport",
       type: "get",
       data: {
         reviewNo: reviewNo,
         memberNo: memberNo,
         reporter: loginMemberNo,
+      },
+      success: (result) => {
+        if (result == 0) {
+          alert("이미 신고한 리뷰입니다.");
+          return;
+        } else {
+          alert("리뷰를 신고 했습니다.");
+          location.reload();
+        }
       },
       success: (result) => {
         console.log(result);
@@ -875,6 +884,8 @@ function insertReport(reviewNo, memberNo, loginMemberNo) {
       },
       error: (error) => {
         console.log(error);
+        alert("이미 신고한 리뷰입니다");
+        location.reload();
       },
     });
   }
