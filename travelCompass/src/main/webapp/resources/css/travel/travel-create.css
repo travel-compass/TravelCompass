@@ -23,6 +23,7 @@ main {
 /* 여행 콘텐츠 */
 .travel-create-content {
     width: 75%;
+    position: relative;
 }
 
 /* 여행 정보 */
@@ -442,5 +443,25 @@ button.cancel-btn {
     justify-content: center;
     font-size: 200px;
     color: #bbb;
+}
+
+#mapInit {
+    cursor: pointer;
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: 100px;
+    height: 60px;
+    border: 2px solid black;
+    background-color: white;
+    border-radius: 10px;
+    transition: 0.1s;
+    z-index: 7000;
+    font-size: 20px;
+    font-weight: bold;
+}
+#mapInit:hover {
+    color: white;
+    background-color: black;
 }
 

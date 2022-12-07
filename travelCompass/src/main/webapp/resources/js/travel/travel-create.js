@@ -714,6 +714,7 @@ const updateTravel = () => {
 
 
 let map;
+let bounds;
 // 여행 맵 만들기
 const createTravelMap = ()=>{
     const toggleArea = document.getElementById("toggleArea");
@@ -725,6 +726,14 @@ const createTravelMap = ()=>{
     travelMap.setAttribute("id", "travelMap");
     
     toggleArea.append(travelMap);
+    // 버튼 생성 후 prepend
+    const mapInitBtn = document.createElement("button");
+    mapInitBtn.setAttribute("id", "mapInit");
+    mapInitBtn.addEventListener("click", ()=>{
+        setBounds(map, bounds)
+    });
+    mapInitBtn.innerText = "초기화";
+    document.getElementsByClassName("travel-create-content")[0].prepend(mapInitBtn);
     showMap();
 };
 
@@ -734,10 +743,10 @@ const showMap = ()=>{
         center: new kakao.maps.LatLng(Number(travel.placeList[0].mapy), Number(travel.placeList[0].mapx)),
         level: 3
     }
-    let map = new kakao.maps.Map(mapContainer, mapOption);
+    map = new kakao.maps.Map(mapContainer, mapOption);
     console.log("맵 생성");
     // 바운드 생성
-    const bounds = new kakao.maps.LatLngBounds();
+    bounds = new kakao.maps.LatLngBounds();
 
     for(let place of travel.placeList) {
         // 마커찍을 위치 생성
