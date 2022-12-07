@@ -143,5 +143,46 @@ public class ReviewDAO {
 		return sqlSession.selectList("reviewMapper.selectReviewList", contentid, rowBounds);
 	}
 
+	
+	
+	
+
+	/**좋아요 여부 체크
+	 * @param map
+	 * @return result
+	 */
+	public int reviewLikeCheck(Map<String, Object> map) {
+	
+		return sqlSession.selectOne("reviewMapper.boardLikeCheck", map);
+	}
+
+
+	/**좋아요 증가
+	 * @param paramMap
+	 * @return result
+	 */
+	public int reviewLikeUp(Map<String, Object> paramMap) {
+		
+		return sqlSession.insert("reviewMapper.boardLikeUp", paramMap);
+	}
+
+
+	/**좋아요 감소
+	 * @param paramMap
+	 * @return result
+	 */
+	public int reviewLikeDown(Map<String, Object> paramMap) {
+		
+		return sqlSession.delete("reviewMapper.boardLikeDown", paramMap);
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

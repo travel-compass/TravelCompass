@@ -73,4 +73,29 @@ public interface ReviewService {
 	List<Review> moreReviewList(String contentid, int rowBoundCount);
 
 	
+	
+	/** 좋아요 여부 체크
+	 * @param map
+	 * @return result
+	 */
+	int reviewLikeCheck(Map<String, Object> map);
+
+	
+	/** 좋아요 증가
+	 * @param paramMap
+	 * @return result
+	 */
+	int reviewLikeUp(Map<String, Object> paramMap);
+
+	
+	
+	/** 좋아요 감소
+	 * @param paramMap
+	 * @return result
+	 */
+	int reviewLikeDown(Map<String, Object> paramMap);
+
+	
+	
+	
 }
