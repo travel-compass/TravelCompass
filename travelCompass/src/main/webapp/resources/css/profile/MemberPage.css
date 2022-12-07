@@ -311,7 +311,7 @@ main {
     font-size: 12px;
 }
 
-.review-user-nickname a{
+.review-user-nickname span{
     font-weight: bold;
 }
 

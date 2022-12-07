@@ -200,7 +200,7 @@ public class ProfileController {
 			@RequestParam(value = "profileImage") MultipartFile profileImage,
 			HttpServletRequest req, RedirectAttributes ra) throws Exception {
 		
-		String wepPath = "/resources/images/common/";
+		String wepPath = "/resources/images/member/";
 		
 		String filePath = req.getSession().getServletContext().getRealPath(wepPath);
 

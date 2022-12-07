@@ -199,7 +199,7 @@
                                             <div class="user-page-review-header-layout">
                                                 <a class="review-user-image"><img src="${member.profileImage}" alt="프로필 이미지"></a>
                                                 <div class="review-user-info-layout">
-                                                    <span class="review-user-nickname">${member.memberNickname} 님이 리뷰를 작성했습니다.</span>
+                                                    <span class="review-user-nickname"><span>${member.memberNickname}</span> 님이 리뷰를 작성했습니다.</span>
                                                     <a class="review-user-dday">
                                                         ${FedList.reviewDate}
                                                     </a>
@@ -237,7 +237,7 @@
                                             <div class="user-page-review-header-layout">
                                                 <a class="review-user-image"><img src="${member.profileImage}" alt="프로필 이미지"></a>
                                                 <div class="review-user-info-layout">
-                                                    <span class="review-user-nickname">${member.memberNickname} 님이 리뷰를 작성했습니다.</span>
+                                                    <span class="review-user-nickname"><span>${member.memberNickname}</span> 님이 리뷰를 작성했습니다.</span>
                                                     <a class="review-user-dday">
                                                         ${FedList.reviewDate}
                                                     </a>
