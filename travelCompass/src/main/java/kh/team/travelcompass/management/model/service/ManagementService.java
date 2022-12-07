@@ -16,15 +16,6 @@ public interface ManagementService {
 	//정지 회원 조회
 	List<Review> selectBanMember();
 	
-
-	
-	
-	//중복신고 체크
-	int reportCheck(Map<String, Object> paramMap);	
-	
-	//신고 등록
-	int insertReport(Map<String, Object> paramMap);
-
 	
 	
 	//블라인드 처리
