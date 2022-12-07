@@ -202,7 +202,7 @@ function selectReviewList(e) {
         }
         reviewTextSaveButton.setAttribute(
           "onclick",
-          `reviewLike(${review.reviewNo},${review.memberNo},${loginMemberNo})`
+          `reviewLike(${review.reviewNo},${review.memberNo},${loginMemberNo},${this})`
         );
 
         const likeCount = document.createElement("span");
@@ -572,9 +572,10 @@ moreBtn.addEventListener("click", () => {
           reviewTextSaveButton.innerHTML =
             "<i class='fa-solid fa-heart'></i>좋아요";
         }
+
         reviewTextSaveButton.setAttribute(
           "onclick",
-          `reviewLike(${review.reviewNo},${review.memberNo},${loginMemberNo})`
+          `reviewLike(${review.reviewNo},${review.memberNo},${loginMemberNo},${this})`
         );
 
         const likeCount = document.createElement("span");
@@ -809,7 +810,7 @@ const createReviewList = function () {
 
         reviewTextSaveButton.setAttribute(
           "onclick",
-          `reviewLike(${review.reviewNo},${review.memberNo},${loginMemberNo})`
+          `reviewLike(${review.reviewNo},${review.memberNo},${loginMemberNo},${this})`
         );
 
         const likeCount = document.createElement("span");
