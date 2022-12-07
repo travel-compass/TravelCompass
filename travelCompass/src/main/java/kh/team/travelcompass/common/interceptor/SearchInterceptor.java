@@ -25,6 +25,10 @@ public class SearchInterceptor implements HandlerInterceptor{
 			ModelAndView modelAndView) throws Exception {
 		
 		System.out.println("인터셉터 호출");
+		Map<String, Object> model = modelAndView.getModel();
+		if(model == null) {	// 응답이 잘못되면 리턴
+			return;
+		}
 		// 검색 결과가 있는지 확인
 		int totalCount = (int)((Map<String, Object>) modelAndView.getModel().get("placeMap")).get("totalCount");
 		System.out.printf("검색결과 갯수 : %d\n", totalCount);

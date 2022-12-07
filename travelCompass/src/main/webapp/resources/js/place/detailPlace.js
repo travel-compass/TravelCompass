@@ -84,3 +84,13 @@ marker.setMap(map);
 
 // 지도에 교통정보를 표시하도록 지도타입을 추가합니다
 // map.addOverlayMapTypeId(kakao.maps.MapTypeId.TRAFFIC);
+
+
+// 주변 장소 거리 초기화
+(()=>{
+  const distList = document.getElementsByClassName("search-result-item-review");
+
+  for(let dist of distList) {
+    dist.innerText = Math.round(Number(dist.innerText) / 100) / 10 + "km";
+  }
+})();

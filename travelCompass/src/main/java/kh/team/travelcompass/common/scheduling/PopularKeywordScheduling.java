@@ -54,7 +54,7 @@ public class PopularKeywordScheduling {
 		}
 	}
 	
-	@Scheduled(cron="0 0/1 * * * *")
+	@Scheduled(cron="0 0/3 * * * *")
 	public void initPoPopularKeyword() {
 		// 맵 가져오기
 		LinkedHashMap<String, Integer> keywordMap = (LinkedHashMap<String, Integer>) application.getAttribute("keywordMap");
