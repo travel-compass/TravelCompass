@@ -22,6 +22,10 @@ public class SearchInterceptorTest implements HandlerInterceptor{
 		
 		System.out.println("인터셉터 호출");
 		// 검색 결과가 있는지 확인
+		Map<String, Object> model = modelAndView.getModel();
+		if(model == null) {	// 응답이 잘못되면 리턴
+			return;
+		}
 		int totalCount = (int)((Map<String, Object>) modelAndView.getModel().get("placeMap")).get("totalCount");
 		System.out.printf("검색결과 갯수 : %d\n", totalCount);
 		if(totalCount > 0) {	// 검색결과가 있으면 (유효한 키워드면)
@@ -29,6 +33,11 @@ public class SearchInterceptorTest implements HandlerInterceptor{
 			LinkedHashMap<String, Integer> keywordMap = (LinkedHashMap<String, Integer>) application.getAttribute("keywordMap");
 			if(keywordMap == null ) {	// 어플리케이션 스코프에 popularKeywordMap키값으로 저장된 map 이없으면
 				keywordMap = new LinkedHashMap<String, Integer>(); // 생성
+				keywordMap.put("동대문", 44);
+				keywordMap.put("뚝섬", 23);
+				keywordMap.put("서울", 203);
+				keywordMap.put("라면", 10);
+				keywordMap.put("떡볶이", 10);
 				application.setAttribute("keywordMap", keywordMap); // 추가
 			}
 			
@@ -37,11 +46,7 @@ public class SearchInterceptorTest implements HandlerInterceptor{
 			System.out.println(keyword);
 			
 			keywordMap.put(keyword, keywordMap.get(keyword) == null ? 1 : keywordMap.get(keyword) + 1);
-			keywordMap.put("동대문", 44);
-			keywordMap.put("뚝섬", 23);
-			keywordMap.put("서울", 203);
-			keywordMap.put("라면", 10);
-			keywordMap.put("떡볶이", 10);
+			
 			System.out.println(keywordMap);
 		} // 검색결과가 없으면 아무것도 하지 않음
 		

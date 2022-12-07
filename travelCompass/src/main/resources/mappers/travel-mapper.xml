@@ -13,10 +13,11 @@
 		<result property="travelDate" column="TRAVEL_DATE"/>
 		<result property="privateFlag" column="PRIVATE_FL"/>
 		<result property="travelFirstImage" column="TRAVEL_FIRST_IMAGE"/>
+		<result property="travelLikeCount" column="TRAVEL_LIKE_COUNT"/>
 	</resultMap>
 	
 	<!-- 특정회원 여행목록 조회 -->
-	<select id="selectTravelList" parameterType="_int" resultMap="travel_rm">
+	<select id="selectTravelList" parameterType="map" resultMap="travel_rm">
 		SELECT T.TRAVEL_NO, T.TRAVEL_TITLE, T.PRIVATE_FL, T.MEMBER_NO,
 			TO_CHAR(T.TRAVEL_DATE, 'YYYY"년" MM"월" DD"일"') TRAVEL_DATE,
 			(SELECT PS.FIRST_IMAGE FROM "PLACE_SCRAP" PS
@@ -27,10 +28,17 @@
 					) TRAVEL_FIRST_IMAGE,
 			(SELECT COUNT(*) FROM "TRAVEL_LIST" TL WHERE TL.TRAVEL_NO = T.TRAVEL_NO) TRAVEL_PLACE_COUNT,
 			(SELECT MEMBER_NICKNAME FROM "MEMBER" M WHERE M.MEMBER_NO = T.MEMBER_NO) MEMBER_NICKNAME,
-			(SELECT PROFILE_IMAGE FROM "MEMBER" M WHERE M.MEMBER_NO = T.MEMBER_NO) PROFILE_IMAGE
+			(SELECT PROFILE_IMAGE FROM "MEMBER" M WHERE M.MEMBER_NO = T.MEMBER_NO) PROFILE_IMAGE,
+			(SELECT COUNT(*) FROM "TRAVEL_LIKE" WHERE TRAVEL_NO = T.TRAVEL_NO) TRAVEL_LIKE_COUNT
 		FROM TRAVEL T
 		WHERE MEMBER_NO = #{memberNo}
-		AND T.TRAVEL_DEL_FL = 'N'
+		AND T.TRAVEL_DEL_FL = 'N'		
+		<if test="privateFlag == 0">		<!-- 공개만 -->
+			AND T.PRIVATE_FL = 'N'
+		</if>
+		<if test="privateFlag == 1">		<!-- 비공개만 -->
+			AND T.PRIVATE_FL = 'Y'
+		</if>
 	</select>
 	
 	<!-- 여행 생성 -->
@@ -82,6 +90,67 @@
 		TRAVEL_DEL_FL = 'Y'
 		WHERE TRAVEL_NO = #{travelNo}
 	</update>
+	
+	
+	<!-- 여행 스크랩 -->
+	<insert id="insertTravelScrap">
+		INSERT INTO TRAVEL_SCRAP (MEMBER_NO, TRAVEL_NO, SCRAP_DATE)
+		VALUES(#{memberNo}, #{travelNo}, SYSDATE)
+	</insert>
+	
+	<!-- 여행 스크랩 취소 -->
+	<delete id="deleteTravelScrap">
+		DELETE FROM TRAVEL_SCRAP
+		WHERE MEMBER_NO = #{memberNo}
+		AND TRAVEL_NO = #{travelNo}
+	</delete>
+	
+	<!-- 여행 좋아요 -->
+	<insert id="insertTravelLike">
+		INSERT INTO TRAVEL_LIKE (MEMBER_NO, TRAVEL_NO) VALUES(#{memberNo}, #{travelNo})
+	</insert>
+	
+	<!-- 여행 좋아요 취소 -->
+	<delete id="deleteTravelLike">
+		DELETE FROM TRAVEL_LIKE
+		WHERE MEMBER_NO = #{memberNo}
+		AND TRAVEL_NO = #{travelNo}
+	</delete>
+	
+	<!-- 여행 좋아요 체크-->
+	<select id="checkTravelLike" resultType="_int">
+		SELECT COUNT(*) FROM TRAVEL_LIKE
+		WHERE MEMBER_NO = #{memberNo}
+		AND TRAVEL_NO = #{travelNo}
+	</select>
+	
+	<!-- 여행 스크랩 체크 -->
+	<select id="checkTravelScrap" resultType="_int">
+		SELECT COUNT(*) FROM TRAVEL_SCRAP
+		WHERE MEMBER_NO = #{memberNo}
+		AND TRAVEL_NO = #{travelNo}
+	</select>
+	
+	<!-- 특정 회원이 스크랩한 여행 목록 조회 -->
+	<select id="selectTravelScrapList" resultMap="travel_rm">
+		SELECT T.TRAVEL_NO, T.TRAVEL_TITLE, T.PRIVATE_FL, T.MEMBER_NO,
+			TO_CHAR(T.TRAVEL_DATE, 'YYYY"년" MM"월" DD"일"') TRAVEL_DATE,
+			(SELECT PS.FIRST_IMAGE FROM "PLACE_SCRAP" PS
+				WHERE PS.PLACE_SCRAP_NO = 
+					(SELECT TL.PLACE_SCRAP_NO  
+					FROM "TRAVEL_LIST" TL
+					WHERE TRAVEL_LIST_ORDER = (SELECT MIN(TRAVEL_LIST_ORDER) FROM "TRAVEL_LIST" WHERE TL.TRAVEL_NO = T.TRAVEL_NO))
+					) TRAVEL_FIRST_IMAGE,
+			(SELECT COUNT(*) FROM "TRAVEL_LIST" TL WHERE TL.TRAVEL_NO = T.TRAVEL_NO) TRAVEL_PLACE_COUNT,
+			(SELECT MEMBER_NICKNAME FROM "MEMBER" M WHERE M.MEMBER_NO = T.MEMBER_NO) MEMBER_NICKNAME,
+			(SELECT PROFILE_IMAGE FROM "MEMBER" M WHERE M.MEMBER_NO = T.MEMBER_NO) PROFILE_IMAGE,
+			(SELECT COUNT(*) FROM "TRAVEL_LIKE" WHERE TRAVEL_NO = T.TRAVEL_NO) TRAVEL_LIKE_COUNT
+		FROM TRAVEL T
+		JOIN TRAVEL_SCRAP TS ON (T.TRAVEL_NO = TS.TRAVEL_NO)
+		WHERE TS.MEMBER_NO = #{memberNo}
+		AND T.TRAVEL_DEL_FL = 'N'
+		AND T.PRIVATE_FL = 'N'
+	</select>
 </mapper>
 
 

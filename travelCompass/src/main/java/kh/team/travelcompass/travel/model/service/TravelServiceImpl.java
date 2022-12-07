@@ -21,8 +21,8 @@ public class TravelServiceImpl implements TravelService{
 
 	// 회원별 모든 여행 조회 서비스
 	@Override
-	public List<Travel> selectTravelList(int memberNo) {
-		return dao.selectTravelList(memberNo);
+	public List<Travel> selectTravelList(Map<String, Integer> paramMap) {
+		return dao.selectTravelList(paramMap);
 	}
 
 	// 여행 추가 서비스
@@ -98,5 +98,45 @@ public class TravelServiceImpl implements TravelService{
 	@Override
 	public int deleteTravel(int travelNo) {
 		return dao.deleteTravelList(travelNo);
+	}
+	
+	
+	// 여행 스크랩
+	@Override
+	public int insertTravelScrap(Map<String, Integer> paramMap) {
+		return dao.insertTravelScrap(paramMap);
+	}
+
+	// 여행 스크랩 취소
+	@Override
+	public int deleteTravelScrap(Map<String, Integer> paramMap) {
+		return dao.deleteTravelScrap(paramMap);
+	}
+
+	// 여행 좋아요
+	@Override
+	public int insertTravelLike(Map<String, Integer> paramMap) {
+		return dao.insertTravelLike(paramMap);
+	}
+
+	// 여행 좋아요 취소
+	@Override
+	public int deleteTravelLike(Map<String, Integer> paramMap) {
+		return dao.deleteTravelLike(paramMap);
+	}
+
+	@Override
+	public int checkTravelScrap(Map<String, Integer> paramMap) {
+		return dao.checkTravelScrap(paramMap);
+	}
+
+	@Override
+	public int checkTravelLike(Map<String, Integer> paramMap) {
+		return dao.checkTravelLike(paramMap);
+	}
+
+	@Override
+	public List<Travel> selectTravelScrapList(int memberNo) {
+		return dao.selectTravelScrapList(memberNo);
 	}
 }

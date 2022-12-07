@@ -85,10 +85,10 @@ public class ReviewServiceImpl implements ReviewService {
 	
 	// 리뷰 연결
 	@Override
-	public void connectReview(List<Place> placeList) {
+	public List<Place> connectReview(List<Place> placeList) {
 		if(placeList == null || placeList.isEmpty()) {
 			System.out.println("장소리스트가 비어있습니다.");
-			return;
+			return placeList;
 		}
 		int size = placeList.size();
 		
@@ -108,9 +108,7 @@ public class ReviewServiceImpl implements ReviewService {
 				placeList.get(i).setReviewCount(Integer.parseInt(String.valueOf((reviewMapList.get(i).get("REVIEW_COUNT")))));
 			}
 		}
-		
-		// size만큼 반복하며 연결
-		System.out.println();
+		return placeList;
 	}
 
 

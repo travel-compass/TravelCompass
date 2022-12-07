@@ -321,7 +321,6 @@ const createTravelList = () => {
                     travelList.append(travelItem);
                 }
             }
-
         }
     });
 }
@@ -458,11 +457,21 @@ const deleteScrap = (index) => {
                         /* 정렬옵션 */
                     );
 
-                    for(let i=0; i<travel.placeList.length; i++) {      
-                        if(travel.placeList[i].placeScrapNo == scrapList[index].placeScrapNo) { // 삭제한 스크랩 장소가 현재 조회중인 여행에 있다면
-                            deleteTravelPlace(i);       // 삭제
+                    // for(let i=0; i<travel.placeList.length; i++) {      
+                    //     if(travel.placeList[i].placeScrapNo == scrapList[index].placeScrapNo) { // 삭제한 스크랩 장소가 현재 조회중인 여행에 있다면
+                    //         deleteTravelPlace(i);       // 삭제
+                    //     }
+                    // }
+
+                    // 삭제할 스크립 번호를 저장
+                    const deleteScrapNo = scrapList[index].placeScrapNo;
+                    // placeList를 돌면서 scrapNo가 맞는 인덱스 확인
+                    for(let i = 0; i<travel.placeList.length; i++) {
+                        if(travel.placeList[i].placeScrapNo == deleteScrapNo) {
+                            deleteTravelPlace(i--);
                         }
                     }
+                    // placeList를 돌면서 scrapNo가 맞는 인덱스 확인
                 }
             }
         });
@@ -506,9 +515,6 @@ const deleteTravelPlace = (index) => {
     for(let i=index; i<btnList.length; i++) {
         btnList[i].setAttribute("onclick", `deleteTravelPlace(${i})`);
     }
-
-    
-
 
     // index가 0이면 (맨 첫번째 장소면)
     if(index == 0) {
@@ -655,7 +661,7 @@ const createTravelPlace = (travelPlace, distance) => {
     const fill = document.createElement("span");
     fill.classList.add("fill");
     fill.innerHTML = "&#9679;&#9679;&#9679;&#9679;&#9679;";
-    fill.style.width = 92 * (travelPlace.averageRating * 20) / 100;
+    fill.style.width = 92 * (travelPlace.averageRating * 20) / 100 + "px";
     const reviewCount = document.createElement("span");
     reviewCount.innerText = travelPlace.reviewCount;
 
@@ -739,7 +745,7 @@ const showMap = ()=>{
 
         let marker = new kakao.maps.Marker({
             "position": markerPosition
-        })
+        });
 
         // 인포 윈도우 생성
         // 커스텀 오버레이 생성
