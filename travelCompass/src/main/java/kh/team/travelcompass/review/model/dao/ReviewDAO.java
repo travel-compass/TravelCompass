@@ -137,11 +137,32 @@ public class ReviewDAO {
 	}
 
 	public List<Review> moreReviewList(String contentid, int rowBoundCount) {
-		
+
 		RowBounds rowBounds = new RowBounds(rowBoundCount, 10);
-		
+
 		return sqlSession.selectList("reviewMapper.selectReviewList", contentid, rowBounds);
 	}
 
+	/**
+	 * 좋아요 증가
+	 * 
+	 * @param paramMap
+	 * @return result
+	 */
+	public int reviewLikeUp(Map<String, Object> paramMap) {
+
+		return sqlSession.insert("reviewMapper.boardLikeUp", paramMap);
+	}
+
+	/**
+	 * 좋아요 감소
+	 * 
+	 * @param paramMap
+	 * @return result
+	 */
+	public int reviewLikeDown(Map<String, Object> paramMap) {
+
+		return sqlSession.delete("reviewMapper.boardLikeDown", paramMap);
+	}
 
 }

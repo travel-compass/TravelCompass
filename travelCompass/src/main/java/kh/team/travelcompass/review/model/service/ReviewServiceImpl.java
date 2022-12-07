@@ -35,7 +35,7 @@ public class ReviewServiceImpl implements ReviewService {
 
 		// 3. 페이징 처리객체를 이용해서 게시글 목록 조회
 		List<Review> reviewList = dao.selectReviewList(pagination, paramMap);
-		
+
 		Map<String, Object> reviewMap = new HashMap<String, Object>();
 		reviewMap.put("pagination", pagination);
 		reviewMap.put("reviewList", reviewList);
@@ -102,15 +102,14 @@ public class ReviewServiceImpl implements ReviewService {
 		review.setReviewContent(Util.XSSHandling(review.getReviewContent()));
 
 		review.setReviewContent(Util.newLineHandling(review.getReviewContent()));
-		
+
 		return dao.updateReview(review);
 	}
-	
-	
+
 	// 리뷰 연결
 	@Override
 	public List<Place> connectReview(List<Place> placeList) {
-		if(placeList == null || placeList.isEmpty()) {
+		if (placeList == null || placeList.isEmpty()) {
 			System.out.println("장소리스트가 비어있습니다.");
 			return placeList;
 		}
@@ -141,14 +140,27 @@ public class ReviewServiceImpl implements ReviewService {
 	public List<String> countRating(String contentid) {
 		return dao.countRating(contentid);
 	}
-	
+
 	@Override
 	public List<Review> moreReviewList(String contentid, int rowBoundCount) {
-		
+
 		List<Review> moreReviewList = dao.moreReviewList(contentid, rowBoundCount);
-		
+
 		return moreReviewList;
 	}
-	
-	
+
+	// 좋아요 증가
+	@Override
+	public int reviewLikeUp(Map<String, Object> paramMap) {
+
+		return dao.reviewLikeUp(paramMap);
+	}
+
+	// 좋아요 감소
+	@Override
+	public int reviewLikeDown(Map<String, Object> paramMap) {
+
+		return dao.reviewLikeDown(paramMap);
+	}
+
 }

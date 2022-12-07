@@ -150,7 +150,7 @@ public class ReviewController {
 	}
 
 	// 좋아요 증가
-	@GetMapping("/reviewLikeUp")
+	@GetMapping("/likeUp")
 	@ResponseBody
 	public int reviewLikeUp(@RequestParam Map<String, Object> paramMap) {
 
@@ -158,7 +158,7 @@ public class ReviewController {
 	}
 
 	// 좋아요 감소
-	@GetMapping("/reviewLikeDown")
+	@GetMapping("/likeDown")
 	@ResponseBody
 	public int reviewLikeDown(@RequestParam Map<String, Object> paramMap) {
 

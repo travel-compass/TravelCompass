@@ -98,9 +98,9 @@
 			]]> 
 			PROFILE_IMAGE, MEMBER_NICKNAME, MEMBER_NO, RATING,
 			<if test="#{memberNo!=-1}">
-				(SELECT COUNT(*) FROM REVIEW_LIKE WHERE REVIEW_NO = R.REVIEW_NO AND MEMBER_NO = 4) LIKE_CHECK			
+				(SELECT COUNT(*) FROM REVIEW_LIKE WHERE REVIEW_NO = R.REVIEW_NO AND MEMBER_NO = #{memberNo}) LIKE_CHECK,
 			</if>
-			(SELECT COUNT(*) FROM REVIEW_LIKE WHERE REVIEW_NO=R.REVIEW_NO) REVIEW_LIKE,
+			(SELECT COUNT(*) FROM REVIEW_LIKE WHERE REVIEW_NO=R.REVIEW_NO) REVIEW_LIKE
 		FROM REVIEW R
 		LEFT JOIN "MEMBER" USING(MEMBER_NO)
 		WHERE REVIEW_FL = 'N'
@@ -233,4 +233,18 @@
 		GROUP BY CONTENT_ID
 		ORDER BY CONTENT_ID
 	</select>
+	
+	<!-- 좋아요 증가 -->
+   <insert id="reviewLikeUp">
+      INSERT INTO REVIEW_LIKE VALUES(#{reviewNo}, #{memberNo})
+   </insert>
+  
+  <!-- 좋아요 감소 -->
+  <delete id="reviewLikeDown">
+     DELETE FROM REVIEW_LIKE 
+     WHERE BOARD_NO= #{reviewNo}
+     AND MEMBER_NO= #{memberNo}
+  </delete>
+	
+	
 </mapper>

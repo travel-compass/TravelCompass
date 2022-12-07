@@ -1,7 +1,7 @@
 /* ------------------------------ 스크랩 --------------------------------- */
 const placeScrap = document.getElementById("placeScrap");
 placeScrap.addEventListener("click", (e) => {
-  if (memberNo == "") {
+  if (loginMemberNo == "") {
     alert("로그인 후 이용해주세요");
     return;
   }
@@ -13,7 +13,7 @@ placeScrap.addEventListener("click", (e) => {
       data: {
         contentid: contentid,
         contenttypeid: contenttypeid,
-        memberNo: memberNo,
+        memberNo: loginMemberNo,
         firstimage: firstimage,
         addr1: addr1,
         mapx: mapx,
@@ -40,7 +40,7 @@ placeScrap.addEventListener("click", (e) => {
     if (confirm("정말 스크랩을 취소할까요?")) {
       $.ajax({
         url: "/place/scrapCancel",
-        data: { contentid: contentid, memberNo: memberNo },
+        data: { contentid: contentid, memberNo: loginMemberNo },
         type: "GET",
         success: (result) => {
           if (result > 0) {
