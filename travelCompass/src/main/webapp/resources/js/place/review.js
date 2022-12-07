@@ -824,70 +824,27 @@ function insertReport(reviewNo, memberNo, loginMemberNo) {
 
 
 
+function reviewLike(reviewNo, memberNo, loginMemberNo){
+  console.log(reviewNo, memberNo, loginMemberNo);
+  
+  if(loginMemberNo == '') {
+    alert("로그인 후 이용해주세요.");
+    return;
+  }
 
-
-
-/* ------------------------------------------ */
-//좋아요 버튼
-//전역 변수 loginMemberNo사용
-
-// const likeBtn = document.getElementsByClassName("save-button");
-// const likeCount = document.getElementsByClassName("likeCount");
-
-// function reviewLike(reviewNo, memberNo, loginMemberNo) {
-//   // 로그인 상태가 아닌 경우
-//   if (loginMemberNo == "") {
-//     alert("로그인 후 이용해주세요.");
-//     return;
-//   }
-
-//   if (loginMemberNo == memberNo) {
-//     alert("본인의 리뷰는 좋아요를 누를 수 없습니다.");
-//     return;
-//   }
-
-// 로그인 상태 + 좋아요 상태가 아닌 경우
-
-//   if (likeBtn.firstElementChild.classList.contains("fa-regular")) {
-//     //빈하트인 경우
-
-//     $.ajax({
-//       url: "/review/likeUp",
-//       data: { reviewNo: reviewNo, memberNo: loginMemberNo },
-//       type: "get",
-//       success: (result) => {
-//         if (result > 0) {
-//           likeBtn.firstElementChild.classList.remove("fa-regular"); //빈하트 클래스 제거
-//           likeBtn.firstElementChild.classList.add("fa-solid"); //채워진 하트 클래스 추가
-//           likeCount.innerText = Number(likeCount.innerText) + 1;
-//         } else {
-//           console.log("증가 실패");
-//         }
-//       },
-//       error: () => {
-//         console.log("증가 에러");
-//       },
-//     });
-//   }
-//   // 로그인 상태 + 좋아요 상태인 경우
-//   else {
-//     //채워진 하트인 경우
-//     $.ajax({
-//       url: "/review/likeDown",
-//       data: { reviewNo: reviewNo, memberNo: loginMemberNo },
-//       type: "get",
-//       success: (result) => {
-//         if (result > 0) {
-//           likeBtn.firstElementChild.classList.remove("fa-solid"); //빈하트 클래스 제거
-//           likeBtn.firstElementChild.classList.add("fa-regular"); //채워진 하트 클래스 추가
-//           likeCount.innerText = Number(likeCount.innerText) + 1;
-//         } else {
-//           console.log("감소 실패");
-//         }
-//       },
-//       error: () => {
-//         console.log("감소 에러");
-//       },
-//     });
-//   }
-// }
+  if (memberNo != loginMemberNo) {
+    $.ajax ({
+      url: "/review/likeUp",
+      type: "get",
+      data: {
+        reviewNo: reviewNo,
+        memberNo: memberNo,
+      success : result => {
+          console.log(result);
+      },
+      error : error => {
+        console.log(error);
+      }
+    },
+}
+}
