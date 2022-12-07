@@ -24,8 +24,24 @@
                 </div>
                 <div class="input-row">
                     <input type="text" class="travel-title read-only travel-input" maxlength="10" id="travelTitle" name="travelTitle" readonly value="${travel.travelTitle}">
-                    <button class="fa-regular fa-thumbs-up" id="travelLikeBtn"></button>
-                    <button class="fa-regular fa-bookmark" id="travelScrapBtn"></button>
+                    <c:choose>
+                        <c:when test="${empty checkLike}">  <%-- 스크랩 x --%>
+                            <button class="fa-regular fa-thumbs-up" id="travelLikeBtn"></button>
+                        </c:when>
+                        <c:otherwise>                       <%-- 스크랩 o --%>
+                            <button class="fa-solid fa-thumbs-up" id="travelLikeBtn"></button>
+                        </c:otherwise>
+                    </c:choose>
+                    <c:choose>
+                        <c:when test="${empty checkScrap}">  <%-- 스크랩 x --%>
+                            <button class="fa-regular fa-bookmark" id="travelScrapBtn"></button>
+                        </c:when>
+                        <c:otherwise>                       <%-- 스크랩 o --%>
+                            <button class="fa-solid fa-bookmark" id="travelScrapBtn"></button>
+                        </c:otherwise>
+                    </c:choose>
+
+                    
                 </div>
                 <span class="travel-writer">작성자: <a href="/profile/${travel.memberNo}">${travel.memberNickname}</a></span>
                 <div class="input-row">
@@ -88,9 +104,7 @@
         </section>
         <section class="travel-create-content">
             <div id="travelMap">
-                <div class=map-empty-area>
-
-                </div>
+                
             </div>
         </section>
     </main>

@@ -63,7 +63,6 @@ public class TravelController {
 		return "/travel/travelMain";
 	}
 	
-	
 	/** 여행 상세 조회
 	 * @param travelNo
 	 * @param model
@@ -86,7 +85,22 @@ public class TravelController {
 				model.addAttribute("scrapPlaceList", scrapPlaceList);
 				model.addAttribute("jsonScrapPlaceList", new ObjectMapper().writeValueAsString(scrapPlaceList));
 				path = "/travel/travelCreate";
-			} else {
+			} else {	// 로그인 중 and 자신의 여행 아닐 때
+				// 스크랩 여부 확인
+				Map<String, Integer> paramMap = new HashMap<>();
+				paramMap.put("memberNo", loginMember.getMemberNo());
+				paramMap.put("travelNo", travelNo);
+				
+				int result = service.checkTravelScrap(paramMap);
+				if(result > 0) {
+					model.addAttribute("checkScrap", "on");
+				}
+				result = service.checkTravelLike(paramMap);
+				if(result > 0) {
+					model.addAttribute("checkLike", "on");
+					
+				}
+				// 좋아요 여부 확인
 				path = "/travel/travelDetail";
 			}
 		} else {						// 로그인 중이 아니면 무조건 다른사람의 여행 페이지
@@ -95,12 +109,14 @@ public class TravelController {
 		// 여행 번호에 맞는 여행 조회
 		Travel travel = service.selectTravel(travelNo);
 		// 리뷰 연결
+		
 		travel.setPlaceList(rService.connectReview(travel.getPlaceList()));
 		model.addAttribute("jsonTravel", new ObjectMapper().writeValueAsString(travel));
 		if(travel.getTravelContent() != null) {
 			travel.setTravelContent(Util.newLineClear(travel.getTravelContent()));
 		}
 		model.addAttribute("travel", travel);
+		
 		return path;
 	}
 	
@@ -125,11 +141,16 @@ public class TravelController {
 	@GetMapping("/select")
 	public List<Travel> selectTravelList(int memberNo, int privateFlag) {
 		System.out.println("호출");
-		Map<String, Integer> paramMap = new HashMap<>();
-		paramMap.put("memberNo", memberNo);
-		paramMap.put("privateFlag", privateFlag);
-		System.out.println(privateFlag);
-		List<Travel> travelList = service.selectTravelList(paramMap);
+		List<Travel> travelList = null; 
+		if(privateFlag == -1) {
+			travelList = service.selectTravelScrapList(memberNo);
+		} else {
+			Map<String, Integer> paramMap = new HashMap<>();
+			paramMap.put("memberNo", memberNo);
+			paramMap.put("privateFlag", privateFlag);
+			System.out.println(privateFlag);
+			travelList = service.selectTravelList(paramMap);			
+		}
 		return travelList;
 	}
 	
@@ -230,9 +251,19 @@ public class TravelController {
 	 * @return result
 	 */
 	@ResponseBody
-	@GetMapping("insertTravelScrap")
+	@GetMapping("/insertTravelScrap")
 	public int insertTravelScrap(@RequestParam Map<String, Integer> paramMap) {
 		return service.insertTravelScrap(paramMap);
+	}
+	
+	/** 여행 스크랩 삭제
+	 * @param paramMap
+	 * @return result
+	 */
+	@ResponseBody
+	@GetMapping("/deleteTravelScrap")
+	public int deleteTravelScrap(@RequestParam Map<String, Integer> paramMap) {
+		return service.deleteTravelScrap(paramMap); 
 	}
 	
 	/** 여행 좋아요
@@ -240,8 +271,19 @@ public class TravelController {
 	 * @return result
 	 */
 	@ResponseBody
-	@GetMapping("deleteTravelScrap")
-	public int deleteTravelScrap(@RequestParam Map<String, Integer> paramMap) {
-		return service.deleteTravelScrap(paramMap); 
+	@GetMapping("/insertTravelLike")
+	public int insertTravelLike(@RequestParam Map<String, Integer> paramMap) {
+		return service.insertTravelLike(paramMap);
+	}
+
+	
+	/** 여행 좋아요 취소
+	 * @param paramMap
+	 * @return result
+	 */
+	@ResponseBody
+	@GetMapping("/deleteTravelLike")
+	public int deleteTravelLike(@RequestParam Map<String, Integer> paramMap) {
+		return service.deleteTravelLike(paramMap);
 	}
 }

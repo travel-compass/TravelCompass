@@ -124,4 +124,49 @@ public class TravelDAO {
 	public int deleteTravelScrap(Map<String, Integer> paramMap) {
 		return sqlSession.delete("travelMapper.deleteTravelScrap", paramMap);
 	}
+
+
+	/** 여행 좋아요
+	 * @param paramMap
+	 * @return result
+	 */
+	public int insertTravelLike(Map<String, Integer> paramMap) {
+		return sqlSession.insert("travelMapper.insertTravelLike", paramMap);
+	}
+
+
+	/** 여행 좋아요 취소
+	 * @param paramMap
+	 * @return result
+	 */
+	public int deleteTravelLike(Map<String, Integer> paramMap) {
+		return sqlSession.delete("travelMapper.deleteTravelLike", paramMap);
+	}
+
+
+	/** 여행 스크랩 확인
+	 * @param paramMap
+	 * @return result
+	 */
+	public int checkTravelScrap(Map<String, Integer> paramMap) {
+		return sqlSession.selectOne("travelMapper.checkTravelScrap", paramMap);
+	}
+
+
+	/** 여행 좋아요 확인
+	 * @param paramMap
+	 * @return result
+	 */
+	public int checkTravelLike(Map<String, Integer> paramMap) {
+		return sqlSession.selectOne("travelMapper.checkTravelLike", paramMap);
+	}
+
+
+	/** 스크랩한 여행 목록 조회
+	 * @param memberNo
+	 * @return travelList
+	 */
+	public List<Travel> selectTravelScrapList(int memberNo) {
+		return sqlSession.selectList("travelMapper.selectTravelScrapList", memberNo);
+	}
 }
