@@ -29,10 +29,10 @@
 	<resultMap type="ReviewImage" id="reviewImage_rm">
 		<id property="reviewImageNo" column="REVIEW_IMAGE_NO"/>
 		<result property="reviewNo" column="REVIEW_NO"/>
-		<result property="reviewImgPath" column="REVIEW_IMAGE_PATH"/>
-		<result property="reviewImgOrder" column="REVIEW_IMAGE_ORDER"/>
-		<result property="reviewImgReName" column="REVIEW_IMAGE_RENAME"/>
-		<result property="reviewImgOriginal" column="REVIEW_IMAGE_ORIGINAL"/>
+		<result property="reviewImagePath" column="REVIEW_IMAGE_PATH"/>
+		<result property="reviewImageOrder" column="REVIEW_IMAGE_ORDER"/>
+		<result property="reviewImageReName" column="REVIEW_IMAGE_RENAME"/>
+		<result property="reviewImageOriginal" column="REVIEW_IMAGE_ORIGINAL"/>
 	</resultMap>
 	
 	
