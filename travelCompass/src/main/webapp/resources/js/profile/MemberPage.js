@@ -213,7 +213,11 @@ Fed.addEventListener("click", (e) => {
                         reviewTextDotStyle.nextElementSibling.style.display = "none";
                     });
                      */
-                    const reviewTextDataTableStyle = document.createElement("div");
+
+                    const reviewDetailPage = document.createElement("a");
+                    reviewDetailPage.setAttribute("href","/place/detail/" +list.contenttypeid + "/" + list.contentid);
+
+                    const reviewTextDataTableStyle = document.createElement("span");
                     reviewTextDataTableStyle.classList.add("review-data-table-style");
                     
                     const reviewTextPoint = document.createElement("div");
@@ -278,12 +282,12 @@ Fed.addEventListener("click", (e) => {
                             // 슬라이드 조립 끝
 
                             // 사진이 있을 땐 사이에 슬라이드 디브 테이블 append
-                            reviewTextColum.append(reviewTextHeaderStyle, reviewImageSlideContainer, reviewTextDataTableStyle);
+                            reviewTextColum.append(reviewTextHeaderStyle, reviewImageSlideContainer, reviewDetailPage);
 
                     } else {
                         // 사진이 없을 땐 밑에께 바로 실행
                         // A 리뷰 시작 태그인 reviewTextColum append
-                        reviewTextColum.append(reviewTextHeaderStyle, reviewTextDataTableStyle);
+                        reviewTextColum.append(reviewTextHeaderStyle, reviewDetailPage);
 
                     }
 
@@ -306,6 +310,7 @@ Fed.addEventListener("click", (e) => {
                     // A-0 번 완성
                                     
                     // A-1 (A 리뷰 시작의 1번 인덱스 위치에 있는 태그 )의 append
+                    reviewDetailPage.append(reviewTextDataTableStyle);                
                     reviewTextDataTableStyle.append(reviewTextPoint, reviewTextTitle, reviewTextContent);
 
                     // A-1-0 (A 리뷰 1번 위치의 0번 위치에 있는 태그)
@@ -436,7 +441,11 @@ const fedMoreReviewList = function() {
                     reviewTextDotStyle.nextElementSibling.style.display = "none";
                 });
                  */
-                const reviewTextDataTableStyle = document.createElement("div");
+
+                const reviewDetailPage = document.createElement("a");
+                reviewDetailPage.setAttribute("href","/place/detail/" +list.contenttypeid + "/" + list.contentid);
+                    
+                const reviewTextDataTableStyle = document.createElement("span");
                 reviewTextDataTableStyle.classList.add("review-data-table-style");
                 
                 const reviewTextPoint = document.createElement("div");
@@ -501,12 +510,12 @@ const fedMoreReviewList = function() {
                         // 슬라이드 조립 끝
 
                         // 사진이 있을 땐 사이에 슬라이드 디브 테이블 append
-                        reviewTextColum.append(reviewTextHeaderStyle, reviewImageSlideContainer, reviewTextDataTableStyle);
+                        reviewTextColum.append(reviewTextHeaderStyle, reviewImageSlideContainer, reviewDetailPage);
 
                 } else {
                     // 사진이 없을 땐 밑에께 바로 실행
                     // A 리뷰 시작 태그인 reviewTextColum append
-                    reviewTextColum.append(reviewTextHeaderStyle, reviewTextDataTableStyle);
+                    reviewTextColum.append(reviewTextHeaderStyle, reviewDetailPage);
 
                 }
 
@@ -529,6 +538,7 @@ const fedMoreReviewList = function() {
                 // A-0 번 완성
                                 
                 // A-1 (A 리뷰 시작의 1번 인덱스 위치에 있는 태그 )의 append
+                reviewDetailPage.append(reviewTextDataTableStyle);                
                 reviewTextDataTableStyle.append(reviewTextPoint, reviewTextTitle, reviewTextContent);
 
                 // A-1-0 (A 리뷰 1번 위치의 0번 위치에 있는 태그)
@@ -682,8 +692,12 @@ Review.addEventListener("click", (e) => {
                     reviewTextDotStyle.addEventListener("blur", () => {
                         reviewTextDotStyle.nextElementSibling.style.display = "none";
                     });
- */
-                    const reviewTextDataTableStyle = document.createElement("div");
+                    */
+
+                    const reviewDetailPage = document.createElement("a");
+                    reviewDetailPage.setAttribute("href","/place/detail/" +list.contenttypeid + "/" + list.contentid);
+                    
+                    const reviewTextDataTableStyle = document.createElement("span");
                     reviewTextDataTableStyle.classList.add("review-data-table-style");
                     
                     const reviewTextPoint = document.createElement("div");
@@ -709,7 +723,7 @@ Review.addEventListener("click", (e) => {
 
                     // 사진이 없을 땐 밑에께 바로 실행
                     // A 리뷰 시작 태그인 reviewTextColum append
-                    reviewTextColum.append(reviewTextHeaderStyle, reviewTextDataTableStyle);
+                    reviewTextColum.append(reviewTextHeaderStyle, reviewDetailPage);
 
 
                     // A-0 (A 리뷰 시작의 0번 인덱스 위치에 있는 태그 )의 append
@@ -731,6 +745,8 @@ Review.addEventListener("click", (e) => {
                     // A-0 번 완성
                                     
                     // A-1 (A 리뷰 시작의 1번 인덱스 위치에 있는 태그 )의 append
+                    reviewDetailPage.append(reviewTextDataTableStyle);
+                    
                     reviewTextDataTableStyle.append(reviewTextPoint, reviewTextTitle, reviewTextContent);
 
                     // A-1-0 (A 리뷰 1번 위치의 0번 위치에 있는 태그)
@@ -857,8 +873,12 @@ function reviewMoreReviewList () {
                 reviewTextDotStyle.addEventListener("blur", () => {
                     reviewTextDotStyle.nextElementSibling.style.display = "none";
                 });
- */
-                const reviewTextDataTableStyle = document.createElement("div");
+                */
+
+                const reviewDetailPage = document.createElement("a");
+                reviewDetailPage.setAttribute("href","/place/detail/" +list.contenttypeid + "/" + list.contentid);
+                    
+                const reviewTextDataTableStyle = document.createElement("span");
                 reviewTextDataTableStyle.classList.add("review-data-table-style");
                 
                 const reviewTextPoint = document.createElement("div");
@@ -884,7 +904,7 @@ function reviewMoreReviewList () {
 
                 // 사진이 없을 땐 밑에께 바로 실행
                 // A 리뷰 시작 태그인 reviewTextColum append
-                reviewTextColum.append(reviewTextHeaderStyle, reviewTextDataTableStyle);
+                reviewTextColum.append(reviewTextHeaderStyle, reviewDetailPage);
 
 
                 // A-0 (A 리뷰 시작의 0번 인덱스 위치에 있는 태그 )의 append
@@ -906,8 +926,8 @@ function reviewMoreReviewList () {
                 // A-0 번 완성
                                 
                 // A-1 (A 리뷰 시작의 1번 인덱스 위치에 있는 태그 )의 append
+                reviewDetailPage.append(reviewTextDataTableStyle);                
                 reviewTextDataTableStyle.append(reviewTextPoint, reviewTextTitle, reviewTextContent);
-
                 // A-1-0 (A 리뷰 1번 위치의 0번 위치에 있는 태그)
                 reviewTextPoint.append(rating);
 
@@ -1061,8 +1081,12 @@ ImageReview.addEventListener("click", (e) => {
                     reviewTextDotStyle.addEventListener("blur", () => {
                         reviewTextDotStyle.nextElementSibling.style.display = "none";
                     });
- */
-                    const reviewTextDataTableStyle = document.createElement("div");
+                    */
+
+                    const reviewDetailPage = document.createElement("a");
+                    reviewDetailPage.setAttribute("href","/place/detail/" +list.contenttypeid + "/" + list.contentid);
+                    
+                    const reviewTextDataTableStyle = document.createElement("span");
                     reviewTextDataTableStyle.classList.add("review-data-table-style");
                     
                     const reviewTextPoint = document.createElement("div");
@@ -1126,7 +1150,7 @@ ImageReview.addEventListener("click", (e) => {
                     // 슬라이드 조립 끝
 
                     // 사진이 있을 땐 사이에 슬라이드 디브 테이블 append
-                    reviewTextColum.append(reviewTextHeaderStyle, reviewImageSlideContainer, reviewTextDataTableStyle);
+                    reviewTextColum.append(reviewTextHeaderStyle, reviewImageSlideContainer, reviewDetailPage);
 
                     // A-0 (A 리뷰 시작의 0번 인덱스 위치에 있는 태그 )의 append
                     reviewTextHeaderStyle.append(reviewTextHeaderLayout, reviewTextDotStyle,
@@ -1147,8 +1171,8 @@ ImageReview.addEventListener("click", (e) => {
                     // A-0 번 완성
                                     
                     // A-1 (A 리뷰 시작의 1번 인덱스 위치에 있는 태그 )의 append
+                    reviewDetailPage.append(reviewTextDataTableStyle);                
                     reviewTextDataTableStyle.append(reviewTextPoint, reviewTextTitle, reviewTextContent);
-
                     // A-1-0 (A 리뷰 1번 위치의 0번 위치에 있는 태그)
                     reviewTextPoint.append(rating);
 
@@ -1279,8 +1303,12 @@ function imageMoreReviewList() {
                 reviewTextDotStyle.addEventListener("blur", () => {
                     reviewTextDotStyle.nextElementSibling.style.display = "none";
                 });
- */
-                const reviewTextDataTableStyle = document.createElement("div");
+                */
+
+                const reviewDetailPage = document.createElement("a");
+                reviewDetailPage.setAttribute("href","/place/detail/" +list.contenttypeid + "/" + list.contentid);
+                    
+                const reviewTextDataTableStyle = document.createElement("span");
                 reviewTextDataTableStyle.classList.add("review-data-table-style");
                 
                 const reviewTextPoint = document.createElement("div");
@@ -1344,7 +1372,7 @@ function imageMoreReviewList() {
                 // 슬라이드 조립 끝
 
                 // 사진이 있을 땐 사이에 슬라이드 디브 테이블 append
-                reviewTextColum.append(reviewTextHeaderStyle, reviewImageSlideContainer, reviewTextDataTableStyle);
+                reviewTextColum.append(reviewTextHeaderStyle, reviewImageSlideContainer, reviewDetailPage);
 
                 // A-0 (A 리뷰 시작의 0번 인덱스 위치에 있는 태그 )의 append
                 reviewTextHeaderStyle.append(reviewTextHeaderLayout, reviewTextDotStyle,
@@ -1365,6 +1393,7 @@ function imageMoreReviewList() {
                 // A-0 번 완성
                                 
                 // A-1 (A 리뷰 시작의 1번 인덱스 위치에 있는 태그 )의 append
+                reviewDetailPage.append(reviewTextDataTableStyle);                
                 reviewTextDataTableStyle.append(reviewTextPoint, reviewTextTitle, reviewTextContent);
 
                 // A-1-0 (A 리뷰 1번 위치의 0번 위치에 있는 태그)
@@ -1927,8 +1956,12 @@ const reviewMoreList = function(){
                 reviewTextDotStyle.addEventListener("blur", () => {
                     reviewTextDotStyle.nextElementSibling.style.display = "none";
                 });
- */
-                const reviewTextDataTableStyle = document.createElement("div");
+                */ 
+
+                const reviewDetailPage = document.createElement("a");
+                reviewDetailPage.setAttribute("href","/place/detail/" +list.contenttypeid + "/" + list.contentid);
+
+                const reviewTextDataTableStyle = document.createElement("span");
                 reviewTextDataTableStyle.classList.add("review-data-table-style");
                 
                 const reviewTextPoint = document.createElement("div");
@@ -1993,12 +2026,12 @@ const reviewMoreList = function(){
                         // 슬라이드 조립 끝
     
                         // 사진이 있을 땐 사이에 슬라이드 디브 테이블 append
-                        reviewTextColum.append(reviewTextHeaderStyle, reviewImageSlideContainer, reviewTextDataTableStyle);
+                        reviewTextColum.append(reviewTextHeaderStyle, reviewImageSlideContainer, reviewDetailPage);
     
                 } else {
                     // 사진이 없을 땐 밑에께 바로 실행
                     // A 리뷰 시작 태그인 reviewTextColum append
-                    reviewTextColum.append(reviewTextHeaderStyle, reviewTextDataTableStyle);
+                    reviewTextColum.append(reviewTextHeaderStyle, reviewDetailPage);
     
                 }
     
@@ -2021,6 +2054,7 @@ const reviewMoreList = function(){
                 // A-0 번 완성
                                 
                 // A-1 (A 리뷰 시작의 1번 인덱스 위치에 있는 태그 )의 append
+                reviewDetailPage.append(reviewTextDataTableStyle);                
                 reviewTextDataTableStyle.append(reviewTextPoint, reviewTextTitle, reviewTextContent);
     
                 // A-1-0 (A 리뷰 1번 위치의 0번 위치에 있는 태그)
