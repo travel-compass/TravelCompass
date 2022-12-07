@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>회원페이지</title>
+    <title>프로필</title>
 
     <link rel="stylesheet" href="/resources/css/inc/header.css">
     <link rel="stylesheet" href="/resources/css/inc/footer.css">

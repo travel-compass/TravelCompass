@@ -46,15 +46,23 @@ public class ProfileController {
 		model.addAttribute("reviewList", reviewList);
 		
 		// 회원 팔로우 수, 여부 체크
-		Map<String, Object> map = new HashMap<String, Object>();
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		
+		// reviewPageMemberNo 회원 페이지의 번호
 		map.put("reviewPageMemberNo", memberNo);
 		
+		// loginMemberNo 로그인한 회원 번호
 		if(loginMember != null) map.put("loginMemberNo", loginMember.getMemberNo());
+		
+		System.out.println(map);
 		
 		int result = service.followCheck(map);
 		
+		// result 가 1 이면 팔로우한 상태
 		if(result > 0) {
 			model.addAttribute("followCheck", "on");
+		} else {
+			model.addAttribute("followCheck", null);
 		}
 		
 		return "profile/MemberPage";
@@ -104,7 +112,19 @@ public class ProfileController {
 	@ResponseBody
 	public int follow(@RequestParam Map<String, Integer> paramMap) {
 		
-		return service.follow(paramMap);
+		// 팔로우 버튼 누르면 로그인 맴버 번호 담기는 키 : loginMemberNo
+		// 팔로우 버튼 누르면 팔로우 할 맴버 번호 담기는 키 : reviewPageMemberNo
+		
+		// 팔로우 하기 전 팔로우 했는지 안했는 지 체크
+		
+		int result = service.followCheck(paramMap);
+		
+		// result 가 1 이면 팔로우한 상태
+		if(result > 0) {
+			return 0;
+		} else {
+			return service.follow(paramMap);
+		}
 	}
 	
 	// 팔로워 취소 하기
