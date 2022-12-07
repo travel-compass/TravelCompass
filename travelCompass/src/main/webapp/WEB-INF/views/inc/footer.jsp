@@ -4,7 +4,7 @@
 <footer>
     <section>
         <div class="footer-logo">
-            <img src="https://static.tacdn.com/img2/brand_refresh/Tripadvisor_logoset_solid_green.svg" alt="">
+            <img src="/resources/images/common/footer-logo.png" alt="">
         </div>
         <div class="footer-content">
             <span>© 2022 Tripadvisor LLC All rights reserved.</span>
