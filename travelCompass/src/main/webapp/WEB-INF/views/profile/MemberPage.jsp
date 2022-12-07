@@ -197,7 +197,7 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <a href="/place/detail/${FedList.contenttypeid}/${FedList.contentId}">
+                                        <a href="/place/detail/${FedList.contenttypeid}/${FedList.contentid}">
                                             <div class="review-data-table-style">
                                                 <div class="review-point">
                                                     <div class="rating">
@@ -240,7 +240,7 @@
                                             <c:forEach var="i" begin="0" end="${fn:length(FedList.reviewImgList) - 1}">
                                                     <div class="slide fade">
                                                         <div class="numbertext">${i+1} / ${fn:length(FedList.reviewImgList)}</div>
-                                                        <img src="${FedList.reviewImgList[i].reviewImgPath}${FedList.reviewImgList[i].reviewImgOriginal}">
+                                                        <img src="${FedList.reviewImgList[i].reviewImagePath}${FedList.reviewImgList[i].reviewImageOriginal}">
                                                     </div>
                                             </c:forEach>
                                             <a class="prev" onclick="plusSlides(-1, this)">&#10094;</a>
