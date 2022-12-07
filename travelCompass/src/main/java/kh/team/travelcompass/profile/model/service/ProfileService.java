@@ -17,7 +17,7 @@ public interface ProfileService {
 	Member selectMember(int memberNo);
 
 	// 팔로우 체크하기
-	int followCheck(Map<String, Object> map);
+	int followCheck(Map<String, Integer> map);
 	
 	// 팔로우 하기
 	int follow(Map<String, Integer> paramMap);

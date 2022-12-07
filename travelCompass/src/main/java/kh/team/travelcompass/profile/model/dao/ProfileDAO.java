@@ -56,7 +56,7 @@ public class ProfileDAO {
 	 * @param map
 	 * @return result
 	 */
-	public int followCheck(Map<String, Object> map) {
+	public int followCheck(Map<String, Integer> map) {
 		return sqlSession.selectOne("profileMapper.followCheck", map);
 	}
 	
@@ -120,4 +120,5 @@ public class ProfileDAO {
 	public int boardDelete(int reviewNo) {
 		return sqlSession.update("profileMapper.reviewDelete", reviewNo);
 	}
+	
 }
