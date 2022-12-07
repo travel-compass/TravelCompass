@@ -132,13 +132,15 @@
               
               <div class="review-support"></div>
               <div class="review-bottom-menu-style">
-                <div class="save-button" onclick="reviewLike(${review.reviewNo}, ${review.memberNo}, loginMemberNo)">
-                  <c:if test="${empty review.likeCheck}">
-                    <i class="fa-regular fa-heart"></i>좋아요<span class="likeCount">${review.reviewLike}</span>
-                  </c:if>                  
-                  <c:if test="${not empty review.likeCheck}">
-                    <i class="fa-solid fa-heart"></i>좋아요 <span class="likeCount">${review.reviewLike}</span>
-                  </c:if>
+                <div class="save-button" id="likebtn" onclick="reviewLike(${review.reviewNo}, ${review.memberNo}, loginMemberNo, this)">
+                  <c:choose>
+                    <c:when test="${review.likeCheck==0}">
+                      <i class="fa-regular fa-heart"></i>좋아요<span class="likeCount">${review.reviewLike}</span>
+                    </c:when>                  
+                    <c:otherwise>
+                      <i class="fa-solid fa-heart"></i>좋아요 <span class="likeCount">${review.reviewLike}</span>
+                    </c:otherwise>
+                  </c:choose>
                 </div>
 
                 <div class="share-button" onclick="insertReport(${review.reviewNo}, ${review.memberNo}, loginMemberNo )">

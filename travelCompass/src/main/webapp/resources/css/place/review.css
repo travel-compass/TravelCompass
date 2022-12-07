@@ -284,11 +284,21 @@
 .review-bottom-menu-style .suport-button:hover i,
 .review-bottom-menu-style .share-button:hover i {
     color: black;
+    cursor: pointer;
 }
 
 .review-bottom-menu-style .save-button:hover i,
 .review-navi-right i:hover {
     color: #ff564f;
+    cursor: pointer;
+}
+
+.share-button:hover i {
+    cursor: pointer;
+}
+
+.save-button i {
+    color: red;
 }
 
 .review-navi-style {

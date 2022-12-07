@@ -47,6 +47,13 @@ public class PlaceController {
 		paramMap.put("contentid", contentId);
 		paramMap.put("contenttypeid", contentTypeId);
 		
+		int memberNo;
+		if (loginMember == null) {
+			memberNo = -1;
+		} else {
+			memberNo = loginMember.getMemberNo();
+		}
+		paramMap.put("memberNo", memberNo);
 		
 		// title,overview
 		Place mainPlace=service.detailPlace(contentId,contentTypeId);
