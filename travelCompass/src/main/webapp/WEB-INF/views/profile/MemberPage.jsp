@@ -40,7 +40,7 @@
                         <div class="user-info-left-part">
                             <div class="user-container-image">
                                 <span class="user-info-image">
-                                    <img id="profile-image" src="${member.profileImage}" alt="프로필 이미지">
+                                    <img id="profile-image" src="${member.profileImage}">
                                 </span>
                             </div>
                             <div class="user-nickname">
@@ -197,7 +197,7 @@
                                     <div class="user-page-review-colums2">
                                         <div class="user-page-review-header-style">
                                             <div class="user-page-review-header-layout">
-                                                <a class="review-user-image"><img src="${member.profileImage}" alt="프로필 이미지"></a>
+                                                <a class="review-user-image"><img src="${member.profileImage}"></a>
                                                 <div class="review-user-info-layout">
                                                     <span class="review-user-nickname"><span>${member.memberNickname}</span> 님이 리뷰를 작성했습니다.</span>
                                                     <a class="review-user-dday">

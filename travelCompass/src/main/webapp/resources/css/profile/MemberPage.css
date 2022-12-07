@@ -306,6 +306,10 @@ main {
     font-size: 14px;
 }
 
+.review-user-image img{
+    border-radius: 50%;
+}
+
 .review-user-dday{
     font-size: 12px;
 }
