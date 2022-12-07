@@ -27,7 +27,7 @@
 		                    <li><a href="/member/info">내 정보</a></li>
 		                    <li><a href="/profile/${loginMember.memberNo}">마이 프로필</a></li>
 							<c:if test="${loginMember.authority == 'Y'}">
-								<li><a href="/management">관리자 페이지</a></li>
+								<li><a href="/management/info">관리자 페이지</a></li>
 							</c:if>
 		                    <li><a href="/member/logout">로그아웃</a></li>
 		                </ul>
