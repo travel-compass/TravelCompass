@@ -67,6 +67,7 @@
 	</interceptors>
 	
 	
+	
 	<!-- 스케쥴링 어노테이션 인식 -->
 	<task:annotation-driven />
 </beans:beans>

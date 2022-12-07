@@ -311,7 +311,7 @@ main {
     font-size: 12px;
 }
 
-.review-user-nickname a{
+.review-user-nickname span{
     font-weight: bold;
 }
 
@@ -325,8 +325,12 @@ main {
 }
 
 .review-data-table-style{
-    padding: 0 24px;
     cursor: pointer;
+}
+
+.review-data-table-style > div{
+    padding: 0 24px;
+    margin-bottom: 5px;
 }
 
 .review-point{
