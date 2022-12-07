@@ -532,5 +532,12 @@
     z-index: 2;
     overflow: hidden;
     color: #34E0A1;
-    width: 80px;
 }
+
+.review-left>ul>span {
+    /* font-weight: bold; */
+    margin-left: 15px;
+}
+
+
+/* -------------------------------------------- */

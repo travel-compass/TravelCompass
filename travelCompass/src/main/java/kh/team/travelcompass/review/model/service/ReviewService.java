@@ -3,6 +3,7 @@ package kh.team.travelcompass.review.model.service;
 import java.util.List;
 import java.util.Map;
 
+import kh.team.travelcompass.member.model.vo.Member;
 import kh.team.travelcompass.place.model.vo.Place;
 import kh.team.travelcompass.review.model.vo.Review;
 
@@ -71,6 +72,12 @@ public interface ReviewService {
 	 * @return
 	 */
 	List<Review> moreReviewList(String contentid, int rowBoundCount);
+
+	/** 좋아요 증가
+	 * @param paramMap
+	 * @return result
+	 */
+	int reviewLikeUp(Map<String, Object> paramMap);
 
 	
 	

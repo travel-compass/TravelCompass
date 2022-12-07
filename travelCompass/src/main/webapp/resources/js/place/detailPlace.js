@@ -1,7 +1,7 @@
 /* ------------------------------ 스크랩 --------------------------------- */
 const placeScrap = document.getElementById("placeScrap");
 placeScrap.addEventListener("click", (e) => {
-  if (memberNo == "") {
+  if (loginMemberNo == "") {
     alert("로그인 후 이용해주세요");
     return;
   }
@@ -13,7 +13,7 @@ placeScrap.addEventListener("click", (e) => {
       data: {
         contentid: contentid,
         contenttypeid: contenttypeid,
-        memberNo: memberNo,
+        memberNo: loginMemberNo,
         firstimage: firstimage,
         addr1: addr1,
         mapx: mapx,
@@ -40,7 +40,7 @@ placeScrap.addEventListener("click", (e) => {
     if (confirm("정말 스크랩을 취소할까요?")) {
       $.ajax({
         url: "/place/scrapCancel",
-        data: { contentid: contentid, memberNo: memberNo },
+        data: { contentid: contentid, memberNo: loginMemberNo },
         type: "GET",
         success: (result) => {
           if (result > 0) {
@@ -78,19 +78,60 @@ var markerPosition = new kakao.maps.LatLng(mapy, mapx);
 var marker = new kakao.maps.Marker({
   position: markerPosition,
 });
+let content =
+  `<div class='marker-content' onclick='showRoadView(${mapy}, ${mapx})'>` +
+  `<span class='marker-title'>${title}</span>`;
+("</div>");
 
+let customOverlay = new kakao.maps.CustomOverlay({
+  map: map,
+  position: markerPosition,
+  content: content,
+  yAnchor: 1,
+});
 // 마커가 지도 위에 표시되도록 설정합니다
 marker.setMap(map);
 
 // 지도에 교통정보를 표시하도록 지도타입을 추가합니다
 // map.addOverlayMapTypeId(kakao.maps.MapTypeId.TRAFFIC);
+// 로드뷰 모달 이벤트 달기
+(() => {
+  const roadViewModal = document.getElementById("roadViewModal");
+  roadViewModal.addEventListener("click", (e) => {
+    console.log("클릭");
+    if (e.target.getAttribute("id") == "roadViewModal") {
+      roadViewModal.classList.remove("show");
+    }
+  });
+})();
 
+// 로드뷰 보여주기
+function showRoadView(mapy, mapx) {
+  document.getElementById("roadViewModal").classList.add("show");
 
-// 주변 장소 거리 초기화
-(()=>{
+  // 로드뷰 보여줄 컨테이너
+  const roadViewContainer = document.getElementById("roadView");
+  roadViewContainer.innerHTML = "";
+  // 로드뷰 객체
+  const roadView = new kakao.maps.Roadview(roadViewContainer);
+  const roadviewClient = new kakao.maps.RoadviewClient();
+
+  const position = new kakao.maps.LatLng(Number(mapy), Number(mapx));
+
+  roadviewClient.getNearestPanoId(position, 100, (panoId) => {
+    if (panoId == null) {
+      alert("로드뷰를 지원하지 않습니다.");
+    }
+    console.log(panoId);
+    roadView.setPanoId(panoId, position);
+  });
+}
+
+// // 주변 장소 거리 초기화
+(() => {
   const distList = document.getElementsByClassName("search-result-item-review");
 
-  for(let dist of distList) {
+  for (let dist of distList) {
     dist.innerText = Math.round(Number(dist.innerText) / 100) / 10 + "km";
   }
 })();

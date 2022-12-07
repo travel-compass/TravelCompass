@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kh.team.travelcompass.common.Util;
+import kh.team.travelcompass.member.model.vo.Member;
 import kh.team.travelcompass.place.model.vo.Pagination;
 import kh.team.travelcompass.place.model.vo.Place;
 import kh.team.travelcompass.review.model.dao.ReviewDAO;
@@ -101,15 +102,14 @@ public class ReviewServiceImpl implements ReviewService {
 		review.setReviewContent(Util.XSSHandling(review.getReviewContent()));
 
 		review.setReviewContent(Util.newLineHandling(review.getReviewContent()));
-		
+
 		return dao.updateReview(review);
 	}
-	
-	
+
 	// 리뷰 연결
 	@Override
 	public List<Place> connectReview(List<Place> placeList) {
-		if(placeList == null || placeList.isEmpty()) {
+		if (placeList == null || placeList.isEmpty()) {
 			System.out.println("장소리스트가 비어있습니다.");
 			return placeList;
 		}
@@ -140,12 +140,12 @@ public class ReviewServiceImpl implements ReviewService {
 	public List<String> countRating(String contentid) {
 		return dao.countRating(contentid);
 	}
-	
+
 	@Override
 	public List<Review> moreReviewList(String contentid, int rowBoundCount) {
-		
+
 		List<Review> moreReviewList = dao.moreReviewList(contentid, rowBoundCount);
-		
+
 		return moreReviewList;
 	}
 

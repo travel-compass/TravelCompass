@@ -137,9 +137,9 @@ public class ReviewDAO {
 	}
 
 	public List<Review> moreReviewList(String contentid, int rowBoundCount) {
-		
+
 		RowBounds rowBounds = new RowBounds(rowBoundCount, 10);
-		
+
 		return sqlSession.selectList("reviewMapper.selectReviewList", contentid, rowBounds);
 	}
 
