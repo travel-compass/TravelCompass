@@ -37,6 +37,6 @@ public class Review {
 	private int reasonCode;        //사유 코드
 	private int reviewReportCount; //리뷰당 신고횟수
 	private int blindReviewCount;  //멤버당 블라인드 리뷰 개수
-	
+	private int reporter;          //신고자(loginMemberNo)
 
 }

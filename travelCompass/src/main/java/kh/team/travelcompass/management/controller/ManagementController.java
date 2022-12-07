@@ -107,7 +107,17 @@ public class ManagementController {
 	@GetMapping("/insertReport")
 	@ResponseBody
 	public int insertReport(@RequestParam Map<String, Object>paramMap) {
-		return service.insertReport(paramMap);
+		
+		int check = service.reportCheck(paramMap);
+		int result = 0;
+		
+		if(check>0) {
+			
+		}else {
+			result= service.insertReport(paramMap);
+		}
+		
+		return result;
 	}
 	
 	
