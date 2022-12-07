@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -286,4 +287,23 @@ public class TravelController {
 	public int deleteTravelLike(@RequestParam Map<String, Integer> paramMap) {
 		return service.deleteTravelLike(paramMap);
 	}
+	
+	
+	
+	/** 최근 본 장소 리뷰 연결
+	 * @param jsonPlaceList
+	 * @return result
+	 * @throws IOException 
+	 * @throws JsonMappingException 
+	 * @throws JsonParseException 
+	 */
+	@ResponseBody
+	@PostMapping("/recentPlace")
+	public List<Place> recentPlace(String jsonPlaceList) throws JsonParseException, JsonMappingException, IOException {
+		List<Place> placeList = new ObjectMapper().readValue(jsonPlaceList, new TypeReference<List<Place>>() {}); 
+		placeList = rService.connectReview(placeList);
+				
+		return placeList;
+	}
+	
 }

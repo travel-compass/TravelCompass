@@ -51,8 +51,7 @@ public class Util {
 			String item = new JSONObject(items).getJSONArray("item").toString();
 			ObjectMapper om = new ObjectMapper();
 			om.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-			placeList = om.readValue(item, new TypeReference<List<Place>>() {
-			});
+			placeList = om.readValue(item, new TypeReference<List<Place>>() {});
 		}
 		System.out.println(placeList.get(0));
 		return placeList.get(0);
