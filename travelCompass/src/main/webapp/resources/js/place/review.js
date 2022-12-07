@@ -543,7 +543,7 @@ moreBtn.addEventListener("click", () => {
 
         rating.append(empty, fill);
 
-        if (memberNo == review.memberNo) {
+        if (loginMemberNo == review.memberNo) {
           reviewTextHeaderStyle.append(
             reviewTextHeaderLayout,
             reviewTextDotStyle,
@@ -740,7 +740,7 @@ const createReviewList = function () {
 
         rating.append(empty, fill);
 
-        if (memberNo == review.memberNo) {
+        if (loginMemberNo == review.memberNo) {
           reviewTextHeaderStyle.append(
             reviewTextHeaderLayout,
             reviewTextDotStyle,
