@@ -54,6 +54,7 @@ public class LocationServiceImpl implements LocationService {
 		paramMap.put("radius", "3000");
 		paramMap.put("numOfRows", "3");
 		
+		
 		// 관광지		
 		paramMap.put("contentTypeId", "12");
 		List<Place> tourPlace = api.serachPlace(paramMap);

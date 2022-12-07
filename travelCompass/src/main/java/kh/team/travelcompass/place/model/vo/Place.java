@@ -1,6 +1,7 @@
 package kh.team.travelcompass.place.model.vo;
 
 import java.util.List;
+import java.util.Map;
 
 
 import kh.team.travelcompass.question.model.vo.Question;
@@ -34,7 +35,7 @@ public class Place {
 	
 	private List<Review> reviewList; // 장소에 달린 리뷰리스트
 	private int reviewCount;		 // 장소에 달린 모든 리뷰 갯수
-	private Double averageRating;       // 장소의 평균평점
+	private double averageRating;       // 장소의 평균평점
 	private List<Question> questionList;  // 장소에 달린 리뷰리스트
 	
 	// 스크랩 관련 필드
@@ -49,6 +50,8 @@ public class Place {
 	private String homepage; // 홈페이지
 	private String infocenter; // 인포센터
 	private String usefee;
+	
+	private List<String> countRating;
 	
 //	private int pageNo;        // 현재 페이지 번호 
 //	private int totalCount;    // 전체 게시글 수

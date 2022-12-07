@@ -26,8 +26,8 @@
 
 <body>
   <script>
-    const mapx=${place.mapx};
-    const mapy=${place.mapy};
+    const mapx="${place.mapx}";
+    const mapy="${place.mapy}";
     const memberNo="${loginMember.memberNo}";
     const memberNickname="${loginMember.memberNickname}"
     const contentid="${place.contentid}";
@@ -35,6 +35,7 @@
     const addr1="${place.addr1}";
     const contenttypeid="${place.contenttypeid}";
     const title="${place.title}"
+    const avgRating="${place.averageRating}"
     
   </script>
   <!-- header:include -->
@@ -86,10 +87,10 @@
         <div class="review-container">
           <div class="rating">
             <span class="empty">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
-            <span class="fill" style="width:${92*(place.averageRating*20)/100}px;">
+            <span class="fill" style="width:${69*(place.averageRating*20)/100}px;">
             &#9679;&#9679;&#9679;&#9679;&#9679;</span>
           </div>
-            <span class="review-count">${place.reviewCount} 건의 리뷰</span>
+            <span class="review-count"> ${place.averageRating} / ${place.reviewCount} 건의 리뷰</span>
       </div>
 
       <hr>
@@ -171,7 +172,7 @@
                           <div class="search-result-item-grade">
                               <div class="a-rating">
                                   <span class="empty">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
-                                  <span class="fill">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                                  <span class="fill" style="width:${69*(tourPlace.averageRating*20)/100}px;">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
                               </div>
                               <span><a href="#<!--상세페이지-리뷰-->">${tourPlace.reviewCount}</a></span>
                           </div>
@@ -219,7 +220,7 @@
                           <div class="search-result-item-grade">
                               <div class="a-rating">
                                   <span class="empty">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
-                                  <span class="fill">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                                  <span class="fill" style="width:${69*(culturePlace.averageRating*20)/100}px;">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
                               </div>
                               <span><a href="#<!--상세페이지-리뷰-->">${culturePlace.reviewCount}</a></span>
                           </div>
@@ -268,7 +269,7 @@
                           <div class="search-result-item-grade">
                               <div class="a-rating">
                                   <span class="empty">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
-                                  <span class="fill">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                                  <span class="fill" style="width:${69*(foodPlace.averageRating*20)/100}px;">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
                               </div>
                               <span><a href="#<!--상세페이지-리뷰-->">${foodPlace.reviewCount}</a></span>
                           </div>
@@ -313,7 +314,7 @@
                           <div class="search-result-item-grade">
                               <div class="a-rating">
                                   <span class="empty">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
-                                  <span class="fill">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                                  <span class="fill" style="width:${69*(leisurePlace.averageRating*20)/100}px;">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
                               </div>
                               <span><a href="#<!--상세페이지-리뷰-->">${leisurePlace.reviewCount}</a></span>
                           </div>
@@ -356,10 +357,9 @@
     </nav>
 
     <%-- 리뷰 섹션 --%>
-    <%-- <div id=reviewBoard>
-      <jsp:include page="/WEB-INF/views/place/review.jsp"></jsp:include>
-    </div> --%>
-    <%-- QnA 섹션 --%>
+
+    <jsp:include page="/WEB-INF/views/place/review.jsp"></jsp:include>
+
     <%-- <jsp:include page="/WEB-INF/views/place/QnA.jsp"></jsp:include> --%>
   
 
@@ -373,7 +373,7 @@
   <script src="/resources/js/common/jQuery-core.js"></script>
   <script src="/resources/js/place/detailPlace.js"></script>
   <script src="/resources/js/place/review.js"></script>
-  <%-- <script src="/resources/js/place/QnA.js"></script> --%>
+  <script src="/resources/js/place/QnA.js"></script>
 	<script src="/resources/js/place/swiper.js"></script>
 </body>
 

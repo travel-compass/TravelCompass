@@ -8,20 +8,25 @@ import kh.team.travelcompass.review.model.vo.Review;
 
 public interface ReviewService {
 
+	/** 처음 리뷰목록 조회 + 페이징처리
+	 * @param contentId
+	 * @param cp
+	 * @return
+	 */
+	Map<String, Object> selectReviewList(String contentid, Map<String, Object> paramMap, int cp);
+	
 	/** 상세페이지 속 조건 별 리뷰 조회(추천,최신,평점) + 페이징 처리
 	 * @param paramMap
 	 * @param cp
 	 * @return
 	 */
-	Map<String, Object> orderReviewList(Map<String, Object> paramMap, int cp);
+	Map<String, Object> orderReviewList(String contentid, Map<String, Object> paramMap, int cp);
 
-	/** 처음 리뷰목록 조회
-	 * @param contentId
-	 * @param cp
+
+	/** 리뷰 등록
+	 * @param review
 	 * @return
 	 */
-	Map<String, Object> selectReviewList(String contentId, int cp);
-
 	int insertReview(Review review);
 
 	/** 리뷰 삭제
@@ -29,12 +34,43 @@ public interface ReviewService {
 	 * @return
 	 */
 	int deleteReview(int reviewNo);
+
+	/** 평균 리뷰평점 조회
+	 * @param contentId
+	 * @return avgRating
+	 */
+	double selectAvgRating(String contentId);
+
+	/** 작성된 리뷰 개수 조회
+	 * @param contentId
+	 * @return reviewCount
+	 */
+	int selectReviewCount(String contentId);
+
+	/** 리뷰 수정
+	 * @param review
+	 * @return
+	 */
+	int updateReview(Review review);
+
+	/** 평점별 개수 조회
+	 * @param contentid
+	 * @return
+	 */
+	List<String> countRating(String contentid);
 	
 	
 	/** 리뷰 연결(평균평점, 리뷰갯수)
 	 * 
 	 */
-	public void connectReview(List<Place> placeList);
+	public List<Place> connectReview(List<Place> placeList);
 
+	/** 더보기 조회
+	 * @param contentid
+	 * @param rowBoundCount
+	 * @return
+	 */
+	List<Review> moreReviewList(String contentid, int rowBoundCount);
 
+	
 }
