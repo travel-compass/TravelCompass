@@ -42,10 +42,10 @@
                 <option value="39">제주도</option>
             </select>
         </div>
-        <a href="/location/aroundSearch?" id="aroundSearch">
+        <%-- <a href="/location/aroundSearch?" id="aroundSearch">
             <i class="fa-solid fa-location-arrow"></i>
             <span>주변</span>
-        </a>
+        </a> --%>
         <c:if test="${not empty popularKeyword}">
             <label class="search-keyword-title">인기 검색어</label>
             <ul class="popular-keyword-list">
