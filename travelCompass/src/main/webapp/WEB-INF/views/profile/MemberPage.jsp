@@ -197,7 +197,7 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <a href="/place/detail/${FedList.contenttypeid}/${FedList.contentId}">
+                                        <a href="/place/detail/${FedList.contenttypeid}/${FedList.contentid}">
                                             <div class="review-data-table-style">
                                                 <div class="review-point">
                                                     <div class="rating">
