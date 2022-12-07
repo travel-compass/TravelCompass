@@ -142,6 +142,12 @@ function createTravelList(privateFlag) {
                 travelTitle.className = "travel-title";
                 travelTitle.innerText = travel.travelTitle;
         
+                const travelLikeCount = document.createElement("span");
+                travelLikeCount.classList.add("travel-like-count");
+                const travelLikeCountIcon = document.createElement("i");
+                travelLikeCountIcon.classList.add("fa-solid", "fa-thumbs-up");
+
+
                 const travelWriterDiv = document.createElement("div");
                 travelWriterDiv.innerText = "작성자: ";
                 const aTravelWriter = document.createElement("a");
@@ -177,7 +183,10 @@ function createTravelList(privateFlag) {
                     scopeDiv.className = "access-scope-private";
                     scopeIcon.className = "fa-solid fa-lock";
                 }
-        
+                
+
+                /* 좋아요카운트 결합 */
+                travelLikeCount.append(travelLikeCountIcon, `${travel.travelLikeCount}`);
         
                 /* 접근범위 결합 */
                 scopeSpan.append(scopeIcon);
@@ -193,7 +202,7 @@ function createTravelList(privateFlag) {
                 travelPlaceItem.append(placeCount);
         
                 /* 여행 제목 작성자 결합 */
-                travelTitleDiv.append(travelTitle);
+                travelTitleDiv.append(travelTitle, travelLikeCount);
                 travelWriterDiv.append(aTravelWriter);
                 travelDescription.append(travelTitleDiv, travelWriterDiv);
         

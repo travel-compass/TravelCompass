@@ -100,11 +100,25 @@ main {
     font-size: 13px;
 }
 
+.travel-description > div:first-child {
+    display: flex;
+    justify-content: space-between;
+}
 .travel-item .travel-title {
-    display: block;
+    display: inline-block;
     font-size: 22px;
     font-weight: bold;
     cursor: pointer;
+}
+.travel-item .travel-like-count {
+    font-size: 15px;
+    background-color: black;
+    padding: 5px;
+    color: white;
+    border-radius: 5px;
+}
+.travel-item .travel-like-count i {
+    margin-right: 5px;
 }
 
 .travel-item .travel-writer {
