@@ -165,4 +165,24 @@ public class ReviewController {
 		return service.reviewLikeDown(paramMap);
 	}
 
+	//좋아요 증가
+	@GetMapping("/reviewLikeUp")
+	@ResponseBody
+	public int reviewLikeUp(@RequestParam Map<String, Object>paramMap) {
+		
+		return service.reviewLikeUp(paramMap);
+	}
+	
+	//좋아요 감소
+	@GetMapping("/reviewLikeDown")
+	@ResponseBody
+	public int reviewLikeDown(@RequestParam Map<String, Object>paramMap) {
+		
+		return service.reviewLikeDown(paramMap);
+	}
+	
+	
+	
+	
+	
 }

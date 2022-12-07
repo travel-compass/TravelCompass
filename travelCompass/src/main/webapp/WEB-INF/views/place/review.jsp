@@ -141,7 +141,7 @@
                   </c:if>
                 </div>
 
-                <div class="share-button">
+                <div class="share-button" onclick="insertReport(${review.reviewNo}, ${review.memberNo}, loginMemberNo )">
                   <i class="fa-solid fa-arrow-up-from-bracket"></i>신고
                 </div>
               </div>

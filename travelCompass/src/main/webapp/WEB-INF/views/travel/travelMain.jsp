@@ -84,6 +84,10 @@
                         <div class="travel-description">
                             <div>
                                 <span class="travel-title">${travel.travelTitle}</span>
+                                <span class="travel-like-count">
+                                    <i class="fa-solid fa-thumbs-up"></i>
+                                    ${travel.travelLikeCount}
+                                </span>
                             </div>
                             <div>
                                 작성자: <a href="/profile/${memberNo}" class="travel-writer">${travel.memberNickname}</a>

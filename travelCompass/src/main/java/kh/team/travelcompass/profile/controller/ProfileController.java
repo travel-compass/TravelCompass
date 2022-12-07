@@ -48,7 +48,8 @@ public class ProfileController {
 		// 회원 팔로우 수, 여부 체크
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("reviewPageMemberNo", memberNo);
-		map.put("loginMemberNo", loginMember.getMemberNo());
+		
+		if(loginMember != null) map.put("loginMemberNo", loginMember.getMemberNo());
 		
 		int result = service.followCheck(map);
 		
@@ -199,7 +200,7 @@ public class ProfileController {
 			@RequestParam(value = "profileImage") MultipartFile profileImage,
 			HttpServletRequest req, RedirectAttributes ra) throws Exception {
 		
-		String wepPath = "/resources/images/common/";
+		String wepPath = "/resources/images/member/";
 		
 		String filePath = req.getSession().getServletContext().getRealPath(wepPath);
 

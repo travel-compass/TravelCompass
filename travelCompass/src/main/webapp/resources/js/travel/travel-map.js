@@ -153,6 +153,18 @@ let bounds;
 let map
 // 여행에 등록된 장소가 비어있지 않을 때만
 if(travel.placeList.length != 0) {
+
+
+    // 지도 초기화 버튼
+    // 버튼 생성 후 prepend
+    const mapInitBtn = document.createElement("button");
+    mapInitBtn.setAttribute("id", "mapInit");
+    mapInitBtn.addEventListener("click", ()=>{
+        setBounds(map, bounds)
+    });
+    mapInitBtn.innerText = "초기화";
+    document.getElementsByClassName("travel-create-content")[0].prepend(mapInitBtn);
+    
     const mapContainer = document.getElementById("travelMap");
     let mapOption = {
         center: new kakao.maps.LatLng(Number(travel.placeList[0].mapy), Number(travel.placeList[0].mapx)),

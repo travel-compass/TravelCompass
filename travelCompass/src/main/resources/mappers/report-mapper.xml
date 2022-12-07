@@ -20,6 +20,7 @@
 		<result property="reasonCode" column="REASON_CODE"/>
 		<result property="reviewReportCount" column="REVIEW_REPORT_COUNT" />
 		<result property="blindReviewCount" column="BLIND_REVIEW_COUNT"/>
+		<result property="reporter"    column="REPORTER"/>
 	</resultMap>
 	
 
@@ -56,9 +57,17 @@
 		ORDER BY BLIND_REVIEW_COUNT
 	</select>
 	
+	<!-- 중복 신고 체크 -->
+	<select id="reportCheck" resultType="_int">
+		SELECT COUNT(*) FROM REPORT
+		WHERE REVIEW_NO = #{reviewNo}
+		AND REPORTER = #{reporter}
+	</select>
+	
+	
 	<!-- 신고하기 -->
 	<insert id="insertReport">
-		INSERT INTO REPORT VALUES(SEQ_REPORT_NO.NEXTVAL, DEFAULT, #{memberNo}, DEFAULT, #{reviewNo})
+		INSERT INTO REPORT VALUES(SEQ_REPORT_NO.NEXTVAL, DEFAULT, #{memberNo}, #{reviewNo}, #{reporter})
 	</insert>
 	
 	

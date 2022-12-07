@@ -56,7 +56,7 @@
             console.log(latitude);
             console.log(longitude);
             const aURL = `latitude=${latitude}&longitude=${longitude}&contentTypeId=12`;
-            document.getElementById("aroundSearch").href += aURL;
+            // document.getElementById("aroundSearch").href += aURL;
 
             $.ajax({
                 url: "/location/searchPlace",

@@ -156,12 +156,13 @@
                         <ul class="review-list" id="reviewContainer">
                                 
 
-                                <c:if test="${empty reviewList}">
+                            <c:if test="${empty reviewList}">
+                                <c:if test="${loginMember.memberNo == member.memberNo}">
                                     <!-- 리뷰가 아무것도 없을 때 나오는 테이블 -->
                                     <div class="user-page-review-colums2">
                                         <div class="user-page-review-none-content">
                                             <div class="none-content-title">
-                                                프로필 작성
+                                                리뷰 작성
                                             </div>
                                             <div class="none-content">
                                                 사람들이 회원님을 쉽게 찾고 더 알아갈 수 있도록 하려면 사진과 정보를 프로필에 추가하세요!
@@ -173,6 +174,20 @@
                                         </div>
                                     </div>
                                 </c:if>
+                                <c:if test="${loginMember.memberNo != member.memberNo}">
+                                    <!-- 리뷰가 아무것도 없을 때 나오는 테이블 -->
+                                    <div class="user-page-review-colums2">
+                                        <div class="user-page-review-none-content">
+                                            <div class="none-content-title">
+                                                리뷰
+                                            </div>
+                                            <div class="none-content">
+                                                회원이 활동한 내역이 없습니다. 다음에 다시 한번 방문해주세요.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </c:if>
+                            </c:if>
 
                             <c:forEach var="FedList" items="${reviewList}" begin="0" end="9">
                                 
@@ -184,31 +199,32 @@
                                             <div class="user-page-review-header-layout">
                                                 <a class="review-user-image"><img src="${member.profileImage}" alt="프로필 이미지"></a>
                                                 <div class="review-user-info-layout">
-                                                    <span class="review-user-nickname"><>${member.memberNickname}</>님이 리뷰를 작성했습니다.</span>
+                                                    <span class="review-user-nickname"><span>${member.memberNickname}</span> 님이 리뷰를 작성했습니다.</span>
                                                     <a class="review-user-dday">
                                                         ${FedList.reviewDate}
                                                     </a>
                                                 </div>
                                             </div>
-                                            <button class="user-page-review-dot-style"><i class="fa-solid fa-ellipsis"></i></button>
-                                            <div class="user-page-review-dot-down-menu">
-                                                <ul class="down-menu">
-                                                    <li id="reviewDelete" var="${FedList.reviewNo}">삭제</li>0
-                                                </ul>
-                                            </div>
+                                            <button class="user-page-review-dot-style"><i class="fa-solid fa-ellipsis"></i>
+                                                <div class="user-page-review-dot-down-menu">
+                                                    <ul class="down-menu">
+                                                        <li id="reviewDelete" var="${FedList.reviewNo}">삭제</li>
+                                                    </ul>
+                                                </div>
+                                            </button>
                                         </div>
+
                                         <a href="/place/detail/${FedList.contenttypeid}/${FedList.contentid}">
-                                            <div class="review-data-table-style">
+                                            <span class="review-data-table-style">
                                                 <div class="review-point">
                                                     <div class="rating">
                                                         <span class="empty">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
-                                                        <span class="fill" style="width:${92 * (FedList.rating * 20) / 100}px;">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                                                        <span class="fill" style="width:${84.5 * (FedList.rating * 20) / 100}px;">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
                                                     </div>
                                                 </div>
-                                                <div class="review-title"><a href="">${FedList.reviewTitle}</a></div>
-                                                <div class="review-content"><a href="">"${FedList.reviewContent}"</a>
-                                                </div>
-                                            </div>
+                                                <div class="review-title">${FedList.reviewTitle}</div>
+                                                <div class="review-content">"${FedList.reviewContent}"</div>
+                                            </span>
                                         </a>
                                     </div>
                                 </c:if>
@@ -222,18 +238,26 @@
                                             <div class="user-page-review-header-layout">
                                                 <a class="review-user-image"><img src="${member.profileImage}" alt="프로필 이미지"></a>
                                                 <div class="review-user-info-layout">
-                                                    <span class="review-user-nickname"><a >${member.memberNickname}</a>님이 리뷰를 작성했습니다.</span>
+                                                    <span class="review-user-nickname"><span>${member.memberNickname}</span> 님이 리뷰를 작성했습니다.</span>
                                                     <a class="review-user-dday">
                                                         ${FedList.reviewDate}
                                                     </a>
                                                 </div>
                                             </div>
-                                            <button class="user-page-review-dot-style"><i class="fa-solid fa-ellipsis"></i></button>
+                                            <%-- <button class="user-page-review-dot-style"><i class="fa-solid fa-ellipsis"></i></button>
                                             <div class="user-page-review-dot-down-menu">
                                                 <ul class="down-menu">
                                                     <li id="reviewDelete" var="${FedList.reviewNo}">삭제</li>
                                                 </ul>
-                                            </div>
+                                            </div> --%>
+                                            <button class="user-page-review-dot-style"><i class="fa-solid fa-ellipsis"></i>
+                                                <div class="user-page-review-dot-down-menu">
+                                                    <ul class="down-menu">
+                                                        <li id="reviewDelete" var="${FedList.reviewNo}">삭제</li>
+                                                    </ul>
+                                                </div>
+                                            </button>
+                                            
                                         </div>
                                         <!-- 사진 슬라이드 div태그 시작 -->
                                         <div class="slide-container-style">
@@ -249,16 +273,16 @@
                                         <br>
 
                                         <a href="/place/detail/${FedList.contenttypeid}/${FedList.contentid}">
-                                            <div class="review-data-table-style">
+                                            <span class="review-data-table-style">
                                                 <div class="review-point">
                                                     <div class="rating">
                                                         <span class="empty">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
-                                                        <span class="fill" style="width:${92 * (FedList.rating * 20) / 100}px;">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                                                        <span class="fill" style="width:${84.5 * (FedList.rating * 20) / 100}px;">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
                                                     </div>
                                                 </div>
                                                 <div class="review-title">${FedList.reviewTitle}</div>
                                                 <div class="review-content">"${FedList.reviewContent}"</div>
-                                            </div>
+                                            </span>
                                         </a>
                                     </div>
                                 </c:if>
@@ -285,7 +309,7 @@
         const memberNo = "${member.memberNo}";
 
         // @ReqeustParam
-        const reviewPageMemberNo = "${member.memberNo}";
+        const reviewMemberNo = "${member.memberNo}";
         const loginMemberNo = "${loginMember.memberNo}"
 
         // 팔로워 넘버

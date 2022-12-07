@@ -149,18 +149,29 @@ public class ReviewServiceImpl implements ReviewService {
 		return moreReviewList;
 	}
 
-	// 좋아요 증가
+	
+	
+
+	//좋아요여부 체크
+	@Override
+	public int reviewLikeCheck(Map<String, Object> map) {
+		
+		return dao.reviewLikeCheck(map);
+	}
+
+	//좋아요 증가
 	@Override
 	public int reviewLikeUp(Map<String, Object> paramMap) {
 
 		return dao.reviewLikeUp(paramMap);
 	}
 
-	// 좋아요 감소
+	//좋아요 감소
 	@Override
 	public int reviewLikeDown(Map<String, Object> paramMap) {
-
+		
 		return dao.reviewLikeDown(paramMap);
 	}
 
+	
 }

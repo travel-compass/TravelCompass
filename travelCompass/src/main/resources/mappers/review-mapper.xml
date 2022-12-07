@@ -234,16 +234,23 @@
 		ORDER BY CONTENT_ID
 	</select>
 	
+	  <!-- 좋아요 여부 체크 -->
+  <select id="reviewLikeCheck" resultType="_int">
+		SELECT COUNT(*) FROM REVIEW_LIKE
+		WHERE BOARD_NO = #{reviewNo}
+		AND MEMBER_NO = #{memberNo}
+	</select>
+	
 	<!-- 좋아요 증가 -->
-   <insert id="reviewLikeUp">
-      INSERT INTO REVIEW_LIKE VALUES(#{reviewNo}, #{memberNo})
-   </insert>
+	<insert id="reviewLikeUp">
+		INSERT INTO REVIEW_LIKE VALUES(#{reviewNo}, #{memberNo})
+	</insert>
   
   <!-- 좋아요 감소 -->
   <delete id="reviewLikeDown">
-     DELETE FROM REVIEW_LIKE 
-     WHERE BOARD_NO= #{reviewNo}
-     AND MEMBER_NO= #{memberNo}
+  	DELETE FROM REVIEW_LIKE 
+  	WHERE BOARD_NO= #{reviewNo}
+  	AND MEMBER_NO= #{memberNo}
   </delete>
 	
 	
