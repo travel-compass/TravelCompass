@@ -85,7 +85,7 @@ public class ReviewServiceImpl implements ReviewService {
 	
 	// 리뷰 연결
 	@Override
-	public List<Place> connectReview(List<Place> placeList) {
+	public void connectReview(List<Place> placeList) {
 		if(placeList == null || placeList.isEmpty()) {
 			System.out.println("장소리스트가 비어있습니다.");
 			return placeList;
