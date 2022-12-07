@@ -177,13 +177,30 @@ function selectReviewList(e) {
 
         const reviewTextSaveButton = document.createElement("div");
         reviewTextSaveButton.classList.add("save-button");
-        reviewTextSaveButton.innerHTML =
-          "<i class='fa-solid fa-heart'></i>좋아요";
+        if (review.likeCheck == 0) {
+          reviewTextSaveButton.innerHTML =
+            "<i class='fa-regular fa-heart'></i>좋아요";
+        } else {
+          reviewTextSaveButton.innerHTML =
+            "<i class='fa-solid fa-heart'></i>좋아요";
+        }
+        reviewTextSaveButton.setAttribute(
+          "onclick",
+          `reviewLike(${review.reviewNo},${review.memberNo},${loginMemberNo})`
+        );
+
+        const likeCount = document.createElement("span");
+        likeCount.classList.add("likeCount");
+        likeCount.innerText = review.reviewLike;
 
         const reviewTextShareButton = document.createElement("div");
         reviewTextShareButton.classList.add("share-button");
         reviewTextShareButton.innerHTML =
           "<i class='fa-solid fa-arrow-up-from-bracket'></i>신고";
+        reviewTextShareButton.setAttribute(
+          "onclick",
+          `reviewLike(${review.reviewNo},${review.memberNo},${loginMemberNo})`
+        );
 
         ulreviewList.append(reviewTextColum);
 
@@ -207,7 +224,7 @@ function selectReviewList(e) {
 
         rating.append(empty, fill);
 
-        if (memberNo == review.memberNo) {
+        if (loginMemberNo == review.memberNo) {
           reviewTextHeaderStyle.append(
             reviewTextHeaderLayout,
             reviewTextDotStyle,
@@ -216,6 +233,8 @@ function selectReviewList(e) {
         } else {
           reviewTextHeaderStyle.append(reviewTextHeaderLayout);
         }
+
+        reviewTextSaveButton.append(likeCount);
 
         reviewTextBottomMenu.append(
           reviewTextSaveButton,
@@ -513,13 +532,30 @@ moreBtn.addEventListener("click", () => {
 
         const reviewTextSaveButton = document.createElement("div");
         reviewTextSaveButton.classList.add("save-button");
-        reviewTextSaveButton.innerHTML =
-          "<i class='fa-solid fa-heart'></i>좋아요";
+        if (review.likeCheck == 0) {
+          reviewTextSaveButton.innerHTML =
+            "<i class='fa-regular fa-heart'></i>좋아요";
+        } else {
+          reviewTextSaveButton.innerHTML =
+            "<i class='fa-solid fa-heart'></i>좋아요";
+        }
+        reviewTextSaveButton.setAttribute(
+          "onclick",
+          `reviewLike(${review.reviewNo},${review.memberNo},${loginMemberNo})`
+        );
+
+        const likeCount = document.createElement("span");
+        likeCount.classList.add("likeCount");
+        likeCount.innerText = review.reviewLike;
 
         const reviewTextShareButton = document.createElement("div");
         reviewTextShareButton.classList.add("share-button");
         reviewTextShareButton.innerHTML =
           "<i class='fa-solid fa-arrow-up-from-bracket'></i>신고";
+        reviewTextShareButton.setAttribute(
+          "onclick",
+          `reviewLike(${review.reviewNo},${review.memberNo},${loginMemberNo})`
+        );
 
         ulreviewList.append(reviewTextColum);
 
@@ -536,6 +572,8 @@ moreBtn.addEventListener("click", () => {
           reviewTextDownMenu_li1,
           reviewTextDownMenu_li2
         );
+
+        reviewTextSaveButton.append(likeCount);
 
         reviewArea.append(reviewContainer);
 
@@ -710,13 +748,32 @@ const createReviewList = function () {
 
         const reviewTextSaveButton = document.createElement("div");
         reviewTextSaveButton.classList.add("save-button");
-        reviewTextSaveButton.innerHTML =
-          "<i class='fa-solid fa-heart'></i>좋아요";
+
+        if (review.likeCheck == 0) {
+          reviewTextSaveButton.innerHTML =
+            "<i class='fa-regular fa-heart'></i>좋아요";
+        } else {
+          reviewTextSaveButton.innerHTML =
+            "<i class='fa-solid fa-heart'></i>좋아요";
+        }
+
+        reviewTextSaveButton.setAttribute(
+          "onclick",
+          `reviewLike(${review.reviewNo},${review.memberNo},${loginMemberNo})`
+        );
+
+        const likeCount = document.createElement("span");
+        likeCount.classList.add("likeCount");
+        likeCount.innerText = review.reviewLike;
 
         const reviewTextShareButton = document.createElement("div");
         reviewTextShareButton.classList.add("share-button");
         reviewTextShareButton.innerHTML =
           "<i class='fa-solid fa-arrow-up-from-bracket'></i>신고";
+        reviewTextShareButton.setAttribute(
+          "onclick",
+          `reviewLike(${review.reviewNo},${review.memberNo},${loginMemberNo})`
+        );
 
         ulreviewList.append(reviewTextColum);
 
@@ -733,6 +790,8 @@ const createReviewList = function () {
           reviewTextDownMenu_li1,
           reviewTextDownMenu_li2
         );
+
+        reviewTextSaveButton.append(likeCount);
 
         reviewArea.append(reviewContainer);
 
@@ -792,59 +851,105 @@ const createReviewList = function () {
   });
 };
 
-
-
 //신고하기
 function insertReport(reviewNo, memberNo, loginMemberNo) {
   console.log(reviewNo, memberNo, loginMemberNo);
-  if(loginMemberNo == '') {
+  if (loginMemberNo == "") {
     alert("로그인 후 이용해주세요.");
     return;
   }
 
   if (memberNo != loginMemberNo) {
-    $.ajax ({
+    $.ajax({
       url: "/management/insertReport",
       type: "get",
       data: {
         reviewNo: reviewNo,
         memberNo: memberNo,
-        reporter: loginMemberNo},
-      success : result => {
-          console.log(result);
-          alert("리뷰를 신고 했습니다.");
-          location.reload();
+        reporter: loginMemberNo,
       },
-      error : error => {
+      success: (result) => {
+        console.log(result);
+        alert("리뷰를 신고 했습니다.");
+        location.reload();
+      },
+      error: (error) => {
         console.log(error);
-      }
+      },
     });
+  }
 }
-}
 
+//좋아요 버튼
+//전역 변수 loginMemberNo사용
 
+const likebtn = document.getElementsByClassName("save-button");
+const likeCount = document.getElementsByClassName("likeCount");
 
-function reviewLike(reviewNo, memberNo, loginMemberNo){
-  console.log(reviewNo, memberNo, loginMemberNo);
-  
-  if(loginMemberNo == '') {
+function reviewLike(reviewNo, memberNo, loginMemberNo, el) {
+  // 로그인 상태가 아닌 경우
+  if (loginMemberNo == "") {
     alert("로그인 후 이용해주세요.");
     return;
   }
 
-  if (memberNo != loginMemberNo) {
-    $.ajax ({
+  if (loginMemberNo == memberNo) {
+    alert("본인의 리뷰는 좋아요를 누를 수 없습니다.");
+    return;
+  }
+
+  // 로그인 상태 + 좋아요 상태가 아닌 경우
+
+  console.log(el);
+  console.log(el.firstElementChild);
+  console.log(el.firstElementChild.classList.contains("fa-regular"));
+
+  if (el.firstElementChild.classList.contains("fa-regular")) {
+    //빈하트인 경우
+
+    $.ajax({
       url: "/review/likeUp",
+      data: { reviewNo: reviewNo, memberNo: loginMemberNo },
       type: "get",
-      data: {
-        reviewNo: reviewNo,
-        memberNo: memberNo,
-      success : result => {
-          console.log(result);
+      success: (result) => {
+        if (result > 0) {
+          el.firstElementChild.classList.remove("fa-regular"); //빈하트 클래스 제거
+          el.firstElementChild.classList.add("fa-solid"); //채워진 하트 클래스 추가
+          console.log(el.lastElementChild);
+
+          el.lastElementChild.innerText =
+            Number(el.lastElementChild.innerText) + 1;
+        } else {
+          console.log("증가 실패");
+        }
       },
-      error : error => {
-        console.log(error);
-      }
-    },
-}
+      error: () => {
+        console.log("증가 에러");
+      },
+    });
+  }
+  // 로그인 상태 + 좋아요 상태인 경우
+  else {
+    //채워진 하트인 경우
+    $.ajax({
+      url: "/review/likeDown",
+      data: { reviewNo: reviewNo, memberNo: loginMemberNo },
+      type: "get",
+      success: (result) => {
+        if (result > 0) {
+          el.firstElementChild.classList.remove("fa-solid"); //빈하트 클래스 제거
+          el.firstElementChild.classList.add("fa-regular"); //채워진 하트 클래스 추가
+          if (el.lastElementChild.innerText > 0) {
+            el.lastElementChild.innerText =
+              Number(el.lastElementChild.innerText) - 1;
+          }
+        } else {
+          console.log("감소 실패");
+        }
+      },
+      error: () => {
+        console.log("감소 에러");
+      },
+    });
+  }
 }
