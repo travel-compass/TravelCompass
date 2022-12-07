@@ -64,4 +64,13 @@ public interface ReviewService {
 	 * 
 	 */
 	public List<Place> connectReview(List<Place> placeList);
+
+	/** 더보기 조회
+	 * @param contentid
+	 * @param rowBoundCount
+	 * @return
+	 */
+	List<Review> moreReviewList(String contentid, int rowBoundCount);
+
+	
 }

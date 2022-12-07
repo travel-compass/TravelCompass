@@ -136,4 +136,12 @@ public class ReviewDAO {
 		return sqlSession.selectList("reviewMapper.selectConnectReview", contentidList);
 	}
 
+	public List<Review> moreReviewList(String contentid, int rowBoundCount) {
+		
+		RowBounds rowBounds = new RowBounds(rowBoundCount, 10);
+		
+		return sqlSession.selectList("reviewMapper.selectReviewList", contentid, rowBounds);
+	}
+
+
 }

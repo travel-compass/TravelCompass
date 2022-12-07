@@ -360,7 +360,7 @@
 
     <jsp:include page="/WEB-INF/views/place/review.jsp"></jsp:include>
 
-    <jsp:include page="/WEB-INF/views/place/QnA.jsp"></jsp:include>
+    <%-- <jsp:include page="/WEB-INF/views/place/QnA.jsp"></jsp:include> --%>
   
 
   </main>

@@ -50,7 +50,7 @@
   </div>
   <div class="review-right" id="review-right">
 
-    <div>
+    <div id=wrapContainer>
       <div class="wrap">
         <h4>별점과 리뷰를 남겨주세요</h4>
         <form name="reviewform" class="reviewform" id="reviewform">
@@ -75,14 +75,12 @@
             <textarea name="reviewContent" rows="10" class="review_textarea" id="reviewContent"></textarea>
           </div>
             
-            <form method="POST" enctype="multipart/form-data" id="form">
-              <input type="file" name="profile"/>
-              <button type="button" onclick="uploadFunction();"class="form-control btn btn-primary">파일업로드</button>
+            
               
               <div class="cmd" id="addReview">
                 <button type="button">등록</button>
               </div>
-            </form>
+            
           
           
         </form>
@@ -146,7 +144,7 @@
         </ul>
 
 
-            <div class="page-select">
+            <%-- <div class="page-select">
               <button class="page-select-before">이전</button>
               <div class="pageNumber">
                 <a href="#" class="page-select-btn">1</a>
@@ -158,9 +156,12 @@
                 <a href="#" class="page-select-btn">6</a>
               </div>
               <button class="page-select-next">다음</button>
-            </div>
+            </div> --%>
+      <div class=moreButton>
+        <button type="button" class="moreBtn" id="moreBtn">더 보기</button>    
+      </div>
     </div>
-    </ul>
+   
   </div>
 
 </div>

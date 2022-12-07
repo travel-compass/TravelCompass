@@ -484,6 +484,31 @@
     color: #34E0A1;
 }
 
+.moreButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.moreBtn {
+    background-color: rgb(60, 60, 60);
+    font-size: 14px;
+    color: white;
+    width: 80px;
+    height: 40px;
+    border: none;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.moreBtn:hover {
+    background-color: black;
+    cursor: pointer;
+}
+
+
+
+
 /*  */
 .rating {
     position: relative;

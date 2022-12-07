@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
 import kh.team.travelcompass.member.model.vo.Member;
+import kh.team.travelcompass.profile.model.service.ProfileService;
 import kh.team.travelcompass.review.model.service.ReviewService;
 import kh.team.travelcompass.review.model.vo.Review;
 
@@ -35,6 +37,8 @@ public class ReviewController {
 	@Autowired
 	private ReviewService service;
 
+	@Autowired
+	private ProfileService pservice;
 	// 리뷰 목록 정렬 리스트(추천,최신,평점 순 조회)
 //	@GetMapping("/reviewList")
 //	public Map<String, Object> orderReviewList(String contentid, @RequestParam Map<String, Object> paramMap,
@@ -49,22 +53,21 @@ public class ReviewController {
 //
 //		return reviewMap;
 //	}
-	
+
 	@GetMapping("/list")
-	public Map<String, Object> selectReviewList(String contentid,
-			Map<String, Object> paramMap,
-			@RequestParam(value="cp",required=false, defaultValue="1") int cp) {
-		
+	public Map<String, Object> selectReviewList(String contentid, Map<String, Object> paramMap,
+			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp) {
+
 		paramMap.put("contentid", contentid);
-		
-		Map<String, Object> reviewMap=service.selectReviewList(contentid,paramMap, cp);
-		
+
+		Map<String, Object> reviewMap = service.selectReviewList(contentid, paramMap, cp);
+
 		return reviewMap;
 	}
-	
+
 	@PostMapping("/insert")
 	public int insertReview(Review review) {
-		
+
 //		String contentid=req.getParameter("contentid");
 //		
 //		Cookie[] cookies=req.getCookies();
@@ -105,22 +108,16 @@ public class ReviewController {
 //		cookie.setMaxAge((int)diff/1000);
 //		
 //		resp.addCookie(cookie);
-		
+
 		return service.insertReview(review);
 	}
-
-
 
 	// 리뷰 삭제
 	@GetMapping("/delete")
 	public int deleteReview(int reviewNo) {
-		
-		
-		
-		
+
 		System.out.println();
-		
-		
+
 		return service.deleteReview(reviewNo);
 	}
 
@@ -129,11 +126,20 @@ public class ReviewController {
 	public int updateReview(Review review) {
 		return service.updateReview(review);
 	}
-	
+
 	// 평점별 개수 조회
 	@GetMapping("/countRating")
-	public List<String> countRating(String contentid){
+	public List<String> countRating(String contentid) {
 		return service.countRating(contentid);
+	}
+
+	// 리뷰 무한스크롤 더보기 조회
+	@GetMapping("/moreReview")
+	public List<Review> reviewMoreReviewList(String contentid, @RequestParam int rowBoundCount) {
+
+		List<Review> reviewMoreList = service.moreReviewList(contentid, rowBoundCount);
+
+		return reviewMoreList;
 	}
 	
 

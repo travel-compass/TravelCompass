@@ -369,3 +369,392 @@ for (let item of suportButton) {
     }
   });
 }
+
+/* ------------------------- 무한 스크롤 ------------------------------ */
+const moreBtn = document.getElementById("moreBtn");
+const wrapContainer = document.getElementById("wrapContainer");
+
+let rowBoundCount = 10;
+
+moreBtn.addEventListener("click", () => {
+  $.ajax({
+    url: "/review/moreReview",
+    data: {
+      contentid: contentid,
+      rowBoundCount: rowBoundCount,
+    },
+    type: "GET",
+    dataType: "JSON",
+    success: (reviewMoreList) => {
+      moreBtn.remove();
+      const ulreviewList = document.getElementById("review-list");
+
+      for (let review of reviewMoreList) {
+        const reviewTextColum = document.createElement("li");
+        reviewTextColum.classList.add("user-page-review-colums2");
+
+        const reviewTextHeaderStyle = document.createElement("div");
+        reviewTextHeaderStyle.classList.add("user-page-review-header-style");
+
+        const reviewTextHeaderLayout = document.createElement("div");
+        reviewTextHeaderLayout.classList.add("user-page-review-header-layout");
+
+        reviewTextHeaderStyle.append(reviewTextHeaderLayout);
+
+        const reviewTextUserImage = document.createElement("a");
+        reviewTextUserImage.classList.add("review-user-image");
+
+        reviewTextUserImage.innerHTML =
+          '<img src="' + review.profileImage + '">';
+
+        const reviewTextInfoLayout = document.createElement("div");
+        reviewTextInfoLayout.classList.add("review-user-info-layout");
+
+        const reviewInfoNickname = document.createElement("span");
+        reviewInfoNickname.classList.add("review-user-nickname");
+
+        reviewInfoNickname.innerHTML =
+          "<a href='#'>" + review.memberNickname + "</a>";
+
+        const reviewInfoDateLink = document.createElement("a");
+        reviewInfoDateLink.classList.add("review-user-dday");
+
+        reviewInfoDateLink.innerText = review.reviewDate;
+        //
+        const reviewTextDotStyle = document.createElement("button");
+        reviewTextDotStyle.classList.add("user-page-review-dot-style");
+        reviewTextDotStyle.innerHTML = "<i class='fa-solid fa-ellipsis' ></i>";
+
+        const reviewTextDotDownMenu = document.createElement("div");
+        reviewTextDotDownMenu.classList.add("user-page-review-dot-down-menu");
+
+        const reviewTextDownMenu = document.createElement("ul");
+        reviewTextDownMenu.classList.add("down-menu");
+
+        const reviewTextDownMenu_li1 = document.createElement("li");
+        reviewTextDownMenu_li1.innerText = "수정";
+
+        const reviewTextDownMenu_li2 = document.createElement("li");
+        reviewTextDownMenu_li2.innerText = "삭제";
+        reviewTextDownMenu_li2.setAttribute(
+          "onclick",
+          `deleteReview(${review.reviewNo})`
+        );
+        //
+        // 드랍 다운 메뉴 이벤트 삽입
+        reviewTextDotStyle.addEventListener("click", () => {
+          reviewTextDotStyle.nextElementSibling.style.display = "block";
+        });
+        reviewTextDotStyle.addEventListener("blur", () => {
+          reviewTextDotStyle.nextElementSibling.style.display = "none";
+        });
+
+        const reviewArea = document.createElement("div");
+        reviewArea.classList.add("review-container");
+
+        const reviewContainer = document.createElement("div");
+        reviewContainer.classList.add("review-container");
+
+        const rating = document.createElement("div");
+        rating.classList.add("rating");
+
+        const empty = document.createElement("span");
+        empty.classList.add("empty");
+        empty.innerHTML = "&#9679;&#9679;&#9679;&#9679;&#9679;";
+
+        const fill = document.createElement("fill");
+        fill.classList.add("fill");
+        fill.style.width = (69 * (review.rating * 20)) / 100 + "px";
+        fill.innerHTML = "&#9679;&#9679;&#9679;&#9679;&#9679;";
+
+        const reviewTextTitle = document.createElement("div");
+        reviewTextTitle.classList.add("review-title");
+
+        reviewTextTitle.innerText = review.reviewTitle;
+
+        const reviewTextContent = document.createElement("div");
+        reviewTextContent.classList.add("review-content");
+
+        reviewTextContent.innerText = '"' + review.reviewContent + '"';
+
+        const reviewTextSupport = document.createElement("div");
+        reviewTextSupport.classList.add("review-support");
+
+        const reviewTextBottomMenu = document.createElement("div");
+        reviewTextBottomMenu.classList.add("review-bottom-menu-style");
+
+        const reviewTextSaveButton = document.createElement("div");
+        reviewTextSaveButton.classList.add("save-button");
+        reviewTextSaveButton.innerHTML =
+          "<i class='fa-solid fa-heart'></i>좋아요";
+
+        const reviewTextShareButton = document.createElement("div");
+        reviewTextShareButton.classList.add("share-button");
+        reviewTextShareButton.innerHTML =
+          "<i class='fa-solid fa-arrow-up-from-bracket'></i>신고";
+
+        ulreviewList.append(reviewTextColum);
+
+        reviewTextInfoLayout.append(reviewInfoNickname, reviewInfoDateLink);
+
+        reviewTextHeaderLayout.append(
+          reviewTextUserImage,
+          reviewTextInfoLayout
+        );
+
+        reviewTextDotDownMenu.append(reviewTextDownMenu);
+
+        reviewTextDownMenu.append(
+          reviewTextDownMenu_li1,
+          reviewTextDownMenu_li2
+        );
+
+        reviewArea.append(reviewContainer);
+
+        reviewContainer.append(rating);
+
+        rating.append(empty, fill);
+
+        if (memberNo == review.memberNo) {
+          reviewTextHeaderStyle.append(
+            reviewTextHeaderLayout,
+            reviewTextDotStyle,
+            reviewTextDotDownMenu
+          );
+        } else {
+          reviewTextHeaderStyle.append(reviewTextHeaderLayout);
+        }
+
+        reviewTextBottomMenu.append(
+          reviewTextSaveButton,
+          reviewTextShareButton
+        );
+
+        reviewTextColum.append(
+          reviewTextHeaderStyle,
+          reviewArea,
+          reviewTextTitle,
+          reviewTextContent,
+          reviewTextSupport,
+          reviewTextBottomMenu
+        );
+      }
+
+      if (reviewMoreList.length == 10) {
+        const createDiv = document.createElement("div");
+        createDiv.classList.add("moreButton");
+
+        const createBtn = document.createElement("button");
+        createBtn.setAttribute("id", "moreBtn");
+        createBtn.setAttribute("type", "button");
+        createBtn.classList.add("moreBtn");
+        createBtn.innerText = "더 보기";
+
+        rowBoundCount += 10;
+
+        createBtn.addEventListener("click", () => {
+          createReviewList();
+        });
+
+        createDiv.append(createBtn);
+
+        wrapContainer.append(createDiv);
+        // reviewRight.append(reviewTextColum);
+      } else {
+        rowBoundCount = 0;
+      }
+    },
+  });
+});
+
+const createReviewList = function () {
+  $.ajax({
+    url: "/review/moreReview",
+    data: {
+      contentid: contentid,
+      rowBoundCount: rowBoundCount,
+    },
+    type: "GET",
+    dataType: "JSON",
+    success: (reviewMoreList) => {
+      const moreBtn = document.getElementById("moreBtn");
+      moreBtn.remove();
+      const ulreviewList = document.getElementById("review-list");
+
+      for (let review of reviewMoreList) {
+        const reviewTextColum = document.createElement("li");
+        reviewTextColum.classList.add("user-page-review-colums2");
+
+        const reviewTextHeaderStyle = document.createElement("div");
+        reviewTextHeaderStyle.classList.add("user-page-review-header-style");
+
+        const reviewTextHeaderLayout = document.createElement("div");
+        reviewTextHeaderLayout.classList.add("user-page-review-header-layout");
+
+        reviewTextHeaderStyle.append(reviewTextHeaderLayout);
+
+        const reviewTextUserImage = document.createElement("a");
+        reviewTextUserImage.classList.add("review-user-image");
+
+        reviewTextUserImage.innerHTML =
+          '<img src="' + review.profileImage + '">';
+
+        const reviewTextInfoLayout = document.createElement("div");
+        reviewTextInfoLayout.classList.add("review-user-info-layout");
+
+        const reviewInfoNickname = document.createElement("span");
+        reviewInfoNickname.classList.add("review-user-nickname");
+
+        reviewInfoNickname.innerHTML =
+          "<a href='#'>" + review.memberNickname + "</a>";
+
+        const reviewInfoDateLink = document.createElement("a");
+        reviewInfoDateLink.classList.add("review-user-dday");
+
+        reviewInfoDateLink.innerText = review.reviewDate;
+        //
+        const reviewTextDotStyle = document.createElement("button");
+        reviewTextDotStyle.classList.add("user-page-review-dot-style");
+        reviewTextDotStyle.innerHTML = "<i class='fa-solid fa-ellipsis' ></i>";
+
+        const reviewTextDotDownMenu = document.createElement("div");
+        reviewTextDotDownMenu.classList.add("user-page-review-dot-down-menu");
+
+        const reviewTextDownMenu = document.createElement("ul");
+        reviewTextDownMenu.classList.add("down-menu");
+
+        const reviewTextDownMenu_li1 = document.createElement("li");
+        reviewTextDownMenu_li1.innerText = "수정";
+
+        const reviewTextDownMenu_li2 = document.createElement("li");
+        reviewTextDownMenu_li2.innerText = "삭제";
+        reviewTextDownMenu_li2.setAttribute(
+          "onclick",
+          `deleteReview(${review.reviewNo})`
+        );
+        //
+        // 드랍 다운 메뉴 이벤트 삽입
+        reviewTextDotStyle.addEventListener("click", () => {
+          reviewTextDotStyle.nextElementSibling.style.display = "block";
+        });
+        reviewTextDotStyle.addEventListener("blur", () => {
+          reviewTextDotStyle.nextElementSibling.style.display = "none";
+        });
+
+        const reviewArea = document.createElement("div");
+        reviewArea.classList.add("review-container");
+
+        const reviewContainer = document.createElement("div");
+        reviewContainer.classList.add("review-container");
+
+        const rating = document.createElement("div");
+        rating.classList.add("rating");
+
+        const empty = document.createElement("span");
+        empty.classList.add("empty");
+        empty.innerHTML = "&#9679;&#9679;&#9679;&#9679;&#9679;";
+
+        const fill = document.createElement("fill");
+        fill.classList.add("fill");
+        fill.style.width = (69 * (review.rating * 20)) / 100 + "px";
+        fill.innerHTML = "&#9679;&#9679;&#9679;&#9679;&#9679;";
+
+        const reviewTextTitle = document.createElement("div");
+        reviewTextTitle.classList.add("review-title");
+
+        reviewTextTitle.innerText = review.reviewTitle;
+
+        const reviewTextContent = document.createElement("div");
+        reviewTextContent.classList.add("review-content");
+
+        reviewTextContent.innerText = '"' + review.reviewContent + '"';
+
+        const reviewTextSupport = document.createElement("div");
+        reviewTextSupport.classList.add("review-support");
+
+        const reviewTextBottomMenu = document.createElement("div");
+        reviewTextBottomMenu.classList.add("review-bottom-menu-style");
+
+        const reviewTextSaveButton = document.createElement("div");
+        reviewTextSaveButton.classList.add("save-button");
+        reviewTextSaveButton.innerHTML =
+          "<i class='fa-solid fa-heart'></i>좋아요";
+
+        const reviewTextShareButton = document.createElement("div");
+        reviewTextShareButton.classList.add("share-button");
+        reviewTextShareButton.innerHTML =
+          "<i class='fa-solid fa-arrow-up-from-bracket'></i>신고";
+
+        ulreviewList.append(reviewTextColum);
+
+        reviewTextInfoLayout.append(reviewInfoNickname, reviewInfoDateLink);
+
+        reviewTextHeaderLayout.append(
+          reviewTextUserImage,
+          reviewTextInfoLayout
+        );
+
+        reviewTextDotDownMenu.append(reviewTextDownMenu);
+
+        reviewTextDownMenu.append(
+          reviewTextDownMenu_li1,
+          reviewTextDownMenu_li2
+        );
+
+        reviewArea.append(reviewContainer);
+
+        reviewContainer.append(rating);
+
+        rating.append(empty, fill);
+
+        if (memberNo == review.memberNo) {
+          reviewTextHeaderStyle.append(
+            reviewTextHeaderLayout,
+            reviewTextDotStyle,
+            reviewTextDotDownMenu
+          );
+        } else {
+          reviewTextHeaderStyle.append(reviewTextHeaderLayout);
+        }
+
+        reviewTextBottomMenu.append(
+          reviewTextSaveButton,
+          reviewTextShareButton
+        );
+
+        reviewTextColum.append(
+          reviewTextHeaderStyle,
+          reviewArea,
+          reviewTextTitle,
+          reviewTextContent,
+          reviewTextSupport,
+          reviewTextBottomMenu
+        );
+      }
+
+      if (reviewMoreList.length == 10) {
+        const createDiv = document.createElement("div");
+        createDiv.classList.add("moreButton");
+
+        const createBtn = document.createElement("button");
+        createBtn.setAttribute("id", "moreBtn");
+        createBtn.setAttribute("type", "button");
+        createBtn.classList.add("moreBtn");
+        createBtn.innerText = "더 보기";
+
+        rowBoundCount += 10;
+
+        createBtn.addEventListener("click", () => {
+          createReviewList();
+        });
+
+        createDiv.append(createBtn);
+
+        wrapContainer.append(createDiv);
+        // reviewRight.append(reviewTextColum);
+      } else {
+        rowBoundCount = 0;
+      }
+    },
+  });
+};

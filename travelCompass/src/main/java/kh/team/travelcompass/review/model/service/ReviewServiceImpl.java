@@ -140,4 +140,14 @@ public class ReviewServiceImpl implements ReviewService {
 	public List<String> countRating(String contentid) {
 		return dao.countRating(contentid);
 	}
+	
+	@Override
+	public List<Review> moreReviewList(String contentid, int rowBoundCount) {
+		
+		List<Review> moreReviewList = dao.moreReviewList(contentid, rowBoundCount);
+		
+		return moreReviewList;
+	}
+	
+	
 }
