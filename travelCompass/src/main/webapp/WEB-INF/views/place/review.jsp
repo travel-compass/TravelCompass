@@ -132,10 +132,10 @@
               
               <div class="review-support"></div>
               <div class="review-bottom-menu-style">
-                <div class="save-button">
+                <div class="save-button" onclick="reviewLike(${review.reviewNo}, ${review.memberNo}, loginMemberNo)">
                   <i class="fa-solid fa-heart"></i>좋아요
                 </div>
-                <div class="share-button">
+                <div class="share-button" onclick="insertReport(${review.reviewNo}, ${review.memberNo}, loginMemberNo )">
                   <i class="fa-solid fa-arrow-up-from-bracket"></i>신고
                 </div>
               </div>

@@ -13,18 +13,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- * Servlet Filter implementation class LoginFilter
- */
-// 로그아웃 상태일 때 요청 시 메인페이지로
-@WebFilter(filterName = "loginFilter",
-			urlPatterns = {"/member/logout", "/member/info", "/member/updateInfo", "/member/secession"})
-public class LoginFilter implements Filter {
 
-    /**
-     * Default constructor. 
-     */
-    public LoginFilter() {
+// 로그인 상태일 때 요청 시 메인페이지로
+@WebFilter(filterName = "logoutFilter",
+			urlPatterns = {"/member/login", "/member/signUp", "/member/findEmail", "/member/findPw"})
+public class LogoutFilter implements Filter {
+
+    public LogoutFilter() {
 
     }
 
@@ -40,7 +35,7 @@ public class LoginFilter implements Filter {
 		// session LoginMember가 있는지 확인
 		HttpSession session = req.getSession();
 		
-		if(session.getAttribute("loginMember") == null) {
+		if(session.getAttribute("loginMember") != null) {
 			resp.sendRedirect("/");
 		} else {
 			chain.doFilter(request, response);	

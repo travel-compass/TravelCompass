@@ -37,6 +37,7 @@
     const title="${place.title}"
     const avgRating="${place.averageRating}"
     
+    const loginMemberNo = "${ loginMember.memberNo }";
   </script>
   <!-- header:include -->
 	<jsp:include page="/WEB-INF/views/inc/header.jsp"></jsp:include>

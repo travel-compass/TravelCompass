@@ -434,7 +434,6 @@ const searchScrapPlaceList = (keyword, sort) =>{
             console.log("스크렙 목록 조회 실패");
         }
     })
-
 }
 
 // 스크랩 삭제
@@ -442,7 +441,7 @@ const deleteScrap = (index) => {
     console.log(scrapList[index]);
 
     // 경고 메세지 출력
-    if(confirm("여행에서도 삭제됩니다.<br>정말 삭제하시겠습니까?")){
+    if(confirm("여행에서도 삭제됩니다.\n정말 삭제하시겠습니까?")){
         // 비동기로 스크랩 장소에서 제거
         $.ajax({
             url:"/travel/deleteScrap",
