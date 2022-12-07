@@ -290,8 +290,8 @@ main {
 }
 
 .search-result-item-title{
-    margin-top: 3px;
-    margin-bottom: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .search-result-item-grade{
@@ -299,7 +299,12 @@ main {
 }
 
 .search-result-item-address{
+    margin-top: 10px;
     margin-bottom: 13px;
+}
+
+.search-result-item-address a {
+    font-size: 18px;
 }
 
 .search-result-item-review{
@@ -310,7 +315,7 @@ main {
 
 .search-result-item-title a {
     font-weight: bolder;
-    font-size: 18px;
+    font-size: 20px;
 
 }
 
@@ -340,17 +345,18 @@ main {
     position: relative;
     height: 15px;
     margin-bottom: 5px;
-    width: 80px;
+    width: 100px;
 }
 .empty, .fill{
     position: absolute;
-    font-size: 15px;
+    font-size: 18px;
 }
 
 .empty{
     z-index: 1;
     color: #ddd;
 }
+
 .fill{
     z-index: 2;
     overflow: hidden;
@@ -361,9 +367,7 @@ main {
 /******************************************************/
 
 
-.search-result-item-address a {
-    font-size: 14px;
-}
+
 
 .search-result-item-review {
     width: 520px;

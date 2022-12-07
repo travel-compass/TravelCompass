@@ -34,5 +34,7 @@ public interface ReviewService {
 	/** 리뷰 연결(평균평점, 리뷰갯수)
 	 * 
 	 */
-	public List<Place> connectReview(List<Place> placeList);
+	public void connectReview(List<Place> placeList);
+
+
 }

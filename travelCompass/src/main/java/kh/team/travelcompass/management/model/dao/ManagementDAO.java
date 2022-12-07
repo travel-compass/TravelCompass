@@ -56,7 +56,11 @@ public class ManagementDAO {
 		return sqlSession.update("reportMapper.memberBanCancel", memberNo);
 	}	
 
-
+	//신고 등록
+	public int insertReport(Map<String, Object> paramMap) {
+		
+		return sqlSession.insert("reportMapper.insertReport", paramMap);
+	}
 	
 	
 }

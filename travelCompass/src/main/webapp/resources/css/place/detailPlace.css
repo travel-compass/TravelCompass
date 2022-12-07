@@ -140,10 +140,6 @@ main {
 
 .around-list>div {
   /* margin: 0px; */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   height: 400px;
   width: 400px;
   padding: 10px;
@@ -157,6 +153,9 @@ main {
 }
 
 .aCategory{
+  display: inline-block;
+  margin-left: 20px;
+  width: 100%;
   background-color: rgb(60, 60, 60);
   color: white;
   border-radius: 20px;
@@ -334,4 +333,28 @@ main {
 .boardNav input:checked+label {
   border-bottom: #34E0A1 solid 4px;
   transition-delay: 50ms;
+}
+
+/*별도 추가 css*/
+
+.around-item a {
+  overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1; 
+    -webkit-box-orient: vertical;
+    word-wrap:break-word; 
+}
+
+.a-rating {
+  width: 80px;
+}
+
+.search-result-item-address{
+  margin-top: 5px;
+}
+
+.search-result-item-title{
+  margin-top: 5px;
+  height: 18px;
 }

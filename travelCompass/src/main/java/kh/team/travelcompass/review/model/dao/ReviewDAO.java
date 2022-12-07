@@ -96,4 +96,6 @@ public class ReviewDAO {
 		return sqlSession.selectList("reviewMapper.selectConnectReview", contentidList);
 	}
 
+
+
 }
