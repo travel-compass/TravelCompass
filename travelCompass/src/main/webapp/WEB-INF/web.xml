@@ -59,4 +59,15 @@
 	  <location>/error/500</location>
 	</error-page>
 	
+	<multipart-config>
+     <location>C:\\upload</location>
+     <!-- 업로드 되는 파일 저장 공간 -->
+     <max-file-size>20971520</max-file-size>
+     <!-- 업로드 되는 파일의 최대 크기 -->
+     <max-request-size>41943040</max-request-size>
+    <!--  한번에 올릴 수 있는 최대 크기 -->
+     <file-size-threshold>20971520</file-size-threshold>
+     <!-- 특정 사이즈의 메모리 사용 -->
+     </multipart-config>
+	
 </web-app>

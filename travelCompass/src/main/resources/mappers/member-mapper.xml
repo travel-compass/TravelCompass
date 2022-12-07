@@ -98,6 +98,7 @@
 	WHERE MEMBER_NO = #{memberNo}
 	</select>
 	
+	<!-- 특정 맴버의 정보 리스트로 조회 -->
 	<select id="totalSelectMember" resultMap="member_rm">
 		SELECT MEMBER_NO, MEMBER_EMAIL, MEMBER_NICKNAME, MEMBER_NAME, PROFILE_IMAGE, 
 		SUBSTR(MEMBER_ADDRESS, 8, 6) MEMBER_ADDRESS, TO_CHAR(ENROLL_DATE, 'YYYY"년" MM"월"') ENROLL_DATE, 
@@ -125,6 +126,7 @@
 		WHERE MEMBER_NO = #{memberNo}
 	</select>
 	
+	<!-- 팔로우한 인원 리스트 조회 -->
 	<select id="selectFollowMemberList" resultMap="member_rm">
 		SELECT M.MEMBER_NO, MEMBER_EMAIL, MEMBER_NICKNAME, MEMBER_NAME, PROFILE_IMAGE, 
 		SUBSTR(MEMBER_ADDRESS, 8, 6) MEMBER_ADDRESS, TO_CHAR(ENROLL_DATE, 'YYYY"년" MM"월"') REVIEW_DATE, 
@@ -152,6 +154,41 @@
 		JOIN "MEMBER" M ON (F.FOLLOW_MEMBER_NO = M.MEMBER_NO)
 		WHERE F.MEMBER_NO = #{memberNo}
 	</select>
+	
+	<!-- 팔로잉 한 인원 리스트 조회하기 -->
+	<select id="selectFollowingMemberList" resultMap="member_rm">
+		SELECT M.MEMBER_NO, MEMBER_EMAIL, MEMBER_NICKNAME, MEMBER_NAME, PROFILE_IMAGE, 
+		SUBSTR(MEMBER_ADDRESS, 8, 6) MEMBER_ADDRESS, TO_CHAR(ENROLL_DATE, 'YYYY"년" MM"월"') REVIEW_DATE, 
+		(SELECT COUNT(*)
+		FROM REVIEW
+		WHERE REVIEW_FL = 'N'
+		AND MEMBER_NO = M.MEMBER_NO)
+		+
+		(SELECT COUNT(*)
+		FROM TRAVEL
+		WHERE PRIVATE_FL = 'N'
+		AND MEMBER_NO = M.MEMBER_NO)
+		+
+		(SELECT COUNT(*)
+		FROM QUESTION
+		WHERE BLIND_FL = 'N'
+		AND MEMBER_NO = M.MEMBER_NO) TOTAL_POSTING,
+		(SELECT COUNT(*)
+		FROM FOLLOW
+		WHERE MEMBER_NO = M.MEMBER_NO) TOTAL_FOLLOWER,
+		(SELECT COUNT(*)
+		FROM FOLLOW
+		WHERE FOLLOW_MEMBER_NO = M.MEMBER_NO) TOTAL_FOLLOWING
+		FROM FOLLOW F
+		JOIN "MEMBER" M ON (F.MEMBER_NO = M.MEMBER_NO)
+		WHERE F.FOLLOW_MEMBER_NO = #{memberNo}
+	</select>
+	
+	<update id="updateProfile">
+		UPDATE "MEMBER" SET
+		PROFILE_IMAGE = #{profileImage}
+		WHERE MEMBER_NO = #{memberNo}
+	</update>
 	
 </mapper>
 

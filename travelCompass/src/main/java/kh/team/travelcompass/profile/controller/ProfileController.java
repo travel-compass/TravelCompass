@@ -5,14 +5,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kh.team.travelcompass.member.model.vo.Member;
 import kh.team.travelcompass.profile.model.service.ProfileService;
@@ -97,8 +103,6 @@ public class ProfileController {
 	@ResponseBody
 	public int follow(@RequestParam Map<String, Integer> paramMap) {
 		
-		System.out.println(paramMap);
-		
 		return service.follow(paramMap);
 	}
 	
@@ -110,6 +114,7 @@ public class ProfileController {
 		return service.unFollow(paramMap);
 	}
 	
+	// 팔로워 리스트 조회하기
 	@GetMapping("/profile/{memberNo}/follow")
 	@ResponseBody
 	public List<Member> selectFollowMemberList(Model model,
@@ -122,4 +127,114 @@ public class ProfileController {
 		return followMemberList;
 	}
 	
+	// 팔로잉 리스트 조회하기
+	@GetMapping("/profile/{memberNo}/following")
+	@ResponseBody
+	public List<Member> selectFollowingMemberList(Model model,
+			@PathVariable("memberNo") int memberNo) {
+		
+		List<Member> followingMemberList = service.selectFollowingMemberList(memberNo);
+		
+		model.addAttribute("followingMemberList", followingMemberList);
+		
+		return followingMemberList;
+	}
+	
+	// 더보기 버튼 눌렀을 때 리뷰 10개씩 보여주기 
+	@GetMapping("/profile/{memberNo}/reviewMoreList")
+	@ResponseBody
+	public List<Review> moreReviewList(
+			@PathVariable("memberNo") int memberNo,
+			@RequestParam int rowBoundCount) {
+		
+		List<Review> moreReviewList = service.moreReviewList(memberNo,rowBoundCount);
+		
+		return moreReviewList;
+		
+	}
+	
+	// ajax 더보기 버튼 눌렀을 때 피드 10개씩 보여주기
+	@GetMapping("/profile/{memberNo}/ajaxfedMoreList")
+	@ResponseBody
+	public List<Review> fedMoreReviewList(
+			@PathVariable("memberNo") int memberNo,
+			@RequestParam int rowBoundCount) {
+		
+		List<Review> ajaxFedMoreList = service.moreReviewList(memberNo,rowBoundCount);
+		
+		return ajaxFedMoreList;
+		
+	}
+	
+	// ajax 더보기 버튼 눌렀을 때 피드 10개씩 보여주기
+	@GetMapping("/profile/{memberNo}/ajaxReviewMoreList")
+	@ResponseBody
+	public List<Review> reviewMoreReviewList(
+			@PathVariable("memberNo") int memberNo,
+			@RequestParam int rowBoundCount) {
+		
+		List<Review> ajaxReviewMoreList = service.moreReviewList(memberNo,rowBoundCount);
+		
+		return ajaxReviewMoreList;
+		
+	}
+	
+	// ajax 더보기 버튼 눌렀을 때 사진리뷰 10개씩 보여주기
+	@GetMapping("/profile/{memberNo}/ajaxImageMoreList")
+	@ResponseBody
+	public List<Review> imageMoreReviewList(
+			@PathVariable("memberNo") int memberNo,
+			@RequestParam int rowBoundCount) {
+		
+		List<Review> ajaxImageMoreList = service.moreReviewList(memberNo,rowBoundCount);
+		
+		return ajaxImageMoreList;
+		
+	}
+	
+	// 프로필 이미지 변경
+	@PostMapping("/profile/{memberNo}")
+	public String updateProfile(
+			@SessionAttribute("loginMember") Member loginMember,
+			@RequestParam(value = "profileImage") MultipartFile profileImage,
+			HttpServletRequest req, RedirectAttributes ra) throws Exception {
+		
+		String wepPath = "/resources/images/common/";
+		
+		String filePath = req.getSession().getServletContext().getRealPath(wepPath);
+
+		int result = service.updateProfile(wepPath, filePath, profileImage, loginMember);
+		
+		String message = null;
+		
+		if (result > 0) message = "프로필 이미지가 변경되었습니다.";
+		else message = "프로필 이미지 변경 실패";
+				
+		ra.addFlashAttribute("message", message);
+		
+		return "redirect:" + loginMember.getMemberNo();
+	}
+	
+	// 리뷰 삭제하기
+	@GetMapping("/profile/{memberNo}/{reviewNo}/delete")
+	public String reviewDelete(
+			@PathVariable("memberNo") int memberNo,
+			@PathVariable("reviewNo") int reviewNo,
+			@RequestHeader("referer") String referer,
+			RedirectAttributes ra) {
+		
+		int result = service.boardDelete(reviewNo);
+		
+		String message = null;
+		
+		if (result > 0) {
+			message = "삭제되었습니다.";
+		} else {
+			message = "게시글 삭제 실패";
+		}
+		
+		ra.addFlashAttribute("message", message);
+		
+		return "redirect:" + referer;
+	}
 }
