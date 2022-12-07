@@ -174,7 +174,7 @@
                                   <span class="empty">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
                                   <span class="fill" style="width:${69*(tourPlace.averageRating*20)/100}px;">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
                               </div>
-                              <span><a href="#<!--상세페이지-리뷰-->">${tourPlace.reviewCount}</a></span>
+                              <span><a href="/place/detail/${tourPlace.contenttypeid}/${tourPlace.contentid}">${tourPlace.reviewCount}</a></span>
                           </div>
                               
                           <div class="search-result-item-address">
@@ -182,7 +182,7 @@
                           </div>
                               
                           <div class="search-result-item-review">
-                              <a href="#<!--상세페이지-리뷰-->">${tourPlace.dist}</a>
+                              ${tourPlace.dist}
                           </div>
                       </div>
                   </div>
@@ -222,7 +222,7 @@
                                   <span class="empty">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
                                   <span class="fill" style="width:${69*(culturePlace.averageRating*20)/100}px;">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
                               </div>
-                              <span><a href="#<!--상세페이지-리뷰-->">${culturePlace.reviewCount}</a></span>
+                              <span>${culturePlace.reviewCount}</span>
                           </div>
                               
                           <div class="search-result-item-address">
@@ -230,7 +230,7 @@
                           </div>
                               
                           <div class="search-result-item-review">
-                              <a href="#<!--상세페이지-리뷰-->">${culturePlace.dist}</a>
+                              ${culturePlace.dist}
                           </div>
                       </div>
                   </div>
@@ -271,7 +271,7 @@
                                   <span class="empty">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
                                   <span class="fill" style="width:${69*(foodPlace.averageRating*20)/100}px;">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
                               </div>
-                              <span><a href="#<!--상세페이지-리뷰-->">${foodPlace.reviewCount}</a></span>
+                              <span><a href="/place/detail/${foodPlace.contenttypeid}/${foodPlace.contentid}">${foodPlace.reviewCount}</a></span>
                           </div>
                               
                           <div class="search-result-item-address">
@@ -279,7 +279,7 @@
                           </div>
                               
                           <div class="search-result-item-review">
-                              <a href="#<!--상세페이지-리뷰-->">${foodPlace.dist}</a>
+                              ${foodPlace.dist}
                           </div>
                       </div>
                   </div>
@@ -316,7 +316,7 @@
                                   <span class="empty">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
                                   <span class="fill" style="width:${69*(leisurePlace.averageRating*20)/100}px;">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
                               </div>
-                              <span><a href="#<!--상세페이지-리뷰-->">${leisurePlace.reviewCount}</a></span>
+                              <span><a href="/place/detail/${leisurePlace.contenttypeid}/${leisurePlace.contentid}">${leisurePlace.reviewCount}</a></span>
                           </div>
                               
                           <div class="search-result-item-address">
@@ -324,7 +324,7 @@
                           </div>
                               
                           <div class="search-result-item-review">
-                              <a href="#<!--상세페이지-리뷰-->">${leisurePlace.dist}</a>
+                              ${leisurePlace.dist}
                           </div>
                       </div>
                   </div>
@@ -364,7 +364,11 @@
   
 
   </main>
-
+  <div id="roadViewModal">
+    <div id="roadView">
+        
+    </div>
+  </div>
   <!-- footer:include -->
   <jsp:include page="/WEB-INF/views/inc/footer.jsp"></jsp:include>
 
@@ -373,7 +377,7 @@
   <script src="/resources/js/common/jQuery-core.js"></script>
   <script src="/resources/js/place/detailPlace.js"></script>
   <script src="/resources/js/place/review.js"></script>
-  <script src="/resources/js/place/QnA.js"></script>
+  <%-- <script src="/resources/js/place/QnA.js"></script> --%>
 	<script src="/resources/js/place/swiper.js"></script>
 </body>
 

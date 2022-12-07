@@ -7,44 +7,44 @@
 <div class="review-container">
   <div class="review-left">
     <ul>
-      <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
-      <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
-      <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
-      <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
-      <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
-      <span>훌륭함 / ${place.countRating[4]}</span>
+      <i class="fa-solid fa-circle" style="color: #34E0A1"></i>
+      <i class="fa-solid fa-circle" style="color: #34E0A1"></i>
+      <i class="fa-solid fa-circle" style="color: #34E0A1"></i>
+      <i class="fa-solid fa-circle" style="color: #34E0A1"></i>
+      <i class="fa-solid fa-circle" style="color: #34E0A1"></i>
+      <span>${place.countRating[4]} 건</span>
     </ul>
     <ul>
-      <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
-      <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
-      <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
-      <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
-      <i class="fa-regular fa-circle" style="color: #00AA6C"></i>
-      <span>매우좋음 / ${place.countRating[3]}</span>
+      <i class="fa-solid fa-circle" style="color: #34E0A1"></i>
+      <i class="fa-solid fa-circle" style="color: #34E0A1"></i>
+      <i class="fa-solid fa-circle" style="color: #34E0A1"></i>
+      <i class="fa-solid fa-circle" style="color: #34E0A1"></i>
+      <i class="fa-regular fa-circle" style="color: #34E0A1"></i>
+      <span>${place.countRating[3]} 건</span>
     </ul>
     <ul>
-      <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
-      <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
-      <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
-      <i class="fa-regular fa-circle" style="color: #00AA6C"></i>
-      <i class="fa-regular fa-circle" style="color: #00AA6C"></i>
-      <span>보통 / ${place.countRating[2]}</span>
+      <i class="fa-solid fa-circle" style="color: #34E0A1"></i>
+      <i class="fa-solid fa-circle" style="color: #34E0A1"></i>
+      <i class="fa-solid fa-circle" style="color: #34E0A1"></i>
+      <i class="fa-regular fa-circle" style="color: #34E0A1"></i>
+      <i class="fa-regular fa-circle" style="color: #34E0A1"></i>
+      <span>${place.countRating[2]} 건</span>
     </ul>
     <ul>
-      <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
-      <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
-      <i class="fa-regular fa-circle" style="color: #00AA6C"></i>
-      <i class="fa-regular fa-circle" style="color: #00AA6C"></i>
-      <i class="fa-regular fa-circle" style="color: #00AA6C"></i>
-      <span>형편없음 / ${place.countRating[1]}</span>
+      <i class="fa-solid fa-circle" style="color: #34E0A1"></i>
+      <i class="fa-solid fa-circle" style="color: #34E0A1"></i>
+      <i class="fa-regular fa-circle" style="color: #34E0A1"></i>
+      <i class="fa-regular fa-circle" style="color: #34E0A1"></i>
+      <i class="fa-regular fa-circle" style="color: #34E0A1"></i>
+      <span>${place.countRating[1]} 건</span>
     </ul>
     <ul>
-      <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
-      <i class="fa-regular fa-circle" style="color: #00AA6C"></i>
-      <i class="fa-regular fa-circle" style="color: #00AA6C"></i>
-      <i class="fa-regular fa-circle" style="color: #00AA6C"></i>
-      <i class="fa-regular fa-circle" style="color: #00AA6C"></i>
-      <span>최악 / ${place.countRating[0]} </span>
+      <i class="fa-solid fa-circle" style="color: #34E0A1"></i>
+      <i class="fa-regular fa-circle" style="color: #34E0A1"></i>
+      <i class="fa-regular fa-circle" style="color: #34E0A1"></i>
+      <i class="fa-regular fa-circle" style="color: #34E0A1"></i>
+      <i class="fa-regular fa-circle" style="color: #34E0A1"></i>
+      <span>${place.countRating[0]} 건</span>
     </ul>
 
   </div>

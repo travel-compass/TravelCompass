@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kh.team.travelcompass.common.Util;
+import kh.team.travelcompass.member.model.vo.Member;
 import kh.team.travelcompass.place.model.vo.Pagination;
 import kh.team.travelcompass.place.model.vo.Place;
 import kh.team.travelcompass.review.model.dao.ReviewDAO;
@@ -34,7 +35,7 @@ public class ReviewServiceImpl implements ReviewService {
 
 		// 3. 페이징 처리객체를 이용해서 게시글 목록 조회
 		List<Review> reviewList = dao.selectReviewList(pagination, paramMap);
-
+		
 		Map<String, Object> reviewMap = new HashMap<String, Object>();
 		reviewMap.put("pagination", pagination);
 		reviewMap.put("reviewList", reviewList);

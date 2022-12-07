@@ -137,12 +137,12 @@ function selectReviewList(e) {
         reviewTextDotStyle.addEventListener("click", () => {
           reviewTextDotStyle.nextElementSibling.style.display = "block";
         });
-        reviewTextDotStyle.addEventListener("blur", () => {
-          reviewTextDotStyle.nextElementSibling.style.display = "none";
-        });
+        // reviewTextDotStyle.addEventListener("blur", () => {
+        //   reviewTextDotStyle.nextElementSibling.style.display = "none";
+        // });
 
         const reviewArea = document.createElement("div");
-        reviewArea.classList.add("review-container");
+        reviewArea.classList.add("review-area");
 
         const reviewContainer = document.createElement("div");
         reviewContainer.classList.add("review-container");
@@ -154,7 +154,7 @@ function selectReviewList(e) {
         empty.classList.add("empty");
         empty.innerHTML = "&#9679;&#9679;&#9679;&#9679;&#9679;";
 
-        const fill = document.createElement("fill");
+        const fill = document.createElement("span");
         fill.classList.add("fill");
         fill.style.width = (69 * (review.rating * 20)) / 100 + "px";
         fill.innerHTML = "&#9679;&#9679;&#9679;&#9679;&#9679;";
@@ -262,13 +262,36 @@ for (let BTNList of dropDownMenu) {
   });
 }
 
-for (let BTNList of dropDownMenu) {
-  BTNList.addEventListener("blur", () => {
-    setTimeout(() => {
-      BTNList.nextElementSibling.style.display = "none";
-    }, 1);
-  });
-}
+// for (let BTNList of dropDownMenu) {
+//   BTNList.nextElementSibling.addEventListener("blur", () => {
+//     setTimeout(() => {
+//       BTNList.nextElementSibling.style.display = "none";
+//     }, 1);
+//   });
+// }
+
+document.addEventListener("click", (e) => {
+  const list = document.querySelectorAll(
+    ".user-page-review-dot-style, .user-page-review-dot-style *, .user-page-review-dot-down-menu, .user-page-review-dot-down-menu *"
+  );
+
+  let flag = true;
+
+  for (let item of list) {
+    if (e.target == item) {
+      flag = false;
+      break;
+    }
+  }
+
+  if (flag) {
+    const temp = document.querySelectorAll(".user-page-review-dot-down-menu");
+
+    for (let item of temp) {
+      item.style.display = "none";
+    }
+  }
+});
 
 /* 리뷰 수정 */
 let beforeTitle;
@@ -315,7 +338,7 @@ function deleteReview(reviewNo) {
   if (confirm("정말 삭제하시겠습니까?")) {
     $.ajax({
       url: "/review/delete",
-      date: {
+      data: {
         reviewNo: reviewNo,
       },
       type: "GET",
@@ -402,6 +425,7 @@ moreBtn.addEventListener("click", () => {
         reviewTextHeaderStyle.append(reviewTextHeaderLayout);
 
         const reviewTextUserImage = document.createElement("a");
+        reviewTextUserImage.href = `/profile/${review.memberNo}`;
         reviewTextUserImage.classList.add("review-user-image");
 
         reviewTextUserImage.innerHTML =
@@ -414,7 +438,11 @@ moreBtn.addEventListener("click", () => {
         reviewInfoNickname.classList.add("review-user-nickname");
 
         reviewInfoNickname.innerHTML =
-          "<a href='#'>" + review.memberNickname + "</a>";
+          "<a href=/profile/" +
+          review.memberNo +
+          ">" +
+          review.memberNickname +
+          "</a>";
 
         const reviewInfoDateLink = document.createElement("a");
         reviewInfoDateLink.classList.add("review-user-dday");
@@ -445,12 +473,12 @@ moreBtn.addEventListener("click", () => {
         reviewTextDotStyle.addEventListener("click", () => {
           reviewTextDotStyle.nextElementSibling.style.display = "block";
         });
-        reviewTextDotStyle.addEventListener("blur", () => {
-          reviewTextDotStyle.nextElementSibling.style.display = "none";
-        });
+        // reviewTextDotStyle.addEventListener("blur", () => {
+        //   reviewTextDotStyle.nextElementSibling.style.display = "none";
+        // });
 
         const reviewArea = document.createElement("div");
-        reviewArea.classList.add("review-container");
+        reviewArea.classList.add("review-area");
 
         const reviewContainer = document.createElement("div");
         reviewContainer.classList.add("review-container");
@@ -462,7 +490,7 @@ moreBtn.addEventListener("click", () => {
         empty.classList.add("empty");
         empty.innerHTML = "&#9679;&#9679;&#9679;&#9679;&#9679;";
 
-        const fill = document.createElement("fill");
+        const fill = document.createElement("span");
         fill.classList.add("fill");
         fill.style.width = (69 * (review.rating * 20)) / 100 + "px";
         fill.innerHTML = "&#9679;&#9679;&#9679;&#9679;&#9679;";
@@ -594,6 +622,7 @@ const createReviewList = function () {
         reviewTextHeaderStyle.append(reviewTextHeaderLayout);
 
         const reviewTextUserImage = document.createElement("a");
+        reviewTextUserImage.href = `/profile/${review.memberNo}`;
         reviewTextUserImage.classList.add("review-user-image");
 
         reviewTextUserImage.innerHTML =
@@ -606,7 +635,7 @@ const createReviewList = function () {
         reviewInfoNickname.classList.add("review-user-nickname");
 
         reviewInfoNickname.innerHTML =
-          "<a href='/profile/" +
+          "<a href=/profile/" +
           review.memberNo +
           ">" +
           review.memberNickname +
@@ -658,7 +687,7 @@ const createReviewList = function () {
         empty.classList.add("empty");
         empty.innerHTML = "&#9679;&#9679;&#9679;&#9679;&#9679;";
 
-        const fill = document.createElement("fill");
+        const fill = document.createElement("span");
         fill.classList.add("fill");
         fill.style.width = (69 * (review.rating * 20)) / 100 + "px";
         fill.innerHTML = "&#9679;&#9679;&#9679;&#9679;&#9679;";
