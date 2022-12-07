@@ -1,26 +1,74 @@
-// 댓글 목록 조회(AJAX)
+/* ----------------------------------------------------------------- */
+const qnaBoard = document.querySelector('label[for="qnaBoard"]');
+const reviewBoard = document.getElementById("reviewBoard");
+
+const reviewRight = document.getElementById("review-right");
+/*  */
+
+// function createQnABoard() {
+//   const commentwritearea = document.createElement("div");
+//   commentwritearea.classList.add("comment-write-area");
+
+//   const commentcontenttextarea = document.createElement("textarea");
+//   commentcontenttextarea.id("commentContent");
+
+//   const addCommentbtn = document.createElement("button");
+//   addCommentbtn.id("addComment");
+//   addCommentbtn.setAttribute("onclick", "addCommentfunction()");
+//   addCommentbtn.setAttribute("type", "button");
+//   addCommentbtn.innerHTML = "댓글<br>등록";
+
+//   commentwritearea.append(commentcontenttextarea, addCommentbtn);
+
+//   reviewRight.append(commentwritearea);
+// }
+
+qnaBoard.addEventListener("click", () => {
+  reviewRight.innerHTML = "";
+
+  const commentwritearea = document.createElement("div");
+  commentwritearea.classList.add("comment-write-area");
+
+  const commentcontenttextarea = document.createElement("textarea");
+  commentcontenttextarea.id("commentContent");
+
+  const addCommentbtn = document.createElement("button");
+  addCommentbtn.id("addComment");
+  addCommentbtn.setAttribute("onclick", "addCommentfunction()");
+  addCommentbtn.setAttribute("type", "button");
+  addCommentbtn.innerHTML = "댓글<br>등록";
+
+  commentwritearea.append(commentcontenttextarea, addCommentbtn);
+
+  reviewRight.append(commentwritearea);
+});
+
+/* --------------------------------------------------------------- */
+
 function selectCommentList() {
   // boardNo, memberNo 전역 변수 사용
   $.ajax({
-    url: "/question/selectQuestionList",
+    url: "/question/list",
     data: { contentid: contentid },
+    dataType: "JSON",
     type: "GET",
+    // dataType: "JSON", // JSON 형태의 문자열 응답 데이터를 JS 객체로 자동 변환
     success: function (questionMap) {
       // rList : 반환 받은 댓글 목록
-      console.log(questionMap);
+      console.log(questionMap.questionList);
 
       // 화면에 출력되어 있는 댓글 목록 삭제
       const commentList = document.getElementById("comment-list"); // ul태그
       commentList.innerHTML = "";
 
       // rList에 저장된 요소를 하나씩 접근
-      for (let comment of rList) {
+      for (let question of questionMap.questionList) {
         // 행
         const commentRow = document.createElement("li");
         commentRow.classList.add("comment-row");
 
         // 답글일 경우 child-comment 클래스 추가
-        if (comment.parentNo != 0) commentRow.classList.add("child-comment");
+        if (question.parentNo != 0) commentRow.classList.add("child-comment");
 
         // 작성자
         const commentWriter = document.createElement("p");
@@ -29,9 +77,9 @@ function selectCommentList() {
         // 프로필 이미지
         const profileImage = document.createElement("img");
 
-        if (comment.profileImage != null) {
+        if (question.profileImage != null) {
           // 프로필 이미지가 있을 경우
-          profileImage.setAttribute("src", comment.profileImage);
+          profileImage.setAttribute("src", question.profileImage);
         } else {
           // 없을 경우 == 기본이미지
           profileImage.setAttribute("src", "/resources/images/user.png");
@@ -39,12 +87,12 @@ function selectCommentList() {
 
         // 작성자 닉네임
         const memberNickname = document.createElement("span");
-        memberNickname.innerText = comment.memberNickname;
+        memberNickname.innerText = question.memberNickname;
 
         // 작성일
         const commentDate = document.createElement("span");
         commentDate.classList.add("comment-date");
-        commentDate.innerText = "(" + comment.commentCreateDate + ")";
+        commentDate.innerText = "(" + question.questionDate + ")";
 
         // 작성자 영역(p)에 프로필,닉네임,작성일 마지막 자식으로(append) 추가
         commentWriter.append(profileImage, memberNickname, commentDate);
@@ -54,7 +102,7 @@ function selectCommentList() {
         commentContent.classList.add("comment-content");
 
         // 왜 innerHTML?  <br> 태그 인식을 위해서
-        commentContent.innerHTML = comment.commentContent;
+        commentContent.innerHTML = question.questionContent;
 
         // 행에 작성자, 내용 추가
         commentRow.append(commentWriter, commentContent);
@@ -69,7 +117,7 @@ function selectCommentList() {
           const childCommentBtn = document.createElement("button");
           childCommentBtn.setAttribute(
             "onclick",
-            "showInsertComment(" + comment.commentNo + ", this)"
+            "showInsertComment(" + question.questionNo + ", this)"
           );
           childCommentBtn.innerText = "답글";
 
@@ -77,7 +125,7 @@ function selectCommentList() {
           commentBtnArea.append(childCommentBtn);
 
           // 로그인한 회원번호와 댓글 작성자의 회원번호가 같을 때만 버튼 추가
-          if (memberNo == comment.memberNo) {
+          if (memberNo == question.memberNo) {
             // 수정 버튼
             const updateBtn = document.createElement("button");
             updateBtn.innerText = "수정";
@@ -85,7 +133,7 @@ function selectCommentList() {
             // 수정 버튼에 onclick 이벤트 속성 추가
             updateBtn.setAttribute(
               "onclick",
-              "showUpdateComment(" + comment.commentNo + ", this)"
+              "showUpdateComment(" + question.questionNo + ", this)"
             );
 
             // 삭제 버튼
@@ -94,7 +142,7 @@ function selectCommentList() {
             // 삭제 버튼에 onclick 이벤트 속성 추가
             deleteBtn.setAttribute(
               "onclick",
-              "deleteComment(" + comment.commentNo + ")"
+              "deleteComment(" + question.questionNo + ")"
             );
 
             // 버튼 영역 마지막 자식으로 수정/삭제 버튼 추가
@@ -119,10 +167,10 @@ function selectCommentList() {
 //-------------------------------------------------------------------------------------------------
 
 // 댓글 등록
-const addComment = document.getElementById("addComment");
+// const addComment = document.getElementById("addComment");
 const commentContent = document.getElementById("commentContent");
 
-addComment.addEventListener("click", function () {
+function addCommentfunction() {
   // 댓글 등록 버튼이 클릭이 되었을 때
 
   // 1) 로그인이 되어있나? -> 전역변수 memberNo 이용
@@ -144,11 +192,11 @@ addComment.addEventListener("click", function () {
 
   // 3) AJAX를 이용해서 댓글 내용 DB에 저장(INSERT)
   $.ajax({
-    url: "/comment/insert",
+    url: "/question/insert",
     data: {
-      commentContent: commentContent.value,
+      questionContent: commentContent.value,
       memberNo: memberNo,
-      boardNo: boardNo,
+      contentid: contentid,
     },
     type: "post",
     success: function (result) {
@@ -171,11 +219,62 @@ addComment.addEventListener("click", function () {
       console.log(req.responseText);
     },
   });
-});
+}
+
+// addComment.addEventListener("click", function () {
+//   // 댓글 등록 버튼이 클릭이 되었을 때
+
+//   // 1) 로그인이 되어있나? -> 전역변수 memberNo 이용
+//   if (memberNo == "") {
+//     // 로그인 X
+//     alert("로그인 후 이용해주세요.");
+//     return;
+//   }
+
+//   // 2) 댓글 내용이 작성되어있나?
+//   if (commentContent.value.trim().length == 0) {
+//     // 미작성인 경우
+//     alert("댓글을 작성한 후 버튼을 클릭해주세요.");
+
+//     commentContent.value = ""; // 띄어쓰기, 개행문자 제거
+//     commentContent.focus();
+//     return;
+//   }
+
+//   // 3) AJAX를 이용해서 댓글 내용 DB에 저장(INSERT)
+//   $.ajax({
+//     url: "/question/insert",
+//     data: {
+//       questionContent: commentContent.value,
+//       memberNo: memberNo,
+//       contentid: contentid,
+//     },
+//     type: "post",
+//     success: function (result) {
+//       if (result > 0) {
+//         // 등록 성공
+//         alert("댓글이 등록되었습니다.");
+
+//         commentContent.value = ""; // 작성했던 댓글 삭제
+
+//         selectCommentList(); // 비동기 댓글 목록 조회 함수 호출
+//         // -> 새로운 댓글이 추가되어짐
+//       } else {
+//         // 실패
+//         alert("댓글 등록에 실패했습니다...");
+//       }
+//     },
+
+//     error: function (req, status, error) {
+//       console.log("댓글 등록 실패");
+//       console.log(req.responseText);
+//     },
+//   });
+// });
 
 // -----------------------------------------------------------------------------------
 // 댓글 삭제
-function deleteComment(commentNo) {
+function deleteComment(questionNo) {
   if (confirm("정말로 삭제 하시겠습니까?")) {
     // 요청주소 : /community/comment/delete
     // 파라미터 : key : "commentNo",  value : 매개변수 commentNo
@@ -190,8 +289,8 @@ function deleteComment(commentNo) {
     // DB에서 댓글 삭제 ==>   REPLY_ST = 'Y' 변경
 
     $.ajax({
-      url: "/comment/delete",
-      data: { commentNo: commentNo },
+      url: "/question/delete",
+      data: { questionNo: questionNo },
       type: "GET",
       success: function (result) {
         if (result > 0) {
@@ -215,7 +314,7 @@ function deleteComment(commentNo) {
 
 let beforeCommentRow; // 수정 전 원래 행의 상태를 저장할 변수
 
-function showUpdateComment(commentNo, btn) {
+function showUpdateComment(questionNo, btn) {
   // 댓글번호, 이벤트발생요소(수정버튼)
 
   // ** 댓글 수정이 한 개만 열릴 수 있도록 만들기 **
@@ -285,7 +384,7 @@ function showUpdateComment(commentNo, btn) {
 
   const updateBtn = document.createElement("button");
   updateBtn.innerText = "수정";
-  updateBtn.setAttribute("onclick", "updateComment(" + commentNo + ", this)");
+  updateBtn.setAttribute("onclick", "updateComment(" + questionNo + ", this)");
 
   const cancelBtn = document.createElement("button");
   cancelBtn.innerText = "취소";
@@ -310,13 +409,13 @@ function updateCancel(btn) {
 
 // -----------------------------------------------------------------------------------
 // 댓글 수정(AJAX)
-function updateComment(commentNo, btn) {
+function updateComment(questionNo, btn) {
   // 새로 작성된 댓글 내용 얻어오기
   const commentContent = btn.parentElement.previousElementSibling.value;
 
   $.ajax({
-    url: "/comment/update",
-    data: { commentNo: commentNo, commentContent: commentContent },
+    url: "/question/update",
+    data: { questionNo: questionNo, questionContent: commentContent },
     type: "POST",
     success: function (result) {
       if (result > 0) {
@@ -420,13 +519,13 @@ function insertChildComment(parentNo, btn) {
   // "{K:V, K:V, K:V}" -> JSON
 
   $.ajax({
-    url: "/comment/insert",
+    url: "/question/insert",
 
     data: {
       memberNo: memberNo,
-      boardNo: boardNo,
+      contentid: contentid,
       parentNo: parentNo,
-      commentContent: commentContent,
+      questionContent: commentContent,
     },
 
     type: "POST",

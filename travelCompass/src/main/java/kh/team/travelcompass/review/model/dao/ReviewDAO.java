@@ -34,8 +34,8 @@ public class ReviewDAO {
 	 * @param paramMap
 	 * @return
 	 */
-	public int getListCount(Map<String, Object> paramMap) {
-		return sqlSession.selectOne("reviewMapper.getListCount_order", paramMap);
+	public int getListCount2(String contentid) {
+		return sqlSession.selectOne("reviewMapper.getListCount_order", contentid);
 	}
 
 	/**
@@ -60,18 +60,20 @@ public class ReviewDAO {
 		return sqlSession.selectList("reviewMapper.selectReviewList", paramMap, rowBounds);
 	}
 
-	/** 특정 contentid 리뷰 조회
+	/**
+	 * 특정 contentid 리뷰 조회
+	 * 
 	 * @param pagination
 	 * @param contentId
 	 * @return reviewList
 	 */
-	public List<Review> selectReviewList(Pagination pagination, String contentId) {
-		
+	public List<Review> selectReviewList(Pagination pagination, Map<String, Object> paramMap) {
+
 		int offset = (pagination.getPageNo() - 1) * pagination.getNumOfRows();
 
 		RowBounds rowBounds = new RowBounds(offset, pagination.getNumOfRows());
 
-		return sqlSession.selectList("reviewMapper.selectReviewList", contentId, rowBounds);
+		return sqlSession.selectList("reviewMapper.selectReviewList", paramMap, rowBounds);
 
 	}
 
@@ -80,22 +82,66 @@ public class ReviewDAO {
 		return sqlSession.insert("reviewMapper.insertReview", review);
 	}
 
-	/** 리뷰 삭제
+	/**
+	 * 리뷰 삭제
+	 * 
 	 * @param contentid
 	 * @return result
 	 */
 	public int deleteReview(int reviewNo) {
-		return sqlSession.delete("reviewMapper.deleteReview", reviewNo);
+		return sqlSession.update("reviewMapper.deleteReview", reviewNo);
 	}
 
-	/** 리뷰 연결
+	/**
+	 * 평균 리뷰 평점 조회
+	 * 
+	 * @param contentId
+	 * @return avgRating
+	 */
+	public double selectAvgRating(String contentId) {
+		return sqlSession.selectOne("reviewMapper.selectAvgRating", contentId);
+	}
+
+	/**
+	 * 작성된 리뷰 개수 조회
+	 * 
+	 * @param contentId
+	 * @return reviewCount
+	 */
+	public int selectReviewCount(String contentId) {
+		return sqlSession.selectOne("reviewMapper.selectReviewCount", contentId);
+	}
+
+	public int updateReview(Review review) {
+		return sqlSession.update("reviewMapper.updateReview", review);
+	}
+
+	/**
+	 * 평점별 개수 조회
+	 * 
+	 * @param contentid
+	 * @return
+	 */
+	public List<String> countRating(String contentid) {
+		return sqlSession.selectList("reviewMapper.countRating", contentid);
+	}
+
+	/**
+	 * 리뷰 연결
+	 * 
 	 * @param condition
 	 * @return result
 	 */
-	public List<Map<String, Object>>selectConnectReview(List<String> contentidList) {
+	public List<Map<String, Object>> selectConnectReview(List<String> contentidList) {
 		return sqlSession.selectList("reviewMapper.selectConnectReview", contentidList);
 	}
 
+	public List<Review> moreReviewList(String contentid, int rowBoundCount) {
+		
+		RowBounds rowBounds = new RowBounds(rowBoundCount, 10);
+		
+		return sqlSession.selectList("reviewMapper.selectReviewList", contentid, rowBounds);
+	}
 
 
 }

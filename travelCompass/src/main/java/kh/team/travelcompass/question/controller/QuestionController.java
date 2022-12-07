@@ -23,7 +23,7 @@ public class QuestionController {
 	
 
 	// QnA 목록 조회
-	@GetMapping("/selectQnaList")
+	@GetMapping("/iist")
 	public Map<String, Object> selectQuestionList(String contentid,
 			@RequestParam(value="cp",required=false, defaultValue="1") int cp) {
 		Map<String, Object> questionMap=service.selectQuestionList(contentid, cp);
