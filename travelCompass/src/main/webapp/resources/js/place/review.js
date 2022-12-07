@@ -792,6 +792,41 @@ const createReviewList = function () {
   });
 };
 
+
+
+//신고하기
+function insertReport(reviewNo, memberNo, loginMemberNo) {
+  console.log(reviewNo, memberNo, loginMemberNo);
+  if(loginMemberNo == '') {
+    alert("로그인 후 이용해주세요.");
+    return;
+  }
+
+  if (memberNo != loginMemberNo) {
+    $.ajax ({
+      url: "/management/insertReport",
+      type: "get",
+      data: {
+        reviewNo: reviewNo,
+        memberNo: memberNo,
+        reporter: loginMemberNo},
+      success : result => {
+          console.log(result);
+          alert("리뷰를 신고 했습니다.");
+          location.reload();
+      },
+      error : error => {
+        console.log(error);
+      }
+    });
+}
+}
+
+
+
+
+
+
 /* ------------------------------------------ */
 //좋아요 버튼
 //전역 변수 loginMemberNo사용
