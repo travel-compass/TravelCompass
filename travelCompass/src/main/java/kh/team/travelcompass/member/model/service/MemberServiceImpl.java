@@ -86,4 +86,9 @@ public class MemberServiceImpl implements MemberService{
 	public int secession(int memberNo) {
 		return dao.secession(memberNo);
 	}
+
+	@Override
+	public int memberRRNDupCheck(String memberRRN) {
+		return dao.memberRRNDupCheck(memberRRN);
+	}
 }

@@ -81,4 +81,13 @@ public class MemberDAO {
 	public int secession(int memberNo) {
 		return sqlSession.update("memberMapper.secession", memberNo);
 	}
+
+
+	/** 이메일 중복 검사
+	 * @param memberRRN
+	 * @return result
+	 */
+	public int memberRRNDupCheck(String memberRRN) {
+		return sqlSession.selectOne("memberMapper.memberRRNDupCheck", memberRRN);
+	}
 }

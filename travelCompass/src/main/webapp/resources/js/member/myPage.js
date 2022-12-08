@@ -1,11 +1,10 @@
-const lastPathName = location.pathname.substring(location.pathname.lastIndexOf("/") + 1);
 
 let writable = false;
 document.getElementById(lastPathName).classList.add("current-menu");
 if(lastPathName == "info") {
     let messageList = document.querySelectorAll(".input-row > span");
     console.log(messageList);
-    window
+    // window
     // 페이지 로드 시
     // 유효성 검사 true 초기화
     for(let key in validate) {

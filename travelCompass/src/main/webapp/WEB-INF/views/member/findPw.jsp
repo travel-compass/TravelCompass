@@ -28,7 +28,7 @@
                 <input type="text" name="memberEmail" id="memberEmail" maxlength="30" autocomplete="off">
                 <button type="button" id="getAuthKeyBtn">인증번호 받기</button>
             </div>
-            <span class="confirm-message" id="memberEmailMessage">이메일 형식이 아닙니다.</span>
+            <span class="confirm-message" id="memberEmailMessage"></span>
 
             <label for="authKey">
                 인증번호
@@ -37,7 +37,7 @@
                 <input type="text" name="authKey" id="authKey" maxlength="6" autocomplete="off">
                 <button type="button" id="checkAuthKeyBtn">인증번호 확인</button>
             </div>
-            <span class="confirm-message" id="authKeyMessage">인증번호가 올바르지 않습니다.</span>
+            <span class="confirm-message" id="authKeyMessage"></span>
             
             <button class="login-btn">비밀번호 찾기</button>
         </form>
