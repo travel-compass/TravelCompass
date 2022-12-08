@@ -198,6 +198,7 @@
 		SELECT COUNT(CONTENT_ID)
 		FROM REVIEW
 		WHERE CONTENT_ID = #{contentid}
+		AND REVIEW_FL='N'
 	</select>
 	
 	<!-- 리뷰 수정 -->
