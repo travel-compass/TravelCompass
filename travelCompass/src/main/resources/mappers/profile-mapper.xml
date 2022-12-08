@@ -13,7 +13,6 @@
 		<result property="memberNo" column="MEMBER_NO"/>
 		<result property="contentid" column="CONTENT_ID"/>
 		<result property="firstimage" column="FIRST_IMAGE"/>
-		<result property="reviewImagePath" column="REVIEW_IMAGE_PATH"/>
 		<result property="profileImage" column="PROFILE_IMAGE"/>
 		<result property="memberNickname" column="MEMBER_NICKNAME"/>
 		<result property="contenttypeid" column="CONTENT_TYPE_ID"/>
@@ -45,14 +44,39 @@
 		AND MEMBER_NO = #{memberNo}
 	</select>
 	
-	<select id="ReviewSelectList" resultMap="review_rm">
+	<select id="allReviewSelectList" resultMap="review_rm">
 		SELECT REVIEW_NO, RATING, REVIEW_TITLE, REVIEW_CONTENT, TO_CHAR(REVIEW_DATE, 'YYYY"년" MM"월"') REVIEW_DATE, 
 			CONTENT_ID,	FIRST_IMAGE, MEMBER_NO, PROFILE_IMAGE, MEMBER_NICKNAME, CONTENT_TYPE_ID
 		FROM REVIEW
 		LEFT JOIN "MEMBER" USING(MEMBER_NO)
 		WHERE REVIEW_FL = 'N'
 		AND MEMBER_NO = #{memberNo}
-		ORDER BY REVIEW_NO
+		ORDER BY REVIEW_NO DESC
+	</select>
+	
+	<select id="ReviewSelectList" resultMap="review_rm">
+		SELECT R.REVIEW_NO, RATING, REVIEW_TITLE, REVIEW_CONTENT, TO_CHAR(REVIEW_DATE, 'YYYY"년" MM"월"') REVIEW_DATE, 
+			CONTENT_ID,	FIRST_IMAGE, MEMBER_NO, PROFILE_IMAGE, MEMBER_NICKNAME, CONTENT_TYPE_ID 
+		FROM REVIEW R
+		LEFT JOIN "MEMBER" USING(MEMBER_NO)
+		LEFT JOIN REVIEW_IMAGE I ON (R.REVIEW_NO = I.REVIEW_NO)
+		WHERE REVIEW_FL = 'N'
+		AND MEMBER_NO = #{memberNo}
+		AND REVIEW_IMAGE_PATH IS NULL
+		ORDER BY REVIEW_NO DESC
+	</select>
+	
+	<select id="imageReviewSelectList" resultMap="review_rm">
+		SELECT R.REVIEW_NO, RATING, REVIEW_TITLE, REVIEW_CONTENT, TO_CHAR(REVIEW_DATE, 'YYYY"년" MM"월"') REVIEW_DATE, 
+			CONTENT_ID,	FIRST_IMAGE, MEMBER_NO, PROFILE_IMAGE, MEMBER_NICKNAME, CONTENT_TYPE_ID 
+		FROM REVIEW R
+		LEFT JOIN "MEMBER" USING(MEMBER_NO)
+		LEFT JOIN REVIEW_IMAGE I ON (I.REVIEW_NO = R.REVIEW_NO)
+		WHERE REVIEW_FL = 'N'
+		AND MEMBER_NO = #{memberNo}
+		AND REVIEW_IMAGE_PATH IS NOT NULL
+		AND REVIEW_IMAGE_ORDER = 0
+		ORDER BY REVIEW_NO DESC
 	</select>
 	
 	<!-- 특정 게시글의 이미지 목록 조회 -->
