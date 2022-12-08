@@ -18,7 +18,7 @@ public class PopularKeywordScheduling {
 	@Autowired
 	ServletContext application;
 	
-	@Scheduled(fixedRate = 1000 * 60)		// 3분마다
+	@Scheduled(fixedRate = 1000 * 60)		// 1분마다
 	public void updatePopularKeyword() {
 		// 맵 가져오기
 		LinkedHashMap<String, Integer> keywordMap = (LinkedHashMap<String, Integer>) application.getAttribute("keywordMap"); 
@@ -54,7 +54,7 @@ public class PopularKeywordScheduling {
 		}
 	}
 	
-	@Scheduled(cron="0 0/20 * * * *")
+	@Scheduled(cron="0 59 * * * *")
 	public void initPoPopularKeyword() {
 		// 맵 가져오기
 		LinkedHashMap<String, Integer> keywordMap = (LinkedHashMap<String, Integer>) application.getAttribute("keywordMap");

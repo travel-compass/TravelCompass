@@ -38,6 +38,11 @@ public class SearchInterceptor implements HandlerInterceptor{
 			if(keywordMap == null ) {	// 어플리케이션 스코프에 popularKeywordMap키값으로 저장된 map 이없으면
 				keywordMap = new LinkedHashMap<String, Integer>(); // 생성
 				application.setAttribute("keywordMap", keywordMap); // 추가
+				keywordMap.put("동대문", 10);
+				keywordMap.put("뚝섬", 11);
+				keywordMap.put("서울", 12);
+				keywordMap.put("라면", 13);
+				keywordMap.put("떡볶이", 14);
 			}
 			
 			// keyword 가져오기
