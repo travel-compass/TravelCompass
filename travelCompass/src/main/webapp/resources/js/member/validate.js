@@ -48,6 +48,8 @@ const addressBtn = document.getElementById("addressSearch");
 // 약관
 const agree = document.getElementById("agree1");
 
+const lastPathName = location.pathname.substring(location.pathname.lastIndexOf("/") + 1);
+
 let findPwPage = false;
 let infoPage = false;
 
@@ -460,8 +462,28 @@ if(memberRRN != null) {
                 memberRRNMessage.innerText = "유효한 형식의 주민등록번호입니다.";
                 memberRRNMessage.classList.remove("error");
                 memberRRNMessage.classList.add("confirm");
+
+                $.ajax({
+                    url:"/member/memberRRNDupCheck",
+                    data: {
+                        "memberRRN": totMemberRRN
+                    },
+                    success: result => {
+                        if(result > 0) {    // 이미 가입한 사람이 있을 때
+                            memberRRNMessage.innerText = "이미 가입한 계정이 존재합니다";
+                            memberRRNMessage.classList.add("error");
+                            memberRRNMessage.classList.remove("confirm");
+                            validate.memberRRN = false;
+                        } else {
+                            memberRRNMessage.innerText = "유효한 형식의 주민등록번호입니다.";
+                            memberRRNMessage.classList.remove("error");
+                            memberRRNMessage.classList.add("confirm");
+                            validate.memberRRN = true;
+                        }
+                    }
+                });
             }
-            validate.memberRRN = true;
+            
         } else {                                            // 형식이 유효하지 않습니다.
             if(memberRRNMessage != null) {
                 memberRRNMessage.innerText = "13자리 숫자, 뒷자리 첫번째 수는 1 ~ 4 혹은 생년월일을 정확히 입력해주세요";

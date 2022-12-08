@@ -156,7 +156,7 @@
                     <i class="fa-solid fa-unlock"></i>
                     <div class="scope-description">
                         <span>공개</span>
-                        <span>트립어드바이저 사용자 및 회원에게 표시되지 않습니다.</span>
+                        <span>Travelcompass의 모든 사용자에게 표시됩니다.</span>
                     </div>
                 </label>
                 

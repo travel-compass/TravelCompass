@@ -66,4 +66,11 @@ public interface MemberService {
 	 * @return result
 	 */
 	public int secession(int memberNo);
+
+
+	/** 주민등록번호 중복 검사
+	 * @param memberRRN
+	 * @return result
+	 */
+	public int memberRRNDupCheck(String memberRRN);
 }

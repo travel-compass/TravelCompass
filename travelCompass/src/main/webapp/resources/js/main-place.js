@@ -64,6 +64,8 @@
 (() => {
     let latitude = 37.563398;  // 위도
     let longitude = 126.9863309;  // 경도
+    // let latitude;  // 위도
+    // let longitude;  // 경도
     // if(navigator.geolocation) {     // GPS 사용가능하면
     //     navigator.geolocation.getCurrentPosition(position => {
     //         latitude = position.coords.latitude;

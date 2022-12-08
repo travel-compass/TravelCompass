@@ -357,4 +357,10 @@ public class MemberController {
 	public int emailDupCheck(String memberEmail) {
 		return service.emailDupCheck(memberEmail);
 	}
+	
+	@ResponseBody
+	@GetMapping("/memberRRNDupCheck")
+	public int memberRRNDupCheck(String memberRRN) {
+		return service.memberRRNDupCheck(memberRRN);
+	}
 }

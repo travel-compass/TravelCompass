@@ -189,6 +189,11 @@
 		PROFILE_IMAGE = #{profileImage}
 		WHERE MEMBER_NO = #{memberNo}
 	</update>
+	
+	<select id="memberRRNDupCheck" parameterType="string" resultType="_int">
+		SELECT COUNT(*) FROM MEMBER WHERE MEMBER_RRN = #{memberRRN} AND SECESSION_FL = 'N'
+	</select>
+
 </mapper>
 
 
