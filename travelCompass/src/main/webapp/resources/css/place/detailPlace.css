@@ -181,18 +181,9 @@ main {
   /* margin-bottom: 2px; */
 }
 
-.search-result-item-grade {
-  /* margin-bottom: 2px; */
+.search-result-item-grade>span {
+  margin-top: 3px;
 }
-
-.search-result-item-address {
-  /* margin-bottom: 6px; */
-}
-
-.search-result-item-review {
-  /* margin-bottom: 1px; */
-}
-
 
 
 .search-result-item-title {

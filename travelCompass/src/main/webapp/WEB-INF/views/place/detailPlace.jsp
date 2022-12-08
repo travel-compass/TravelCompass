@@ -223,7 +223,7 @@
                                   <span class="empty">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
                                   <span class="fill" style="width:${69*(culturePlace.averageRating*20)/100}px;">&#9679;&#9679;&#9679;&#9679;&#9679;</span>
                               </div>
-                              <span>${culturePlace.reviewCount}</span>
+                              <span><a href="/place/detail/${culturePlace.contenttypeid}/${culturePlace.contentid}">${culturePlace.reviewCount}</a></span>
                           </div>
                               
                           <div class="search-result-item-address">
