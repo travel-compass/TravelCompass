@@ -137,9 +137,9 @@ public class ReviewDAO {
 	}
 
 	public List<Review> moreReviewList(String contentid, int rowBoundCount) {
-		
+
 		RowBounds rowBounds = new RowBounds(rowBoundCount, 10);
-		
+
 		return sqlSession.selectList("reviewMapper.selectReviewList", contentid, rowBounds);
 	}
 
@@ -153,7 +153,7 @@ public class ReviewDAO {
 	 */
 	public int reviewLikeCheck(Map<String, Object> map) {
 	
-		return sqlSession.selectOne("reviewMapper.boardLikeCheck", map);
+		return sqlSession.selectOne("reviewMapper.reviewLikeCheck", map);
 	}
 
 
@@ -163,7 +163,7 @@ public class ReviewDAO {
 	 */
 	public int reviewLikeUp(Map<String, Object> paramMap) {
 		
-		return sqlSession.insert("reviewMapper.boardLikeUp", paramMap);
+		return sqlSession.insert("reviewMapper.reviewLikeUp", paramMap);
 	}
 
 
@@ -173,7 +173,7 @@ public class ReviewDAO {
 	 */
 	public int reviewLikeDown(Map<String, Object> paramMap) {
 		
-		return sqlSession.delete("reviewMapper.boardLikeDown", paramMap);
+		return sqlSession.delete("reviewMapper.reviewLikeDown", paramMap);
 	}
 
 	

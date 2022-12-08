@@ -5,12 +5,10 @@ const reviewContent = document.getElementById("reviewContent");
 
 const submitReview = document.getElementById("reviewform");
 
-
-
 addReview.addEventListener("click", () => {
   console.log("비동기 리뷰 작성");
   // 로그인 확인
-  if (memberNo == "") {
+  if (loginMemberNo == "") {
     // 로그인X
     if (confirm("로그인하시겠습니까?")) {
       location.href = "/member/login";
@@ -42,7 +40,7 @@ addReview.addEventListener("click", () => {
       rating: document.querySelector('input[name="rating"]:checked').value,
       reviewTitle: reviewTitle.value,
       reviewContent: reviewContent.value,
-      memberNo: memberNo,
+      memberNo: loginMemberNo,
       contentid: contentid,
       contenttypeid: contenttypeid,
     },
@@ -139,12 +137,12 @@ function selectReviewList(e) {
         reviewTextDotStyle.addEventListener("click", () => {
           reviewTextDotStyle.nextElementSibling.style.display = "block";
         });
-        reviewTextDotStyle.addEventListener("blur", () => {
-          reviewTextDotStyle.nextElementSibling.style.display = "none";
-        });
+        // reviewTextDotStyle.addEventListener("blur", () => {
+        //   reviewTextDotStyle.nextElementSibling.style.display = "none";
+        // });
 
         const reviewArea = document.createElement("div");
-        reviewArea.classList.add("review-container");
+        reviewArea.classList.add("review-area");
 
         const reviewContainer = document.createElement("div");
         reviewContainer.classList.add("review-container");
@@ -156,7 +154,7 @@ function selectReviewList(e) {
         empty.classList.add("empty");
         empty.innerHTML = "&#9679;&#9679;&#9679;&#9679;&#9679;";
 
-        const fill = document.createElement("fill");
+        const fill = document.createElement("span");
         fill.classList.add("fill");
         fill.style.width = (69 * (review.rating * 20)) / 100 + "px";
         fill.innerHTML = "&#9679;&#9679;&#9679;&#9679;&#9679;";
@@ -179,13 +177,30 @@ function selectReviewList(e) {
 
         const reviewTextSaveButton = document.createElement("div");
         reviewTextSaveButton.classList.add("save-button");
-        reviewTextSaveButton.innerHTML =
-          "<i class='fa-solid fa-heart'></i>좋아요";
+        if (review.likeCheck == 0) {
+          reviewTextSaveButton.innerHTML =
+            "<i class='fa-regular fa-heart'></i>좋아요";
+        } else {
+          reviewTextSaveButton.innerHTML =
+            "<i class='fa-solid fa-heart'></i>좋아요";
+        }
+        reviewTextSaveButton.setAttribute(
+          "onclick",
+          `reviewLike(${review.reviewNo},${review.memberNo},${loginMemberNo})`
+        );
+
+        const likeCount = document.createElement("span");
+        likeCount.classList.add("likeCount");
+        likeCount.innerText = review.reviewLike;
 
         const reviewTextShareButton = document.createElement("div");
         reviewTextShareButton.classList.add("share-button");
         reviewTextShareButton.innerHTML =
           "<i class='fa-solid fa-arrow-up-from-bracket'></i>신고";
+        reviewTextShareButton.setAttribute(
+          "onclick",
+          `reviewLike(${review.reviewNo},${review.memberNo},${loginMemberNo})`
+        );
 
         ulreviewList.append(reviewTextColum);
 
@@ -209,7 +224,7 @@ function selectReviewList(e) {
 
         rating.append(empty, fill);
 
-        if (memberNo == review.memberNo) {
+        if (loginMemberNo == review.memberNo) {
           reviewTextHeaderStyle.append(
             reviewTextHeaderLayout,
             reviewTextDotStyle,
@@ -218,6 +233,8 @@ function selectReviewList(e) {
         } else {
           reviewTextHeaderStyle.append(reviewTextHeaderLayout);
         }
+
+        reviewTextSaveButton.append(likeCount);
 
         reviewTextBottomMenu.append(
           reviewTextSaveButton,
@@ -252,7 +269,7 @@ const dropDownMenu = document.getElementsByClassName(
 
 for (let BTNList of dropDownMenu) {
   BTNList.addEventListener("click", () => {
-    if (memberNo == "") {
+    if (loginMemberNo == "") {
       // 로그인X
       if (confirm("로그인하시겠습니까?")) {
         location.href = "/member/login";
@@ -264,13 +281,36 @@ for (let BTNList of dropDownMenu) {
   });
 }
 
-for (let BTNList of dropDownMenu) {
-  BTNList.addEventListener("blur", () => {
-    setTimeout(() => {
-      BTNList.nextElementSibling.style.display = "none";
-    }, 1);
-  });
-}
+// for (let BTNList of dropDownMenu) {
+//   BTNList.nextElementSibling.addEventListener("blur", () => {
+//     setTimeout(() => {
+//       BTNList.nextElementSibling.style.display = "none";
+//     }, 1);
+//   });
+// }
+
+document.addEventListener("click", (e) => {
+  const list = document.querySelectorAll(
+    ".user-page-review-dot-style, .user-page-review-dot-style *, .user-page-review-dot-down-menu, .user-page-review-dot-down-menu *"
+  );
+
+  let flag = true;
+
+  for (let item of list) {
+    if (e.target == item) {
+      flag = false;
+      break;
+    }
+  }
+
+  if (flag) {
+    const temp = document.querySelectorAll(".user-page-review-dot-down-menu");
+
+    for (let item of temp) {
+      item.style.display = "none";
+    }
+  }
+});
 
 /* 리뷰 수정 */
 let beforeTitle;
@@ -317,7 +357,7 @@ function deleteReview(reviewNo) {
   if (confirm("정말 삭제하시겠습니까?")) {
     $.ajax({
       url: "/review/delete",
-      date: {
+      data: {
         reviewNo: reviewNo,
       },
       type: "GET",
@@ -404,6 +444,7 @@ moreBtn.addEventListener("click", () => {
         reviewTextHeaderStyle.append(reviewTextHeaderLayout);
 
         const reviewTextUserImage = document.createElement("a");
+        reviewTextUserImage.href = `/profile/${review.memberNo}`;
         reviewTextUserImage.classList.add("review-user-image");
 
         reviewTextUserImage.innerHTML =
@@ -416,7 +457,11 @@ moreBtn.addEventListener("click", () => {
         reviewInfoNickname.classList.add("review-user-nickname");
 
         reviewInfoNickname.innerHTML =
-          "<a href='#'>" + review.memberNickname + "</a>";
+          "<a href=/profile/" +
+          review.memberNo +
+          ">" +
+          review.memberNickname +
+          "</a>";
 
         const reviewInfoDateLink = document.createElement("a");
         reviewInfoDateLink.classList.add("review-user-dday");
@@ -447,12 +492,12 @@ moreBtn.addEventListener("click", () => {
         reviewTextDotStyle.addEventListener("click", () => {
           reviewTextDotStyle.nextElementSibling.style.display = "block";
         });
-        reviewTextDotStyle.addEventListener("blur", () => {
-          reviewTextDotStyle.nextElementSibling.style.display = "none";
-        });
+        // reviewTextDotStyle.addEventListener("blur", () => {
+        //   reviewTextDotStyle.nextElementSibling.style.display = "none";
+        // });
 
         const reviewArea = document.createElement("div");
-        reviewArea.classList.add("review-container");
+        reviewArea.classList.add("review-area");
 
         const reviewContainer = document.createElement("div");
         reviewContainer.classList.add("review-container");
@@ -464,7 +509,7 @@ moreBtn.addEventListener("click", () => {
         empty.classList.add("empty");
         empty.innerHTML = "&#9679;&#9679;&#9679;&#9679;&#9679;";
 
-        const fill = document.createElement("fill");
+        const fill = document.createElement("span");
         fill.classList.add("fill");
         fill.style.width = (69 * (review.rating * 20)) / 100 + "px";
         fill.innerHTML = "&#9679;&#9679;&#9679;&#9679;&#9679;";
@@ -487,13 +532,30 @@ moreBtn.addEventListener("click", () => {
 
         const reviewTextSaveButton = document.createElement("div");
         reviewTextSaveButton.classList.add("save-button");
-        reviewTextSaveButton.innerHTML =
-          "<i class='fa-solid fa-heart'></i>좋아요";
+        if (review.likeCheck == 0) {
+          reviewTextSaveButton.innerHTML =
+            "<i class='fa-regular fa-heart'></i>좋아요";
+        } else {
+          reviewTextSaveButton.innerHTML =
+            "<i class='fa-solid fa-heart'></i>좋아요";
+        }
+        reviewTextSaveButton.setAttribute(
+          "onclick",
+          `reviewLike(${review.reviewNo},${review.memberNo},${loginMemberNo})`
+        );
+
+        const likeCount = document.createElement("span");
+        likeCount.classList.add("likeCount");
+        likeCount.innerText = review.reviewLike;
 
         const reviewTextShareButton = document.createElement("div");
         reviewTextShareButton.classList.add("share-button");
         reviewTextShareButton.innerHTML =
           "<i class='fa-solid fa-arrow-up-from-bracket'></i>신고";
+        reviewTextShareButton.setAttribute(
+          "onclick",
+          `reviewLike(${review.reviewNo},${review.memberNo},${loginMemberNo})`
+        );
 
         ulreviewList.append(reviewTextColum);
 
@@ -511,13 +573,15 @@ moreBtn.addEventListener("click", () => {
           reviewTextDownMenu_li2
         );
 
+        reviewTextSaveButton.append(likeCount);
+
         reviewArea.append(reviewContainer);
 
         reviewContainer.append(rating);
 
         rating.append(empty, fill);
 
-        if (memberNo == review.memberNo) {
+        if (loginMemberNo == review.memberNo) {
           reviewTextHeaderStyle.append(
             reviewTextHeaderLayout,
             reviewTextDotStyle,
@@ -596,6 +660,7 @@ const createReviewList = function () {
         reviewTextHeaderStyle.append(reviewTextHeaderLayout);
 
         const reviewTextUserImage = document.createElement("a");
+        reviewTextUserImage.href = `/profile/${review.memberNo}`;
         reviewTextUserImage.classList.add("review-user-image");
 
         reviewTextUserImage.innerHTML =
@@ -608,7 +673,11 @@ const createReviewList = function () {
         reviewInfoNickname.classList.add("review-user-nickname");
 
         reviewInfoNickname.innerHTML =
-          "<a href='#'>" + review.memberNickname + "</a>";
+          "<a href=/profile/" +
+          review.memberNo +
+          ">" +
+          review.memberNickname +
+          "</a>";
 
         const reviewInfoDateLink = document.createElement("a");
         reviewInfoDateLink.classList.add("review-user-dday");
@@ -656,7 +725,7 @@ const createReviewList = function () {
         empty.classList.add("empty");
         empty.innerHTML = "&#9679;&#9679;&#9679;&#9679;&#9679;";
 
-        const fill = document.createElement("fill");
+        const fill = document.createElement("span");
         fill.classList.add("fill");
         fill.style.width = (69 * (review.rating * 20)) / 100 + "px";
         fill.innerHTML = "&#9679;&#9679;&#9679;&#9679;&#9679;";
@@ -679,13 +748,32 @@ const createReviewList = function () {
 
         const reviewTextSaveButton = document.createElement("div");
         reviewTextSaveButton.classList.add("save-button");
-        reviewTextSaveButton.innerHTML =
-          "<i class='fa-solid fa-heart'></i>좋아요";
+
+        if (review.likeCheck == 0) {
+          reviewTextSaveButton.innerHTML =
+            "<i class='fa-regular fa-heart'></i>좋아요";
+        } else {
+          reviewTextSaveButton.innerHTML =
+            "<i class='fa-solid fa-heart'></i>좋아요";
+        }
+
+        reviewTextSaveButton.setAttribute(
+          "onclick",
+          `reviewLike(${review.reviewNo},${review.memberNo},${loginMemberNo})`
+        );
+
+        const likeCount = document.createElement("span");
+        likeCount.classList.add("likeCount");
+        likeCount.innerText = review.reviewLike;
 
         const reviewTextShareButton = document.createElement("div");
         reviewTextShareButton.classList.add("share-button");
         reviewTextShareButton.innerHTML =
           "<i class='fa-solid fa-arrow-up-from-bracket'></i>신고";
+        reviewTextShareButton.setAttribute(
+          "onclick",
+          `reviewLike(${review.reviewNo},${review.memberNo},${loginMemberNo})`
+        );
 
         ulreviewList.append(reviewTextColum);
 
@@ -703,13 +791,15 @@ const createReviewList = function () {
           reviewTextDownMenu_li2
         );
 
+        reviewTextSaveButton.append(likeCount);
+
         reviewArea.append(reviewContainer);
 
         reviewContainer.append(rating);
 
         rating.append(empty, fill);
 
-        if (memberNo == review.memberNo) {
+        if (loginMemberNo == review.memberNo) {
           reviewTextHeaderStyle.append(
             reviewTextHeaderLayout,
             reviewTextDotStyle,
@@ -761,83 +851,111 @@ const createReviewList = function () {
   });
 };
 
-
 //신고하기
 function insertReport(reviewNo, memberNo, loginMemberNo) {
-    console.log(reviewNo, memberNo, loginMemberNo);
+  console.log(reviewNo, memberNo, loginMemberNo);
+  if (loginMemberNo == "") {
+    alert("로그인 후 이용해주세요.");
+    return;
+  }
 
-    if (memberNo != loginMemberNo) {
-      $.ajax ({
-        url: "/management/insertReport",
-        type: "get",
-        data: {
-          reviewNo: reviewNo,
-          memberNo: memberNo},
-        success : result => {
-            console.log(result);
-            alert("리뷰를 신고 했습니다.");
-            location.reload();
-        },
-        error : error => {
-          console.log(error);
+  if (memberNo != loginMemberNo) {
+    $.ajax({
+      url: "/insertReport",
+      type: "get",
+      data: {
+        reviewNo: reviewNo,
+        memberNo: memberNo,
+        reporter: loginMemberNo,
+      },
+      success: (result) => {
+        if (result == 0) {
+          alert("이미 신고한 리뷰입니다.");
+          return;
+        } else {
+          alert("리뷰를 신고 했습니다.");
+          location.reload();
         }
-      });
+      },
+      error: (error) => {
+        console.log(error);
+        alert("이미 신고한 리뷰입니다");
+        location.reload();
+      },
+    });
   }
 }
 
-
 //좋아요 버튼
-// //전역 변수 loginMemberNo사용
-// function reviewLike(reviewNo, memberNo, loginMemberNo) {
-  
-//     // 로그인 상태가 아닌 경우
-//     if(loginMemberNo == ""){
-//         alert("로그인 후 이용해주세요.");
-//         return;
-//     }
+//전역 변수 loginMemberNo사용
 
-//     if(loginMemberNo == memberNo){
-//         alert("본인의 리뷰는 좋아요를 누를 수 없습니다.");
-//         return;
-//     }
-//     const likeCount = e.target.nextElementSibling;
-//     console.log(likeCount);
+const likebtn = document.getElementsByClassName("save-button");
+const likeCount = document.getElementsByClassName("likeCount");
 
-//     // 로그인 상태 + 좋아요 상태가 아닌 경우
-//     if(e.target.classList.contains("fa-regular")){ //빈하트인 경우
+function reviewLike(reviewNo, memberNo, loginMemberNo, el) {
+  // 로그인 상태가 아닌 경우
+  if (loginMemberNo == "") {
+    alert("로그인 후 이용해주세요.");
+    return;
+  }
 
-//         $.ajax({
-//             url: "/reviewLikeUp",
-//             data: { "reviewNo": reviewNo, "memberNo": loginMemberNo},
-//             type: "get",
-//             success: (result) => {
-//                 if(result>0){
-//                     e.target.classList.remove("fa-regular")    //빈하트 클래스 제거
-//                     e.target.classList.add("fa-solid")         //채워진 하트 클래스 추가
-//                     likeCount.innerText = Number(likeCount.innerText) + 1;
-//                 } else {
-//                     console.log("증가 실패");
-//                 }
-//             },
-//             error: () => { console.log("증가 에러");}
-//         });
-//     }
-//     // 로그인 상태 + 좋아요 상태인 경우
-//     else{ //채워진 하트인 경우
-//         $.ajax({
-//             url: "/reviewLikeDown",
-//             data: { "reviewNo": reviewNo, "memberNo": loginMemberNo},
-//             type: "get",
-//             success: (result) => {
-//                 if(result>0){
-//                 e.target.classList.remove("fa-solid")      //채워진 하트 클래스 제거
-//                 e.target.classList.add("fa-regular")       //빈하트 클래스 추가
-//                 likeCount.innerText = Number(likeCount.innerText) - 1; //좋아요 수 -1
-//                 }else {
-//                     console.log("감소 실패");
-//                 }
-//             },
-//             error: () => { console.log("감소 에러");}
-//         });
-//     }
-// }
+  if (loginMemberNo == memberNo) {
+    alert("본인의 리뷰는 좋아요를 누를 수 없습니다.");
+    return;
+  }
+
+  // 로그인 상태 + 좋아요 상태가 아닌 경우
+
+  console.log(el);
+  console.log(el.firstElementChild);
+  console.log(el.firstElementChild.classList.contains("fa-regular"));
+
+  if (el.firstElementChild.classList.contains("fa-regular")) {
+    //빈하트인 경우
+
+    $.ajax({
+      url: "/review/likeUp",
+      data: { reviewNo: reviewNo, memberNo: loginMemberNo },
+      type: "get",
+      success: (result) => {
+        if (result > 0) {
+          el.firstElementChild.classList.remove("fa-regular"); //빈하트 클래스 제거
+          el.firstElementChild.classList.add("fa-solid"); //채워진 하트 클래스 추가
+          console.log(el.lastElementChild);
+
+          el.lastElementChild.innerText =
+            Number(el.lastElementChild.innerText) + 1;
+        } else {
+          console.log("증가 실패");
+        }
+      },
+      error: () => {
+        console.log("증가 에러");
+      },
+    });
+  }
+  // 로그인 상태 + 좋아요 상태인 경우
+  else {
+    //채워진 하트인 경우
+    $.ajax({
+      url: "/review/likeDown",
+      data: { reviewNo: reviewNo, memberNo: loginMemberNo },
+      type: "get",
+      success: (result) => {
+        if (result > 0) {
+          el.firstElementChild.classList.remove("fa-solid"); //빈하트 클래스 제거
+          el.firstElementChild.classList.add("fa-regular"); //채워진 하트 클래스 추가
+          if (el.lastElementChild.innerText > 0) {
+            el.lastElementChild.innerText =
+              Number(el.lastElementChild.innerText) - 1;
+          }
+        } else {
+          console.log("감소 실패");
+        }
+      },
+      error: () => {
+        console.log("감소 에러");
+      },
+    });
+  }
+}

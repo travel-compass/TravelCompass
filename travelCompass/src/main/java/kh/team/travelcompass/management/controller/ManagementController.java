@@ -103,13 +103,7 @@ public class ManagementController {
 		return jsonReportList;
 	}
 	
-	//리뷰 신고
-	@GetMapping("/insertReport")
-	@ResponseBody
-	public int insertReport(@RequestParam Map<String, Object>paramMap) {
-		return service.insertReport(paramMap);
-	}
-	
+
 	
 	//블라인드 처리
 	@ResponseBody

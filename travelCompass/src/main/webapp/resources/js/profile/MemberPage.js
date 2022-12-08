@@ -80,15 +80,15 @@ const dropDownMenu = document.getElementsByClassName("user-page-review-dot-style
 for (let BTNList of dropDownMenu){
     BTNList.addEventListener("click",() => {
 
-        BTNList.nextElementSibling.style.display = "block";
+        BTNList.lastElementChild.style.display = "block";
     })
-    /* 
+    
     BTNList.addEventListener("blur", () => {
+        setTimeout(()=>{
+            BTNList.lastElementChild.style.display = "none";
+        }, 10)
+    });
 
-        BTNList.nextElementSibling.style.display = "none";
-
-    })
- */
 }
 
 
@@ -191,8 +191,7 @@ Fed.addEventListener("click", (e) => {
                     // 드랍 다운 메뉴 삭제 버튼에 이벤트 삽입
                     reivewTextDownMenu_li1.addEventListener("click", () => {
                         
-                        if(loginMemberNo == list.memberNO) {
-
+                        if(loginMemberNo == list.memberNo) {
                             if (confirm("정말 삭제 하시겠습니까?")){
                     
                                 location.href = location.pathname + "/" + reviewNo + "/delete";
@@ -206,13 +205,14 @@ Fed.addEventListener("click", (e) => {
 
                     // 드랍 다운 메뉴 이벤트 삽입
                     reviewTextDotStyle.addEventListener("click", () => {
-                        reviewTextDotStyle.nextElementSibling.style.display = "block";
+                        reviewTextDotStyle.lastElementChild.style.display = "block";
                     });
-                    /* 
+
                     reviewTextDotStyle.addEventListener("blur", () => {
-                        reviewTextDotStyle.nextElementSibling.style.display = "none";
+                        setTimeout(()=>{
+                            reviewTextDotStyle.lastElementChild.style.display = "none";
+                        }, 10)
                     });
-                     */
 
                     const reviewDetailPage = document.createElement("a");
                     reviewDetailPage.setAttribute("href","/place/detail/" +list.contenttypeid + "/" + list.contentid);
@@ -226,7 +226,7 @@ Fed.addEventListener("click", (e) => {
                     const rating = document.createElement("div");
                     rating.classList.add("rating");
                     rating.innerHTML = "<span class='empty'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>"
-                    +"<span class='fill' style='width:100 * (" + list.rating + " * 20) / 100px;'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>";
+                    +"<span class='fill' style='width:84.5 * (" + list.rating + " * 20) / 100px;'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>";
 
                     const reviewTextTitle = document.createElement("div");
                     reviewTextTitle.classList.add("review-title");
@@ -292,9 +292,10 @@ Fed.addEventListener("click", (e) => {
                     }
 
                     // A-0 (A 리뷰 시작의 0번 인덱스 위치에 있는 태그 )의 append
-                    reviewTextHeaderStyle.append(reviewTextHeaderLayout, reviewTextDotStyle,
-                        reivewTextDotDownMenu);
-                        
+                    reviewTextHeaderStyle.append(reviewTextHeaderLayout, reviewTextDotStyle);
+                    
+                    reviewTextDotStyle.append(reivewTextDotDownMenu);  
+                    
                     // A-0-0 (A 리뷰 0번 위치의 0번 위치에 있는 태그)
                     reviewTextHeaderLayout.append(reviewTextUserImage, reviewTextInfoLayout);
 
@@ -420,7 +421,7 @@ const fedMoreReviewList = function() {
                 // 드랍 다운 메뉴 삭제 버튼에 이벤트 삽입
                 reivewTextDownMenu_li1.addEventListener("click", () => {
             
-                    if(loginMemberNo == list.memberNO) {
+                    if(loginMemberNo == list.memberNo) {
 
                         if (confirm("정말 삭제 하시겠습니까?")){
                 
@@ -434,13 +435,14 @@ const fedMoreReviewList = function() {
 
                 // 드랍 다운 메뉴 이벤트 삽입
                 reviewTextDotStyle.addEventListener("click", () => {
-                    reviewTextDotStyle.nextElementSibling.style.display = "block";
+                    reviewTextDotStyle.lastElementChild.style.display = "block";
                 });
-                /* 
+
                 reviewTextDotStyle.addEventListener("blur", () => {
-                    reviewTextDotStyle.nextElementSibling.style.display = "none";
+                    setTimeout(()=>{
+                        reviewTextDotStyle.lastElementChild.style.display = "none";
+                    }, 10)
                 });
-                 */
 
                 const reviewDetailPage = document.createElement("a");
                 reviewDetailPage.setAttribute("href","/place/detail/" +list.contenttypeid + "/" + list.contentid);
@@ -454,7 +456,7 @@ const fedMoreReviewList = function() {
                 const rating = document.createElement("div");
                 rating.classList.add("rating");
                 rating.innerHTML = "<span class='empty'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>"
-                +"<span class='fill' style='width:100 * (" + list.rating + " * 20) / 100px;'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>";
+                +"<span class='fill' style='width:84.5 * (" + list.rating + " * 20) / 100px;'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>";
 
                 const reviewTextTitle = document.createElement("div");
                 reviewTextTitle.classList.add("review-title");
@@ -520,8 +522,9 @@ const fedMoreReviewList = function() {
                 }
 
                 // A-0 (A 리뷰 시작의 0번 인덱스 위치에 있는 태그 )의 append
-                reviewTextHeaderStyle.append(reviewTextHeaderLayout, reviewTextDotStyle,
-                    reivewTextDotDownMenu);
+                reviewTextHeaderStyle.append(reviewTextHeaderLayout, reviewTextDotStyle);
+                    
+                reviewTextDotStyle.append(reivewTextDotDownMenu);
                     
                 // A-0-0 (A 리뷰 0번 위치의 0번 위치에 있는 태그)
                 reviewTextHeaderLayout.append(reviewTextUserImage, reviewTextInfoLayout);
@@ -673,7 +676,7 @@ Review.addEventListener("click", (e) => {
                     // 드랍 다운 메뉴 삭제 버튼에 이벤트 삽입
                     reivewTextDownMenu_li1.addEventListener("click", () => {
                 
-                        if(loginMemberNo == list.memberNO) {
+                        if(loginMemberNo == list.memberNo) {
 
                             if (confirm("정말 삭제 하시겠습니까?")){
                     
@@ -686,14 +689,14 @@ Review.addEventListener("click", (e) => {
                     });
                     // 드랍 다운 메뉴 이벤트 삽입
                     reviewTextDotStyle.addEventListener("click", () => {
-                        reviewTextDotStyle.nextElementSibling.style.display = "block";
+                        reviewTextDotStyle.lastElementChild.style.display = "block";
                     });
-                    /* 
-                    reviewTextDotStyle.addEventListener("blur", () => {
-                        reviewTextDotStyle.nextElementSibling.style.display = "none";
-                    });
-                    */
 
+                    reviewTextDotStyle.addEventListener("blur", () => {
+                        setTimeout(()=>{
+                            reviewTextDotStyle.lastElementChild.style.display = "none";
+                        }, 10)
+                    });
                     const reviewDetailPage = document.createElement("a");
                     reviewDetailPage.setAttribute("href","/place/detail/" +list.contenttypeid + "/" + list.contentid);
                     
@@ -706,7 +709,7 @@ Review.addEventListener("click", (e) => {
 
                     rating.classList.add("rating");
                     rating.innerHTML = "<span class='empty'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>"
-                    +"<span class='fill' style='width:100 * (" + list.rating + " * 20) / 100px;'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>";
+                    +"<span class='fill' style='width:84.5 * (" + list.rating + " * 20) / 100px;'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>";
 
                     const reviewTextTitle = document.createElement("div");
                     reviewTextTitle.classList.add("review-title");
@@ -727,8 +730,9 @@ Review.addEventListener("click", (e) => {
 
 
                     // A-0 (A 리뷰 시작의 0번 인덱스 위치에 있는 태그 )의 append
-                    reviewTextHeaderStyle.append(reviewTextHeaderLayout, reviewTextDotStyle,
-                        reivewTextDotDownMenu);
+                    reviewTextHeaderStyle.append(reviewTextHeaderLayout, reviewTextDotStyle);
+                    
+                    reviewTextDotStyle.append(reivewTextDotDownMenu);
                         
                     // A-0-0 (A 리뷰 0번 위치의 0번 위치에 있는 태그)
                     reviewTextHeaderLayout.append(reviewTextUserImage, reviewTextInfoLayout);
@@ -853,7 +857,7 @@ function reviewMoreReviewList () {
                 // 드랍 다운 메뉴 삭제 버튼에 이벤트 삽입
                 reivewTextDownMenu_li1.addEventListener("click", () => {
             
-                    if(loginMemberNo == list.memberNO) {
+                    if(loginMemberNo == list.memberNo) {
 
                         if (confirm("정말 삭제 하시겠습니까?")){
                 
@@ -867,13 +871,14 @@ function reviewMoreReviewList () {
 
                 // 드랍 다운 메뉴 이벤트 삽입
                 reviewTextDotStyle.addEventListener("click", () => {
-                    reviewTextDotStyle.nextElementSibling.style.display = "block";
+                    reviewTextDotStyle.lastElementChild.style.display = "block";
                 });
-                /* 
+
                 reviewTextDotStyle.addEventListener("blur", () => {
-                    reviewTextDotStyle.nextElementSibling.style.display = "none";
+                    setTimeout(()=>{
+                        reviewTextDotStyle.lastElementChild.style.display = "none";
+                    }, 10)
                 });
-                */
 
                 const reviewDetailPage = document.createElement("a");
                 reviewDetailPage.setAttribute("href","/place/detail/" +list.contenttypeid + "/" + list.contentid);
@@ -887,7 +892,7 @@ function reviewMoreReviewList () {
                 const rating = document.createElement("div");
                 rating.classList.add("rating");
                 rating.innerHTML = "<span class='empty'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>"
-                +"<span class='fill' style='width:100 * (" + list.rating + " * 20) / 100px;'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>";
+                +"<span class='fill' style='width:84.5 * (" + list.rating + " * 20) / 100px;'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>";
 
                 const reviewTextTitle = document.createElement("div");
                 reviewTextTitle.classList.add("review-title");
@@ -908,8 +913,9 @@ function reviewMoreReviewList () {
 
 
                 // A-0 (A 리뷰 시작의 0번 인덱스 위치에 있는 태그 )의 append
-                reviewTextHeaderStyle.append(reviewTextHeaderLayout, reviewTextDotStyle,
-                    reivewTextDotDownMenu);
+                reviewTextHeaderStyle.append(reviewTextHeaderLayout, reviewTextDotStyle);
+                    
+                reviewTextDotStyle.append(reivewTextDotDownMenu);
                     
                 // A-0-0 (A 리뷰 0번 위치의 0번 위치에 있는 태그)
                 reviewTextHeaderLayout.append(reviewTextUserImage, reviewTextInfoLayout);
@@ -1061,7 +1067,7 @@ ImageReview.addEventListener("click", (e) => {
                     // 드랍 다운 메뉴 삭제 버튼에 이벤트 삽입
                     reivewTextDownMenu_li1.addEventListener("click", () => {
                 
-                        if(loginMemberNo == list.memberNO) {
+                        if(loginMemberNo == list.memberNo) {
 
                             if (confirm("정말 삭제 하시겠습니까?")){
                     
@@ -1075,13 +1081,14 @@ ImageReview.addEventListener("click", (e) => {
 
                     // 드랍 다운 메뉴 이벤트 삽입
                     reviewTextDotStyle.addEventListener("click", () => {
-                        reviewTextDotStyle.nextElementSibling.style.display = "block";
+                        reviewTextDotStyle.lastElementChild.style.display = "block";
                     });
-                    /* 
+
                     reviewTextDotStyle.addEventListener("blur", () => {
-                        reviewTextDotStyle.nextElementSibling.style.display = "none";
+                        setTimeout(()=>{
+                            reviewTextDotStyle.lastElementChild.style.display = "none";
+                        }, 10)
                     });
-                    */
 
                     const reviewDetailPage = document.createElement("a");
                     reviewDetailPage.setAttribute("href","/place/detail/" +list.contenttypeid + "/" + list.contentid);
@@ -1095,7 +1102,7 @@ ImageReview.addEventListener("click", (e) => {
                     const rating = document.createElement("div");
                     rating.classList.add("rating");
                     rating.innerHTML = "<span class='empty'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>"
-                    +"<span class='fill' style='width:100 * (" + list.rating + " * 20) / 100px;'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>";
+                    +"<span class='fill' style='width:84.5 * (" + list.rating + " * 20) / 100px;'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>";
 
                     const reviewTextTitle = document.createElement("div");
                     reviewTextTitle.classList.add("review-title");
@@ -1153,8 +1160,9 @@ ImageReview.addEventListener("click", (e) => {
                     reviewTextColum.append(reviewTextHeaderStyle, reviewImageSlideContainer, reviewDetailPage);
 
                     // A-0 (A 리뷰 시작의 0번 인덱스 위치에 있는 태그 )의 append
-                    reviewTextHeaderStyle.append(reviewTextHeaderLayout, reviewTextDotStyle,
-                        reivewTextDotDownMenu);
+                    reviewTextHeaderStyle.append(reviewTextHeaderLayout, reviewTextDotStyle);
+                    
+                    reviewTextDotStyle.append(reivewTextDotDownMenu);
                         
                     // A-0-0 (A 리뷰 0번 위치의 0번 위치에 있는 태그)
                     reviewTextHeaderLayout.append(reviewTextUserImage, reviewTextInfoLayout);
@@ -1283,7 +1291,7 @@ function imageMoreReviewList() {
                 // 드랍 다운 메뉴 삭제 버튼에 이벤트 삽입
                 reivewTextDownMenu_li1.addEventListener("click", () => {
                 
-                    if(loginMemberNo == list.memberNO) {
+                    if(loginMemberNo == list.memberNo) {
 
                         if (confirm("정말 삭제 하시겠습니까?")){
                 
@@ -1297,13 +1305,14 @@ function imageMoreReviewList() {
                 
                 // 드랍 다운 메뉴 이벤트 삽입
                 reviewTextDotStyle.addEventListener("click", () => {
-                    reviewTextDotStyle.nextElementSibling.style.display = "block";
+                    reviewTextDotStyle.lastElementChild.style.display = "block";
                 });
-                /* 
+
                 reviewTextDotStyle.addEventListener("blur", () => {
-                    reviewTextDotStyle.nextElementSibling.style.display = "none";
+                    setTimeout(()=>{
+                        reviewTextDotStyle.lastElementChild.style.display = "none";
+                    }, 10)
                 });
-                */
 
                 const reviewDetailPage = document.createElement("a");
                 reviewDetailPage.setAttribute("href","/place/detail/" +list.contenttypeid + "/" + list.contentid);
@@ -1317,7 +1326,7 @@ function imageMoreReviewList() {
                 const rating = document.createElement("div");
                 rating.classList.add("rating");
                 rating.innerHTML = "<span class='empty'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>"
-                +"<span class='fill' style='width:100 * (" + list.rating + " * 20) / 100px;'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>";
+                +"<span class='fill' style='width:84.5 * (" + list.rating + " * 20) / 100px;'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>";
 
                 const reviewTextTitle = document.createElement("div");
                 reviewTextTitle.classList.add("review-title");
@@ -1375,8 +1384,9 @@ function imageMoreReviewList() {
                 reviewTextColum.append(reviewTextHeaderStyle, reviewImageSlideContainer, reviewDetailPage);
 
                 // A-0 (A 리뷰 시작의 0번 인덱스 위치에 있는 태그 )의 append
-                reviewTextHeaderStyle.append(reviewTextHeaderLayout, reviewTextDotStyle,
-                    reivewTextDotDownMenu);
+                reviewTextHeaderStyle.append(reviewTextHeaderLayout, reviewTextDotStyle);
+                    
+                reviewTextDotStyle.append(reivewTextDotDownMenu);
                     
                 // A-0-0 (A 리뷰 0번 위치의 0번 위치에 있는 태그)
                 reviewTextHeaderLayout.append(reviewTextUserImage, reviewTextInfoLayout);
@@ -1484,6 +1494,7 @@ followButton.addEventListener("click", () => {
                 const followTableUserInfo = document.createElement("div");
                 followTableUserInfo.classList.add("follow-user-info");
 
+                // 여기 조건문 추가
                 const followUserButton = document.createElement("button");
                 followUserButton.classList.add("follow-user-button", "followOff");
                 followUserButton.innerHTML = "<i class='fa-solid fa-user-plus'></i>";
@@ -1519,7 +1530,11 @@ followButton.addEventListener("click", () => {
                                     followCountArray();
                 
                                 } else{
-                                    console.log("증가 실패");
+                                    alert("이미 팔로우한 인원입니다.");
+                        
+                                    clickFollow.classList.remove("followOn");
+                                    
+                                    clickFollow.classList.add("followOff");
                                 }
                             },
                             error : () => {
@@ -1543,7 +1558,11 @@ followButton.addEventListener("click", () => {
                                     followCountArray();
                 
                                 } else{
-                                    console.log("감소 실패");
+                                    alert("이미 팔로우한 인원입니다.");
+                                    
+                                    clickFollow.classList.remove("followOn");
+                                    
+                                    clickFollow.classList.add("followOff");
                                 }
                             },
                             error : () =>{
@@ -1673,7 +1692,12 @@ followingButton.addEventListener("click", () => {
                                     followCountArray();
                 
                                 } else{
-                                    console.log("증가 실패");
+                                    alert("이미 팔로우한 인원입니다.");
+                                    
+                                    clickFollow.classList.remove("followOn");
+                                    
+                                    clickFollow.classList.add("followOff");
+
                                 }
                             },
                             error : () => {
@@ -1806,7 +1830,7 @@ if (clickFollow != null){
     
             $.ajax({
                 url : "/follow",
-                data : {"loginMemberNo" : loginMemberNo, "reviewPageMemberNo" : reviewPageMemberNo},
+                data : {"loginMemberNo" : loginMemberNo, "reviewPageMemberNo" : reviewMemberNo},
                 type : "GET",
                 success : (result) => {
     
@@ -1821,7 +1845,12 @@ if (clickFollow != null){
                         followCountArray();
     
                     } else{
-                        console.log("증가 실패");
+                        alert("이미 팔로우한 인원입니다.");
+                        
+                        clickFollow.classList.remove("followOn");
+
+                        clickFollow.classList.add("followOff");
+                        
                     }
                 },
                 error : () => {
@@ -1832,7 +1861,7 @@ if (clickFollow != null){
     
             $.ajax({
                 url : "/unFollow",
-                data : {"loginMemberNo" :loginMemberNo, "reviewPageMemberNo" : reviewPageMemberNo},
+                data : {"loginMemberNo" :loginMemberNo, "reviewPageMemberNo" : reviewMemberNo},
                 type : "GET",
                 success : (result) => {
     
@@ -1936,7 +1965,7 @@ const reviewMoreList = function(){
                 // 드랍 다운 메뉴 삭제 버튼에 이벤트 삽입
                 reivewTextDownMenu_li1.addEventListener("click", () => {
             
-                    if(loginMemberNo == list.memberNO) {
+                    if(loginMemberNo == list.memberNo) {
 
                         if (confirm("정말 삭제 하시겠습니까?")){
                 
@@ -1950,13 +1979,14 @@ const reviewMoreList = function(){
 
                 // 드랍 다운 메뉴 이벤트 삽입
                 reviewTextDotStyle.addEventListener("click", () => {
-                    reviewTextDotStyle.nextElementSibling.style.display = "block";
+                    reviewTextDotStyle.lastElementChild.style.display = "block";
                 });
-                /* 
+
                 reviewTextDotStyle.addEventListener("blur", () => {
-                    reviewTextDotStyle.nextElementSibling.style.display = "none";
+                    setTimeout(()=>{
+                        reviewTextDotStyle.lastElementChild.style.display = "none";
+                    }, 10)
                 });
-                */ 
 
                 const reviewDetailPage = document.createElement("a");
                 reviewDetailPage.setAttribute("href","/place/detail/" +list.contenttypeid + "/" + list.contentid);
@@ -1970,7 +2000,7 @@ const reviewMoreList = function(){
                 const rating = document.createElement("div");
                 rating.classList.add("rating");
                 rating.innerHTML = "<span class='empty'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>"
-                +"<span class='fill' style='width:100 * (" + list.rating + " * 20) / 100px;'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>";
+                +"<span class='fill' style='width:84.5 * (" + list.rating + " * 20) / 100px;'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>";
     
                 const reviewTextTitle = document.createElement("div");
                 reviewTextTitle.classList.add("review-title");
@@ -2036,8 +2066,9 @@ const reviewMoreList = function(){
                 }
     
                 // A-0 (A 리뷰 시작의 0번 인덱스 위치에 있는 태그 )의 append
-                reviewTextHeaderStyle.append(reviewTextHeaderLayout, reviewTextDotStyle,
-                    reivewTextDotDownMenu);
+                reviewTextHeaderStyle.append(reviewTextHeaderLayout, reviewTextDotStyle);
+                        
+                reviewTextDotStyle.append(reivewTextDotDownMenu);
                     
                 // A-0-0 (A 리뷰 0번 위치의 0번 위치에 있는 태그)
                 reviewTextHeaderLayout.append(reviewTextUserImage, reviewTextInfoLayout);
@@ -2149,7 +2180,7 @@ for (let Btn of reviewDelteBtn){
     
         const reviewNo = Btn.childNodes[1].getAttribute("var");
 
-        if(loginMemberNo == reviewPageMemberNo) {
+        if(loginMemberNo == reviewMemberNo) {
 
             if (confirm("정말 삭제 하시겠습니까?")){
     

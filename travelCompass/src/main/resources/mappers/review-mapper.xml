@@ -17,6 +17,9 @@
 		<result property="memberNickname" column="MEMBER_NICKNAME"/>
 		
 		<result property="contenttypeid" column="CONTENT_TYPE_ID"/>
+		
+		<result property="likeCheck" column="LIKE_CHECK"/>
+		<result property="reviewLike" column="REVIEW_LIKE"/>
 
 		
 		 
@@ -95,6 +98,9 @@
 			END REVIEW_DATE,
 			]]> 
 			PROFILE_IMAGE, MEMBER_NICKNAME, MEMBER_NO, RATING,
+			<if test='#{memberNo!=-1}'>
+				(SELECT COUNT(*) FROM REVIEW_LIKE WHERE REVIEW_NO = R.REVIEW_NO AND MEMBER_NO = #{memberNo}) LIKE_CHECK,
+			</if>
 			(SELECT COUNT(*) FROM REVIEW_LIKE WHERE REVIEW_NO=R.REVIEW_NO) REVIEW_LIKE
 		FROM REVIEW R
 		LEFT JOIN "MEMBER" USING(MEMBER_NO)
@@ -232,19 +238,19 @@
 	  <!-- 좋아요 여부 체크 -->
   <select id="reviewLikeCheck" resultType="_int">
 		SELECT COUNT(*) FROM REVIEW_LIKE
-		WHERE BOARD_NO = #{reviewNo}
+		WHERE REVIEW_NO = #{reviewNo}
 		AND MEMBER_NO = #{memberNo}
 	</select>
 	
 	<!-- 좋아요 증가 -->
 	<insert id="reviewLikeUp">
-		INSERT INTO REVIEW_LIKE VALUES(#{reviewNo}, #{memberNo})
+		INSERT INTO REVIEW_LIKE VALUES(#{memberNo}, #{reviewNo})
 	</insert>
   
   <!-- 좋아요 감소 -->
   <delete id="reviewLikeDown">
   	DELETE FROM REVIEW_LIKE 
-  	WHERE BOARD_NO= #{reviewNo}
+  	WHERE REVIEW_NO= #{reviewNo}
   	AND MEMBER_NO= #{memberNo}
   </delete>
 	

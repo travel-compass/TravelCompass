@@ -7,44 +7,44 @@
 <div class="review-container">
   <div class="review-left">
     <ul>
-      <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
-      <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
-      <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
-      <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
-      <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
-      <span>훌륭함 / ${place.countRating[4]}</span>
+      <i class="fa-solid fa-circle" style="color: #34E0A1"></i>
+      <i class="fa-solid fa-circle" style="color: #34E0A1"></i>
+      <i class="fa-solid fa-circle" style="color: #34E0A1"></i>
+      <i class="fa-solid fa-circle" style="color: #34E0A1"></i>
+      <i class="fa-solid fa-circle" style="color: #34E0A1"></i>
+      <span>${place.countRating[4]} 건</span>
     </ul>
     <ul>
-      <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
-      <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
-      <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
-      <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
-      <i class="fa-regular fa-circle" style="color: #00AA6C"></i>
-      <span>매우좋음 / ${place.countRating[3]}</span>
+      <i class="fa-solid fa-circle" style="color: #34E0A1"></i>
+      <i class="fa-solid fa-circle" style="color: #34E0A1"></i>
+      <i class="fa-solid fa-circle" style="color: #34E0A1"></i>
+      <i class="fa-solid fa-circle" style="color: #34E0A1"></i>
+      <i class="fa-regular fa-circle" style="color: #34E0A1"></i>
+      <span>${place.countRating[3]} 건</span>
     </ul>
     <ul>
-      <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
-      <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
-      <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
-      <i class="fa-regular fa-circle" style="color: #00AA6C"></i>
-      <i class="fa-regular fa-circle" style="color: #00AA6C"></i>
-      <span>보통 / ${place.countRating[2]}</span>
+      <i class="fa-solid fa-circle" style="color: #34E0A1"></i>
+      <i class="fa-solid fa-circle" style="color: #34E0A1"></i>
+      <i class="fa-solid fa-circle" style="color: #34E0A1"></i>
+      <i class="fa-regular fa-circle" style="color: #34E0A1"></i>
+      <i class="fa-regular fa-circle" style="color: #34E0A1"></i>
+      <span>${place.countRating[2]} 건</span>
     </ul>
     <ul>
-      <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
-      <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
-      <i class="fa-regular fa-circle" style="color: #00AA6C"></i>
-      <i class="fa-regular fa-circle" style="color: #00AA6C"></i>
-      <i class="fa-regular fa-circle" style="color: #00AA6C"></i>
-      <span>형편없음 / ${place.countRating[1]}</span>
+      <i class="fa-solid fa-circle" style="color: #34E0A1"></i>
+      <i class="fa-solid fa-circle" style="color: #34E0A1"></i>
+      <i class="fa-regular fa-circle" style="color: #34E0A1"></i>
+      <i class="fa-regular fa-circle" style="color: #34E0A1"></i>
+      <i class="fa-regular fa-circle" style="color: #34E0A1"></i>
+      <span>${place.countRating[1]} 건</span>
     </ul>
     <ul>
-      <i class="fa-solid fa-circle" style="color: #00AA6C"></i>
-      <i class="fa-regular fa-circle" style="color: #00AA6C"></i>
-      <i class="fa-regular fa-circle" style="color: #00AA6C"></i>
-      <i class="fa-regular fa-circle" style="color: #00AA6C"></i>
-      <i class="fa-regular fa-circle" style="color: #00AA6C"></i>
-      <span>최악 / ${place.countRating[0]} </span>
+      <i class="fa-solid fa-circle" style="color: #34E0A1"></i>
+      <i class="fa-regular fa-circle" style="color: #34E0A1"></i>
+      <i class="fa-regular fa-circle" style="color: #34E0A1"></i>
+      <i class="fa-regular fa-circle" style="color: #34E0A1"></i>
+      <i class="fa-regular fa-circle" style="color: #34E0A1"></i>
+      <span>${place.countRating[0]} 건</span>
     </ul>
 
   </div>
@@ -132,9 +132,17 @@
               
               <div class="review-support"></div>
               <div class="review-bottom-menu-style">
-                <div class="save-button" onclick="reviewLike(${review.reviewNo}, ${review.memberNo}, loginMemberNo)">
-                  <i class="fa-solid fa-heart"></i>좋아요
+                <div class="save-button" id="likebtn" onclick="reviewLike(${review.reviewNo}, ${review.memberNo}, loginMemberNo, this)">
+                  <c:choose>
+                    <c:when test="${review.likeCheck==0}">
+                      <i class="fa-regular fa-heart"></i>좋아요<span class="likeCount">${review.reviewLike}</span>
+                    </c:when>                  
+                    <c:otherwise>
+                      <i class="fa-solid fa-heart"></i>좋아요 <span class="likeCount">${review.reviewLike}</span>
+                    </c:otherwise>
+                  </c:choose>
                 </div>
+
                 <div class="share-button" onclick="insertReport(${review.reviewNo}, ${review.memberNo}, loginMemberNo )">
                   <i class="fa-solid fa-arrow-up-from-bracket"></i>신고
                 </div>

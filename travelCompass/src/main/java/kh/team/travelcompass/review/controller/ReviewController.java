@@ -56,10 +56,17 @@ public class ReviewController {
 
 	@GetMapping("/list")
 	public Map<String, Object> selectReviewList(String contentid, Map<String, Object> paramMap,
-			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp) {
+			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
+			@SessionAttribute(value = "loginMember", required = false) Member loginMember) {
 
 		paramMap.put("contentid", contentid);
-
+		int memberNo;
+		if (loginMember == null) {
+			memberNo = -1;
+		} else {
+			memberNo = loginMember.getMemberNo();
+		}
+		paramMap.put("memberNo", memberNo);
 		Map<String, Object> reviewMap = service.selectReviewList(contentid, paramMap, cp);
 
 		return reviewMap;
@@ -141,23 +148,23 @@ public class ReviewController {
 
 		return reviewMoreList;
 	}
-	
 
-	//좋아요 증가
-	@GetMapping("/reviewLikeUp")
+	// 좋아요 증가
+	@GetMapping("/likeUp")
 	@ResponseBody
-	public int reviewLikeUp(@RequestParam Map<String, Object>paramMap) {
-		
+	public int reviewLikeUp(@RequestParam Map<String, Object> paramMap) {
+
 		return service.reviewLikeUp(paramMap);
 	}
-	
-	//좋아요 감소
-	@GetMapping("/reviewLikeDown")
+
+	// 좋아요 감소
+	@GetMapping("/likeDown")
 	@ResponseBody
-	public int reviewLikeDown(@RequestParam Map<String, Object>paramMap) {
-		
+	public int reviewLikeDown(@RequestParam Map<String, Object> paramMap) {
+
 		return service.reviewLikeDown(paramMap);
 	}
+
 	
 	
 	
