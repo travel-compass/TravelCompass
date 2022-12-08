@@ -124,6 +124,7 @@
 		WHERE FOLLOW_MEMBER_NO = #{memberNo}) TOTAL_FOLLOWING
 		FROM MEMBER
 		WHERE MEMBER_NO = #{memberNo}
+		AND SECESSION_FL = 'N'
 	</select>
 	
 	<!-- 팔로우한 인원 리스트 조회 -->
@@ -153,6 +154,7 @@
 		FROM FOLLOW F
 		JOIN "MEMBER" M ON (F.FOLLOW_MEMBER_NO = M.MEMBER_NO)
 		WHERE F.MEMBER_NO = #{memberNo}
+		AND SECESSION_FL = 'N'
 	</select>
 	
 	<!-- 팔로잉 한 인원 리스트 조회하기 -->
@@ -182,6 +184,7 @@
 		FROM FOLLOW F
 		JOIN "MEMBER" M ON (F.MEMBER_NO = M.MEMBER_NO)
 		WHERE F.FOLLOW_MEMBER_NO = #{memberNo}
+		AND SECESSION_FL = 'N'
 	</select>
 	
 	<update id="updateProfile">
