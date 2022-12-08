@@ -40,7 +40,7 @@ public class ProfileController {
 		Member member = service.selectMember(memberNo);
 		
 		// 프로필 페이지의 리뷰 리스트 가져오기
-		List<Review> reviewList = service.ReviewSelectList(memberNo);
+		List<Review> reviewList = service.allReviewSelectList(memberNo);
 		
 		model.addAttribute("member", member);
 		model.addAttribute("reviewList", reviewList);
@@ -74,9 +74,7 @@ public class ProfileController {
 	public List<Review> profileFedSelectList(Model model,
 			@PathVariable("memberNo") int memberNo){
 		
-		List<Review> fedList = service.ReviewSelectList(memberNo);
-		
-		model.addAttribute("reviewList", fedList);
+		List<Review> fedList = service.allReviewSelectList(memberNo);
 		
 		return fedList;
 	}
@@ -89,7 +87,6 @@ public class ProfileController {
 		
 		List<Review> reviewList = service.ReviewSelectList(memberNo);
 		
-		model.addAttribute("reviewList", reviewList);
 		
 		return reviewList;
 	}
@@ -100,9 +97,8 @@ public class ProfileController {
 	public List<Review> profileImageReviewSelectList(Model model,
 			@PathVariable("memberNo") int memberNo){
 		
-		List<Review> imageReviewList = service.ReviewSelectList(memberNo);
+		List<Review> imageReviewList = service.imageReviewSelectList(memberNo);
 		
-		model.addAttribute("reviewList", imageReviewList);
 		
 		return imageReviewList;
 	}
@@ -181,13 +177,13 @@ public class ProfileController {
 			@PathVariable("memberNo") int memberNo,
 			@RequestParam int rowBoundCount) {
 		
-		List<Review> ajaxFedMoreList = service.moreReviewList(memberNo,rowBoundCount);
+		List<Review> ajaxFedMoreList = service.moreFedList(memberNo,rowBoundCount);
 		
 		return ajaxFedMoreList;
 		
 	}
 	
-	// ajax 더보기 버튼 눌렀을 때 피드 10개씩 보여주기
+	// ajax 더보기 버튼 눌렀을 때 리뷰 10개씩 보여주기
 	@GetMapping("/profile/{memberNo}/ajaxReviewMoreList")
 	@ResponseBody
 	public List<Review> reviewMoreReviewList(
@@ -207,7 +203,7 @@ public class ProfileController {
 			@PathVariable("memberNo") int memberNo,
 			@RequestParam int rowBoundCount) {
 		
-		List<Review> ajaxImageMoreList = service.moreReviewList(memberNo,rowBoundCount);
+		List<Review> ajaxImageMoreList = service.moreImageReviewList(memberNo,rowBoundCount);
 		
 		return ajaxImageMoreList;
 		
