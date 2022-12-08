@@ -93,7 +93,8 @@
 		AND MEMBER_NO = (
 		SELECT MEMBER_NO
 		FROM "MEMBER"
-		WHERE MEMBER_NO = #{reviewPageMemberNo})
+		WHERE MEMBER_NO = #{reviewPageMemberNo}
+		AND SECESSION_FL = 'N')
 	</select>
 	
 	<update id="Follow">
