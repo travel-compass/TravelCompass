@@ -10,12 +10,18 @@ import kh.team.travelcompass.review.model.vo.Review;
 
 public interface ProfileService {
 
+	// 프로필 페이지 이동 시 프로필 페이지의 회원 정보 받아오기
+	Member selectMember(int memberNo);
+	
+	// 리뷰 조회 시 모든 리뷰 조회하기 (사진 유무 포함)
+	List<Review> allReviewSelectList(int memberNo);
+	
 	// ajax 리뷰 리스트 조회
 	List<Review> ReviewSelectList(int memberNo);
 
-	// 프로필 페이지 이동 시 프로필 페이지의 회원 정보 받아오기
-	Member selectMember(int memberNo);
-
+	// ajax 이미지 리뷰 리스트 조회
+	List<Review> imageReviewSelectList(int memberNo);
+	
 	// 팔로우 체크하기
 	int followCheck(Map<String, Integer> map);
 	
@@ -31,8 +37,14 @@ public interface ProfileService {
 	// 팔로잉 한 인원 리스트 조회하기
 	List<Member> selectFollowingMemberList(int memberNo);
 
+	// 더보기 버튼 눌렀을 때 남은 피드 테이블 불러오기
+	List<Review> moreFedList(int memberNo, int rowBoundCount);
+	
 	// 더보기 버튼 눌렀을 때 남은 리뷰 테이블 불러오기
 	List<Review> moreReviewList(int memberNo, int rowBoundCount);
+	
+	// 더보기 버튼 눌렀을 때 남은 사진리뷰 테이블 불러오기
+	List<Review> moreImageReviewList(int memberNo, int rowBoundCount);
 
 	// 프로필 이미지 변경
 	int updateProfile(String wepPath, String filePath, 
@@ -40,6 +52,7 @@ public interface ProfileService {
 
 	// 리뷰 삭제
 	int boardDelete(int reviewNo);
+
 
 
 }

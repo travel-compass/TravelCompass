@@ -659,7 +659,6 @@ footer{
     height: 15px;
     margin-bottom: 10px;
     width: 100px;
-    z-index: 950;
 }
 .empty, .fill{
     position: absolute;
@@ -667,11 +666,9 @@ footer{
 }
 
 .empty{
-    z-index: 1;
     color: #ddd;
 }
 .fill{
-    z-index: 2;
     overflow: hidden;
     color: #2DC48D;
     width: 40px;

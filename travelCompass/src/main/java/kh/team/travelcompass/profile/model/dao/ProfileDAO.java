@@ -23,6 +23,18 @@ public class ProfileDAO {
 		
 		return sqlSession.selectOne("profileMapper.getListCount", memberNo);
 	}
+	
+
+	/** ajax 모든 리뷰 조회하기
+	 * @param memberNo
+	 * @return allReviewList
+	 */
+	public List<Review> allReivewSelectList(int memberNo) {
+		
+		RowBounds rowBounds = new RowBounds(0, 10);
+		
+		return sqlSession.selectList("profileMapper.allReviewSelectList", memberNo, rowBounds);
+	}
 
 	/** ajax 리뷰 리스트 조회
 	 * @return reviewList
@@ -42,6 +54,14 @@ public class ProfileDAO {
 		RowBounds rowBounds = new RowBounds(0, 10);
 		
 		return sqlSession.selectList("profileMapper.ReviewSelectList", memberNo, rowBounds);
+	}
+	
+
+	public List<Review> imageReivewSelectList(int memberNo) {
+		
+		RowBounds rowBounds = new RowBounds(0, 10);
+		
+		return sqlSession.selectList("profileMapper.imageReviewSelectList", memberNo, rowBounds);
 	}
 
 	/** 프로필 페이지 이동 시 프로필 페이지의 회원 정보 받아오기
@@ -93,6 +113,18 @@ public class ProfileDAO {
 		return sqlSession.selectList("memberMapper.selectFollowingMemberList", memberNo);
 	}
 
+	/** 더보기 버튼 눌렀을 때 남은 피드 테이블 불러오기
+	 * @param memberNo
+	 * @param rowBoundCount
+	 * @return moreReviewList
+	 */
+	public List<Review> moreFedList(int memberNo, int rowBoundCount) {
+		
+		RowBounds rowBounds = new RowBounds(rowBoundCount, 10);
+		
+		return sqlSession.selectList("profileMapper.allReviewSelectList", memberNo, rowBounds);
+	}
+	
 	/** 더보기 버튼 눌렀을 때 남은 리뷰 테이블 불러오기
 	 * @param memberNo
 	 * @param rowBoundCount
@@ -103,6 +135,18 @@ public class ProfileDAO {
 		RowBounds rowBounds = new RowBounds(rowBoundCount, 10);
 		
 		return sqlSession.selectList("profileMapper.ReviewSelectList", memberNo, rowBounds);
+	}
+	
+	/** 더보기 버튼 눌렀을 때 남은 사진리뷰 테이블 불러오기
+	 * @param memberNo
+	 * @param rowBoundCount
+	 * @return moreReviewList
+	 */
+	public List<Review> moreImageReviewList(int memberNo, int rowBoundCount) {
+		
+		RowBounds rowBounds = new RowBounds(rowBoundCount, 10);
+		
+		return sqlSession.selectList("profileMapper.imageReviewSelectList", memberNo, rowBounds);
 	}
 
 	/** 프로핑 이미지 변경
@@ -120,5 +164,7 @@ public class ProfileDAO {
 	public int boardDelete(int reviewNo) {
 		return sqlSession.update("profileMapper.reviewDelete", reviewNo);
 	}
+
+
 	
 }

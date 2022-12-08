@@ -20,6 +20,17 @@ public class ProfileServiceImpl implements ProfileService {
 	@Autowired
 	private ProfileDAO dao;
 
+
+	// ajax 모든 리뷰 조회하기
+	@Override
+	public List<Review> allReviewSelectList(int memberNo) {
+		
+		List<Review> allReviewList = dao.allReivewSelectList(memberNo);
+		
+		return allReviewList;
+	}
+	
+	
 	// ajax 리뷰 리스트 조회
 	@Override
 	public List<Review> ReviewSelectList(int memberNo) {
@@ -29,6 +40,15 @@ public class ProfileServiceImpl implements ProfileService {
 		List<Review> reviewList = dao.ReivewSelectList(memberNo);
 		
 		return reviewList;
+	}
+	
+	// ajax 이미지 리뷰 리스트 조회
+	@Override
+	public List<Review> imageReviewSelectList(int memberNo) {
+		
+		List<Review> imageReviewList = dao.imageReivewSelectList(memberNo);
+		
+		return imageReviewList;
 	}
 
 	// 프로필 페이지 이동 시 프로필 페이지의 회원 정보 받아오기
@@ -79,6 +99,15 @@ public class ProfileServiceImpl implements ProfileService {
 		return followingMemberList;
 	}
 
+	// 더보기 버튼 눌렀을 때 남은 피드 테이블 불러오기
+	@Override
+	public List<Review> moreFedList(int memberNo, int rowBoundCount) {
+		
+		List<Review> moreFedList = dao.moreReviewList(memberNo, rowBoundCount);
+		
+		return moreFedList;
+	}
+	
 	// 더보기 버튼 눌렀을 때 남은 리뷰 테이블 불러오기
 	@Override
 	public List<Review> moreReviewList(int memberNo, int rowBoundCount) {
@@ -86,6 +115,15 @@ public class ProfileServiceImpl implements ProfileService {
 		List<Review> moreReviewList = dao.moreReviewList(memberNo, rowBoundCount);
 		
 		return moreReviewList;
+	}
+	
+	// 더보기 버튼 눌렀을 때 남은 이미지 리뷰 테이블 불러오기
+	@Override
+	public List<Review> moreImageReviewList(int memberNo, int rowBoundCount) {
+		
+		List<Review> moreImageReviewList = dao.moreReviewList(memberNo, rowBoundCount);
+		
+		return moreImageReviewList;
 	}
 
 	// 프로필 이미지 수정
@@ -130,5 +168,6 @@ public class ProfileServiceImpl implements ProfileService {
 	public int boardDelete(int reviewNo) {
 		return dao.boardDelete(reviewNo);
 	}
-	
+
+
 }
