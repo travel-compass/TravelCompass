@@ -19,7 +19,7 @@ public class ReportController {
 	@GetMapping("/insertReport")
 	@ResponseBody
 	public int insertReport(@RequestParam Map<String, Object>paramMap) {
-		System.out.println("호출");
+
 		int check = service.reportCheck(paramMap);
 		int result = 0;
 		

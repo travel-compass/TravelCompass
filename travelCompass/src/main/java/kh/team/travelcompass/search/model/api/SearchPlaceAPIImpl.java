@@ -48,50 +48,50 @@ public class SearchPlaceAPIImpl implements SearchPlaceAPI{
 	}
 
 	/**
-	 *좌표 기반 검색(위치기반관광정보조회)
+	 *좌표 기반 검색(위치기반관광정보조회) 
 	 */
-	@Override
-	public List<Place> nearByPlace(Map<String, String> paramMap) throws Exception{
-		List<Place> placeList = new ArrayList<>();
-
-		System.out.println("API 호출");
-		String endPoint = "/locationBasedList?";
-		String radius = "&radius=1000";
-		String param = createQueryString(paramMap);
-		
-
-		URL url = new URL(HOST + endPoint + essentialParam + key + radius + param);
-		System.out.println(url.toString());
-		HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-		conn.setRequestMethod("GET");
-		conn.setDoInput(true);
-		conn.setDoOutput(false);
-
-		StringBuilder response = new StringBuilder();
-
-		BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-		String readline = "";
-
-		while((readline = br.readLine()) != null) {
-			response.append(readline);
-		}
-		br.close();
-
-		JSONObject json = new JSONObject(response.toString());
-		String items = json.getJSONObject("response").getJSONObject("body").getJSONObject("items").getJSONArray("item").toString();
-
-		System.out.println(items);
-
-		// ObjectMapper 객체 생성
-		ObjectMapper objectMapper = new ObjectMapper();
-
-		// JSONArray String -> List
-		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		placeList = objectMapper.readValue(items, new TypeReference<List<Place>>() {});
-		System.out.println(placeList);
-
-		return placeList;
-	}
+//	@Override
+//	public List<Place> nearByPlace(Map<String, String> paramMap) throws Exception{
+//		List<Place> placeList = new ArrayList<>();
+//
+//		System.out.println("API 호출");
+//		String endPoint = "/locationBasedList?";
+//		String radius = "&radius=1000";
+//		String param = createQueryString(paramMap);
+//		
+//
+//		URL url = new URL(HOST + endPoint + essentialParam + key + radius + param);
+//		System.out.println(url.toString());
+//		HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+//		conn.setRequestMethod("GET");
+//		conn.setDoInput(true);
+//		conn.setDoOutput(false);
+//
+//		StringBuilder response = new StringBuilder();
+//
+//		BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+//		String readline = "";
+//
+//		while((readline = br.readLine()) != null) {
+//			response.append(readline);
+//		}
+//		br.close();
+//
+//		JSONObject json = new JSONObject(response.toString());
+//		String items = json.getJSONObject("response").getJSONObject("body").getJSONObject("items").getJSONArray("item").toString();
+//
+//		System.out.println(items);
+//
+//		// ObjectMapper 객체 생성
+//		ObjectMapper objectMapper = new ObjectMapper();
+//
+//		// JSONArray String -> List
+//		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+//		placeList = objectMapper.readValue(items, new TypeReference<List<Place>>() {});
+//		System.out.println(placeList);
+//
+//		return placeList;
+//	}
 
 
 
@@ -102,12 +102,12 @@ public class SearchPlaceAPIImpl implements SearchPlaceAPI{
 	public Map<String,Object> searchPlaceKeyword(Map<String, String> paramMap) throws Exception {
 		Map<String,Object> placeMap = new HashMap<String,Object>();
 
-		System.out.println("API 호출");
+		//System.out.println("API 호출");
 		String endPoint = "/searchKeyword?";
 		String param = createQueryString(paramMap);
 
 		URL url = new URL(HOST + endPoint + essentialParam + key + param);   //key 검색량 소진시 key2
-		System.out.println(url.toString());
+		//System.out.println(url.toString());
 		HttpURLConnection conn = (HttpURLConnection)url.openConnection();
 		conn.setRequestMethod("GET");
 		conn.setDoInput(true);
@@ -123,7 +123,7 @@ public class SearchPlaceAPIImpl implements SearchPlaceAPI{
 		}
 		br.close();
 
-		System.out.println(response.toString());
+		//System.out.println(response.toString());
 		try {
 			
 		

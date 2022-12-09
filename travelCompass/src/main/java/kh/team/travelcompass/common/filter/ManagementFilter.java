@@ -21,12 +21,13 @@ public class ManagementFilter implements Filter {
 
 
 	public void init(FilterConfig filterConfig) throws ServletException {
-		System.out.println("로그인 필터 생성");
+		
 	}
 
 	public void destroy() {
-		System.out.println("로그인 필터 파괴");
+		
 	}
+	
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 		//다운캐스팅 진행
