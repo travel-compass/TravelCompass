@@ -30,7 +30,15 @@ public class SearchController {
 
 	// jsp에서 keyword, areaCode, contentTypeId를 받아 service -> api
 	// api(검색 결과(json객체)) -> service -> controller -> jsp
-	// @ResponseBody
+	
+	/**키워드 검색
+	 * @param keyword
+	 * @param areaCode
+	 * @param contentTypeId
+	 * @param model
+	 * @param pageNo
+	 * @return "search/searchpage"
+	 */
 	@GetMapping("/search")
 	public String searchPlaceKeyword(String keyword,
 			/*@RequestParam(value = "areaCode", required = false, defaultValue = "null")*/ String areaCode,
@@ -50,6 +58,13 @@ public class SearchController {
 		return "search/searchpage";
 	}
 
+	/** 카테고리 클릭시 비동기 검색
+	 * @param keyword
+	 * @param areaCode
+	 * @param contentTypeId
+	 * @param pageNo
+	 * @return placeMap
+	 */
 	@ResponseBody
 	@GetMapping("/categorySearch")
 	public Map<String,Object> categorySearch(String keyword,

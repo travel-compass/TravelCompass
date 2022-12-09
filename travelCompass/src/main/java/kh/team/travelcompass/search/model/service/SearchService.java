@@ -19,7 +19,7 @@ public interface SearchService {
 	 * @param areaCode
 	 * @param contentTypeId 
 	 * @param pageNo 
-	 * @return 
+	 * @return placeMap
 	 */
 	public Map<String, Object> searchPlaceKeyword( String keyword, String areaCode,
 			String contentTypeId, String pageNo) throws Exception;
