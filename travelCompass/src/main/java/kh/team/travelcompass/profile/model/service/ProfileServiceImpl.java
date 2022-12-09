@@ -165,8 +165,8 @@ public class ProfileServiceImpl implements ProfileService {
 	// 리뷰 삭제
 	@Transactional
 	@Override
-	public int boardDelete(int reviewNo) {
-		return dao.boardDelete(reviewNo);
+	public int reviewDelete(int reviewNo) {
+		return dao.reviewDelete(reviewNo);
 	}
 
 

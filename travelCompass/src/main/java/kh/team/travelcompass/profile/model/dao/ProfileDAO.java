@@ -41,22 +41,16 @@ public class ProfileDAO {
 	 */
 	public List<Review> ReivewSelectList(int memberNo) {
 
-		// 25개의 리스트 카운트가 존재한다
-		// 25개중 10개씩 출력하기 원한다
-		// 0 ~ 9 번 출력 후
-		// 10 ~ 19 번 출력
-		// 20 ~ 29 번 출력
-		
-		// RowBounds(0, 10);
-		// RowBounds(10, 10);
-		// RowBounds(20, 10);
-		
 		RowBounds rowBounds = new RowBounds(0, 10);
 		
 		return sqlSession.selectList("profileMapper.ReviewSelectList", memberNo, rowBounds);
 	}
 	
 
+	/** ajax 사진 리뷰 리스트 조회
+	 * @param memberNo
+	 * @return imageReviewList
+	 */
 	public List<Review> imageReivewSelectList(int memberNo) {
 		
 		RowBounds rowBounds = new RowBounds(0, 10);
@@ -161,7 +155,7 @@ public class ProfileDAO {
 	 * @param reviewNo
 	 * @return result
 	 */
-	public int boardDelete(int reviewNo) {
+	public int reviewDelete(int reviewNo) {
 		return sqlSession.update("profileMapper.reviewDelete", reviewNo);
 	}
 
