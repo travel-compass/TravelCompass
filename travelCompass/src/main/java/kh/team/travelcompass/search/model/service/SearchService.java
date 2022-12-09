@@ -11,10 +11,6 @@ import kh.team.travelcompass.place.model.vo.Place;
 
 public interface SearchService {
 
-	/** 좌표기반 장소 목록 조회 서비스
-	 * @return placeList
-	 */
-	public List<Place> nearByPlace(String latitude, String longitude) throws Exception;
 
 	
 	/** 키워드 검색 장소 목록 조회 서비스

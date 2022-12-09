@@ -27,17 +27,6 @@ public class SearchController {
 	@Autowired
 	SearchService service;
 
-	@ResponseBody
-	@GetMapping("/nearByPlace")
-	public List<Place> nearByPlace(String latitude, String longitude) {
-
-		try {
-			service.nearByPlace(latitude, longitude);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
 
 	// jsp에서 keyword, areaCode, contentTypeId를 받아 service -> api
 	// api(검색 결과(json객체)) -> service -> controller -> jsp
