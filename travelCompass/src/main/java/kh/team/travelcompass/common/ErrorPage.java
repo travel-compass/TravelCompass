@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.GetMapping;
 
+//web.xml에서 errorpage 추가
+
 @Controller
 public class ErrorPage {
 	
