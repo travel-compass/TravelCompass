@@ -111,11 +111,11 @@ public class PlaceController {
 		model.addAttribute("reviewMap", reviewMap);
 		
 		
-		System.out.println(mainPlace);
-		System.out.println("주변장소리스트"+aroundPlaceList);
-		System.out.println("리뷰맵"+reviewMap);
-		
-		System.out.println(countRating);
+//		System.out.println(mainPlace);
+//		System.out.println("주변장소리스트"+aroundPlaceList);
+//		System.out.println("리뷰맵"+reviewMap);
+//		
+//		System.out.println(countRating);
 		
 		return "place/detailPlace"; 
 	}

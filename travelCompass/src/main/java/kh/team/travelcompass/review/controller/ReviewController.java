@@ -123,7 +123,7 @@ public class ReviewController {
 	@GetMapping("/delete")
 	public int deleteReview(int reviewNo) {
 
-		System.out.println();
+//		System.out.println();
 
 		return service.deleteReview(reviewNo);
 	}

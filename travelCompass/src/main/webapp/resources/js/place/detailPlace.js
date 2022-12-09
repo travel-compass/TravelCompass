@@ -28,11 +28,11 @@ placeScrap.addEventListener("click", (e) => {
           e.target.classList.add("fa-solid"); // 꽉 찬 스크랩 클래스 추가
         } else {
           // 실패
-          console.log("스크랩 실패");
+          // console.log("스크랩 실패");
         }
       },
       error: () => {
-        console.log("스크랩 에러");
+        // console.log("스크랩 에러");
       },
     });
   } else {
@@ -49,11 +49,11 @@ placeScrap.addEventListener("click", (e) => {
             e.target.classList.add("fa-regular");
           } else {
             // 실패
-            console.log("스크랩 취소 실패");
+            // console.log("스크랩 취소 실패");
           }
         },
         error: () => {
-          console.log("스크랩 취소 에러");
+          // console.log("스크랩 취소 에러");
         },
       });
     }
@@ -98,7 +98,7 @@ marker.setMap(map);
 (() => {
   const roadViewModal = document.getElementById("roadViewModal");
   roadViewModal.addEventListener("click", (e) => {
-    console.log("클릭");
+    // console.log("클릭");
     if (e.target.getAttribute("id") == "roadViewModal") {
       roadViewModal.classList.remove("show");
     }
@@ -122,7 +122,7 @@ function showRoadView(mapy, mapx) {
     if (panoId == null) {
       alert("로드뷰를 지원하지 않습니다.");
     }
-    console.log(panoId);
+    // console.log(panoId);
     roadView.setPanoId(panoId, position);
   });
 }

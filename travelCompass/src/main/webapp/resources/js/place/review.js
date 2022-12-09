@@ -6,7 +6,7 @@ const reviewContent = document.getElementById("reviewContent");
 const submitReview = document.getElementById("reviewform");
 
 addReview.addEventListener("click", () => {
-  console.log("비동기 리뷰 작성");
+  // console.log("비동기 리뷰 작성");
   // 로그인 확인
   if (loginMemberNo == "") {
     // 로그인X
@@ -32,7 +32,6 @@ addReview.addEventListener("click", () => {
     return;
   }
 
-  console.log("비동기 리뷰 작성");
   // 비동기화 리뷰 작성(등록)
   $.ajax({
     url: "/review/insert",
@@ -46,7 +45,7 @@ addReview.addEventListener("click", () => {
     },
     type: "post",
     success: (result) => {
-      console.log("작성 성공");
+      // console.log("작성 성공");
       if (result > 0) {
         //댓글 등록 성공
         reviewTitle.value = "";
@@ -61,7 +60,7 @@ addReview.addEventListener("click", () => {
     },
 
     error: function (req, status, error) {
-      console.log("리뷰 등록 에러");
+      // console.log("리뷰 등록 에러");
     },
   });
 });
@@ -77,7 +76,7 @@ function selectReviewList(e) {
     },
     dataType: "JSON",
     success: (reviewMap) => {
-      console.log(reviewMap);
+      // console.log(reviewMap);
       const ulreviewList = document.getElementById("review-list");
       ulreviewList.innerHTML = "";
 
@@ -164,26 +163,45 @@ function selectReviewList(e) {
 
         reviewTextTitle.innerText = review.reviewTitle;
         // XSS 방지 처리 해제
-        reviewTextTitle.innerText =  review.reviewTitle.replaceAll("&amp;", "&");
-        reviewTextTitle.innerText =  review.reviewTitle.replaceAll("&lt;", "<");
-        reviewTextTitle.innerText =  review.reviewTitle.replaceAll("&gt;", ">");
-        reviewTextTitle.innerText =  review.reviewTitle.replaceAll("&quot;", "\"");
-        
+        reviewTextTitle.innerText = review.reviewTitle.replaceAll("&amp;", "&");
+        reviewTextTitle.innerText = review.reviewTitle.replaceAll("&lt;", "<");
+        reviewTextTitle.innerText = review.reviewTitle.replaceAll("&gt;", ">");
+        reviewTextTitle.innerText = review.reviewTitle.replaceAll(
+          "&quot;",
+          '"'
+        );
+
         // 개행문자 처리 해제
-        reviewTextTitle.innerText =  review.reviewTitle.replaceAll("<br>", "\n").replaceAll("&nbsp;"," ");
+        reviewTextTitle.innerText = review.reviewTitle
+          .replaceAll("<br>", "\n")
+          .replaceAll("&nbsp;", " ");
 
         const reviewTextContent = document.createElement("div");
         reviewTextContent.classList.add("review-content");
 
         reviewTextContent.innerText = '"' + review.reviewContent + '"';
 
-        reviewTextContent.innerText = review.reviewContent.replaceAll("&amp;", "&");
-        reviewTextContent.innerText = review.reviewContent.replaceAll("&lt;", "<");
-        reviewTextContent.innerText = review.reviewContent.replaceAll("&gt;", ">");
-        reviewTextContent.innerText = review.reviewContent.replaceAll("&quot;", "\"");
-        
+        reviewTextContent.innerText = review.reviewContent.replaceAll(
+          "&amp;",
+          "&"
+        );
+        reviewTextContent.innerText = review.reviewContent.replaceAll(
+          "&lt;",
+          "<"
+        );
+        reviewTextContent.innerText = review.reviewContent.replaceAll(
+          "&gt;",
+          ">"
+        );
+        reviewTextContent.innerText = review.reviewContent.replaceAll(
+          "&quot;",
+          '"'
+        );
+
         // 개행문자 처리 해제
-        reviewTextContent.innerText =  review.reviewContent.replaceAll("<br>", "\n").replaceAll("&nbsp;"," ");
+        reviewTextContent.innerText = review.reviewContent
+          .replaceAll("<br>", "\n")
+          .replaceAll("&nbsp;", " ");
 
         const reviewTextSupport = document.createElement("div");
         reviewTextSupport.classList.add("review-support");
@@ -270,7 +288,7 @@ function selectReviewList(e) {
       }
     },
     error: () => {
-      console.log("리뷰 리스트 불러오기 실패");
+      // console.log("리뷰 리스트 불러오기 실패");
     },
   });
 }
@@ -369,7 +387,7 @@ for (let BTNList of dropDownMenu) {
 
 /* 리뷰 삭제 */
 function deleteReview(reviewNo) {
-  console.log(reviewNo);
+  // console.log(reviewNo);
   if (confirm("정말 삭제하시겠습니까?")) {
     $.ajax({
       url: "/review/delete",
@@ -382,11 +400,11 @@ function deleteReview(reviewNo) {
           alert("삭제되었습니다");
           selectReviewList();
         } else {
-          console.log("삭제 실패");
+          // console.log("삭제 실패");
         }
       },
       error: () => {
-        console.log("삭제 에러");
+        // console.log("삭제 에러");
       },
     });
   }
@@ -536,26 +554,45 @@ moreBtn.addEventListener("click", () => {
         reviewTextTitle.innerText = review.reviewTitle;
 
         // XSS 방지 처리 해제
-        reviewTextTitle.innerText =  review.reviewTitle.replaceAll("&amp;", "&");
-        reviewTextTitle.innerText =  review.reviewTitle.replaceAll("&lt;", "<");
-        reviewTextTitle.innerText =  review.reviewTitle.replaceAll("&gt;", ">");
-        reviewTextTitle.innerText =  review.reviewTitle.replaceAll("&quot;", "\"");
-        
+        reviewTextTitle.innerText = review.reviewTitle.replaceAll("&amp;", "&");
+        reviewTextTitle.innerText = review.reviewTitle.replaceAll("&lt;", "<");
+        reviewTextTitle.innerText = review.reviewTitle.replaceAll("&gt;", ">");
+        reviewTextTitle.innerText = review.reviewTitle.replaceAll(
+          "&quot;",
+          '"'
+        );
+
         // 개행문자 처리 해제
-        reviewTextTitle.innerText =  review.reviewTitle.replaceAll("<br>", "\n").replaceAll("&nbsp;"," ");
+        reviewTextTitle.innerText = review.reviewTitle
+          .replaceAll("<br>", "\n")
+          .replaceAll("&nbsp;", " ");
 
         const reviewTextContent = document.createElement("div");
         reviewTextContent.classList.add("review-content");
 
         reviewTextContent.innerText = '"' + review.reviewContent + '"';
 
-        reviewTextContent.innerText = review.reviewContent.replaceAll("&amp;", "&");
-        reviewTextContent.innerText = review.reviewContent.replaceAll("&lt;", "<");
-        reviewTextContent.innerText = review.reviewContent.replaceAll("&gt;", ">");
-        reviewTextContent.innerText = review.reviewContent.replaceAll("&quot;", "\"");
-        
+        reviewTextContent.innerText = review.reviewContent.replaceAll(
+          "&amp;",
+          "&"
+        );
+        reviewTextContent.innerText = review.reviewContent.replaceAll(
+          "&lt;",
+          "<"
+        );
+        reviewTextContent.innerText = review.reviewContent.replaceAll(
+          "&gt;",
+          ">"
+        );
+        reviewTextContent.innerText = review.reviewContent.replaceAll(
+          "&quot;",
+          '"'
+        );
+
         // 개행문자 처리 해제
-        reviewTextContent.innerText =  review.reviewContent.replaceAll("<br>", "\n").replaceAll("&nbsp;"," ");
+        reviewTextContent.innerText = review.reviewContent
+          .replaceAll("<br>", "\n")
+          .replaceAll("&nbsp;", " ");
 
         const reviewTextSupport = document.createElement("div");
         reviewTextSupport.classList.add("review-support");
@@ -770,26 +807,45 @@ const createReviewList = function () {
         reviewTextTitle.innerText = review.reviewTitle;
 
         // XSS 방지 처리 해제
-        reviewTextTitle.innerText =  review.reviewTitle.replaceAll("&amp;", "&");
-        reviewTextTitle.innerText =  review.reviewTitle.replaceAll("&lt;", "<");
-        reviewTextTitle.innerText =  review.reviewTitle.replaceAll("&gt;", ">");
-        reviewTextTitle.innerText =  review.reviewTitle.replaceAll("&quot;", "\"");
-        
+        reviewTextTitle.innerText = review.reviewTitle.replaceAll("&amp;", "&");
+        reviewTextTitle.innerText = review.reviewTitle.replaceAll("&lt;", "<");
+        reviewTextTitle.innerText = review.reviewTitle.replaceAll("&gt;", ">");
+        reviewTextTitle.innerText = review.reviewTitle.replaceAll(
+          "&quot;",
+          '"'
+        );
+
         // 개행문자 처리 해제
-        reviewTextTitle.innerText =  review.reviewTitle.replaceAll("<br>", "\n").replaceAll("&nbsp;"," ");
+        reviewTextTitle.innerText = review.reviewTitle
+          .replaceAll("<br>", "\n")
+          .replaceAll("&nbsp;", " ");
 
         const reviewTextContent = document.createElement("div");
         reviewTextContent.classList.add("review-content");
 
         reviewTextContent.innerText = '"' + review.reviewContent + '"';
 
-        reviewTextContent.innerText = review.reviewContent.replaceAll("&amp;", "&");
-        reviewTextContent.innerText = review.reviewContent.replaceAll("&lt;", "<");
-        reviewTextContent.innerText = review.reviewContent.replaceAll("&gt;", ">");
-        reviewTextContent.innerText = review.reviewContent.replaceAll("&quot;", "\"");
-        
+        reviewTextContent.innerText = review.reviewContent.replaceAll(
+          "&amp;",
+          "&"
+        );
+        reviewTextContent.innerText = review.reviewContent.replaceAll(
+          "&lt;",
+          "<"
+        );
+        reviewTextContent.innerText = review.reviewContent.replaceAll(
+          "&gt;",
+          ">"
+        );
+        reviewTextContent.innerText = review.reviewContent.replaceAll(
+          "&quot;",
+          '"'
+        );
+
         // 개행문자 처리 해제
-        reviewTextContent.innerText =  review.reviewContent.replaceAll("<br>", "\n").replaceAll("&nbsp;"," ");
+        reviewTextContent.innerText = review.reviewContent
+          .replaceAll("<br>", "\n")
+          .replaceAll("&nbsp;", " ");
 
         const reviewTextSupport = document.createElement("div");
         reviewTextSupport.classList.add("review-support");
@@ -904,7 +960,7 @@ const createReviewList = function () {
 
 //신고하기
 function insertReport(reviewNo, memberNo, loginMemberNo) {
-  console.log(reviewNo, memberNo, loginMemberNo);
+  // console.log(reviewNo, memberNo, loginMemberNo);
   if (loginMemberNo == "") {
     alert("로그인 후 이용해주세요.");
     return;
@@ -929,7 +985,7 @@ function insertReport(reviewNo, memberNo, loginMemberNo) {
         }
       },
       error: (error) => {
-        console.log(error);
+        // console.log(error);
         alert("이미 신고한 리뷰입니다");
         location.reload();
       },
@@ -957,10 +1013,6 @@ function reviewLike(reviewNo, memberNo, loginMemberNo, el) {
 
   // 로그인 상태 + 좋아요 상태가 아닌 경우
 
-  console.log(el);
-  console.log(el.firstElementChild);
-  console.log(el.firstElementChild.classList.contains("fa-regular"));
-
   if (el.firstElementChild.classList.contains("fa-regular")) {
     //빈하트인 경우
 
@@ -972,16 +1024,16 @@ function reviewLike(reviewNo, memberNo, loginMemberNo, el) {
         if (result > 0) {
           el.firstElementChild.classList.remove("fa-regular"); //빈하트 클래스 제거
           el.firstElementChild.classList.add("fa-solid"); //채워진 하트 클래스 추가
-          console.log(el.lastElementChild);
+          // console.log(el.lastElementChild);
 
           el.lastElementChild.innerText =
             Number(el.lastElementChild.innerText) + 1;
         } else {
-          console.log("증가 실패");
+          // console.log("증가 실패");
         }
       },
       error: () => {
-        console.log("증가 에러");
+        // console.log("증가 에러");
       },
     });
   }
@@ -1001,11 +1053,11 @@ function reviewLike(reviewNo, memberNo, loginMemberNo, el) {
               Number(el.lastElementChild.innerText) - 1;
           }
         } else {
-          console.log("감소 실패");
+          // console.log("감소 실패");
         }
       },
       error: () => {
-        console.log("감소 에러");
+        // console.log("감소 에러");
       },
     });
   }
