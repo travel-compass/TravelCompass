@@ -152,7 +152,7 @@ public class ReviewServiceImpl implements ReviewService {
 	
 	
 
-	//좋아요여부 체크
+	// 본인 리뷰 좋아요여부 체크
 	@Override
 	public int reviewLikeCheck(Map<String, Object> map) {
 		

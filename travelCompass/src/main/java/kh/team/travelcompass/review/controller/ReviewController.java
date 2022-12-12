@@ -39,21 +39,14 @@ public class ReviewController {
 
 	@Autowired
 	private ProfileService pservice;
-	// 리뷰 목록 정렬 리스트(추천,최신,평점 순 조회)
-//	@GetMapping("/reviewList")
-//	public Map<String, Object> orderReviewList(String contentid, @RequestParam Map<String, Object> paramMap,
-//			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp, Model model) {
-//
-//		paramMap.put("contentid", contentid);
-//		// pm=={contentid,key,query,cp}
-//
-//		Map<String, Object> reviewMap = service.orderReviewList(paramMap, cp);
-//
-//		model.addAttribute("reviewMap", reviewMap);
-//
-//		return reviewMap;
-//	}
 
+	/**
+	 * @param contentid 리뷰가 포함된 contentid
+	 * @param paramMap 
+	 * @param cp 페이지네이션 페이지 변수
+	 * @param loginMember 로그인한 회원 객체
+	 * @return reviewMap reivew List와 pagination객체
+	 */
 	@GetMapping("/list")
 	public Map<String, Object> selectReviewList(String contentid, Map<String, Object> paramMap,
 			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
@@ -61,17 +54,21 @@ public class ReviewController {
 
 		paramMap.put("contentid", contentid);
 		int memberNo;
-		if (loginMember == null) {
+		
+		// 로그인 확인 / 멤버 넘버 세팅
+		if (loginMember == null) { // 로그인하지 않았을 때
 			memberNo = -1;
 		} else {
 			memberNo = loginMember.getMemberNo();
 		}
+		
 		paramMap.put("memberNo", memberNo);
 		Map<String, Object> reviewMap = service.selectReviewList(contentid, paramMap, cp);
 
 		return reviewMap;
 	}
 
+	// 리뷰 등록
 	@PostMapping("/insert")
 	public int insertReview(Review review) {
 
