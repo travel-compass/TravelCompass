@@ -1480,8 +1480,6 @@ followButton.addEventListener("click", () => {
             const followTable = document.getElementById("follow-table");
             followTable.innerHTML = "";
 
-            console.log(followMemberList);
-            
             if (followMemberList.length == 0){
                 return;
             }
@@ -1548,6 +1546,7 @@ followButton.addEventListener("click", () => {
                                 }
                             },
                             error : () => {
+
                                 console.log("증가 에러");
                             }
                         })
@@ -1979,7 +1978,7 @@ const reviewMoreList = function(){
 
                         if (confirm("정말 삭제 하시겠습니까?")){
                 
-                            location.href = location.pathname + "/" + reviewNo + "/delete";
+                            location.href = location.pathname + "/" + list.reviewNo + "/delete";
                     
                         }
                     } else{
@@ -2156,9 +2155,6 @@ if(imageInput != null){
     }
 
     imageInput.addEventListener("change", e => {
-
-        console.log(e.target.files);
-        console.log(e.target.files[0]);
 
         if(e.target.files[0] != undefined){
 

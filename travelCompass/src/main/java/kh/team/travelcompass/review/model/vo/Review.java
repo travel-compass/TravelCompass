@@ -26,7 +26,6 @@ public class Review {
 	private int reviewLike; // 리뷰 좋아요 갯수
 	private int likeCheck; // 리뷰 좋아요 확인
 
-	// 황석현 요구사항
 	private String memberNickname; // 리뷰 작성한 회원 닉네임
 	private String profileImage; // 리뷰 작성한 회원 프로필 사진
 
