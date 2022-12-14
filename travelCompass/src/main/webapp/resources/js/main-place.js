@@ -236,6 +236,7 @@ function createPlaceList(resultList, title) {
 
         // 거리
         
+        a.append(img, placeTitle, reviewArea, addr);
         if(place.dist != null) {
             const distArea = document.createElement("span");
             distArea.classList.add("dist-area");
@@ -244,9 +245,9 @@ function createPlaceList(resultList, title) {
             distIcon.className = "fa-solid fa-location-dot dist-icon";
             
             const dist = parseInt(place.dist / 100) * 100 / 1000 + "km 떨어짐"
-            distArea.append(distIcon, dist);    
+            distArea.append(distIcon, dist);
+            a.append(distArea);
         }
-        a.append(img, placeTitle, reviewArea, addr);
         placeItem.append(a);
         placeList.append(placeItem);
     }
