@@ -10,16 +10,28 @@ import kh.team.travelcompass.review.model.vo.Review;
 
 public interface ProfileService {
 
-	// 프로필 페이지 이동 시 프로필 페이지의 회원 정보 받아오기
+	/**프로필 페이지 이동 시 프로필 페이지의 회원 정보 받아오기
+	 * @param memberNo
+	 * @return member, reviewList
+	 */
 	Member selectMember(int memberNo);
 	
-	// 리뷰 조회 시 모든 리뷰 조회하기 (사진 유무 포함)
+	/** 리뷰 조회 시 모든 리뷰 조회하기 (사진 유무 포함)
+	 * @param memberNo
+	 * @return FedList
+	 */
 	List<Review> allReviewSelectList(int memberNo);
 	
-	// ajax 리뷰 리스트 조회
+	/** ajax 리뷰 리스트 조회
+	 * @param memberNo
+	 * @return reviewList
+	 */
 	List<Review> ReviewSelectList(int memberNo);
 
-	// ajax 이미지 리뷰 리스트 조회
+	/** ajax 이미지 리뷰 리스트 조회
+	 * @param memberNo
+	 * @return imageReviewList
+	 */
 	List<Review> imageReviewSelectList(int memberNo);
 	
 	// 팔로우 체크하기
@@ -51,7 +63,7 @@ public interface ProfileService {
 			MultipartFile profileImage, Member loginMember) throws Exception;
 
 	// 리뷰 삭제
-	int boardDelete(int reviewNo);
+	int reviewDelete(int reviewNo);
 
 
 

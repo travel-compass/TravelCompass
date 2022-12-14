@@ -23,6 +23,11 @@ public class ManagementController {
 	@Autowired
 	ManagementService service;
 	
+	
+	/**관리자 페이지 이동
+	 * @param model
+	 * @return "management/managementPage"포워드
+	 */
 	@GetMapping("/info")
 	public String management(Model model) {
 		List<Review>reportList = null;	
@@ -40,7 +45,10 @@ public class ManagementController {
 		return "management/managementPage";
 	}
 	
-	//모든 신고 조회
+	
+	/**모든 신고 조회
+	 * @return List<Review>reportList
+	 */
 	@ResponseBody
 	@GetMapping("/selectAll")
 	public String selectAll(){
@@ -61,7 +69,10 @@ public class ManagementController {
 		return jsonReportList;
 	}
 	
-	//회원 블라인드 리뷰 수 조회 
+
+	/**회원 블라인드 리뷰 수 조회 
+	 * @return List<Review>reportList
+	 */
 	@ResponseBody
 	@GetMapping("/selectBlind")
 	public String selectReport(){
@@ -82,7 +93,10 @@ public class ManagementController {
 		return jsonReportList;
 	}
 	
-	//정지 회원 조회
+
+	/**정지 회원 조회
+	 * @return List<Review>reportList
+	 */
 	@ResponseBody
 	@GetMapping("/selectBanMember")
 	public String selectBanMember(){
@@ -105,7 +119,10 @@ public class ManagementController {
 	
 
 	
-	//블라인드 처리
+	/**블라인드 처리
+	 * @param reviewNo
+	 * @return result
+	 */
 	@ResponseBody
 	@GetMapping("/reviewBlind")
 	public int reviewBlind(int reviewNo){
@@ -114,7 +131,11 @@ public class ManagementController {
 			
 	}
 	
-	//회원 기능 정지
+
+	/**회원 기능 정지
+	 * @param memberNo
+	 * @return result
+	 */
 	@ResponseBody
 	@GetMapping("/memberBan")
 	public int memberBan(int memberNo){
@@ -123,7 +144,10 @@ public class ManagementController {
 		
 	}
 	
-	//회원 정지 취소
+	/**회원 정지 취소
+	 * @param memberNo
+	 * @return result
+	 */
 	@ResponseBody
 	@GetMapping("/memberBanCancel")
 	public int memberBanCancel(int memberNo){

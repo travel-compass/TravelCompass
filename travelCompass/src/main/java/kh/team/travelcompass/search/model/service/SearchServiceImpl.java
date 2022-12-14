@@ -18,17 +18,7 @@ public class SearchServiceImpl implements SearchService {
 	@Autowired
 	SearchPlaceAPI api;
 
-	@Override
-	public List<Place> nearByPlace(String latitude, String longitude) throws Exception {
 
-		Map<String, String> paramMap = new HashMap<String, String>();
-		paramMap.put("mapY", latitude);
-		paramMap.put("mapX", longitude);
-		paramMap.put("contentTypeId", "12");
-
-		List<Place> placeList = api.nearByPlace(paramMap);
-		return null;
-	}
 
 	// 키워드 검색
 	@Override

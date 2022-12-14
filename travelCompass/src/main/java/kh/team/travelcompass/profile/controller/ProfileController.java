@@ -30,7 +30,12 @@ public class ProfileController {
 	@Autowired
 	private ProfileService service;
 
-	// 프로필 페이지 이동
+	/**프로필 페이지 이동
+	 * @param memberNo
+	 * @param model
+	 * @param loginMember
+	 * @return "profile/MemberPage" forward
+	 */
 	@GetMapping("/profile/{memberNo}")
 	public String MemberPage(@PathVariable("memberNo") int memberNo,
 			Model model,
@@ -42,6 +47,7 @@ public class ProfileController {
 		// 프로필 페이지의 리뷰 리스트 가져오기
 		List<Review> reviewList = service.allReviewSelectList(memberNo);
 		
+		// jsp에서 요청해서 사용 할 수 있게 model.addAttribute 사용 
 		model.addAttribute("member", member);
 		model.addAttribute("reviewList", reviewList);
 		
@@ -54,8 +60,7 @@ public class ProfileController {
 		// loginMemberNo 로그인한 회원 번호
 		if(loginMember != null) map.put("loginMemberNo", loginMember.getMemberNo());
 		
-		System.out.println(map);
-		
+		// 팔로우 여부 확인 할 ( result 0 : 팔로우 취소, result 1 : 팔로우 상태 )
 		int result = service.followCheck(map);
 		
 		// result 가 1 이면 팔로우한 상태
@@ -68,7 +73,7 @@ public class ProfileController {
 		return "profile/MemberPage";
 	}
 	
-	// fed ajax 비동기(리뷰 사진 유무 같이 출력)
+	// 활동 피드 메뉴 클릭 시 비동기로 사진 포함 모든 리뷰 불러오기 fed ajax 비동기(리뷰 사진 유무 같이 출력)
 	@GetMapping("/profile/{memberNo}/Fed")
 	@ResponseBody
 	public List<Review> profileFedSelectList(Model model,
@@ -79,7 +84,7 @@ public class ProfileController {
 		return fedList;
 	}
 	
-	// review ajax 비동기(리뷰 사진 없는 게시물만 출력)
+	// 리뷰 메뉴 클릭 시 비동기로 사진 업는 리뷰만 불러오기 review ajax 비동기(리뷰 사진 없는 게시물만 출력)
 	@GetMapping("/profile/{memberNo}/Review")
 	@ResponseBody
 	public List<Review> profileReviewSelectList(Model model,
@@ -87,18 +92,16 @@ public class ProfileController {
 		
 		List<Review> reviewList = service.ReviewSelectList(memberNo);
 		
-		
 		return reviewList;
 	}
 	
-	// imageReview ajax 비동기(리뷰 사진 있는 게시물만 출력)
+	// 사진 메뉴 클릭 시 비동기로 사진만 있는 리뷰 불러오기 imageReview ajax 비동기(리뷰 사진 있는 게시물만 출력)
 	@GetMapping("/profile/{memberNo}/ImageReview")
 	@ResponseBody
 	public List<Review> profileImageReviewSelectList(Model model,
 			@PathVariable("memberNo") int memberNo){
 		
 		List<Review> imageReviewList = service.imageReviewSelectList(memberNo);
-		
 		
 		return imageReviewList;
 	}
@@ -157,7 +160,7 @@ public class ProfileController {
 		return followingMemberList;
 	}
 	
-	// 더보기 버튼 눌렀을 때 리뷰 10개씩 보여주기 
+	// 프로필 페이지로 forward 한 곳의 더보기 버튼 눌렀을 때 리뷰 10개씩 보여주기 
 	@GetMapping("/profile/{memberNo}/reviewMoreList")
 	@ResponseBody
 	public List<Review> moreReviewList(
@@ -170,7 +173,7 @@ public class ProfileController {
 		
 	}
 	
-	// ajax 더보기 버튼 눌렀을 때 피드 10개씩 보여주기
+	// 활동 피드 비동기로 불러온 ajax 더보기 버튼 눌렀을 때 피드 10개씩 보여주기
 	@GetMapping("/profile/{memberNo}/ajaxfedMoreList")
 	@ResponseBody
 	public List<Review> fedMoreReviewList(
@@ -183,7 +186,7 @@ public class ProfileController {
 		
 	}
 	
-	// ajax 더보기 버튼 눌렀을 때 리뷰 10개씩 보여주기
+	// 리뷰 비동기로 불러온 ajax 더보기 버튼 눌렀을 때 리뷰 10개씩 보여주기
 	@GetMapping("/profile/{memberNo}/ajaxReviewMoreList")
 	@ResponseBody
 	public List<Review> reviewMoreReviewList(
@@ -196,7 +199,7 @@ public class ProfileController {
 		
 	}
 	
-	// ajax 더보기 버튼 눌렀을 때 사진리뷰 10개씩 보여주기
+	// 사진 비동기로 불러온 ajax 더보기 버튼 눌렀을 때 사진만 있는 리뷰 10개씩 보여주기
 	@GetMapping("/profile/{memberNo}/ajaxImageMoreList")
 	@ResponseBody
 	public List<Review> imageMoreReviewList(
@@ -209,7 +212,14 @@ public class ProfileController {
 		
 	}
 	
-	// 프로필 이미지 변경
+	/** 프로필 이미지 변경
+	 * @param loginMember
+	 * @param profileImage
+	 * @param req
+	 * @param ra
+	 * @return "redirect:" + loginMember.getMemberNo() => /profile/{memberNo} 로 redirect 하기
+	 * @throws Exception
+	 */
 	@PostMapping("/profile/{memberNo}")
 	public String updateProfile(
 			@SessionAttribute("loginMember") Member loginMember,
@@ -232,7 +242,13 @@ public class ProfileController {
 		return "redirect:" + loginMember.getMemberNo();
 	}
 	
-	// 리뷰 삭제하기
+	/** 리뷰 삭제하기
+	 * @param memberNo
+	 * @param reviewNo
+	 * @param referer
+	 * @param ra
+	 * @return "redirect:" + referer 요청한 이전의 주소로 redirect 하기
+	 */
 	@GetMapping("/profile/{memberNo}/{reviewNo}/delete")
 	public String reviewDelete(
 			@PathVariable("memberNo") int memberNo,
@@ -240,7 +256,7 @@ public class ProfileController {
 			@RequestHeader("referer") String referer,
 			RedirectAttributes ra) {
 		
-		int result = service.boardDelete(reviewNo);
+		int result = service.reviewDelete(reviewNo);
 		
 		String message = null;
 		

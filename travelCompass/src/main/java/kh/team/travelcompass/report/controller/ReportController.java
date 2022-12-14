@@ -15,11 +15,14 @@ public class ReportController {
 	@Autowired
 	ReportService service;
 	
-	//리뷰 신고
+	/**리뷰 신고
+	 * @param paramMap
+	 * @return result
+	 */
 	@GetMapping("/insertReport")
 	@ResponseBody
 	public int insertReport(@RequestParam Map<String, Object>paramMap) {
-		System.out.println("호출");
+
 		int check = service.reportCheck(paramMap);
 		int result = 0;
 		
@@ -27,7 +30,6 @@ public class ReportController {
 		
 			result= service.insertReport(paramMap);
 		}
-		
 		
 		return result;
 	}

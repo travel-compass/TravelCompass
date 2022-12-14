@@ -15,13 +15,21 @@ public class ReportDAO {
 
 	
 	
-	//중복 신고 체크
+	
+	/**중복 신고 체크
+	 * @param paramMap
+	 * @return result
+	 */
 	public int reportCheck(Map<String, Object> paramMap) {
 		
 		return sqlSession.selectOne("reportMapper.reportCheck", paramMap);
 	}
 	
-	//신고 등록
+	
+	/**신고 등록
+	 * @param paramMap
+	 * @return result
+	 */
 	public int insertReport(Map<String, Object> paramMap) {
 		
 		return sqlSession.insert("reportMapper.insertReport", paramMap);

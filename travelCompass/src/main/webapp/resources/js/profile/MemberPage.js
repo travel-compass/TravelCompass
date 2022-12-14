@@ -222,7 +222,7 @@ Fed.addEventListener("click", (e) => {
                     const rating = document.createElement("div");
                     rating.classList.add("rating");
                     rating.innerHTML = "<span class='empty'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>"
-                    +"<span class='fill' style='(width:84.5 * (" + list.rating + " * 20) / 100)px;'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>";
+                    +"<span class='fill' style='(width:"+(84.5 * (Number(list.rating)* 20) / 100)+"px;'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>";
 
                     const reviewTextTitle = document.createElement("div");
                     reviewTextTitle.classList.add("review-title");
@@ -456,7 +456,7 @@ const fedMoreReviewList = function() {
                 const rating = document.createElement("div");
                 rating.classList.add("rating");
                 rating.innerHTML = "<span class='empty'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>"
-                +"<span class='fill' style='width:(84.5 * (" + list.rating + " * 20) / 100)px;'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>";
+                +"<span class='fill' style='width:"+(84.5 * (Number(list.rating)* 20) / 100)+"px;'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>";
 
                 const reviewTextTitle = document.createElement("div");
                 reviewTextTitle.classList.add("review-title");
@@ -707,7 +707,7 @@ Review.addEventListener("click", (e) => {
     
                         rating.classList.add("rating");
                         rating.innerHTML = "<span class='empty'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>"
-                        +"<span class='fill' style='width:(84.5 * (" + list.rating + " * 20) / 100)px;'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>";
+                        +"<span class='fill' style='width:"+(84.5 * (Number(list.rating)* 20) / 100)+"px;'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>";
     
                         const reviewTextTitle = document.createElement("div");
                         reviewTextTitle.classList.add("review-title");
@@ -894,7 +894,7 @@ function reviewMoreReviewList () {
                     const rating = document.createElement("div");
                     rating.classList.add("rating");
                     rating.innerHTML = "<span class='empty'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>"
-                    +"<span class='fill' style='width:(84.5 * (" + list.rating + " * 20) / 100)px;'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>";
+                    +"<span class='fill' style='width:"+(84.5 * (Number(list.rating)* 20) / 100)+"px;'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>";
     
                     const reviewTextTitle = document.createElement("div");
                     reviewTextTitle.classList.add("review-title");
@@ -1096,7 +1096,7 @@ ImageReview.addEventListener("click", (e) => {
                     const rating = document.createElement("div");
                     rating.classList.add("rating");
                     rating.innerHTML = "<span class='empty'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>"
-                    +"<span class='fill' style='width:(84.5 * (" + list.rating + " * 20) / 100)px;'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>";
+                    +"<span class='fill' style='width:"+(84.5 * (Number(list.rating)* 20) / 100)+"px;'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>";
 
                     const reviewTextTitle = document.createElement("div");
                     reviewTextTitle.classList.add("review-title");
@@ -1331,7 +1331,7 @@ function imageMoreReviewList() {
                 const rating = document.createElement("div");
                 rating.classList.add("rating");
                 rating.innerHTML = "<span class='empty'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>"
-                +"<span class='fill' style='width:(84.5 * (" + list.rating + " * 20) / 100)px;'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>";
+                +"<span class='fill' style='width:"+(84.5 * (Number(list.rating)* 20) / 100)+"px;'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>";
 
                 const reviewTextTitle = document.createElement("div");
                 reviewTextTitle.classList.add("review-title");
@@ -1480,8 +1480,6 @@ followButton.addEventListener("click", () => {
             const followTable = document.getElementById("follow-table");
             followTable.innerHTML = "";
 
-            console.log(followMemberList);
-            
             if (followMemberList.length == 0){
                 return;
             }
@@ -1548,6 +1546,7 @@ followButton.addEventListener("click", () => {
                                 }
                             },
                             error : () => {
+
                                 console.log("증가 에러");
                             }
                         })
@@ -1979,7 +1978,7 @@ const reviewMoreList = function(){
 
                         if (confirm("정말 삭제 하시겠습니까?")){
                 
-                            location.href = location.pathname + "/" + reviewNo + "/delete";
+                            location.href = location.pathname + "/" + list.reviewNo + "/delete";
                     
                         }
                     } else{
@@ -2010,7 +2009,7 @@ const reviewMoreList = function(){
                 const rating = document.createElement("div");
                 rating.classList.add("rating");
                 rating.innerHTML = "<span class='empty'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>"
-                +"<span class='fill' style='width:(84.5 * (" + list.rating + " * 20) / 100)px;'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>";
+                +"<span class='fill' style='width:"+(84.5 * (Number(list.rating)* 20) / 100)+"px;'>&#9679;&#9679;&#9679;&#9679;&#9679;</span>";
     
                 const reviewTextTitle = document.createElement("div");
                 reviewTextTitle.classList.add("review-title");
@@ -2156,9 +2155,6 @@ if(imageInput != null){
     }
 
     imageInput.addEventListener("change", e => {
-
-        console.log(e.target.files);
-        console.log(e.target.files[0]);
 
         if(e.target.files[0] != undefined){
 

@@ -110,7 +110,7 @@ public class ReviewServiceImpl implements ReviewService {
 	@Override
 	public List<Place> connectReview(List<Place> placeList) {
 		if (placeList == null || placeList.isEmpty()) {
-			System.out.println("장소리스트가 비어있습니다.");
+//			System.out.println("장소리스트가 비어있습니다.");
 			return placeList;
 		}
 		int size = placeList.size();
@@ -125,7 +125,7 @@ public class ReviewServiceImpl implements ReviewService {
 		List<Map<String, Object>> reviewMapList = dao.selectConnectReview(contentidList);
 
 		if (!reviewMapList.isEmpty()) {
-			System.out.println("리뷰 비어있지 않음");
+//			System.out.println("리뷰 비어있지 않음");
 			for (int i = 0; i < placeList.size(); i++) {
 				placeList.get(i).setAverageRating(
 						Double.parseDouble(String.valueOf((reviewMapList.get(i).get("AVERAGE_RATING")))));
@@ -152,7 +152,7 @@ public class ReviewServiceImpl implements ReviewService {
 	
 	
 
-	//좋아요여부 체크
+	// 본인 리뷰 좋아요여부 체크
 	@Override
 	public int reviewLikeCheck(Map<String, Object> map) {
 		
