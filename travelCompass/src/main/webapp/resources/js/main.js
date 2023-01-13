@@ -5,16 +5,6 @@ document.addEventListener("DOMContentLoaded", function(){
     let placeListArea = document.querySelector(".place-list-area");
 
     placeListArea.addEventListener("click", function (e) {
-        // if(e.target.nodeName != "SPAN") {                   // 클릭한것이 span이 아니면 리턴
-        //     console.log("스팬 아님");
-        //     return;
-        // } else {                                            // span이면
-        //     if(e.target.className == "prev-arrow") {             // 클래스명이 prev-arrow면
-        //         prevMove(e);                                     // prevMove호출
-        //     } else {
-        //         nextMove(e);
-        //     }
-        // }
 
         currentNode = e.target;
         if (e.target.nodeName == "I") {
@@ -42,19 +32,8 @@ document.addEventListener("DOMContentLoaded", function(){
         let nextBtn = prevBtn.nextElementSibling;
         let placeList = nextBtn.nextElementSibling;
         let placeListWidth = placeList.clientWidth;
-        // console.log(prevBtn);
-        // console.log(nextBtn);
         nextBtn.style.display = "flex";
         let currentLeft = placeList.offsetLeft;
-        // let newOffset = currentLeft - offset;
-        // let nextOffset = placeListWidth + currentLeft;
-
-        // if (nextOffset <= newOffset) {
-        //     placeList.style.left = placeList.offsetLeft + offset + "px";
-        // } else if (-currentLeft < offset) {
-        //     placeList.style.left = 0 + "px";
-        //     prevBtn.style.display = "none";
-        // }
 
         // 더많이 남았을 때
         if(offset + currentLeft < 0) {

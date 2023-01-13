@@ -102,5 +102,4 @@ public class SearchInterceptor implements HandlerInterceptor{
 		
 		HandlerInterceptor.super.postHandle(request, response, handler, modelAndView);
 	}
-	
 }
