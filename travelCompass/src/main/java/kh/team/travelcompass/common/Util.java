@@ -14,6 +14,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import kh.team.travelcompass.place.model.vo.Place;
 
+/**
+ * @author Tonic
+ * 프로젝트 전반의 유틸 클래스
+ */
 public class Util {
 
 	/**
@@ -57,6 +61,11 @@ public class Util {
 		return placeList.get(0);
 	}
 
+	/** json을 List<Place>로 변환
+	 * @param json
+	 * @return placeList
+	 * @throws Exception
+	 */
 	public static List<Place> jsonToPlaceList(String json) throws Exception {
 		List<Place> placeList = null;
 
@@ -75,6 +84,12 @@ public class Util {
 		return placeList;
 	}
 
+	
+	/** json을 List<Image>로 변환
+	 * @param json
+	 * @return imageList
+	 * @throws Exception
+	 */
 	public static List<String> jsonToImageList(String json) throws Exception {
 		List<String> imageList = new ArrayList<String>();
 		System.out.println(json);
