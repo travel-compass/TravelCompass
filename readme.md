@@ -183,7 +183,7 @@ https://www.erdcloud.com/d/e5nkJo2ZpFXCtiFP9
 <br>
 
 # Figma
-
+https://www.figma.com/file/J2luA0zqgFtaIHjIBcOrsA/%ED%8C%80%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%ED%8E%98%EC%9D%B4%EC%A7%80?node-id=0%3A1&t=Hzz4d0kgLMb1U9Ds-1
 
 <br>
 
